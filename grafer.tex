@@ -1,23 +1,25 @@
 \section{\color{red}Grafer}
-En graf er en samling av kanter og noder. Vi kaller mengden av alle nodene $ V $ (verticies), og mengden av alle kantene $ E $ (edges). Grafen $ G $ blir da en samling av disse to mengdene. Formelt kan vi definere en graf slik:
+En graf er en samling av kanter og noder. Vi kaller mengden av alle nodene $ V $ (verticies), og mengden av alle kantene $ E $ (edges). Grafen $ G $ blir da en samling av disse to mengdene. Formelt kan vi definere en graf slik: \index{graf}
 
 \begin{definisjon}
 En graf $ G $  er et par $ (V, E) $, der $ V $ er en ikke-tom mengde noder og $ E $ en mengde nodepar $ \{v_1, v_2\} $; $ v_1, v_2 \in V $ der $ \{v_1, v_2\} $ angir at grafen inneholder en kant fra $ v_1 $ til $ v_2 $.
 \end{definisjon}
 
-Vi bruker $ |E| $ for å betegne antall kanter og $ |V| $ for å betegne antall noder. 
 
-Vi sier at en node er \textbf{nabo} med en annen node hvis de har en kant mellom seg. I figur \ref{fig:graf} er B og A naboer, men A og C er ikke naboer. 
+\paragraph{Terminologi}~\\
+Vi bruker $ |E| $ for å betegne antall kanter og $ |V| $ for å betegne antall noder. \index{graf!kant}\index{graf!node}\index{node!graf}
 
-En \textbf{sti} eller \textbf{vei} er en sekvens av noder (og kantene mellom dem) fra en node til en annen. En sti fra A til G i figuren under kan for eksempel være A, D, C, G. (siden grafen inneholder løkker er ikke stien entydig)
+Vi sier at en node er \textbf{nabo} med en annen node hvis de har en kant mellom seg. I figur \ref{fig:graf} er B og A naboer, men A og C er ikke naboer. \index{graf!nabo}
 
-En graf er \textbf{rettet} hvis kantene har en spesiell retning, og \textbf{urettet} hvis vi ikke bryr oss om retningen på kantene. I en rettet graf vil kanten $ \{v_1, v_2\} $ bety at det går en kant fra $ v_1 $ til $ v_2 $, men ikke nødvendigvis fra $ v_2 $ til $ v_1 $. Grafen i figur \ref{fig:tre} er urettet. Hvis en graf er rettet kaller vi ofte naboene for \textbf{etterfølgere}. 
+En \textbf{sti} eller \textbf{vei} er en sekvens av noder (og kantene mellom dem) fra en node til en annen. En sti fra A til G i figuren under kan for eksempel være A, D, C, G. (siden grafen inneholder løkker er ikke stien entydig) \index{graf!sti}\index{graf!vei}
 
-En graf er \textbf{vektet} hvis kantene har en verdi knyttet til seg, ofte kalt \emph{kosten} til kanten. I en \textbf{uvektet} graf har ikke kantene noen spesiell verdi. Vi kan tenke på en uvektet graf som en vektet graf der alle kantene har kost = 1.
+En graf er \textbf{rettet} hvis kantene har en spesiell retning, og \textbf{urettet} hvis vi ikke bryr oss om retningen på kantene. I en rettet graf vil kanten $ \{v_1, v_2\} $ bety at det går en kant fra $ v_1 $ til $ v_2 $, men ikke nødvendigvis fra $ v_2 $ til $ v_1 $. Grafen i figur \ref{fig:tre} er urettet. Hvis en graf er rettet kaller vi ofte naboene for \textbf{etterfølgere}.  \index{graf!rettet}\index{graf!urettet}
 
-Grafen er \textbf{syklisk} hvis den inneholder løkker, og \textbf{asyklisk} hvis den ikke inneholder løkker. I figur \ref{fig:graf} ser vi at A, B, C, D danner en løkke (det gjør også C, G, F, E). Grafen er derfor syklisk.
+En graf er \textbf{vektet} hvis kantene har en verdi knyttet til seg, ofte kalt \emph{kosten} til kanten. I en \textbf{uvektet} graf har ikke kantene noen spesiell verdi. Vi kan tenke på en uvektet graf som en vektet graf der alle kantene har kost = 1. \index{graf!vektet}\index{graf!uvektet}
 
-En type grafer vi jobber mye med er \textbf{DAG}er. DAG står for \emph{Directed Asyclic Graph}, på norsk: en rettet, asyklisk graf. 
+Grafen er \textbf{syklisk} hvis den inneholder løkker, og \textbf{asyklisk} hvis den ikke inneholder løkker. I figur \ref{fig:graf} ser vi at A, B, C, D danner en løkke (det gjør også C, G, F, E). Grafen er derfor syklisk.\index{graf!syklisk}\index{graf!asyklisk}
+
+En type grafer vi jobber mye med er \textbf{DAG}er. DAG står for \emph{Directed Asyclic Graph}, på norsk: en rettet, asyklisk graf. \index{graf!DAG}
 
 
 \begin{figure}[H]
@@ -48,12 +50,12 @@ En type grafer vi jobber mye med er \textbf{DAG}er. DAG står for \emph{Directed
 \end{figure}
 
 
-\subsection{\color{red}Terminologi}
+\subsection{Begreper}
 
 \subsubsection{Hamiltonsk sti}
-En hamiltonsk sti er en sti som besøker alle nodene én gang. Dette kan virke som en triviell sak, men i en del tilfeller er det faktisk ikke mulig å finne en hamiltonsk sti. I grafen i figur \ref{fig:graf} er B, A, D, C, G, F, E en hamiltonsk sti (det finnes fler). 
+En hamiltonsk sti er en sti som besøker alle nodene én gang. Dette kan virke som en triviell sak, men i en del tilfeller er det faktisk ikke mulig å finne en hamiltonsk sti. I grafen i figur \ref{fig:graf} er B, A, D, C, G, F, E en hamiltonsk sti (det finnes fler). \index{hamiltonsk sti} \index{graf!hamiltonsk sti}
 
-Et berømt eksempel på en graf \emph{uten} en hamiltonsk sti er broene i Königsberg:
+Et berømt eksempel på en graf \emph{uten} en hamiltonsk sti er broene i Königsberg: \index{broene i Königsberg}
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -78,7 +80,7 @@ Et berømt eksempel på en graf \emph{uten} en hamiltonsk sti er broene i König
 
 
 \subsubsection{Spenntrær}
-Vi begynner med en definisjon:
+Vi begynner med en definisjon:\index{spenntre} \index{minimalt spenntre}
 
 \begin{definisjon}
 Et \textbf{spenntre} for en urettet graf $ G $ er et tre med kanter fra grafen slik at alle nodene i $ G $ er forbundet. Spesielt er et \textbf{minimalt spenntre} de(t) spenntre(ene) med lavest total kostnad.
@@ -140,7 +142,7 @@ For å finne et minimalt spenntre til en graf kan vi bruke Prims algoritme (\ref
 
 
 \subsubsection{Topologisk sortering}
-Topologisk sortering er en ordning av noder i en DAG slik at dersom det finnes en vei fra $ v_i $ til $ v_j $ i grafen kommer $ v_i $ før $ v_j $ i sorteringa. En topologisk sortering er ikke nødvendigvis entydig bestemt, ofte finnes det veldig mange. Hvis en graf er syklisk eksisterer det ikke en topologisk sortering av grafen. Vi ser på et eksempel: 
+Topologisk sortering er en ordning av noder i en DAG slik at dersom det finnes en vei fra $ v_i $ til $ v_j $ i grafen kommer $ v_i $ før $ v_j $ i sorteringa. En topologisk sortering er ikke nødvendigvis entydig bestemt, ofte finnes det veldig mange. Hvis en graf er syklisk eksisterer det ikke en topologisk sortering av grafen. Vi ser på et eksempel: \index{topologisk sortering}
 
 \begin{eks} Gitt følgende graf, finn alle topologiske sorteringer.
 \begin{figure}[H]
@@ -181,12 +183,12 @@ Vi kan ta med et moteksempel også: Q, A, J, B, Z, P er ikke en gyldig topologis
 
 
 \subsubsection{Strongly connected components (SCC)}
-Vi ser på definisjonen av strongly connected components (heretter SCC):
+Vi ser på definisjonen av strongly connected components (heretter SCC): \index{SCC (strongly connected components)}
 \begin{definisjon}
-Anta at vi har en rettet graf $ G = (V, E) $. Vi har da at en \textbf{SCC} av $ G $ er et maksimalt sett av noder $ U \subseteq V $ slik at for alle $ u_1 $, $ u_{2} \in U $ har vi at $ u_1 \leadsto u_2 $ og $ u_2 \leadsto u_1 $.
+Anta at vi har en rettet graf $ G = (V, E) $. Vi har da at en \textbf{SCC} av $ G $ er et maksimalt sett av noder $ U \subseteq V $ slik at for alle $ u_i $, $ u_j \in U $ har vi at $ u_i \leadsto u_j $ og $ u_j \leadsto u_i $.
 \end{definisjon}
 
-Med andre ord: en SCC er en del (partisjon) av grafen der alle nodene i den partisjonen kan nå alle andre noder i partisjonen. Vi ser på et eksempel:
+Med andre ord: en SCC er en del (partisjon) av grafen der alle nodene i den partisjonen kan nå alle andre noder i partisjonen. Vi ser på et eksempel: \index{graf!partisjon}
 
 \begin{eks} Finn alle SCCer i grafen:
 \begin{figure}[H]
@@ -212,15 +214,54 @@ Med andre ord: en SCC er en del (partisjon) av grafen der alle nodene i den part
 Vi ser at \{A, B, C\} danner en SCC. D har ingen kanter ut. Den må derfor være sin egen SCC. E ingen kanter inn, den må også være sin egen SCC. Vi har da at vi kan partisjonere grafen slik: \{\{A, B, C\}, \{D\}, \{E\} \}
 \end{eks}
 
-\subsubsection{\color{red}Articulation points og biconnectivity}
+\subsubsection{Articulation points og biconnectivity}
+Et \textbf{articulation point} er et kritisk punkt i en sammenhengende graf som ikke kan fjernes uten at grafen ikke lenger er sammenhengende. I grafen i figur \ref{fig:graf} er C et slikt punkt. Vi ser at vi kan ta vekk A uten noen store komplikasjoner, men hvis vi tar vekk C vil ikke lenger B og E være sammenknyttet.\index{graf!articulation points}
 
+En \textbf{biconnected} graf er en graf uten articulation points, altså en graf der det alltid finnes mer enn én vei fra en node til en annen. Grafen (til venstre) i figur \ref{fig:min_spenntre} er en slik graf. \index{graf!biconnected}
 
 \subsection{\color{red}Grafalgoritmer}
 
-\subsubsection{\color{red}Dybde først}
+\subsubsection{Dybde først}
+Dybde-først-traversering (herfra dfs: depth first search) er en måte å traversere gjennom en graf på. Det kan tenkes på som en generalisering av dybde-først-traversering gjennom trær. Vi velger oss en (hvilken som helst) startnode, og beveger oss ned til etterfølgerne til noden. Når vi kommer til en node som ikke har kanter til en ubesøkt node (enten at noden har utgrad 0, eller at alle etterfølgerne er besøkt) går vi tilbake. 
 
+Underveis i traverseringen har vi en teller som holder styr på hvor mange skritt vi har tatt. I hver node lagrer vi verdien av telleren prefix og postfix, det vil si første gang vi kommer til noden og når vi kommer tilbake etter å ha vært nedom barna. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=1cm}
+\caption{En rettet graf med tallene lagret etter et dfs. Heltrukne linjer er kanter vi besøkte i dfs-et, striplede linjer er kanter vi ikke besøkte}~\\
+\label{fig:dfs}
+\begin{tikzpicture}[->, align=center]
+\tikzstyle{v} = [circle, draw=black]
+\tikzstyle{e} = [draw=black]
+\tikzstyle{eh} = [draw=black, dashed]
+
+\node[v](A) at (0, 3) {A\\1 | 12};
+\node[v](B) at (3, 3) {B\\2 | 11};
+\node[v](C) at (6, 3) {C\\3 | 4};
+\node[v](D) at (0, 0) {D\\5 | 10};
+\node[v](E) at (3, 0) {E\\6 | 9};
+\node[v](F) at (6, 0) {F\\7 | 8};
+
+\draw[e] (A) to (B);
+\draw[e] (B) to (D);
+\draw[eh] (A) to (D);
+\draw[e] (D) to (E);
+\draw[e] (E) to (F);
+\draw[eh] (F) to (C);
+\draw[e] (B) to (C);
+\draw[eh] (E) to (B);
+\end{tikzpicture}
+\end{figure}
+
+I figur \ref{fig:dfs} har vi brukt A som rotnode. Vi gikk deretter til et av barna, B. Videre gikk vi til C, og siden C har utgrad 0 måtte vi gå tilbake til B igjen. Fra B gikk vi videre til D, så til E og til F. Fra F går det en kant til C, men siden vi har besøkt C fra før går vi tilbake igjen. 
+
+DFS-algorigmer er velegnet for å programmere rekursivt. Et eksempel på en enkel implementasjon i Java (som en metode i en Node-klasse):
+
+\javaimport{dfs.java}~\\
 
 \subsubsection{\color{red}Finne SCC}
+
 
 \subsubsection{\color{red}Dijkstras algoritme}
 \label{dijkstra}

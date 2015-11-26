@@ -12,6 +12,11 @@
 % Tegne trær, etc:
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
+\usetikzlibrary{arrows}
+
+
+% multiline caption i fig:
+\usepackage{caption}
 
 
 %************ CODE IMPORT FUNCTION ***************
@@ -102,16 +107,16 @@
 \section*{Noen kommentarer}
 Dette notatet har i hovedsak fungert som min egne lille gummiand i eksamenstreninga, men kan være nyttig til repetisjon og som notater under eksamen. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \verb|mathialo@student.matnat.uio.no|
 
-Innhold og eksempler er basert på stoff fra læreboka, forelesninger, tidligere eksamener, mine egne obliger og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
+Innhold og eksempler er basert på stoff fra læreboka, forelesninger, Wikipedia, tidligere eksamener, mine egne obliger og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
 
 ~\\~\\
 
 \tableofcontents
 \newpage
 
-\input{kompleksitet.tex}		% ferdig
+\input{kompleksitet.tex}		% ferdig, mangler indexer
 ~\\~\\
-\input{paradigmer.tex}			% ferdig
+\input{paradigmer.tex}			% ferdig, mangler indexer
 ~\\~\\
 \input{traer.tex}
 ~\\~\\
@@ -123,11 +128,11 @@ Innhold og eksempler er basert på stoff fra læreboka, forelesninger, tidligere
 ~\\~\\
 \input{sortering.tex}
 ~\\~\\
-\input{bevis.tex}				% ferdig
+\input{bevis.tex}				% ferdig, mangler indexer
 
-% kombinatorisk søk?
 
-\newpage
-\printindex
+
+%\newpage
+%\printindex
 
 \end{document}

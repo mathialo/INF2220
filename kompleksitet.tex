@@ -3,13 +3,13 @@
 \subsubsection{Alfabeter og språk}
 Når vi bruker begrepene alfabet og språk snakker vi som regel ikke om språk som engelsk, norsk eller Java (selv om disse også er språk i formell forstand), men om en samling strenger av tegn (tenk: ord). Hvilke tegn vi kan bruke avhenger av hvilket alfabet vi har.
 
-Et \textbf{alfabet} er en ikke-tom mengde av tegn (også kalt symboler og bokstaver). Vi betegner ofte et alfabet med $ \Sigma $. Eksempler på alfabeter kan være det binære alfabetet $ \{0, 1\} $ eller det norske alfabetet \{a, b, c, d, e, f, g, h, i, j, k, l,  m, n, o, p, q, r, s, t, u, v, w, x, y, z, æ, ø, å\}.
+Et \textbf{alfabet} er en ikke-tom mengde av tegn (også kalt symboler og bokstaver). Vi betegner ofte et alfabet med $ \Sigma $. Eksempler på alfabeter kan være det binære alfabetet $ \{0, 1\} $ eller det norske alfabetet \{a, b, c, d, e, f, g, h, i, j, k, l,  m, n, o, p, q, r, s, t, u, v, w, x, y, z, æ, ø, å\}. \index{alfabet}
 
-Gitt et alfabet $ \Sigma $ bruker vi $ \Sigma ^* $ for å betegne mengden av alle mulige kombinasjoner (strenger) av tegn fra $ \Sigma $ av en endelig lengde. En mengde av strenger, med eller uten noen bestemte regler, kalles et \textbf{språk}. Vi konstruerer språk enten ved å liste opp alle ordene i språket, eller ved å gi noen regler som ordene i språket må følge. Under følger noen eksempler på språk, og hvordan de defineres:
+Gitt et alfabet $ \Sigma $ bruker vi $ \Sigma ^* $ for å betegne mengden av alle mulige kombinasjoner (strenger) av tegn fra $ \Sigma $ av en endelig lengde. En mengde av strenger, med eller uten noen bestemte regler, kalles et \textbf{språk}. Vi konstruerer språk enten ved å liste opp alle ordene i språket, eller ved å gi noen regler som ordene i språket må følge. Under følger noen eksempler på språk, og hvordan de defineres:\index{språk}
 \begin{itemize}
 \item $ L = \{\say{a}, \say{b}, \say{ab}, \say{ba}\}$ (eksempel på et endelig språk)
 \item $ L = \Sigma^* $ (alle ordene over $ \Sigma $) (eksempel på et uendelig språk)
-\item $ L = \{i : M \text{ stopper på input } i \} $ (Den inputen som gjør at en turingmaskin stopper. En variant av haltingproblemet, se \ref{haltingProof})
+\item $ L = \{i : M \text{ stopper på input } i \} $ (Den inputen som gjør at en turingmaskin stopper. En variant av haltingproblemet, se \ref{haltingProof})\index{haltingproblemet}
 \end{itemize}
 \label{språk}
 
@@ -22,7 +22,7 @@ Gitt et alfabet $ \Sigma $ bruker vi $ \Sigma ^* $ for å betegne mengden av all
 
 
 \subsubsection{Turingmaskinen}
-Turingmaskinen er en teoretisk maskin. Den eksisterer ikke i virkeligheten, men er noe vi bruker for å bevise teoremer. Selvfølgelig finnes det ingen formell definisjon på \emph{hva} en Turingmaskin egentlig er, så alle læreverk definerer den litt forskjellig. Det høres kanskje helt Texas ut, men alle definisjonene er tilnærmet ekvivalente. 
+Turingmaskinen er en teoretisk maskin. Den eksisterer ikke i virkeligheten, men er noe vi bruker for å bevise teoremer. Selvfølgelig finnes det ingen formell definisjon på \emph{hva} en Turingmaskin egentlig er, så alle læreverk definerer den litt forskjellig. Det høres kanskje helt Texas ut, men alle definisjonene er tilnærmet ekvivalente. \index{Alan Turing}\index{turingmaskin}
 
 \begin{definisjon}
 \label{def:turingmaskin}
