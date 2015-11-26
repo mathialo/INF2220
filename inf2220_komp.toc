@@ -1,0 +1,72 @@
+\select@language {norsk}
+\contentsline {section}{\numberline {1}Kompleksitet og tidsanalyse}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}Terminologi og begreper}{4}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}Alfabeter og spr\IeC {\r a}k}{4}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}Turingmaskinen}{4}{subsubsection.1.1.2}
+\contentsline {subsection}{\numberline {1.2}Kompleksitetsklasser}{5}{subsection.1.2}
+\contentsline {paragraph}{P (polynomial time)}{5}{section*.3}
+\contentsline {paragraph}{NP (nondeterministic polynomial time)}{5}{section*.4}
+\contentsline {paragraph}{EXPTIME (exponetial time)}{5}{section*.5}
+\contentsline {paragraph}{Ul\IeC {\o }selige problemer}{5}{section*.6}
+\contentsline {subsection}{\numberline {1.3}O-notasjon}{6}{subsection.1.3}
+\contentsline {section}{\numberline {2}Paradigmer for algoritmedesign}{9}{section.2}
+\contentsline {subsection}{\numberline {2.1}Splitt og hersk}{9}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Gr\IeC {\r a}dige algoritmer}{9}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Dynamisk programmering}{9}{subsection.2.3}
+\contentsline {section}{\numberline {3}\color {red}Tr\IeC {\ae }r}{11}{section.3}
+\contentsline {paragraph}{Terminologi}{11}{section*.7}
+\contentsline {subsection}{\numberline {3.1}\color {red}Bin\IeC {\ae }re s\IeC {\o }ketr\IeC {\ae }r}{11}{subsection.3.1}
+\contentsline {paragraph}{Innsetting}{12}{section*.8}
+\contentsline {paragraph}{Fjerning}{13}{section*.9}
+\contentsline {paragraph}{S\IeC {\o }king}{14}{section*.10}
+\contentsline {subsection}{\numberline {3.2}\color {red}R\IeC {\o }d-svarte tr\IeC {\ae }r}{14}{subsection.3.2}
+\contentsline {paragraph}{Insetting}{14}{section*.11}
+\contentsline {subsection}{\numberline {3.3}\color {red}B-tr\IeC {\ae }r}{16}{subsection.3.3}
+\contentsline {paragraph}{Innsetting}{16}{section*.12}
+\contentsline {subsection}{\numberline {3.4}\color {red}Rotasjon}{16}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}\color {red}Zig}{16}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}\color {red}Zig-zag}{16}{subsubsection.3.4.2}
+\contentsline {section}{\numberline {4}\color {red}Grafer}{17}{section.4}
+\contentsline {subsection}{\numberline {4.1}\color {red}Terminologi}{17}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Hamiltonsk sti}{17}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Spenntr\IeC {\ae }r}{18}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Topologisk sortering}{18}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}\color {red}Strongly connected components (SCC)}{19}{subsubsection.4.1.4}
+\contentsline {subsubsection}{\numberline {4.1.5}\color {red}Articulation points}{19}{subsubsection.4.1.5}
+\contentsline {subsection}{\numberline {4.2}\color {red}Grafalgoritmer}{19}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}\color {red}Finne SCC}{19}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}\color {red}Dijkstras algoritme}{20}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}\color {red}Prims algoritme}{20}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.4}\color {red}Kruskals algoritme}{20}{subsubsection.4.2.4}
+\contentsline {subsubsection}{\numberline {4.2.5}\color {red}Floyds algoritme}{20}{subsubsection.4.2.5}
+\contentsline {section}{\numberline {5}\color {red}Andre datastrukturer}{20}{section.5}
+\contentsline {subsection}{\numberline {5.1}\color {red}Prioritetsk\IeC {\o } (heap)}{20}{subsection.5.1}
+\contentsline {subsubsection}{\numberline {5.1.1}\color {red}Venstreorientert heap}{20}{subsubsection.5.1.1}
+\contentsline {subsection}{\numberline {5.2}\color {red}Hashtabeller}{20}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}\color {red}K\IeC {\o }/stack}{20}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}\color {red}K\IeC {\o } (FIFO)}{20}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}\color {red}Stack (LIFO)}{20}{subsubsection.5.3.2}
+\contentsline {section}{\numberline {6}\color {red}Tekstalgoritmer}{20}{section.6}
+\contentsline {subsection}{\numberline {6.1}\color {red}Brute force}{20}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}\color {red}Boyer-Moore}{20}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {6.2.1}\color {red}Bad character shift}{20}{subsubsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.2}\color {red}Good suffix shift}{20}{subsubsection.6.2.2}
+\contentsline {subsection}{\numberline {6.3}\color {red}Huffmankoding}{20}{subsection.6.3}
+\contentsline {section}{\numberline {7}\color {red}Sortering}{20}{section.7}
+\contentsline {subsection}{\numberline {7.1}Formaliteter}{20}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}\color {red}Noen algoritmer}{21}{subsection.7.2}
+\contentsline {subsubsection}{\numberline {7.2.1}\color {red}Boblesortering}{21}{subsubsection.7.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2}\color {red}Innstikksortering}{21}{subsubsection.7.2.2}
+\contentsline {subsubsection}{\numberline {7.2.3}\color {red}Tresortering}{21}{subsubsection.7.2.3}
+\contentsline {subsubsection}{\numberline {7.2.4}\color {red}Quicksort}{21}{subsubsection.7.2.4}
+\contentsline {subsubsection}{\numberline {7.2.5}\color {red}Radix}{21}{subsubsection.7.2.5}
+\contentsline {section}{\numberline {8}Bevisf\IeC {\o }ring}{21}{section.8}
+\contentsline {subsection}{\numberline {8.1}Noen bevisteknikker}{21}{subsection.8.1}
+\contentsline {paragraph}{Bevis ved selvmotsigelse}{21}{section*.13}
+\contentsline {paragraph}{Induksjon}{22}{section*.14}
+\contentsline {paragraph}{Bevis ved moteksempel}{22}{section*.15}
+\contentsline {subsection}{\numberline {8.2}Reduksjon}{22}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Noen beviser}{22}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}Haltingproblemet}{22}{subsubsection.8.3.1}
+\contentsline {subsubsection}{\numberline {8.3.2}Cantors diagnoaliseringsargument}{23}{subsubsection.8.3.2}
+\contentsline {subsubsection}{\numberline {8.3.3}Antall noder i et bin\IeC {\ae }rt tre}{24}{subsubsection.8.3.3}

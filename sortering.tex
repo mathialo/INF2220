@@ -1,0 +1,28 @@
+\section{\color{red}Sortering}
+\subsection{Formaliteter}
+\label{sort_form}
+Før vi kan begynne å se på noen spesielle sorteringsalgoritmer må vi formalisere hva vi mener med sortering. Vi definerer sortering slik:
+
+\begin{definisjon}
+Anta at $ \{a_i\}_{i=0}^n $ er en liste av sammenlignbare elementer. Vi sier at $ \{a'_i\}_{i=0}^n $ er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
+\begin{enumerate}[i]
+\item $ a'_i \leq a'_{i+1} $ for alle $ i = 0, 1, ..., n-1 $
+\item Alle elementene i $ \{a\} $ er med i $ \{a'\} $
+\end{enumerate}
+\end{definisjon}
+
+Det andre kriteriet kan virke litt snodig, men uten det ville sortering vært veldig enkelt. Vi kunne i så fall bare generert en ny liste med elementer i sortert rekkefølge, og det første kriteriet ville vært oppfylt. Vi trenger derfor bevaringskriteriet. 
+
+Med ``sammenlignbare'' mener vi at det finnes en måte å entydig bestemme om et element er større enn, mindre enn eller lik et annet element. Hvis vi skal sortere tall er jobben enkel: vi sammenligner numerisk verdi. Hvis vi skal sammenligne to tekststrenger er det ikke like opplagt hvordan vi skal gjøre det. Skal vi sortere alfabetisk? Etter lengde på ordet? I et sånt tilfelle er det opp til oss å velge et fornuftig sammenligningskriterie. Det er vilkårlig hvordan vi sammenligner to elementer, så lenge vi gjør det likt gjennom hele sorteringen. 
+
+
+\subsection{\color{red}Noen algoritmer}
+Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle eksempler vil vi sortere tall etter tallverdi, men som diskutert i \ref{sort_form} vil vi enkelt kunne tilpasse algoritmene til å sortere på andre kriterier. 
+
+
+\subsubsection{\color{red}Boblesortering}
+\subsubsection{\color{red}Innstikksortering}
+\subsubsection{\color{red}Tresortering}
+\subsubsection{\color{red}Quicksort}
+\label{quick}
+\subsubsection{\color{red}Radix}

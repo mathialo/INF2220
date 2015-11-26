@@ -1,0 +1,131 @@
+% Obligatorisk latex-ting:
+\documentclass[11pt,norsk,a4paper,hidelinks]{article}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp, geometry, imakeidx,float, bookmark,enumerate}
+\usepackage[utf8]{inputenc}
+\usepackage[norsk]{babel}
+\geometry{bottom=1.1in}
+
+\makeindex
+
+
+% Tegne trær, etc:
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+
+
+%************ CODE IMPORT FUNCTION ***************
+\usepackage{color, mdframed}
+\usepackage{setspace}
+\usepackage{listings}
+\definecolor{mygreen}{rgb}{.0,.5,.0}	% green for comments
+\definecolor{purple}{rgb}{.8,.2,.8}
+\definecolor{back}{rgb}{1,1,.9}			% background
+\definecolor{back2}{rgb}{.99,.99,.95}
+\definecolor{orange}{rgb}{0.8, 0.5, 0.1}
+\definecolor{grey}{rgb}{0.6, 0.6, 0.6}
+\lstset{basicstyle=\ttfamily,
+	literate={æ}{{\ae}}1
+	{ø}{{\o}}1
+	{å}{{\aa}}1}				% font, code
+			
+% command, javaimport
+	\newcommand{\javaimport}[1]{
+		\begin{mdframed}[backgroundcolor = back2]
+			\lstinputlisting[language=Java,
+			commentstyle=\color{grey}, 
+			breaklines=true,
+			basicstyle=\footnotesize\ttfamily,
+			keywordstyle=\bfseries\color{orange},
+			keepspaces=true,
+			tabsize=4,
+			stringstyle=\color{mygreen},
+			showstringspaces=false]{#1}
+		\end{mdframed}}
+	
+	
+	\lstset{prebreak=\raisebox{0ex}[0ex][0ex]
+		{\ensuremath{\rightarrow }}}
+	\lstset{postbreak=\raisebox{0ex}[0ex][0ex]
+		{\ensuremath{\hookrightarrow \space}}}
+	\lstset{breaklines=true, breakatwhitespace=true}
+
+
+% mattefonter og -symboler:
+\usepackage{amsmath, amsthm, amssymb, amsfonts, mathtools}
+
+% tittelfont:
+\usepackage{sectsty,xcolor}
+\definecolor{tittelfarge}{RGB}{10,30,130}
+\allsectionsfont{\color{tittelfarge}\sffamily}
+
+% fornuftige sitattegn:
+\newcommand{\say}[1]{\emph{``#1''}}
+
+% basic info:
+\title{\sffamily \huge INF2220: Algoritmer og datastrukturer\\ Pensumsammendrag}
+\author{\sffamily Mathias Lohne\\ \footnotesize\sffamily mathialo@student.matnat.uio.no}
+\date{\sffamily Høsten, 2015}
+
+% spesielle ting:
+\makeatletter
+\newtheoremstyle{indented}
+  {3pt}% space before
+  {3pt}% space after
+  {\addtolength{\@totalleftmargin}{3.5em}
+   \addtolength{\linewidth}{-3.5em}
+   \parshape 1 3.5em \linewidth}% body font
+  {}% indent
+  {\bfseries}% header font
+  {.}% punctuation
+  {.5em}% after theorem header
+  {}% header specification (empty for default)
+\makeatother
+
+\theoremstyle{indented}
+\newtheorem{myDef}{Definisjon}
+\newenvironment{definisjon}{~\\\begin{myDef}}{\end{myDef}~\\}
+
+\newtheorem*{myEks}{Eksempel}
+\newenvironment{eks}{~\\\begin{myEks}}{\end{myEks}~\\}
+
+\newtheorem{myTeo}{Teorem}
+\newenvironment{teorem}{~\\\begin{myTeo}}{\end{myTeo}~\\}
+
+\usepackage{tabu}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section*{Noen kommentarer}
+Dette notatet har i hovedsak fungert som min egne lille gummiand i eksamenstreninga, men kan være nyttig til repetisjon og som notater under eksamen. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \verb|mathialo@student.matnat.uio.no|
+
+Innhold og eksempler er basert på stoff fra læreboka, forelesninger, tidligere eksamener, mine egne obliger og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
+
+~\\~\\
+
+\tableofcontents
+\newpage
+
+\input{kompleksitet.tex}		% ferdig
+~\\~\\
+\input{paradigmer.tex}			% ferdig
+~\\~\\
+\input{traer.tex}
+~\\~\\
+\input{grafer.tex}
+~\\~\\
+\input{datastrukturer.tex}
+~\\~\\
+\input{tekstalg.tex}
+~\\~\\
+\input{sortering.tex}
+~\\~\\
+\input{bevis.tex}				% ferdig
+
+\newpage
+\printindex
+
+\end{document}
