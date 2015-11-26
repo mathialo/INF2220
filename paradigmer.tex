@@ -58,3 +58,11 @@ Vi ser at vi vil regne ut $ f(3) $ to ganger, det virker litt overflødig. Gener
 Denne koden er kanskje litt mindre intuitiv enn den forrige, men den er mye raskere! Her ser vi at algoritmen kun har én loop, og kjøretiden er opplagt $ O(n) $.
 
 Et eksempel på en algoritme som bruker denne teknikken er Floyds algoritme (se \ref{floyd}).
+
+
+
+
+\subsection{Kombinatorisk søk}
+Kombinatorisk søking er en strategi vi bruker når vi ikke har noen andre muligheter. Strategien går i hovedsak ut på å teste alle muligheter. Dette er veldig tregt, og har ofte eksponentiell tid. Når det er sagt kan vi ofte gjøre visse \textbf{avskjæringer} for å forbedre tiden. Avskjæringer er når vi kan fjerne mange muligheter fordi vi veit at svaret ikke finnes der uansett. 
+
+Eksempler på problemer vi må bruke kombinatorisk søk på er TSP, subset sum eller å plassere åtte dronninger på et skjakkbrett uten at noen står i slag.

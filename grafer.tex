@@ -84,11 +84,11 @@ Vi begynner med en definisjon:
 Et \textbf{spenntre} for en urettet graf $ G $ er et tre med kanter fra grafen slik at alle nodene i $ G $ er forbundet. Spesielt er et \textbf{minimalt spenntre} de(t) spenntre(ene) med lavest total kostnad.
 \end{definisjon}
 
-\noindent Vi tegner opp et eksempel:
+\noindent Minimale spenntrær er sjeldent entydig bestemt. Vi har et entydig minimalt spenntre hvis alle kantene har forskjellig vekt. Vi tegner opp et eksempel:
 
 \begin{figure}[H]
 \centering
-\caption{En graf (venstre) og det minimale spenntreet for grafen (høyre)}~\\
+\caption{En graf (venstre) og et minimalt spenntre for grafen (høyre)}~\\
 \label{fig:min_spenntre}
 \begin{tikzpicture}[auto,node distance=2cm]
 \tikzstyle{vertex} = [circle, draw=black]
@@ -212,9 +212,13 @@ Med andre ord: en SCC er en del (partisjon) av grafen der alle nodene i den part
 Vi ser at \{A, B, C\} danner en SCC. D har ingen kanter ut. Den må derfor være sin egen SCC. E ingen kanter inn, den må også være sin egen SCC. Vi har da at vi kan partisjonere grafen slik: \{\{A, B, C\}, \{D\}, \{E\} \}
 \end{eks}
 
-\subsubsection{\color{red}Articulation points}
+\subsubsection{\color{red}Articulation points og biconnectivity}
+
 
 \subsection{\color{red}Grafalgoritmer}
+
+\subsubsection{\color{red}Dybde først}
+
 
 \subsubsection{\color{red}Finne SCC}
 
