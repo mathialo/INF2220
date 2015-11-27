@@ -24,7 +24,7 @@ For illustrere tankegangen skal vi se på et eksempel. Fibonaccitallene er defin
 	\end{array}
 	\right. \]
 Vi skal programmere en funksjon som regner ut $ f(n) $. Det er fristende å gjøre det helt likt som definisjonen:
-\javaimport{fib_rek.java}
+\javaimport{kode/fib_rek.java}
 Dette er en grei og oversiktlig implementasjon, i den forstand at den finner tallet vi ber den om, men la oss foreta en liten tidsanalyse. For hvert tall vi ber den om må den regne ut to tall. For hver av disse to tallene må vi igjen regne ut to tall. Slik baller det på seg. Vi kan tegne opp et tre over funksjonskallene:
 
 \begin{figure}[H]
@@ -54,7 +54,7 @@ every node/.style = {align=center}]
 \end{figure}
 
 Vi ser at vi vil regne ut $ f(3) $ to ganger, det virker litt overflødig. Generelt vil denne algoritmen bruke $ O(2^n) $ tid, som er veldig dårlig. Hvis vi prøver å tenke dynamisk kan vi løse problemet mye bedre. I stedet for å programmere fibonaccifunksjonen vår rekursivt vil vi gjøre det iterativt, og hvor vi lagrer løsningene underveis. Da kan vi, i stedet for å regne ut de foregående tallene, finne dem i en tabell. 
-\javaimport{fib_dyn.java}
+\javaimport{kode/fib_dyn.java}
 Denne koden er kanskje litt mindre intuitiv enn den forrige, men den er mye raskere! Her ser vi at algoritmen kun har én loop, og kjøretiden er opplagt $ O(n) $.
 
 Et eksempel på en algoritme som bruker denne teknikken er Floyds algoritme (se \ref{floyd}).

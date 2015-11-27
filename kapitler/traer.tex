@@ -104,7 +104,7 @@ every node/.style = {shape=circle, draw, align=center}]
 Når vi skal sette inn en node i et binært søketre starter vi i rota. Vi sammenligner verdien vi skal sette inn med verdien i rota. Hvis verdien vi setter inn er mindre enn rota går vil til venstre, er den større går vi til høyre. Hva som skjer ved likhet er opp til oss å bestemme, men vi må være konsekvente. Når vi kommer til en nullpeker kan vi sette denne pekeren til å peke på noden vi setter inn.
 
 Vi kan implementere denne funksjonen rekursivt. I en ytre klasse kan vi skrive en skallfunksjon som kaller på rotas \verb|instert|-metode. Vi har en indre \verb|Node|-klasse med en rekursiv insertmetode. Den kan implementeres slik:
-\javaimport{ex_bintree_insert.java}
+\javaimport{kode/ex_bintree_insert.java}
 ~\\
 
 \paragraph{Fjerning}~\\
@@ -117,14 +117,14 @@ Når vi skal fjerne en node fra et binært søketre har vi tre forskjellige situ
 {\bfseries Noden har to barn}. Hvis noden vi skal fjerne har to barn tar vi opp den minste noden som er større en noden vi skal fjerne og flytter den til den posisjonen noden vi skulle fjærne var. Vi finner den minste noden som er større ved å gå ett steg til høyre, og så til venstre helt til vi er i bunn av treet. 
 
 Eksempel på implementasjon i Java (rekursiv metode i en \verb|Node|-klasse):
-\javaimport{ex_bintree_remove.java}
+\javaimport{kode/ex_bintree_remove.java}
 ~\\
 
 \paragraph{Søking}~\\
 Når vi skal søke etter et element i et søketre starter vi i rota og sammenligner det elementet vi søker etter med det elementet som finnes i rota. Er elementet vår mindre enn noden vi ser på går vi til venstre, og er det større går vi til høyre. Deretter foretar vi samme testen på nytt og fortsetter slik til vi enten finner elementet vi leter etter, eller kommer til en nullpeker (bunnen av treet).
 
 Eksempel på implementasjon i Java:
-\javaimport{ex_bintree_search.java}
+\javaimport{kode/ex_bintree_search.java}
 ~\\
 
 
@@ -169,16 +169,16 @@ La $ N $ være noden vi ønsker å sette inn i treet. La $ P $ være forelder, $
 		\item Hvis $ U $ er rød:
 		\begin{enumerate}
 			\item $ N $ er venstre barn av $ P $, som er venstre barn av $ G $:\\
-			\includegraphics[width=0.65\textwidth]{rbt_ll.png}\\
+			\includegraphics[width=0.65\textwidth]{fig/rbt_ll.png}\\
 
 			\item $ N $ er høyre barn av $ P $, som er venstre barn av $ G $:\\
-			\includegraphics[width=0.65\textwidth]{rbt_lr.png}\\
+			\includegraphics[width=0.65\textwidth]{fig/rbt_lr.png}\\
 			
 			\item $ N $ er høyre barn av $ P $, som er høyre barn av $ G $ (speilvendt av i):\\
-			\includegraphics[width=0.65\textwidth]{rbt_rr.png}\\
+			\includegraphics[width=0.65\textwidth]{fig/rbt_rr.png}\\
 			
 			\item $ N $ er venstre barn av $ P $, som er høyre barn av $ G $ (speilvendt av ii):\\
-			\includegraphics[width=0.65\textwidth]{rbt_rl.png}\\
+			\includegraphics[width=0.65\textwidth]{fig/rbt_rl.png}\\
 			
 		\end{enumerate}
 	\end{enumerate}
