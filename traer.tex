@@ -1,6 +1,6 @@
 
 
-\section{\color{red}Trær}
+\section{Trær}
 Et tre en et spesielt tilfelle av en rettet graf der hver node har inngrad 1 (med unntak av rota i treet). Vi ser på et eksempel:
 \begin{figure}[H]
 \caption{Et lite binært tre}
@@ -199,7 +199,7 @@ Siden høyden til et rød-svart tre maksimalt er $ 2\log_2 (n+1) $ har vi worst 
 
 
 ~\\
-\subsection{\color{red}B-trær}
+\subsection{B-trær}
 B-trær er konstruert for å effektivisere antall disklesninger, og gir mening å bruke hvis vi har et tre som er så stort at det må lagres på gammeldagse spinnedisker, og ikke i RAM. Vi lagrer dataene i blokker, og leser en og en blokk av gangen. Alle dataene er lagret i løvnodene, mens de indre nodene brukes for søking. En vanlig måte å implementere B-trær på er å ha så mye av toppen i RAM som mulig, og lagre resten på disk. B-trær er ikke binære, dvs at de kan ha flere enn 2 barn. 
 
 \begin{definisjon} La $ M $ angi antall mulige nøkler i hver indre node, og $ L $ angi maksimalt antall dataelementer i hver løvnode. B-trær er søketrær der følgende kriterier er oppfylt:
@@ -257,7 +257,7 @@ child {
 
 Vi starter med å sette inn 13. Vi ser først på rota: (33; -). 13 er mindre enn 33, så vi går til første barn. Så sammenligner vi med (12; -). 13 er sørre enn 13, og mindre enn uendelig (- symboliserer minste verdi i tredje barn, men siden det barnet ikke eksisterer tenker vi på verdier som $ \infty $). Vi går derfor til andre barn. Der ser vi at vi kan sette inn 13 uten problemer. 
 
-Vi skal nå sette inn 42. 42 er større enn 33 så vi går til andre barn. Igjen er 42 større enn 33 så vi går til andre barn igjen. Her ser vi at hvis vi legger til 42 i bunn av noden (33, 37, 40, 41) blir størrelsen lik 5, altså større enn $ N $. Vi må splitte noden. Når vi splitter en node med et odde antall elementer er det ikke helt klart som vi skal ta med oss størsteparten, eller la størsteparten være igjen. I dette tilfellet vil vi få en node med 3 og en node med 2 elementer. Vi kan selv velge om den nye noden skal ha 2 eller 3 elementer, men vi må være konsekvente. 3I dette tilfellet lar vi den nye noden ha 2 elementer. Vi oppdaterer foreldrenoden. Siden den har to barn fra før og $ M=3 $ går det fint, vi trenger ikke splitte videre oppover. 
+Vi skal nå sette inn 42. 42 er større enn 33 så vi går til andre barn. Igjen er 42 større enn 33 så vi går til andre barn igjen. Her ser vi at hvis vi legger til 42 i bunn av noden (33, 37, 40, 41) blir størrelsen lik 5, altså større enn $ N $. Vi må splitte noden. Når vi splitter en node med et odde antall elementer er det ikke helt klart som vi skal ta med oss størsteparten, eller la størsteparten være igjen. I dette tilfellet vil vi få en node med 3 og en node med 2 elementer. Vi kan selv velge om den nye noden skal ha 2 eller 3 elementer, men vi må være konsekvente. I dette tilfellet lar vi den nye noden ha 2 elementer. Vi oppdaterer foreldrenoden. Siden den har to barn fra før og $ M=3 $ går det fint, vi trenger ikke splitte videre oppover. 
 
 Resultatet etter innsetting ser slik ut:
 
@@ -300,7 +300,7 @@ child {
 \end{figure}
 \end{eks}
 
-
+~\\
 \paragraph{Fjerning}~\\
 Hvis vi skal fjerne et element fra et B-tre søker vi opp elementet, tar det vekk, og hvis mengden elementer i noden blir mindre enn grensen satt i def. \ref{def:b_tre}.vi slår vi sammen to noder. Den eneste måten B-trær kan minke i høyde på er om alle barna til rota blir slått sammen til én node (vi fjerner da rota). 
 
@@ -343,22 +343,184 @@ child {
 
 \end{tikzpicture}
 \end{figure}
-Vi ser at 41 er mellom 33 og $ \infty $, så vi går til andre barn. Deretter ser vi at 41 er større enn 33 og større enn eller lik 41. Vi går derfor til tredje barn. 
+Vi ser at 41 er mellom 33 og $ \infty $, så vi går til andre barn. Deretter ser vi at 41 er større enn 33 og større enn eller lik 41. Vi går derfor til tredje barn og fjerner 41. Vi ser at da vi noden kun ha ett element, og vi slår den sammen med noden før. Resultatet etter fjerning blir
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
 
+\node[inner] {33; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\13\\14\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; -}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\42}
+	}
+	child[missing]
+}
+;
+
+\end{tikzpicture}
+\end{figure}
 \end{eks}
 
 
 
-\paragraph{Tidsanalyse}~\\
+\paragraph{Tidsanalyse}
+
+\begin{teorem} Å søke etter, sette inn og fjerne elementer fra et B-tre tar, både i beste og verste fall, $ O(\log n) $ tid.
+\end{teorem}
 
 
 
 
-
-
-\subsection{\color{red}Rotasjon}
+\newpage
+\subsection{Rotasjon}
 \label{trerotasjon}
 
-\subsubsection{\color{red}Zig}
+\subsubsection{Zig}
+For å skjønne zig-rotasjon ser vi på en figur:
 
-\subsubsection{\color{red}Zig-zag}
+\begin{figure}[H]
+\caption{Zig-rotasjon mhp X}
+\centering
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {P}
+child {
+	node[n] {X}
+	child {
+		node[subtree] {A}
+	}
+	child {
+		node[subtree] {B}
+	}
+}
+child {
+	node[subtree] {C}
+}
+;
+\end{tikzpicture}
+\quad\raisebox{5\height}{\scalebox{2}{$\rightarrow$}}\quad
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {X}
+child {
+	node[subtree] {A}
+}
+child {
+	node[n] {P}
+	child {
+		node[subtree] {B}
+	}
+	child {
+		node[subtree] {C}
+	}
+}
+;
+\end{tikzpicture}
+\end{figure}
+
+En zig-rotasjon vil beholde egenskapene til et binært søketre siden alle nodene i A er mindre enn X og P, alle nodene i B er større enn X og mindre enn P, og alle nodene i C er større enn både X og P. Vi ser at alle høyre barn av P også er høyre barn av P \emph{etter} rotasjonen, etc. 
+
+Vi har også noe som heter zig-zig-rotasjon, som er å utføre en zig-rotasjon to ganger.
+
+
+\subsubsection{Zig-zag}
+Igjen ser vi på en figur:
+
+\begin{figure}[H]
+
+% Dette er helt forferdelig kode. Jeg vet, og jeg beklager. 
+
+\caption{Zig-zag-rotasjon mhp X:}
+\centering
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {G}
+child {
+	node[n] {P}
+	child {
+		node[subtree] {A}
+	}
+	child {
+		node[n] {X}
+		child {
+			node[subtree] {B}
+		}
+		child {
+			node[subtree] {C}
+		}
+	}
+}
+child {
+	node[subtree] {D}
+}
+;
+\end{tikzpicture}
+\quad\raisebox{9\height}{\scalebox{2}{$\rightarrow$}}\quad
+\raisebox{.25\height}{
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2.7cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {X}
+child {
+	node[n] {P}
+	child {
+		node[subtree] {A}
+	}
+	child {
+		node[subtree] {B}
+	}
+}
+child {
+	node[n] {G}
+	child {
+		node[subtree] {C}
+	}
+	child {
+		node[subtree] {D}
+	}
+}
+;
+\end{tikzpicture}
+}
+\end{figure}
+
+Som i tilfellet med zig-rotasjon ser vi at egenskapene til et binært søketre er bevart. 
