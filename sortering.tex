@@ -21,6 +21,33 @@ Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle eks
 
 
 \subsubsection{\color{red}Boblesortering}
+\label{bubble}
+\textbf{Boblesortering} (\textbf{bubble/(sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
+Idéen bak er derimot forholdsvis enkel:
+Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
+
+\paragraph*{Wikipedias utgave}
+Wikipedias versjon av boblesortering er forskjellig fra den som er gjennomgått i forelesning.
+Her flytter vi oss hele tiden oppover i lista, og begynner på nytt når vi har kommet til slutten.
+Dette gjentas helt til lista er ferdig sortert.
+
+\begin{eks} Sortering av (5 1 2 5 8) \newline
+  \textbf{Første gjennomgang}
+  \begin{align*}
+    (\mathbf{5}~ \mathbf{1}~ 2~ 5~ 8) \rightarrow (\mathbf{1}\, \mathbf{5} ~ 2 ~ 5 ~ 8) &\quad \text{Bytter, siden 5 > 1} \\
+    (1~ \mathbf{5}~ \mathbf{4}~ 2~ 8) \rightarrow (1 ~ \mathbf{4} ~ \mathbf{5} ~ 2 ~ 8) &\quad \text{Bytter, siden 5 > 4} \\
+    (1~ 4~ \mathbf{5}~ \mathbf{2}~ 8) \rightarrow (1~ 4~ \mathbf{2}~ \mathbf{5}~ 8)     &\quad \text{Bytter, siden 5 > 2} \\
+    (1~ 4~ 2~ \mathbf{5}~ \mathbf{8}) \rightarrow (1~ 4~ 2~ \mathbf{5}~ \mathbf{8})     &\quad \text{Bytter ikke, siden 5 < 8}
+  \end{align*}
+  Deretter går vil tilbake til start og gjentar prosessen, helt til vi har gått gjennom lista uten at noen elementer har byttet plass.
+  I dette tilfellet kreves tre gjennomganger.
+\end{eks}
+
+\javaimport{bubbleSort.java}
+
+
+
+
 \subsubsection{\color{red}Innstikksortering}
 \subsubsection{\color{red}Tresortering}
 \subsubsection{\color{red}Quicksort}
