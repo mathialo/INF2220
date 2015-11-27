@@ -22,14 +22,12 @@ Kan en Turingmaskin avgjøre om en annen Turingmaskin noen sinne vil stoppe, ell
 \[ L = \{i : M \text{ stopper på input } i \} \]
 Det kan vises at en Turingmaskin som løser dette problemet \emph{ikke} kan eksistere. Det kan vises på flere måter, Alan Turing beviste det slik:
 
-\begin{proof}
 \label{haltingProof}
 Vi skal bevise at haltingproblemet er uløselig, og vi skal gjøre det ved selvmotsigelse. 
 
 Anta at vi har en Turingmaskin $ M $ som bestemmer om en annen Turingmaskin $ H $ vil stoppe, gitt input $ i $. Vi kan da bygge en annen Turingmaskin $ M' $ rundt denne som tar de samme parametrene ($ H $ og $ i $) som input, og gir resultat hvis $ M $ gir false (Altså at $ H $ ikke vil stoppe, gitt input $ i $), og går i en evig loop hvis $ M $ gir true (at $ H $ vil stoppe, gitt $ i $). 
 
-Hva vil skje hvis vi bruker denne Turingmaskinen på seg selv? Hvis $ M $ sier at $ M' $ vil stoppe vil $ M' $ gå i en evig loop, og følgelig vil ikke $ M' $ stoppe. Hvis $ M $ sier at $ M' $ ikke vil stoppe vil $ M' $ gi et resultat, og så stoppe. Uansett får vi en motsigelse, og derfor kan ikke Turingmaskinen $ M $ eksistere.
-\end{proof}
+Hva vil skje hvis vi bruker denne Turingmaskinen på seg selv? Hvis $ M $ sier at $ M' $ vil stoppe vil $ M' $ gå i en evig loop, og følgelig vil ikke $ M' $ stoppe. Hvis $ M $ sier at $ M' $ ikke vil stoppe vil $ M' $ gi et resultat, og så stoppe. Uansett får vi en motsigelse, og derfor kan ikke Turingmaskinen $ M $ eksistere. $ \hfill\qed $ \\
 
 \noindent Beviset er analogt med Cantors diagonaliseringsargument. \color{red} kanskje du skal forklare hvorfor?\color{black}
 

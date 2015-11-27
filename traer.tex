@@ -34,7 +34,7 @@ Nodene $ r, a, c $ og $ d $ kalles \textbf{indre noder}, det vil si at disse nod
 I figur \ref{fig:tre} er $ r $ \textbf{rotnoden}. Rota i treet er den eneste noden uten noen foreldre. Rota er derfor et naturlig startpunkt når vi skal søke eller traversere gjennom treet. 
 
 
-\subsection{\color{red}Binære søketrær}
+\subsection{Binære søketrær}
 \label{bintraer}
 Binære søketrær er trær med noen spesielle krav. Hver node kan ikke ha mer enn to barn, vi kaller dem ofte venstre og høyre barn. Venstre barn er alltid mindre enn noden selv, og høyre barn er alltid større enn noden. Dette gjør binære søketrær meget godt egnet for søking. 
 
@@ -114,26 +114,30 @@ Når vi skal fjerne en node fra et binært søketre har vi tre forskjellige situ
 
 {\bfseries Noden har ett barn}. For å fjerne en node $ a $ med ett barn kan vi ganske enkelt flytte pekeren fra foreldernoden til $ a $, til barnet til $ a $.
 
-{\bfseries Noden har to barn}. Hvis noden vi skal fjerne har to barn
+{\bfseries Noden har to barn}. Hvis noden vi skal fjerne har to barn tar vi opp den minste noden som er større en noden vi skal fjerne og flytter den til den posisjonen noden vi skulle fjærne var. Vi finner den minste noden som er større ved å gå ett steg til høyre, og så til venstre helt til vi er i bunn av treet. 
+
+Eksempel på implementasjon i Java (rekursiv metode i en \verb|Node|-klasse):
 \javaimport{ex_bintree_remove.java}
 ~\\
 
 \paragraph{Søking}~\\
-kodeeksempel og sånt
+Når vi skal søke etter et element i et søketre starter vi i rota og sammenligner det elementet vi søker etter med det elementet som finnes i rota. Er elementet vår mindre enn noden vi ser på går vi til venstre, og er det større går vi til høyre. Deretter foretar vi samme testen på nytt og fortsetter slik til vi enten finner elementet vi leter etter, eller kommer til en nullpeker (bunnen av treet).
 
-
-\paragraph{Tidsanalyse}~\\
+Eksempel på implementasjon i Java:
+\javaimport{ex_bintree_search.java}
+~\\
 
 
 
 
 ~\\~\\
-\subsection{\color{red}Rød-svarte trær}
+\subsection{Rød-svarte trær}
 Rødsvarte trær er binære søketrær med noen spesielle strukturkrav. Kravene er designet for å motkjempe skjevhet (som illustrert i figur \ref{fig:bintre}), og dermed forbedre kjøretid.
 
 Vi deler nodene opp i to kategorier, røde og svarte. Vi følger noen bestemte regler på hvordan vi skal farge nodene, og fargen på nodene avgjør som vi må benytte oss av rotasjon eller ikke (se \ref{trerotasjon}). Fargen til en node er \textbf{ikke} statisk, den kan endres.
 
 \begin{definisjon}
+\label{def:rb_tree}
 Et rød-svart tre er et binært søketre der hver node er
 farget enten rød eller svart slik at:
 \begin{enumerate}[i]
@@ -142,6 +146,8 @@ farget enten rød eller svart slik at:
 \item Enhver vei fra en node til en null-peker må inneholde samme antall svarte noder.
 \end{enumerate}
 \end{definisjon}
+
+Dette sikrer at høyden maksimalt er $ 2\log_2 (n+1) $
 
 \paragraph{Insetting}~\\
 For å sette inn en node i rød-svarte trær kan vi bruke algoritmen i teorem \ref{teo:ins_rb}
@@ -181,13 +187,20 @@ La $ N $ være noden vi ønsker å sette inn i treet. La $ P $ være forelder, $
 
 
 \paragraph{Fjerning}~\\
+Vi skal fjerne en node $ N $ fra et rød-svart tre.
+
+Vi ser på noen spesialtifeller: Hvis $ N $ er en rød node er jobben enkel. Vi sletter da $ N $ som om vi hadde et vanlig søketre. Det samme gjelder hvis forelderen til $ N $ er rød og $ N $ er eneste barn. Hvis $ N $ er svart og har ett barn sletter vi $ N $ og farger barnet svart. 
+
+Generelt sletter vi noden som i et vanlig binært søketre, og utfører nødvendige rotasjoner og omfarginger for å beholde kravet i definisjon \ref{def:rb_tree}.
+
 
 \paragraph{Tidsanalyse}~\\
+Siden høyden til et rød-svart tre maksimalt er $ 2\log_2 (n+1) $ har vi worst case tid $ O(\log_2 n) $. Selv om vi risikerer å måtte gjøre rotasjoner er innsetningstiden også $ O(\log_2 n) $.
 
 
-
+~\\
 \subsection{\color{red}B-trær}
-B-trær er konstruert for å effektivisere antall disklesninger, og gir mening å bruke hvis vi har et tre som er så stort at det må lagres på gammeldagse spinnedisker, og ikke i RAM. Vi lagrer dataene i blokker, og leser en og en blokk av gangen. Alle dataene er lagret i løvnodene, mens de indre nodene brukes for søking. B-trær er ikke binære, dvs at de kan ha flere enn 2 barn. 
+B-trær er konstruert for å effektivisere antall disklesninger, og gir mening å bruke hvis vi har et tre som er så stort at det må lagres på gammeldagse spinnedisker, og ikke i RAM. Vi lagrer dataene i blokker, og leser en og en blokk av gangen. Alle dataene er lagret i løvnodene, mens de indre nodene brukes for søking. En vanlig måte å implementere B-trær på er å ha så mye av toppen i RAM som mulig, og lagre resten på disk. B-trær er ikke binære, dvs at de kan ha flere enn 2 barn. 
 
 \begin{definisjon} La $ M $ angi antall mulige nøkler i hver indre node, og $ L $ angi maksimalt antall dataelementer i hver løvnode. B-trær er søketrær der følgende kriterier er oppfylt:
 \begin{enumerate}[i]
@@ -198,12 +211,142 @@ B-trær er konstruert for å effektivisere antall disklesninger, og gir mening �
 \item Alle løvnoder har samme dybde.
 \item Alle løvnoder har mellom $ \lceil L/2\rceil $ og $ L $ dataelementer
 \end{enumerate}
+\label{def:b_tre}
 \end{definisjon}
 
 
 \paragraph{Innsetting}~\\
+Når vi skal sette inn et element i et B-tre finner vi plassen elementet skal på, og setter det der. Hvis løvnoden vi setter elementet inn i er full må vi splitte noden i to like store deler. Vi må da oppdatere nøklene i foreldrenoden $ P $. Hvis $ P $ ikke har plass til en ekstra nøkkel må vi splitte den også, og oppdatere nøklene i foreldrenoden til $ P $. Slik fortsetter vi oppover til vi får en node som har plass til en ekstra nøkkel. Den eneste måten et B-tre kan øke høyden på er at rota splittes i to, og at vi lager en ny rot. 
+
+\begin{eks} Sett inn 13 og 42 i følgende B-tre ($ M = 3 $ og $ N = 4 $):
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
+
+\node[inner] {33; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\14\\~\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; -}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\41}
+	}
+	child[missing]
+}
+;
+
+\end{tikzpicture}
+\end{figure}
+
+Vi starter med å sette inn 13. Vi ser først på rota: (33; -). 13 er mindre enn 33, så vi går til første barn. Så sammenligner vi med (12; -). 13 er sørre enn 13, og mindre enn uendelig (- symboliserer minste verdi i tredje barn, men siden det barnet ikke eksisterer tenker vi på verdier som $ \infty $). Vi går derfor til andre barn. Der ser vi at vi kan sette inn 13 uten problemer. 
+
+Vi skal nå sette inn 42. 42 er større enn 33 så vi går til andre barn. Igjen er 42 større enn 33 så vi går til andre barn igjen. Her ser vi at hvis vi legger til 42 i bunn av noden (33, 37, 40, 41) blir størrelsen lik 5, altså større enn $ N $. Vi må splitte noden. Når vi splitter en node med et odde antall elementer er det ikke helt klart som vi skal ta med oss størsteparten, eller la størsteparten være igjen. I dette tilfellet vil vi få en node med 3 og en node med 2 elementer. Vi kan selv velge om den nye noden skal ha 2 eller 3 elementer, men vi må være konsekvente. 3I dette tilfellet lar vi den nye noden ha 2 elementer. Vi oppdaterer foreldrenoden. Siden den har to barn fra før og $ M=3 $ går det fint, vi trenger ikke splitte videre oppover. 
+
+Resultatet etter innsetting ser slik ut:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
+
+\node[inner] {33; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\13\\14\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; 41}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\~}
+	}
+	child {
+		node[leaf] {41\\42\\~\\~}
+	}
+}
+;
+
+\end{tikzpicture}
+\end{figure}
+\end{eks}
+
 
 \paragraph{Fjerning}~\\
+Hvis vi skal fjerne et element fra et B-tre søker vi opp elementet, tar det vekk, og hvis mengden elementer i noden blir mindre enn grensen satt i def. \ref{def:b_tre}.vi slår vi sammen to noder. Den eneste måten B-trær kan minke i høyde på er om alle barna til rota blir slått sammen til én node (vi fjerner da rota). 
+
+\begin{eks} Fjern 41 fra følgende B-tre:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
+
+\node[inner] {33; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\13\\14\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; 41}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\~}
+	}
+	child {
+		node[leaf] {41\\42\\~\\~}
+	}
+}
+;
+
+\end{tikzpicture}
+\end{figure}
+Vi ser at 41 er mellom 33 og $ \infty $, så vi går til andre barn. Deretter ser vi at 41 er større enn 33 og større enn eller lik 41. Vi går derfor til tredje barn. 
+
+\end{eks}
+
 
 
 \paragraph{Tidsanalyse}~\\
@@ -215,6 +358,7 @@ B-trær er konstruert for å effektivisere antall disklesninger, og gir mening �
 
 \subsection{\color{red}Rotasjon}
 \label{trerotasjon}
+
 \subsubsection{\color{red}Zig}
 
 \subsubsection{\color{red}Zig-zag}

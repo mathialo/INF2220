@@ -64,11 +64,17 @@
 \definecolor{tittelfarge}{RGB}{10,30,130}
 \allsectionsfont{\color{tittelfarge}\sffamily}
 
+\sectionfont{\huge\color{tittelfarge}\sffamily}
+\subsectionfont{\Large\color{tittelfarge}\sffamily}
+\subsubsectionfont{\color{tittelfarge}\sffamily\slshape}
+
+
+
 % fornuftige sitattegn:
 \newcommand{\say}[1]{\emph{``#1''}}
 
 % basic info:
-\title{\sffamily \huge INF2220: Algoritmer og datastrukturer\\ Pensumsammendrag}
+\title{\sffamily \Huge INF2220: Algoritmer og datastrukturer\\ Pensumsammendrag}
 \author{\sffamily Mathias Lohne\\ \footnotesize\sffamily mathialo@student.matnat.uio.no\\~\\\sffamily Kristian Monsen Haug\\ \footnotesize\sffamily krimha@student.matnat.uio.no \\~\\ \sffamily Vegard Stikbakke \\ \footnotesize \footnotesize\sffamily vegarsti@student.matnat.uio.no}
 \date{~\\~\\~\\\sffamily Høsten, 2015}
 
@@ -88,14 +94,17 @@
 \makeatother
 
 \theoremstyle{indented}
-\newtheorem{myDef}{Definisjon}
+\newtheorem{myDef}{\sffamily Definisjon}
 \newenvironment{definisjon}{~\\\begin{myDef}}{\end{myDef}~\\}
 
-\newtheorem*{myEks}{Eksempel}
+\newtheorem*{myEks}{\sffamily Eksempel}
 \newenvironment{eks}{~\\\begin{myEks}}{\end{myEks}~\\}
 
-\newtheorem{myTeo}{Teorem}
+\newtheorem{myTeo}{\sffamily Teorem}
 \newenvironment{teorem}{~\\\begin{myTeo}}{\end{myTeo}~\\}
+
+\newtheorem*{myProof}{\sffamily Bevis}
+\newenvironment{bevis}{~\\\begin{myProof}}{$ \hfill\qed $\end{myProof}~\\}
 
 \usepackage{tabu}
 
@@ -107,27 +116,29 @@
 \section*{Noen kommentarer}
 Dette notatet har i hovedsak fungert som min egne lille gummiand i eksamenstreninga, men kan være nyttig til repetisjon og som notater under eksamen. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \verb|mathialo@student.matnat.uio.no|
 
-Innhold og eksempler er basert på stoff fra læreboka, forelesninger, Wikipedia, tidligere eksamener, mine egne obliger og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
+Innhold og eksempler er basert på stoff fra læreboka, forelesninger, tidligere eksamener, mine egne obliger og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
 
-~\\~\\
+~\\Denne utgaven er kompilert \today
+
+~\\
 
 \tableofcontents
 \newpage
 
 \input{kompleksitet.tex}		% ferdig, mangler indexer
-~\\~\\
+\newpage
 \input{paradigmer.tex}			% ferdig, mangler indexer
-~\\~\\
+\newpage
 \input{traer.tex}
-~\\~\\
+\newpage
 \input{grafer.tex}
-~\\~\\
+\newpage
 \input{datastrukturer.tex}
-~\\~\\
+\newpage
 \input{tekstalg.tex}
-~\\~\\
+\newpage
 \input{sortering.tex}
-~\\~\\
+\newpage
 \input{bevis.tex}				% ferdig, mangler indexer
 
 

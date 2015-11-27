@@ -116,12 +116,12 @@ Regneregler for O-notasjon:
 \end{enumerate}
 \end{teorem}
 
-\begin{proof} Teorem \ref{teo:O}, del i
+\begin{bevis} Teorem \ref{teo:O}, del i
 
 La $ f $ og $ g $ være to funksjoner $ f,g:\mathbb{N}\rightarrow\mathbb{R} $ og la $ k $ være et tall $ \in \mathbb{N} $. Videre antar vi at $ f(n) = O(g(n)) $. Da har vi fra definisjon \ref{def:O} at $ f(n) \leq c\,g(n) $ for en konstant $ c $. Vi setter $ g'(n) = k\,g(n) $ for et positivt heltall $ k $. Da har vi at
 \[ f(n) \leq c\,g(n) \leq c\,k\,g(n) = c\,g'(n) \]
 Dermed er $ f(n) = O(g'(n)) $, og fra antagelsen har vi at $ f(n) = O(g(n)) $. Vi har derfor at $ O(k\,g(n)) = O(g(n)) $
-\end{proof}
+\end{bevis}
 
 Beviset for del ii følger samme strategi. Det teorem \ref{teo:O} del ii egentlig sier er at vi kun bryr oss om den `største' funksjonen. Har vi for eksempel kjøretid lik $ T(n) = n^2 + n $ har vi kun $ O(n^2) $.
 
