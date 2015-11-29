@@ -229,7 +229,7 @@ every node/.style = {align=center}]
 \tikzstyle{inner} = [ellipse, draw=black]
 \tikzstyle{leaf} = [rectangle, draw=black]
 
-\node[inner] {33; -}
+\node[inner] {17; -}
 child {
 	node[inner] {12; - }
 	child {
@@ -255,7 +255,7 @@ child {
 \end{tikzpicture}
 \end{figure}
 
-Vi starter med å sette inn 13. Vi ser først på rota: (33; -). 13 er mindre enn 33, så vi går til første barn. Så sammenligner vi med (12; -). 13 er sørre enn 13, og mindre enn uendelig (- symboliserer minste verdi i tredje barn, men siden det barnet ikke eksisterer tenker vi på verdier som $ \infty $). Vi går derfor til andre barn. Der ser vi at vi kan sette inn 13 uten problemer. 
+Vi starter med å sette inn 13. Vi ser først på rota: (17; -). 13 er mindre enn 17, så vi går til første barn. Så sammenligner vi med (12; -). 13 er sørre enn 13, og mindre enn uendelig (- symboliserer minste verdi i tredje barn, men siden det barnet ikke eksisterer tenker vi på verdier som $ \infty $). Vi går derfor til andre barn. Der ser vi at vi kan sette inn 13 uten problemer. 
 
 Vi skal nå sette inn 42. 42 er større enn 33 så vi går til andre barn. Igjen er 42 større enn 33 så vi går til andre barn igjen. Her ser vi at hvis vi legger til 42 i bunn av noden (33, 37, 40, 41) blir størrelsen lik 5, altså større enn $ N $. Vi må splitte noden. Når vi splitter en node med et odde antall elementer er det ikke helt klart som vi skal ta med oss størsteparten, eller la størsteparten være igjen. I dette tilfellet vil vi få en node med 3 og en node med 2 elementer. Vi kan selv velge om den nye noden skal ha 2 eller 3 elementer, men vi må være konsekvente. I dette tilfellet lar vi den nye noden ha 2 elementer. Vi oppdaterer foreldrenoden. Siden den har to barn fra før og $ M=3 $ går det fint, vi trenger ikke splitte videre oppover. 
 
@@ -271,7 +271,7 @@ every node/.style = {align=center}]
 \tikzstyle{inner} = [ellipse, draw=black]
 \tikzstyle{leaf} = [rectangle, draw=black]
 
-\node[inner] {33; -}
+\node[inner] {17; -}
 child {
 	node[inner] {12; - }
 	child {
@@ -316,7 +316,7 @@ every node/.style = {align=center}]
 \tikzstyle{inner} = [ellipse, draw=black]
 \tikzstyle{leaf} = [rectangle, draw=black]
 
-\node[inner] {33; -}
+\node[inner] {17; -}
 child {
 	node[inner] {12; - }
 	child {
@@ -343,7 +343,7 @@ child {
 
 \end{tikzpicture}
 \end{figure}
-Vi ser at 41 er mellom 33 og $ \infty $, så vi går til andre barn. Deretter ser vi at 41 er større enn 33 og større enn eller lik 41. Vi går derfor til tredje barn og fjerner 41. Vi ser at da vi noden kun ha ett element, og vi slår den sammen med noden før. Resultatet etter fjerning blir
+Vi ser at 41 er mellom 17 og $ \infty $, så vi går til andre barn. Deretter ser vi at 41 er større enn 33 og større enn eller lik 41. Vi går derfor til tredje barn og fjerner 41. Vi ser at da vi noden kun ha ett element, og vi slår den sammen med noden før. Resultatet etter fjerning blir
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -354,7 +354,7 @@ every node/.style = {align=center}]
 \tikzstyle{inner} = [ellipse, draw=black]
 \tikzstyle{leaf} = [rectangle, draw=black]
 
-\node[inner] {33; -}
+\node[inner] {17; -}
 child {
 	node[inner] {12; - }
 	child {
