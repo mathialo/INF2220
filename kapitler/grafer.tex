@@ -1,4 +1,4 @@
-\section{\color{red}Grafer}
+\section{Grafer}
 En graf er en samling av kanter og noder. Vi kaller mengden av alle nodene $ V $ (verticies), og mengden av alle kantene $ E $ (edges). Grafen $ G $ blir da en samling av disse to mengdene. Formelt kan vi definere en graf slik: \index{graf}
 
 \begin{definisjon}
@@ -219,7 +219,7 @@ Et \textbf{articulation point} er et kritisk punkt i en sammenhengende graf som 
 
 En \textbf{biconnected} graf er en graf uten articulation points, altså en graf der det alltid finnes mer enn én vei fra en node til en annen. Grafen (til venstre) i figur \ref{fig:min_spenntre} er en slik graf. \index{graf!biconnected}
 
-\subsection{\color{red}Grafalgoritmer}
+\subsection{Grafalgoritmer}
 
 \subsubsection{Dybde først}
 \label{dfs}
@@ -598,5 +598,36 @@ Vi må loope gjennom alle kantene én gang, det gir tid $ O(|E|) $. Vi kan imple
 Prim er som regel noe mer effektiv enn Kruskal, spesielt på tette grafer. Prim har likevel den svakheten at den kun fungerer på sammenhengende grafer. Kruskal anvendt på en usammenhengende graf vil gi et minimalt spenntre for hver sammenhengende del av grafen.
 
 
-\subsubsection{\color{red}Floyds algoritme}
+\subsubsection{Floyds algoritme}
 \label{floyd}
+
+Floyds algoritme er en algoritme som beregner korteste vei fra alle noder til alle andre noder. Algoritmen er et eksempel på en algoritme som benytter seg av dynamisk programmering. 
+
+\begin{teorem} Floyds algoritme
+
+Denne betraktningen gjentas systematisk for alle tripler i, k og j:
+\begin{itemize}
+\item Initielt: Avstanden fra node $ i $ til node $ j $ settes lik vekten på kanten fra $ i $ til $ j $, uendelig hvis det ikke går noen kant fra $ i $ til $ j $
+\item Trinn 0: Se etter forbedringer ved å velge node 0 som mellomnode
+\item Etter trinn $ k $: Avstanden mellom to noder er den korteste veien som bare bruker nodene $ 0, 1, ... , k $ som mellomnoder
+\end{itemize}
+\end{teorem}
+
+\noindent Eksempel på implementasjon i Java:
+\javaimport{kode/floyd.java}
+
+\paragraph{Tidsanalyse}~\\
+Vi ser fra kodeeksempelet at det er to løkker som må kjøres gjennom. En dobbel og en trippel for-løkke. Kjøretiden blir derfor:
+
+\[ \text{Kjøretid} ~=~ O\left(n^2 + n^3\right)  ~=~ O\left(n^3\right) \]
+
+~\\
+\paragraph{Hvordan tolke input/output fra Floyds algoritme}~\\
+Ved start inneholder \verb|nabo[i][j]| lengden av kanten fra $ i $ til $ j $, \verb|nabo[i][j] = |$ \infty $ hvis det ikke er noen kant. Algoritmen lar \verb|nabo| være uendret, og legger resultatene i \verb|avstand| og \verb|vei|. \verb|avstand[i][j]| er lengden av korteste vei fra $ i $ til $ j $. Når vi oppdager at den korteste veien fra $ i $ til $ j $ går gjennom $ k $ setter vi \verb|vei[i][j] = k|. \verb|vei| sier derfor om den korteste veien. Vi finner korteste vei slik:
+\begin{itemize}
+\item \verb|k1 = vei[i][j]| er den største verdien av $ k $ slik at $ k $ ligger på den korteste veien fra $ i $ til $ j $
+\item \verb|k2 = vei[i][k1]| er den største verdien av $ k $ slik at $ k $ ligger på den korteste veien fra $ i $ til $ k_1 $
+\\ $ \vdots $
+\item Når \verb|vei[i][km] = -1| er $ (i, k_m) $ den første kanten i korteste vei fra $ i $ til $ j $
+\end{itemize}
+Dermed er korteste vei fra $ i $ til $ j $ slik: $ i \rightarrow k_m \rightarrow k_{m-1} \rightarrow ... \rightarrow k_2 \rightarrow k_1 \rightarrow j $. 
