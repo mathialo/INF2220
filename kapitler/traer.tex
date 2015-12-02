@@ -105,7 +105,7 @@ Når vi skal sette inn en node i et binært søketre starter vi i rota. Vi samme
 
 Vi kan implementere denne funksjonen rekursivt. I en ytre klasse kan vi skrive en skallfunksjon som kaller på rotas \verb|instert|-metode. Vi har en indre \verb|Node|-klasse med en rekursiv insertmetode. Den kan implementeres slik:
 \javaimport{kode/ex_bintree_insert.java}
-~\\
+
 
 \paragraph{Fjerning}~\\
 Når vi skal fjerne en node fra et binært søketre har vi tre forskjellige situasjoner som vi må se på.
@@ -118,14 +118,14 @@ Når vi skal fjerne en node fra et binært søketre har vi tre forskjellige situ
 
 Eksempel på implementasjon i Java (rekursiv metode i en \verb|Node|-klasse):
 \javaimport{kode/ex_bintree_remove.java}
-~\\
+
 
 \paragraph{Søking}~\\
 Når vi skal søke etter et element i et søketre starter vi i rota og sammenligner det elementet vi søker etter med det elementet som finnes i rota. Er elementet vår mindre enn noden vi ser på går vi til venstre, og er det større går vi til høyre. Deretter foretar vi samme testen på nytt og fortsetter slik til vi enten finner elementet vi leter etter, eller kommer til en nullpeker (bunnen av treet).
 
 Eksempel på implementasjon i Java:
 \javaimport{kode/ex_bintree_search.java}
-~\\
+
 
 
 
