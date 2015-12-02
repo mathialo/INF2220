@@ -259,7 +259,8 @@ I figur \ref{fig:dfs} har vi brukt A som rotnode. Vi gikk deretter til et av bar
 
 DFS-algorigmer er velegnet for å programmere rekursivt. Et eksempel på en enkel implementasjon i Java (som en metode i en Node-klasse):
 
-\javaimport{kode/dfs.java}~\\
+\javaimport{kode/dfs.java}
+\newpage
 
 \subsubsection{Kosarajus algoritme (Finne SCC)}
 Vi kan finne SCCer i en graf $ G $ ved å utføre to dfs. Et på $ G $ og et på $ G^t $, som er grafen vi får ved å snu alle kantene i $ G $. Denne algoritmen kalles Kosarajus algoritme.
@@ -272,7 +273,7 @@ Snu alle kantene i (transponer) $ G $ og dann $ G^t $. Sorter nodene i $ G $ syn
 \end{teorem}
 
 
-Vi ser på et eksempel:
+\noindent Vi ser på et eksempel:
 
 \begin{eks} Finn alle SCCer i grafen:
 
@@ -348,7 +349,7 @@ Vi begynner med å gjøre et dfs. Vi starter i A. Søket stopper etter å ha bes
 \end{tikzpicture}
 \end{figure}
 
-Det hadde vært nok å bare lagre postfixverdiene, men vi har tatt med begge for oversiktens skyld. Vi transponerer $ G $:
+\noindent Det hadde vært nok å bare lagre postfixverdiene, men vi har tatt med begge for oversiktens skyld. Vi transponerer $ G $:
 
 \begin{figure}[H]
 \centering
@@ -384,12 +385,11 @@ Det hadde vært nok å bare lagre postfixverdiene, men vi har tatt med begge for
 \draw[e] (I) to (J);
 \end{tikzpicture}
 \end{figure}
-\end{eks}
 
 Siden G har høyest postfixteller (20) begynner vi der. Vi ser i $ G^t $ at G ikke har noen kanter ut. Første SCC er derfor \{G\}. Når vi tar vekk G fra grafen er det H som har høyest postfixverdi (19), vi starter derfor neste dfs derfra. Vi går fra H til I og J, før vi treffer på H igjen. Vi går tilbake, men siden hverken J eller I har flere etterfølgere stopper søket, og neste SCC er derfor \{H, I, J\}. Nå er det A som har høyest postfixteller (12), så vi starter derfra. Fra A går vi til C, og til B. Da møter vi på A igjen, så vi går tilbake til C og videre til F. Vi går \emph{ikke} fra F til G eller H, siden de allerede er besøkt tidligere. Vi går derfor tilbake til C og tilbake til A. I det søke besøkte vi \{A, B, C, F\}, det blir derfor neste SCC. Til slutt starter vi i D (7), men siden D ikke har noen kanter til ubesøkte noder stopper søket med en gang. Det samme skjer i E (6). 
 
 Alle SCCer til $ G $ er: \{ \{G\}, \{H, I, J\}, \{A, B, C, F\}, \{D\}, \{E\} \}
-
+\end{eks}
 
 \subsubsection{\color{red}Dijkstras algoritme}
 \label{dijkstra}
@@ -397,8 +397,32 @@ Alle SCCer til $ G $ er: \{ \{G\}, \{H, I, J\}, \{A, B, C, F\}, \{D\}, \{E\} \}
 \subsubsection{\color{red}Prims algoritme}
 \label{prim}
 
+Prims algoritme er en algoritme for å finne minimale spenntrær. Det er en grådig algoritme siden den \color{red}\verb|insert reason here|\color{black}
+
+\begin{teorem} Prims algoritme
+
+
+\end{teorem}
+
+
+
 \subsubsection{\color{red}Kruskals algoritme}
 \label{kruskal}
+
+Kruskals algoritme er en annen algoritme for å finne minimale spenntrær. Det er også en grådig algoritme, siden vi til enhver tid velger den kanten med lavest vekt.  
+
+\begin{teorem} Kruskals algoritme
+
+Vi skal finne et minimum spenntre for en graf $ G $. La $ F $ være en skog (en mengde av trær). Så lenge $ F $ ikke utspenner alle nodene velger vi den kanten med lavest vekt fra $ G $, og som ikke danner en løkke, og legger den til i $ F $. Når $ F $ har blitt ett sammenhengende tre og alle nodene er nådd har vi et minimalt spenntre.
+\end{teorem}
+
+\noindent Vi ser på et eksempel.
+
+\begin{eks} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
+
+Vi finner kanten(e) i grafen med den minste vekten. $ v_6-v_7 $ og $ v_1-v_4 $ har begge vekt 1. Vi legger de til i spenntreet. Kantene $ v_3-v_4 $ og $ v_1-v_2 $ har begge vekt 2, og ingen av dem danner en løkke, så vi legger dem til i spenntreet. Neste kant med lavest vekt er $ v_2-v_4 $ (3), men den vil danne en løkke, så vi hopper over den. Videre ser vi at $ v_1-v_3 $ og $ v_4-v_7 $ begge har vekt 4. Kanten $ v_1-v_3 $ vil danne en løkke så den hopper vi over, men $ v_4-v_7 $ legger vi til. Neste kant med lavest vekt, og som ikke danner en løkke er $ v_5-v_7 $. Vi legger den til i spenntreet, og da er alle noder nådd, og vi har en sammenhengende graf. Vi har derfor et minimalt spenntre (se figur \ref{fig:min_spenntre}). 
+\end{eks}
+
 
 \subsubsection{\color{red}Floyds algoritme}
 \label{floyd}
