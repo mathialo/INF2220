@@ -27,7 +27,7 @@ eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_for
 Idéen bak er derimot forholdsvis enkel:
 Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
 
-\paragraph*{Wikipedias utgave}
+\paragraph*{Wikipedias utgave}\label{sec:bubble-wiki}
 Wikipedias versjon av boblesortering er forskjellig fra den som er gjennomgått i forelesning.
 Her flytter vi oss hele tiden oppover i lista, og begynner på nytt når vi har kommet til slutten.
 Dette gjentas helt til lista er ferdig sortert.
@@ -46,7 +46,7 @@ Dette gjentas helt til lista er ferdig sortert.
 
 \javaimport{kode/bubbleSort.java}
 
-\paragraph*{Utgaven presentert i forelesning}
+\paragraph*{Utgaven presentert i forelesning}\label{sec:bubbleoptimal}
 I forelesningen ble en noe alternativ utgave av boblesortering presentert, og det kan være lurt å forholde seg til denne, siden det er denne som er pensum.
 Denne utgaven ligner veldig på innstikksortering, fordi den ``bobler'' et element som står på feil plass nedover i lista helt til den står på riktig plass.
 
@@ -55,6 +55,21 @@ Denne utgaven ligner veldig på innstikksortering, fordi den ``bobler'' et eleme
 
 
 \subsubsection{\color{red}Innstikksortering}\label{insertion}
+Dette er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$
+Idéen her er at elementene vi hittil har besøkt, er sorterte, isolert sett.
+Deretter tar vi neste element, ``skyver'' de foregående elementene oppover,
+helt til det nye elementet står på riktig plass.
+Altså kan denne metoden minne mye om den~\hyperref[sec:bubbleoptimal]{optimaliserte boblesorteringen}. 
+
+\javaimport{kode/insertionSort.java}
+
+Merk at if-testen ikke trengs for at algoritmen skal fungere.
+Faktisk lønner det seg å ikke ha med denne testen.
+Siden if-tester er relativt dyre operasjoner, lønner det seg å ``plukke opp'' et
+element, for deretter å sette den ned igjen på samme plass, enn å sjekke om det
+står på feil plass.
+
+
 \subsubsection{\color{red}Tresortering}
 \subsubsection{\color{red}Quicksort}
 \label{quick}
