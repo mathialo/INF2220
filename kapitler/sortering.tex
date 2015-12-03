@@ -4,9 +4,9 @@
 Før vi kan begynne å se på noen spesielle sorteringsalgoritmer må vi formalisere hva vi mener med sortering. Vi definerer sortering slik:
 
 \begin{definisjon}
-Anta at $ \{a_i\}_{i=0}^n $ er en liste av sammenlignbare elementer. Vi sier at $ \{a'_i\}_{i=0}^n $ er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
+Anta at $ {\{a_i\}}_{i=0}^n $ er en liste av sammenlignbare elementer. Vi sier at $ {\{a'_i\}}_{i=0}^n $ er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
 \begin{enumerate}[i]
-\item $ a'_i \leq a'_{i+1} $ for alle $ i = 0, 1, ..., n-1 $
+\item $ a'_i \leq a'_{i+1} $ for alle $ i = 0, 1, \ldots, n-1 $
 \item Alle elementene i $ \{a\} $ er med i $ \{a'\} $
 \end{enumerate}
 \end{definisjon}
@@ -17,12 +17,13 @@ Med ``sammenlignbare'' mener vi at det finnes en måte å entydig bestemme om et
 
 
 \subsection{\color{red}Noen algoritmer}
-Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle eksempler vil vi sortere tall etter tallverdi, men som diskutert i \ref{sort_form} vil vi enkelt kunne tilpasse algoritmene til å sortere på andre kriterier. 
+Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle
+eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_form} vil vi enkelt kunne tilpasse algoritmene til å sortere på andre kriterier. 
 
 
 \subsubsection{\color{red}Boblesortering}
 \label{bubble}
-\textbf{Boblesortering} (\textbf{bubble/(sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
+\textbf{Boblesortering} (\textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
 Idéen bak er derimot forholdsvis enkel:
 Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
 
@@ -50,7 +51,6 @@ I forelesningen ble en noe alternativ utgave av boblesortering presentert, og de
 Denne utgaven ligner veldig på innstikksortering, fordi den ``bobler'' et element som står på feil plass nedover i lista helt til den står på riktig plass.
 
 \javaimport{kode/optBubbleSort.java}
-
 
 
 
