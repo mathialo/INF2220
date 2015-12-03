@@ -4,7 +4,7 @@ public static void floyd(int[][] naboer, int[][] avstander, int[][] vei) {
 	// Initialisering:
 	for (int i=0; i<n; i++) {
 		for (int j=0; j<n; j++) {
-			avstand[i][j] = nabo[i][j];
+			avstand[i][j] = naboer[i][j];
 			vei[i][j] = -1;
 		}
 	}
