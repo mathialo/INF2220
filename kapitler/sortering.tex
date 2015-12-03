@@ -22,7 +22,7 @@ eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_for
 
 
 \subsubsection{\color{red}Boblesortering}
-\label{bubble}
+\label{bubblesort}
 \textbf{Boblesortering} (\textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
 Idéen bak er derimot forholdsvis enkel:
 Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
@@ -54,7 +54,7 @@ Denne utgaven ligner veldig på innstikksortering, fordi den ``bobler'' et eleme
 
 
 
-\subsubsection{\color{red}Innstikksortering}\label{insertion}
+\subsubsection{\color{red}Innstikksortering}\label{insertsort}
 Dette er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$
 Idéen her er at elementene vi hittil har besøkt, er sorterte, isolert sett.
 Deretter tar vi neste element, ``skyver'' de foregående elementene oppover,
@@ -69,10 +69,56 @@ Siden if-tester er relativt dyre operasjoner, lønner det seg å ``plukke opp'' 
 element, for deretter å sette den ned igjen på samme plass, enn å sjekke om det
 står på feil plass.
 
+\subsubsection{\color{red}Heapsort}
 
-\subsubsection{\color{red}Tresortering}
+\subsubsection{\color{red}Tresortering}\label{treesort}
+
 \subsubsection{\color{red}Quicksort}
 \label{quick}
-\subsubsection{\color{red}Radix}
+Som navnet antyder, er dette en ganske rask algoritme.
+Idéen er at vi velger et (vilkårlig) element i arrayen (pivotelement), og ordner resten av
+elementene slik at de som er mindre pivotelementet står på venstre side, og de
+som er større på venstre. Deretter gjentar vi denne prosessen for disse to
+subarrayene på hver side av pivotelementet.
+
+\javaimport{kode/quickSort.java}
+
+Som man kan se i koden ovenfor, er det litt problematisk å foreta selve
+flyttingen av elementene i forhold til pivoten når vi jobber med arrayer, siden
+vi ikke kan dele opp og sette sammen arrayer. En detaljert beskrivning (og
+illustrering) av tankegangen finnes i boka i seksjon 7.7.2 (side 312). 
+En noe forenklet utgave følger her:
+\begin{enumerate}
+\item Bytt plass på pivoten og det siste elementet, slik at vi unngår at den
+  kommer i veien for oss.
+\item La $i$ og $j$ starte på henholdsvis første og \textbf{nest siste} plass i
+  arrayen. 
+\item\label{item:bevege} La $i$ bevege seg oppover, og $j$ nedover, helt til $i$ står på et
+  element som er større enn pivotelementet, og $j$ står på et element som er
+  mindre.
+\item\label{item:bytt} Bytt plass på elementene som $i$ og $j$ peker på.
+\item Gjenta~\ref{item:bevege} og~\ref{item:bytt} helt til $i$ og $j$ har
+  passert hverandre. Nå peker $j$ på et element mindre enn pivot, og $i$ på et
+  som er større. Dersom vi nå bytter plass på verdien på $i$ og pivoten.
+\end{enumerate}
+
+\paragraph{Om å velge pivot}
+Hvilket element vi velger som pivotelement kan ha veldig mye å si for kjøretiden
+til algoritmen. Dersom vi får en array som allerede er sortert, og vi velger det
+første elementet (altså det minste) som pivotelement, vil vi bruke kvadratisk
+tid på å gjøre egentlig ingenting!
+
+Det beste valget av pivot, villet vært medianen. Da vil størrelsen på
+subarrayene bli det samme (med en forskjell på 1 hvis vi har partall antall
+elementer). Dessverre vil det å regne ut medianen til en stor array ta alt for
+lang tid. Boka foreslår en mulig løsning ved å trekke tilfeldige tall, og
+deretter bruke medianen til disse som pivot. Det tilfeldige elementet viser seg
+imidlertid å hjelpe lite. Derfor blir det til slutt anbefalt å bruke medianen
+til det første, siste og midterste elementet i arrayen som pivot.
+
+
+
+\subsubsection{\color{red}Radixsort}
+
 
 \subsection{\color{red}Parallell Sortering}
