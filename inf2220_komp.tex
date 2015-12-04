@@ -8,6 +8,13 @@
 
 \makeindex
 
+% header and footer:
+\usepackage{fancyhdr}
+%\pagestyle{fancy}				% fjern comment når projektet er ferdig. liker ikke \color i sectiontittel. legger til section- og subsectiontittel i header og aktiverer de to neste statementene
+\fancyfoot[LO,RE]{\thepage}		% annenhver h/v sidetall
+\cfoot{} 						% fjerner sentersidetall
+
+
 % lisens:
 \usepackage{ccicons}
 
@@ -116,7 +123,8 @@
 \thispagestyle{empty}
 \vfill
 \newpage
-\pagenumbering{arabic}
+\pagenumbering{roman}
+\thispagestyle{plain}
 
 \section*{Noen kommentarer}
 Dette notatet har i hovedsak fungert som min egne lille gummiand i eksamenstreninga, men kan være nyttig til repetisjon og som notater under eksamen. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \verb|mathialo@student.matnat.uio.no|
@@ -130,7 +138,9 @@ Feel free til å bruke, modifisere, og stjele innholdet i notatet, men krediter 
 ~\\
 
 \tableofcontents
+\thispagestyle{plain}
 \newpage
+\pagenumbering{arabic}
 
 \input{kapitler/kompleksitet.tex}		% ferdig, mangler indexer
 \newpage
