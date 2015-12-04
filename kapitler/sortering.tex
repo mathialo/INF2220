@@ -15,6 +15,14 @@ Det andre kriteriet kan virke litt snodig, men uten det ville sortering vært ve
 
 Med ``sammenlignbare'' mener vi at det finnes en måte å entydig bestemme om et element er større enn, mindre enn eller lik et annet element. Hvis vi skal sortere tall er jobben enkel: vi sammenligner numerisk verdi. Hvis vi skal sammenligne to tekststrenger er det ikke like opplagt hvordan vi skal gjøre det. Skal vi sortere alfabetisk? Etter lengde på ordet? I et sånt tilfelle er det opp til oss å velge et fornuftig sammenligningskriterie. Det er vilkårlig hvordan vi sammenligner to elementer, så lenge vi gjør det likt gjennom hele sorteringen. 
 
+\subsubsection{\color{red}paradigmer (?) og begreper}
+\label{sec:sortbegrep}
+
+\paragraph{\color{red}Stabil Sortering}\label{stabil}
+
+Noen ganger ønsker
+
+
 
 \subsection{\color{red}Noen algoritmer}
 Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle
@@ -119,6 +127,28 @@ til det første, siste og midterste elementet i arrayen som pivot.
 
 
 \subsubsection{\color{red}Radixsort}
+Radix sort sorterer en array på et siffer av gangen.
+Metoden forekommer i to varianter, en fra høyre til venstre, og en som gjør
+motsatt. Generelt for begge algoritmene har vi
+\begin{enumerate}
+\item Finn max verdi i arrayen. (Største siffer i alle tallene)\color{red}??
+\item\label{item:tell} Tell opp hvor mange elementer det er av hver verdi av det sifferet vi ser
+  på. (hvor mange 0-er, 1-ere osv)
+\item Ved å addere disse antallene, finner vi ut hvor i arrayen tallene skal stå
+  ved å addere verdiene i arrayen vi lagde i~\ref{item:tell}, men starte på 0.
+\end{enumerate}
+En spesiell ting ved Radix sort er at den aldri gjør sammenligninger mellom to
+tall.
 
-
+\paragraph{Right-Radix (RR)}
+Denne algoritmen er den ``vanlige'' Radix-sort, og er iterativ.
+Den begynner med det minst gjeldende sifferet (det bakerste). Etter
+``fellesstegene'' blir den siste arrayen vi lagde brukt til å slå opp hvor vi
+skal plassere elementet. Vi går gjennom arrayen fra venstre til høyre, og setter
+inn elementer i den nye arrayen. At vi gjør det fra høyre til venstre er viktig,
+siden vi ønsker en~\hyperref[stabil]{stabil} sortering. Etter at vi har plassert
+et element på sin plass i den nye ``sorterte'' arrayen, bør vi øke verdien vi
+akkurat brukte i telle-arrayen med 1 så vi lett kan finne ut hvor neste tall med
+samme siffer på gjeldende plass. Dette gjentar vi helt til vi har vært gjennom
+maks antall gjeldende siffer.
 \subsection{\color{red}Parallell Sortering}
