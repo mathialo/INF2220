@@ -95,8 +95,19 @@ står på feil plass.
 \subsubsection{\color{red}Mergesort}\label{mergesort}
 
 \subsubsection{\color{red}Heapsort}\label{heapsort}
+I heapsort utnytter vi egenskapene til en heap.
+Her bruker vi en max-heap, som vi setter alle elementene inn i. Da vet vi at
+rota er det største elementet per detfinisjon av heap. Dersom vi så tar ut et og
+et element av heapen, og plasserer på den bakerste ikke-opptatte plassen i
+resultat-arrayen, vil vi få arrayen ut i sortert form.
 
 \subsubsection{\color{red}Tresortering}\label{treesort}
+I likhet med \nameref{heapsort} utnytter vi her egenskapene til en datastruktur,
+nemlig binære søketrær. I et slikt tre vet vi at venstre barn til en node er
+mindre enn noden selv, og at høyre barn er større eller lik noden.
+
+Deretter traverserer vi treet i infix-rekkefølge. På den måten vil vi altså gå
+gjennom treet i stigende rekkefølge, og vi har dermed sortert arrayen.
 
 \subsubsection{\color{red}Quicksort}
 \label{quick}
