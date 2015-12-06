@@ -187,3 +187,22 @@ maks antall gjeldende siffer.
 
 
 \subsection{\color{red}Parallell Sortering}
+
+\subsubsection{Amdahls lov}
+\label{sec:amdahl}
+
+Amdahls lov gir oss en slags øvre grense for hvor mye tid vi kan spare på å
+parallellisere en algoritme.
+\begin{teorem}\textbf{Amdahls lov: } 
+  Anta at du har en algoritme der en andel
+  $p\%$ må kjøres sekvensielt, men at resten kan gjøres i parallell.
+  Med $k$ lik antall prosessorer, får vi at maksimal speedup er
+  \[
+    S = \frac{\text{Sekvensiell tid}}{\text{Parallell tid}} \leq \frac{100}{p + \frac{100 - p}{k}}
+  \]
+\end{teorem}
+
+Denne loven har imidlertid møtt motstand i Gustafson, som hevder at andelen av
+programmet som er sekvensielt blir mindre etterhvert som problemet blir større.
+Altså er ikke Amdahls lov fast.
+
