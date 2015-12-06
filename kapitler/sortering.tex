@@ -45,6 +45,27 @@ stabil sortering:
 \item \nameref{mergesort}: Kommer an på implementasjon \color{red}Si noe om vår.
 \end{itemize}
 
+
+\paragraph{Nedre grense for enkle sorteringsalgoritmer}
+\begin{teorem} (7.1 i læreboka): Det gjennomsnittlige antall inversjoner i en
+  array med $n$ elementer er $\frac{n(n-1)}{4}$
+\end{teorem}
+
+\begin{bevis}
+  La $L$ være en array og $L_r$ den reverserte. Et hvilket som helst ordnet par
+  i $L$ vil være en inversjon i enten $L$ eller $L_r$. Det totale antallet slike
+  par i $L$ og $L_r$ vil være $\frac{n(n-1)}{2}$, altså har en gjennomsnittlig
+  liste halvparten så mange, altså $\frac{n(n-1)}{4}$ 
+\end{bevis}
+
+\begin{teorem} (7.2 i læreboka): 
+  $\frac{n(n-1)}{4}$
+\end{teorem}
+
+
+
+
+
 \subsection{\color{red}Noen algoritmer}
 Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle
 eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_form} vil vi enkelt kunne tilpasse algoritmene til å sortere på andre kriterier. 
@@ -81,6 +102,22 @@ Denne utgaven ligner veldig på innstikksortering, fordi den ``bobler'' et eleme
 
 \javaimport{kode/optBubbleSort.java}
 
+\paragraph{Kompleksitet}
+Merk at selv om utgaven av boblesortering presentert i forelesning i mange tilfeller kan være
+betydelig raskere, vil disse to algoritmene ha samme kompleksitet.
+
+\subparagraph{Worst Case: $O(n^2)$} Dersom vi ser for oss at vi skal sortere en
+liste som er den reverserte av den sorterte, må vi gå gjennom lista $n$ ganger.
+Dette fordi vi plasserer det største elementet i første gjennomgang, nest
+største i andre gjennomgang osv. Det minste elementet behøver vi ikke å flytte,
+men til slutt vil vi gå gjennom lista en gang for å sjekke at den er sortert.
+Altså gjør vi $n(n-1)$ sammenligninger. $O(n(n-1)) = O(n^2 )$
+
+\subparagraph{Best Case: $O(n)$} En allerede sortert liste: Vi sammenligner alle nabo-par i arrayen, og
+siden vi ikke foretar noen bytter, vil algoritmen terminere etter å ha gjort
+$(n-1)$ sammenligninger. Altså $O(n-1) = O(n)$
+
+\subparagraph{Average Case: $O(n^2)$} 
 
 
 \subsubsection{\color{red}Innstikksortering}\label{insertsort}
