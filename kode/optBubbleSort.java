@@ -6,9 +6,10 @@ void optBubbleSort(int[] A){
             swap(A[i], A[i+1]);
             if (i > 0){
                 i -= 1;
-            } else {
-                i += 1;
             }
+        }
+        else {
+            i += 1;
         }
     }
 }
