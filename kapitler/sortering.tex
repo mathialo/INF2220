@@ -4,10 +4,10 @@
 Før vi kan begynne å se på noen spesielle sorteringsalgoritmer må vi formalisere hva vi mener med sortering. Vi definerer sortering slik:
 
 \begin{definisjon}
-Anta at $ {\{a_i\}}_{i=0}^n $ er en liste av sammenlignbare elementer. Vi sier at $ {\{a'_i\}}_{i=0}^n $ er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
+Anta at \verb|a[]| er en liste av sammenlignbare elementer. Vi sier at \verb|a'[]| er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
 \begin{enumerate}[i]
-\item $ a'_i \leq a'_{i+1} $ for alle $ i = 0, 1, \ldots, n-1 $
-\item Alle elementene i $ \{a\} $ er med i $ \{a'\} $
+\item \verb|a'[i]| $ < $ \verb|a'[i+1]| for alle $ \verb|i| = 0, 1, \ldots, n-1 $
+\item Alle elementene i \verb|a[]| er med i \verb|a'[]|
 \end{enumerate}
 \end{definisjon}
 
