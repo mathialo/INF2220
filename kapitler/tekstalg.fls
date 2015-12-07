@@ -1,0 +1,6 @@
+PWD /Users/vegard/Dropbox/MIT/3. semester (H2015)/INF2220/INF2220/kapitler
+INPUT /usr/local/texlive/2015/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/vegard/Dropbox/MIT/3. semester (H2015)/INF2220/INF2220/kapitler/tekstalg.tex
+OUTPUT /Users/vegard/Dropbox/MIT/3. semester (H2015)/INF2220/INF2220/kapitler/tekstalg.log

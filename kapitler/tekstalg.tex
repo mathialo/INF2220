@@ -1,10 +1,14 @@
 \section{\color{red}Tekstalgoritmer}
 	Generelt problem: Vi er interesserte i å finne ut om en streng er en substreng av en annen streng. Vi kaller substringen for en nål $i$, av lengde $m$, og stringen for en høystakk $h$, av lengde $n$.
 
-\subsection{\color{red}Brute force}
+\subsection{Brute force}
 Brute force-metoden er som navnet tilsier ikke spesielt gjennomtenkt: Til å begynne med sjekker vi hver karakter i høystakken mot den første i nåla. Hvis vi har likhet sjekker vi det neste tegnet i høystakken mot det neste i nåla. Vi fortsetter slik til vi enten finner hele nåla i høystakken eller til vi har ulikhet, og i så fall fortsetter vi med å sjekke det neste tegnet i høystakken mot det første i nåla.
 
+\subsubsection{Analyse}
+Worst case så får vi mismatch $(n-m)$ ganger og suksess $(n-m)+1$ ganger, Totale sammenligninger er $((n-m)+1\times m)$ som gir kjøretid $O(n^2)$.
+
 \subsection{\color{red}Boyer-Moore}
+Med Boyer-Moore preprosserer vi nåla før vi begynner å søke. Vi regner ut hvor mange hopp vi kan gjøre for hvert enkelt tegn i nåla ved mismatch. Detter er bad character shift. Good character shift også... Algoritmen starter med å sjekke halen på nåla og ved eventuell match beveger seg mot venstre. Fortsetter så enten til hele nåla er matchet eller til mismatch, hvor vi i så fall beveger oss \verb|badShift[i]| bortover.
 
 \subsubsection{\color{red}Bad character shift}
 avstand til neste gang nål er på linje med høystakk
