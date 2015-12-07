@@ -1,4 +1,4 @@
-\section{\color{red}Andre datastrukturer}
+\section{Andre datastrukturer}
 \subsection{Heap (prioritetskø)}
 En heap (også kalt prioritetskø) er en type binært tre med noen spesielle struktur- og ordningskrav. Vi har to typer heap: min- og maksheap. Vi vil beskrive minheap i dette kapitlet, men maksheap fremgår helt analogt.
 
@@ -127,7 +127,7 @@ child {
 \end{tikzpicture}
 \end{figure}
 
-\noindent \textbf{Merk:} En venstreorientert heap forsøker å være ute av balanse.
+\noindent \textbf{Merk:} En venstreorientert heap forsøker å være ute av balanse (for å gjøre fletting enklere).
 
 \paragraph{Operasjoner}~\\
 Hovedoperasjonen på venstreorienterte heaper er \textbf{fletting} (engelsk: merging). Vi kan implementere fletting rekursivt: Når vi skal flette to heaper $ H_1 $ og $ H_2 $ sammenligner vi først røttene. La $ H_1 $ være heapen med minst rot. La så den høyre subheapen til $ H_1 $ være heapen som fremstår ved å flette høyre subheap i $ H_1 $ med hele $ H_2 $. Vi fortsetter slik til problemet er trivielt. Gjennomgående kan vi bytte om høyre og venstre subheap for å bevare strukturkravet (def. pt. 1).
@@ -137,13 +137,83 @@ For å \textbf{sette inn} en node i en venstreorientert heap kan vi flette en he
 For å \textbf{fjerne} minste node kan vi ta vekk rota (som vi vet er minst fra def. pt. 2), og flette venstre og høyre subheap.
 
 
-\subsection{\color{red}Hashmap (hashtabell)}
-\subsubsection{\color{red}Maps (tabeller)}
-hva er en nøkkel
-\subsubsection{\color{red}Hashfunksjoner}
-utvidbar hashing
-hva gjør en hashtabell god?
-åpen/lukket
-\subsection{\color{red}Kø/stack}
-\subsubsection{\color{red}Kø (FIFO)}
-\subsubsection{\color{red}Stack (LIFO)}
+
+
+
+\subsection{Hashmap (hashtabell)}
+Sett at vi har en liste med $ n $ elementer. Vi skal søke etter et element $ x $. Hvis vi har implementer lista vår som en array eller lenket liste vil dette ta $ O(n) $ tid. Det vil også operasjoner som sletting, og å sette inn på første ledige plass. Vi ønsker å finne en datastruktur som er bedre på disse tingene. 
+
+Den grunnleggende idéen bak hashtabeller er å la verdien til elementet vi skal sette inn bestemme indexen. Vi bruker en hashfunksjon $ f:\mathbb{N}\rightarrow\mathbb{N} $ på elementet vårt $ x $, og lar $ f(x) $ betegne indexen til elementet i en array. 
+
+\begin{itemize}
+\item Når vi oppretter en hashtabell lager vi en ny array som er $ tableSize $ lang. Størrelsen på arrayen er et primtall. 
+\item Når vi skal sette inn et element $ x $ i en hashtabell regner vi ut $ f(x) $ og setter $ x $ inn i arrayen på plass $ f(x) $
+\item Når vi skal søke etter et element $ x $ i hashtabellen regner vi ut $ f(x) $ og slår opp på den plassen i arrayen. Hvis elementet er der har vi funnet det. Hvis elementet ikke er der må vi muligens sjekke noen andre steder. Hvor vi må lete videre avhenger av hvordan vi håndterer like hashresultater. 
+\item Når vi skal fjerne et element $ x $ i en hashtabell søker vi opp elementet i tabellen, og sletter det. 
+\end{itemize}
+
+\noindent Et eksempel på en hashfunksjon kan være $ f(x) = x \mod tableSize $
+
+
+\subsubsection{Håndtering av like hashresultater}
+Hashfunksjoner trenger ikke å være injektive. Det vil si at vi fort kan få $ f(x) = f(y) $ selv om $ x \neq y $. Hvis vi skal sette inn $ y $ i en hashtabell, men plassen med index $ f(y) $ allerede er okkupert av $ x $ må vi finne en ny plass til $ y $. Det kan gjøres på flere måter, vi deler opp i to hovedgrupper: Seperate chaining og probing. 
+
+
+\paragraph{Seperate chaining}~\\
+En mulig løsning på problemet med like hashresultater er å la arrayen vår være en array av lenkede lister. Vi kan dermed ha flere elementer i hver index. Når vi skal sette inn $ x $, regner vi ut $ f(x) $, og setter y bakerst i lista på den plassen. Dermed har det ingenting å si om det eksisterer elementer på indexen eller ikke. 
+
+Problemet med seperate chaining er at vi må tråkke oss gjennom en lenket liste etter at vi har funnet hashresultatet. Dette tar lineær tid (men dog med (forhåpentligvis) færre elementer enn $ n $)
+
+
+\paragraph{Lineær probing}~\\
+En annen mulig løsning på problemet er å gå til plassen bak $ f(x) $, og hvis den er opptatt går vi til indexen bak det igjen. Skulle vi komme til enden av arrayen begynner vi fra toppen igjen. Generelt for probing har vi at plassen vi setter elementet inn på er gitt ved
+\[ index = (f(x) + g(k)) \mod{tableSize} \]
+der $ f $ er hashfunksjonen, $ g $ er i dette tilfellet $ g(k) = k $, $ k $ er antall skritt vi har tatt fra den opprinnelige indexen (antall ganger vi har støtt på et element) og $ tableSize $ er antall plasser i tabellen. Igjen får vi det problemet at vi i praksis må søke igjennom en liste etter å ha funnet hashresultatet. 
+
+\paragraph{Kvadratisk probing}~\\
+Kvadratisk probing ligner veldig på lineær probing, med den forskjellen at $ g(k) = k^2 $. Vi går altså til den plassen som ligger $ 1, 4, 9, ... $ plasser bak $ f(x) $
+
+\paragraph{Dobbel hashing}~\\
+Med dobbel hashing har vi en ekstra hashfunksjon $ f_2(x) $ som vi regner ut hvis vi skulle støte på problemer. Vi får da at $ g(k) = k f_2(x) $. Et eksempel på en funksjon $ f_2 $ kan være $ f_2(x) = R-(x \mod R) $ der $ R $ er det største primtallet som er mindre enn $ tableSize $. 
+
+
+\subsubsection{Rehashing}
+Hvis hashtabellen begynner å bli full kan det lønne seg å rehashe. Det betyr ganske greit å lage en ny tabell med større $ tableSize $ og flytte alle elementet over. Når vi rehasher lager vi som regel en tabell som er ca dobbelt så stor (men fortsatt primtall). Siden $ f $ ofte avhenger av $ tableSize $ må vi regne ut alle hashverdiene på nytt. Rehashing er derfor en ganske dyr affære, så vi gjør det veldig sjeldent, men hvis tabellen begynner å bli for full kan vi tjene ganske mye tid i lengden. 
+
+
+\subsubsection{Gode hashfunksjoner}
+Vi står helt fritt til å velge hashfunksjoner selv. Gode hashfunksjoner er raske å regne ut, kan gi alle mulige verdier fra $ 0 $ til $ tableSize - 1 $, og har en god fordeling (spredning). utover tabellindexene. 
+
+Ofte bruker vi strenger som nøkler. Vi må derfor ha en måte å regne ut et tall av en tekststreng på. Det kan gjøres på mange måter, her er et par eksempler:
+\begin{itemize}
+\item Summer verdiene til hvert tegn:
+\[ f(x) = \left( \sum_{i=0}^{keyLength-1} = \text{charVal}(key_i) \right) \mod{tableSize} \]
+der $ \text{charVal} $ er en funksjon som tilordner en numerisk verdi til hver bokstav, feks ascii/unicode-verdien til tegnet. $ key_i $ betegner det $ i $-te tegnet i $ key $. Denne funksjonen er rask og enkel å implementere, men vil gi dårlig spredning for store tabeller. 
+\item En vektet sum av de tre første tegnene:
+\[ f(x) = \left( c_1\,\text{charVal}(key_1) + c_2\,\text{charVal}(key_2) + c_3\,\text{charVal}(key_3)\right)  \mod{tableSize} \]
+der $ c $-ene er konstanter vi velger. Denne er rask å enkel å beregne, og gir en grei fordeling for tilfeldige strenger, problemet er at naturlig språk ikke er tilfeldig.
+\end{itemize}
+
+
+\subsubsection{Tidsanalyse}
+Det er åpenbart at best case tid for innsetting, søking og fjerning i hashtabeller er $ O(1) $. Det oppstår når vi kommer rett til elementet/tom index på første forsøk. Worst case er når vi får kollisjoner på hvert eneste treff, og vi i praksis har en liste. Da vil alle operasjoner på tabellen være $ O(n) $. 
+
+Vi ser at en tabell starter som $ O(1) $, og beveger seg mot $ O(n) $ når den blir fullere. Det er derfor vi ofte velger å rehashe når tabellen blir for full. Selv om rehashing har $ O(n) $ tid, er det en operasjon vi gjør én gang. Det vil forbedre kjøretiden på alle andre operasjoner drastisk, siden det er mindre sannsynlighet for å få kollisjoner i en tabell med mindre tetthet. Som regel prøver vi å holde andelen av tabellen som er opptatt (kalt \say{load factor}, ofte forkortet $ LF $) under en gitt grense. Java sin innebygde \verb|HashMap<K,V>| tvinger $ LF < 0.75 $.
+
+
+
+
+
+\subsection{Kø/stack}
+Kø og stack er to forskjellige typer lister. Felles for dem er at vi kun opererer med én \verb|insert()|- og én \verb|remove()|-metode. Forskjellen er hvilket element vi vil hente ut når vi kaller \verb|remove()|-metoden. Innsetting og fjerning i både kø og stack tar $ O(1) $ tid, siden vi på forhånd vet hvor elementet skal fjernes fra/legges til. 
+
+
+\subsubsection{Kø (FIFO)}
+En kø er en liste der første element inn er det første som kommer ut, derav navnet. Vi kaller også slike lister for FIFO-lister (First In, First Out). Elementene som settes inn stilles bakerst i køen, og når vi henter ut et element starter vi foran. 
+
+
+\subsubsection{Stack (LIFO)}
+En stack (norsk: stabel) er en liste der siste element som settes inn er det første som kommer ut. Slike lister kalles også LIFO-lister (Last In, First Out). Elementene som settes inn legges på toppen av stabelen, og når vi skal hente ut et element henter vi det øverste elementet. 
+
+Konvensjonelt kalles insert-metoden i en stack \verb|push()|, og remove-funksjonen \verb|pop()|
+
