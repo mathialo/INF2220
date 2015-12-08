@@ -140,7 +140,7 @@ For å \textbf{fjerne} minste node kan vi ta vekk rota (som vi vet er minst fra 
 
 
 
-\subsection{Hashmap (hashtabell)}
+\subsection{Hashmap (hashtabell)} \label{hashmap}
 Sett at vi har en liste med $ n $ elementer. Vi skal søke etter et element $ x $. Hvis vi har implementer lista vår som en array eller lenket liste vil dette ta $ O(n) $ tid. Det vil også operasjoner som sletting, og å sette inn på første ledige plass. Vi ønsker å finne en datastruktur som er bedre på disse tingene. 
 
 Den grunnleggende idéen bak hashtabeller er å la verdien til elementet vi skal sette inn bestemme indexen. Vi bruker en hashfunksjon $ f:\mathbb{N}\rightarrow\mathbb{N} $ på elementet vårt $ x $, og lar $ f(x) $ betegne indexen til elementet i en array. 
@@ -204,7 +204,7 @@ Vi ser at en tabell starter som $ O(1) $, og beveger seg mot $ O(n) $ når den b
 
 
 
-\subsection{Kø/stack}
+\subsection{Kø/stack} \label{ko_stack}
 Kø og stack er to forskjellige typer lister. Felles for dem er at vi kun opererer med én \verb|insert()|- og én \verb|remove()|-metode. Forskjellen er hvilket element vi vil hente ut når vi kaller \verb|remove()|-metoden. Innsetting og fjerning i både kø og stack tar $ O(1) $ tid, siden vi på forhånd vet hvor elementet skal fjernes fra/legges til. 
 
 
