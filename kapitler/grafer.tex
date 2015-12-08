@@ -221,7 +221,7 @@ En \textbf{biconnected} graf er en graf uten articulation points, altså en graf
 
 \subsection{Grafalgoritmer}
 
-\subsubsection{Dybde først}
+\subsubsection{Dybde-først-søk}
 \label{dfs}
 Dybde-først-traversering (herfra dfs: depth first search) er en måte å traversere gjennom en graf på. Det kan tenkes på som en generalisering av dybde-først-traversering gjennom trær. Vi velger oss en (hvilken som helst) startnode, og beveger oss ned til etterfølgerne til noden. Når vi kommer til en node som ikke har kanter til en ubesøkt node (enten at noden har utgrad 0, eller at alle etterfølgerne er besøkt) går vi tilbake. 
 
@@ -620,6 +620,8 @@ Denne betraktningen gjentas systematisk for alle tripler i, k og j:
 Vi ser fra kodeeksempelet at det er to løkker som må kjøres gjennom. En dobbel og en trippel for-løkke. Kjøretiden blir derfor:
 
 \[ \text{Kjøretid} ~=~ O\left(n^2 + n^3\right)  ~=~ O\left(n^3\right) \]
+
+\noindent Floyds algoritme har forøvrig samme kompleksitet som å kjøre \nameref{dijkstra} én gang for alle nodene i grafen. Fordelen med Floyds algoritme er at den er litt mer robust i møte med løkker og negative vekter. 
 
 ~\\
 \paragraph{Hvordan tolke input/output fra Floyds algoritme}~\\

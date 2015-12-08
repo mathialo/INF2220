@@ -1,1 +1,35 @@
 \section{\color{red} Big-O Cheat-sheet}
+\subsection*{Trær}
+Alle søketrær har samme tid for å sette inn, søke og slette elementer.
+\begin{center}
+\begin{tabular}{c || c  c  c | c}
+	                   & \textbf{Tid} &                 &                 &  \\
+	 \textbf{Tretype}  & {Best}       & {Avarage}       & {Worst}         & \textbf{Plass} \\ \hline
+	\nameref{bintraer} & $ O(1) $     & $ O(\log_2 n) $ & $ O(n) $        & $ O(n) $       \\
+	 \nameref{rb_tre}  & $ O(1) $     & $ O(\log_2 n) $ & $ O(\log_2 n) $ & $ O(n) $       \\
+	 \nameref{b-tre}   & $ O(1) $     & $ O(\log_M n) $ & $ O(\log_M n) $ & $ O(n) $
+\end{tabular}
+\end{center}
+
+~\\\subsection*{Grafalgoritmer}
+\begin{center}
+\begin{tabular}{c || c | c}
+	\textbf{Algoritme} & \textbf{Kjøretid (worst)}   & \textbf{Plass} \\ \hline
+	  \nameref{dfs}    & $ O(|E|) $                  & $ O(|V|) $     \\
+	\nameref{dijkstra} & $ O(|V|^2) $                & $ O(|V|) $     \\
+	  \nameref{prim}   & $ O(|V|^2) $                & $ O(|V|) $     \\
+	\nameref{kruskal}  & $ O(|E| \cdot \log_2 |V|) $ & $ O(|V|) $     \\
+	 \nameref{floyd}   & $ O(|V|^3) $                & $ O(|V|^2) $
+\end{tabular}
+\end{center}
+
+
+~\\\subsection*{Sorteringsalgoritmer}
+\begin{center}
+\begin{tabular}{c || c  c  c | c}
+	                             & \textbf{Tid} &            &            &  \\
+	\textbf{Sorteringsalgoritme} & {Best}       & {Avarage}  & {Worst}    & \textbf{Plass} \\ \hline
+	    \nameref{bubblesort}     & $ O(n) $     & $ O(n^2) $ & $ O(n^2) $ & $ O(1) $
+\end{tabular}
+\[ \vdots \]
+\end{center}

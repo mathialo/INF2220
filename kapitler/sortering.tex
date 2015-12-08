@@ -15,7 +15,7 @@ Det andre kriteriet kan virke litt snodig, men uten det ville sortering vært ve
 
 Med ``sammenlignbare'' mener vi at det finnes en måte å entydig bestemme om et element er større enn, mindre enn eller lik et annet element. Hvis vi skal sortere tall er jobben enkel: vi sammenligner numerisk verdi. Hvis vi skal sammenligne to tekststrenger er det ikke like opplagt hvordan vi skal gjøre det. Skal vi sortere alfabetisk? Etter lengde på ordet? I et sånt tilfelle er det opp til oss å velge et fornuftig sammenligningskriterie. Det er vilkårlig hvordan vi sammenligner to elementer, så lenge vi gjør det likt gjennom hele sorteringen. 
 
-\subsubsection{\color{red}paradigmer (?) og begreper}
+\subsubsection{\color{red}Paradigmer (?) og begreper}
 \label{sec:sortbegrep}
 
 \paragraph{Klasser av sorteringsalgoritmer}
@@ -31,10 +31,8 @@ epost, der vi f.eks. vil sortere både etter avsender og alfabetisk, slik at vi
 får at alle som er fra samme avsender står alfabetisk i forhold til hverandre.
 
 \begin{definisjon} Stabil Sortering
-  Dersom en algoritme er \textbf{stabil}, er det et krav at innbyrdes rekkefølge
-  etter sortering. Dvs at dersom \verb|a[i] = a[j]| og\verb|i < j|, og hvis
-  \verb|a[i]| er sortert på plass \verb|k| i \verb|a'[k]| og \verb|a[j]| sortert
-  på plass \verb|r| i \verb|a[]|, så skal \verb|k<r| 
+  Dersom en algoritme er \textbf{stabil}, er det et krav at innbyrdes rekkefølge beholdes
+  etter sortering. Dvs at dersom \verb|a[i]| $ = $ \verb|a[j]|, og \verb|a[i]| kommer før \verb|a[j]| i \verb|a[]|, så skal \verb|a[i]| komme før \verb|a[j]| i den sorterte lista \verb|a'[]|.
 \end{definisjon}
 
 Følgende algoritmer (altså ikke alle) gjennomgått i kurset oppfyller kravet om
@@ -200,7 +198,7 @@ til algoritmen. Dersom vi får en array som allerede er sortert, og vi velger de
 første elementet (altså det minste) som pivotelement, vil vi bruke kvadratisk
 tid på å gjøre egentlig ingenting!
 
-Det beste valget av pivot, villet vært medianen. Da vil størrelsen på
+Det beste valget av pivot, ville vært medianen. Da vil størrelsen på
 subarrayene bli det samme (med en forskjell på 1 hvis vi har partall antall
 elementer). Dessverre vil det å regne ut medianen til en stor array ta alt for
 lang tid. Boka foreslår en mulig løsning ved å trekke tilfeldige tall, og
@@ -262,3 +260,4 @@ Denne loven har imidlertid møtt motstand i Gustafson, som hevder at andelen av
 programmet som er sekvensielt blir mindre etterhvert som problemet blir større.
 Altså er ikke Amdahls lov fast.
 
+\subsubsection{\color{red}Parallell Quicksort}\label{parquick}
