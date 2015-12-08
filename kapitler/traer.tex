@@ -131,7 +131,7 @@ Eksempel på implementasjon i Java:
 
 
 ~\\~\\
-\subsection{Rød-svarte trær}
+\subsection{Rød-svarte trær} \label{rb_tre}
 Rødsvarte trær er binære søketrær med noen spesielle strukturkrav. Kravene er designet for å motkjempe skjevhet (som illustrert i figur \ref{fig:bintre}), og dermed forbedre kjøretid.
 
 Vi deler nodene opp i to kategorier, røde og svarte. Vi følger noen bestemte regler på hvordan vi skal farge nodene, og fargen på nodene avgjør som vi må benytte oss av rotasjon eller ikke (se \ref{trerotasjon}). Fargen til en node er \textbf{ikke} statisk, den kan endres.
@@ -199,7 +199,7 @@ Siden høyden til et rød-svart tre maksimalt er $ 2\log_2 (n+1) $ har vi worst 
 
 
 ~\\
-\subsection{B-trær}
+\subsection{B-trær} \label{b-tre}
 B-trær er konstruert for å effektivisere antall disklesninger, og gir mening å bruke hvis vi har et tre som er så stort at det må lagres på gammeldagse spinnedisker, og ikke i RAM. Vi lagrer dataene i blokker, og leser en og en blokk av gangen. Alle dataene er lagret i løvnodene, mens de indre nodene brukes for søking. En vanlig måte å implementere B-trær på er å ha så mye av toppen i RAM som mulig, og lagre resten på disk. B-trær er ikke binære, dvs at de kan ha flere enn 2 barn. 
 
 \begin{definisjon} La $ M $ angi antall mulige nøkler i hver indre node, og $ L $ angi maksimalt antall dataelementer i hver løvnode. B-trær er søketrær der følgende kriterier er oppfylt:

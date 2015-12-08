@@ -15,8 +15,6 @@
 \cfoot{} 						% fjerner sentersidetall
 
 
-% lisens:
-\usepackage{ccicons}
 
 % Tegne trær, etc:
 \usepackage{tikz}
@@ -28,41 +26,35 @@
 \usepackage{caption}
 
 
-%************ CODE IMPORT FUNCTION ***************
+% funksjon for import av javakode
 \usepackage{color, mdframed}
-\usepackage{setspace}
 \usepackage{listings}
-\definecolor{mygreen}{rgb}{.0,.5,.0}	% green for comments
-\definecolor{purple}{rgb}{.8,.2,.8}
-\definecolor{back}{rgb}{1,1,.9}			% background
-\definecolor{back2}{rgb}{.99,.99,.95}
+\definecolor{back}{rgb}{.99,.99,.95}
 \definecolor{orange}{rgb}{0.8, 0.5, 0.1}
 \definecolor{grey}{rgb}{0.6, 0.6, 0.6}
 \lstset{basicstyle=\ttfamily,
 	literate={æ}{{\ae}}1
 	{ø}{{\o}}1
-	{å}{{\aa}}1}				% font, code
+	{å}{{\aa}}1}
 			
-% command, javaimport
-	\newcommand{\javaimport}[1]{
-		\begin{mdframed}[backgroundcolor = back2]
-			\lstinputlisting[language=Java,
-			commentstyle=\color{grey}, 
-			breaklines=true,
-			basicstyle=\footnotesize\ttfamily,
-			keywordstyle=\bfseries\color{orange},
-			keepspaces=true,
-			tabsize=4,
-			stringstyle=\color{mygreen},
-			showstringspaces=false]{#1}
-		\end{mdframed}~\\}
-	
-	
-	\lstset{prebreak=\raisebox{0ex}[0ex][0ex]
-		{\ensuremath{\rightarrow }}}
-	\lstset{postbreak=\raisebox{0ex}[0ex][0ex]
-		{\ensuremath{\hookrightarrow \space}}}
-	\lstset{breaklines=true, breakatwhitespace=true}
+\newcommand{\javaimport}[1]{
+	\begin{mdframed}[backgroundcolor = back]
+		\lstinputlisting[language=Java,
+		commentstyle=\color{grey}, 
+		breaklines=true,
+		basicstyle=\footnotesize\ttfamily,
+		keywordstyle=\bfseries\color{orange},
+		keepspaces=true,
+		tabsize=4,
+		stringstyle=\color{mygreen},
+		showstringspaces=false]{#1}
+	\end{mdframed}~\\}
+
+\lstset{prebreak=\raisebox{0ex}[0ex][0ex]
+	{\ensuremath{\rightarrow }}}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]
+	{\ensuremath{\hookrightarrow \space}}}
+\lstset{breaklines=true, breakatwhitespace=true}
 
 
 % mattefonter og -symboler:
