@@ -73,7 +73,7 @@ eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_for
 
 \subsubsection{Boblesortering}
 \label{bubblesort}
-\textbf{Boblesortering} (\textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
+\textbf{Boblesortering} (engelsk: \textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
 Idéen bak er derimot forholdsvis enkel:
 Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
 
@@ -121,7 +121,7 @@ $(n-1)$ sammenligninger. Altså $O(n-1) = O(n)$
 
 
 \subsubsection{Innstikksortering}\label{insertsort}
-Dette er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$
+\textbf{Innstikksortering} (engelsk: \textbf{insertion sort}) er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$
 Idéen her er at elementene vi hittil har besøkt, er sorterte, isolert sett.
 Deretter tar vi neste element, ``skyver'' de foregående elementene oppover,
 helt til det nye elementet står på riktig plass.
@@ -146,7 +146,19 @@ Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen 
 
 
 
-\subsubsection{\color{red}Mergesort}\label{mergesort}
+\subsubsection{Flettesortering}\label{mergesort}
+\textbf{Flettesortering} (engelsk: \textbf{mergesort}) er et ekempel på en \hyperref[splitthersk]{splitt-og-hersk}-algoritme, og er et eksempel på elegant rekursjon. Anta at vi har en liste $ L $ som er $ n $ elementer lang. Vi deler først $ L $ opp i $ n $ biter slik at vi har $ n $ lister på ett element. Deretter fletter vi listene sammen til vi bare har én liste. 
+
+Spørsmålet blir da hva vi mener med å \say{flette listene sammen}. Vi beskriver samme metode som boka: Anta at vi skal flette to lister $ A $ og $ B $. $ A $ er $ m $ elementer lang, og $ B $ er $ o $ elementer. Vi har en resultatliste $ C $ som har $ m+o $ elementer. Vi har tre tellere: $ i $, $ j $ og $ k $ som går over henholdsvis $ A $, $ B $ og $ C $. Vi starter med å sette $ i=j=k=0 $ og sammenligner $ A_i $ med $ B_j $. Den minste av dem setter vi inn i $ C_k $. Hentet vi elementet fra $ A $ øker vi $ i $ med 1, hentet vi elementet fra $ B $ øker vi $ j $ med 1. Uansett øker vi $ k $ med 1. Deretter sammenligner vi $ A_i $ med $ B_j $, setter minste inn i $ C_k $, og øker riktig teller. Slik fortsetter vi så lenge $ j \leq m+o $. Se seksjon 7.6 (side 302) i boka for et nais eksempel med figurer. 
+
+\paragraph{Kompleksitet} Vi setter opp en rekkurant følge for kjøretiden $ T $. Fra definisjonen av flettesortering fremgår det at
+\begin{align*}
+T(1) &= 1\\
+T(n) &= 2\,T\left( \frac{n}{2} \right) + n
+\end{align*}
+Vi ser at for $ n>1 $ må vi utføre $ \log_2 n $ rekursjoner (siden vi halverer $ n $ for hver gang) før vi kommer til et trivielt problem, altså base case $ T(1) = 1 $. For hver rekursjon har vi lineær tid (selve flettinga). Dermed har flettesortering $ O(n\log n) $ tid. 
+
+
 
 \subsubsection{Heapsort}\label{heapsort}
 I heapsort utnytter vi egenskapene til en heap.
