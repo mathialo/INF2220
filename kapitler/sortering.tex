@@ -15,7 +15,7 @@ Det andre kriteriet kan virke litt snodig, men uten det ville sortering vært ve
 
 Med ``sammenlignbare'' mener vi at det finnes en måte å entydig bestemme om et element er større enn, mindre enn eller lik et annet element. Hvis vi skal sortere tall er jobben enkel: vi sammenligner numerisk verdi. Hvis vi skal sammenligne to tekststrenger er det ikke like opplagt hvordan vi skal gjøre det. Skal vi sortere alfabetisk? Etter lengde på ordet? I et sånt tilfelle er det opp til oss å velge et fornuftig sammenligningskriterie. Det er vilkårlig hvordan vi sammenligner to elementer, så lenge vi gjør det likt gjennom hele sorteringen. 
 
-\subsubsection{\color{red}Paradigmer (?) og begreper}
+\subsubsection{\color{red}Paradigmer og begreper}
 \label{sec:sortbegrep}
 
 \paragraph{Klasser av sorteringsalgoritmer}
@@ -45,21 +45,23 @@ stabil sortering:
 
 
 \paragraph{Nedre grense for enkle sorteringsalgoritmer}
-\begin{teorem} (7.1 i læreboka): Det gjennomsnittlige antall inversjoner i en
-  array med $n$ elementer er $\frac{n(n-1)}{4}$
+\begin{teorem} (7.1 i læreboka): Det gjennomsnittlige antall inversjoner i en \label{teo:sortbound}
+  array med $n$ unike elementer er $\frac{n(n-1)}{4}$
 \end{teorem}
-
+Beviset bruker at summen av en aritmetisk rekke er $ n(n-1)/2 $:
 \begin{bevis}
   La $L$ være en array og $L_r$ den reverserte. Et hvilket som helst ordnet par
   i $L$ vil være en inversjon i enten $L$ eller $L_r$. Det totale antallet slike
   par i $L$ og $L_r$ vil være $\frac{n(n-1)}{2}$, altså har en gjennomsnittlig
   liste halvparten så mange, altså $\frac{n(n-1)}{4}$ 
 \end{bevis}
-
-\begin{teorem} (7.2 i læreboka): 
-  $\frac{n(n-1)}{4}$
+Vi har da et korollar til teorem \ref{teo:sortbound} som gir oss en nedre grense for algoritmer som bytter naboelementer:
+\begin{teorem} (7.2 i læreboka): \label{teo:swapkompl}
+  Enhver sorteringsalgoritme som sorterer ved å bytte to naboelementer krever i gjennomsnitt $ O(n^2) $ tid.
 \end{teorem}
-
+\begin{bevis}
+Fra teorem \ref{teo:sortbound} har vi at gjennomsnittlig antall inversjoner er $ n(n-1)/4 $. Hvert plassbytte av to naboer inversjon fjerner én inversjon, dermed tar algoritmer som baserer seg på plassbytte av naboer gjennomsnittlig $ O(n^2) $ tid.
+\end{bevis}
 
 
 
@@ -69,7 +71,7 @@ Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle
 eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_form} vil vi enkelt kunne tilpasse algoritmene til å sortere på andre kriterier. 
 
 
-\subsubsection{\color{red}Boblesortering}
+\subsubsection{Boblesortering}
 \label{bubblesort}
 \textbf{Boblesortering} (\textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
 Idéen bak er derimot forholdsvis enkel:
@@ -115,7 +117,7 @@ Altså gjør vi $n(n-1)$ sammenligninger. $O(n(n-1)) = O(n^2 )$
 siden vi ikke foretar noen bytter, vil algoritmen terminere etter å ha gjort
 $(n-1)$ sammenligninger. Altså $O(n-1) = O(n)$
 
-\subparagraph{Average Case: $O(n^2)$} 
+\subparagraph{Average Case: $O(n^2)$} fra teorem \ref{teo:swapkompl}
 
 
 \subsubsection{\color{red}Innstikksortering}\label{insertsort}
@@ -132,6 +134,16 @@ Faktisk lønner det seg å ikke ha med denne testen.
 Siden if-tester er relativt dyre operasjoner, lønner det seg å ``plukke opp'' et
 element, for deretter å sette den ned igjen på samme plass, enn å sjekke om det
 står på feil plass.
+
+\paragraph{Kompleksitet}
+Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen uegnet til store lister. Når lista er liten derimot (typisk mindre enn 50 elementer lang) er innstikksortering en ganske god algoritme - til og med bedre enn \nameref{quick}. Gode quicksortimplementasjoner bruker derfor innstikksortering hvis lista blir for kort. 
+
+\subparagraph{Best case: $ O(n) $} Hvis lista vi sender inn allerede er sortert vil den ytterste for-løkka gå gjennom lista én gang og så avslutte.
+
+\subparagraph{Worst case: $ O(n^2) $} Et enkelt eksempel på et worst case tilfelle er hvis lista er sortert i motsatt rekkefølge. Vi må derfor flytte alle elementene i snitt $ n/2 $ ganger. 
+
+\subparagraph{Avarage case: $ O(n^2) $} fra teorem \ref{teo:swapkompl}
+
 
 
 \subsubsection{\color{red}Mergesort}\label{mergesort}
