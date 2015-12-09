@@ -38,14 +38,11 @@ Litt forenklet kan vi si at en Turingmaskin $ M = (\Sigma, \Gamma, Q, \delta) $ 
 Hvis vi skal prøve å se for oss en Turingmaskin intuitivt kan vi se for oss et uendelig lang papirremse (formelt kalt teip). På denne papirremsa står det symboler (fra $ \Sigma $). Dette er inputen til Turingmaskinen. Maskinen leser ett og ett symbol, og reagerer på symbolet (etter hva $ \delta $ sier den skal gjøre). Det kan deretter la symbolet stå, viske det vekk eller erstatte det med et nytt symbol (fra $ \Gamma $).
 
 
-\subsection{\color{red}Kompleksitetsklasser}
+\subsection{Kompleksitetsklasser}
 
 Noen problemer kan løses veldig enkelt, for eksempel som å søke i et binært søketre, andre problemer er mye mer kompliserte, og noen er uløselige. I dette kurset skiller vi i hovedsak mellom P, NP og uløselige problemer, selv om kompleksitetsklasser er mye finere oppdelt enn det. 
 
-{\color{red}TODO:}
-Hvorfor kompleksitetsklasser?
-- Si noe om computaility
-- problemer i samme klasse kan ha lignende løsning
+En av grunnene til at vi deler opp problemer i kompleksitetsklasser er at vi på forhånd kan si noe om løsbarheten til problemene, før vi begynner å løse dem. En annen grunn er at problemer i samme klasse kan ha løsninger som ligner, selv om problemene er ganske ulike. Se kapitlet om paradigmer (\ref{paradigmer}). For eksempel er både søk i binærtre og quicksort eksempler på splitt og hersk-algoritmer. De ligner i utforming, men gjør ganske forskjellige ting. Begge de to algoritmene ligger i P. 
 
 
 
@@ -55,7 +52,7 @@ P er mengden av alle problemene som kan løses i polynomisk tid, altså har tid 
 \paragraph{NP (nondeterministic polynomial time)}
 NP er mengden av alle problemer hvor vi ikke vet hvor lang tid det vil ta i forkant å finne en løsning, men som blir gjort i polynomisk tid. NP-problemer er vanskelige å regne ut, men en gitt løsning enkelt lar seg sjekke. Hvis jeg for eksempel ber deg faktorisere et stort tall $ n $, vil det ta lang tid for deg å gjøre det, men det er lett for meg å gange sammen de tallene du påstår er faktorene til $ n $ og se om jeg får $ n $. Hele P er inneholdt i NP, og det er usikkert hvorvidt det er en reell forskjell på N og NP.
 
-Vi har en undermengde av NP kalt NP-komplett. Denne mengden består av de vanskeligste problemene i NP, og hvis man har en løsning på et av disse problemene vil man, ved reduksjon, ha en løsning på alle andre problemer i NP, inkludert P.
+Vi har en undermengde av NP kalt NP-komplett. Denne mengden består av de ``vanskeligste'' problemene i NP, og hvis man har en løsning på et av disse problemene vil man, ved reduksjon, ha en løsning på alle andre problemer i NP, inkludert P.
 
 \paragraph{EXPTIME (exponetial time)}
 EXPTIME er mengden av alle problemer som løses og sjekkes i eksponentiell tid. Hvis jeg for eksempel ber deg fortelle meg hva det beste trekket jeg burde gjøre i et parti sjakk er, er det vanskelig for deg å regne ut, men også vanskelig for meg å sjekke om svaret ditt stemmer. Vi kaller problemer i denne klassen \say{intractable}. I mange tilfeller er brute force den eneste muligheten vi har. 
