@@ -103,7 +103,7 @@ every node/.style = {shape=circle, draw, align=center}]
 \paragraph{Innsetting}~\\
 Når vi skal sette inn en node i et binært søketre starter vi i rota. Vi sammenligner verdien vi skal sette inn med verdien i rota. Hvis verdien vi setter inn er mindre enn rota går vil til venstre, er den større går vi til høyre. Hva som skjer ved likhet er opp til oss å bestemme, men vi må være konsekvente. Når vi kommer til en nullpeker kan vi sette denne pekeren til å peke på noden vi setter inn.
 
-Vi kan implementere denne funksjonen rekursivt. I en ytre klasse kan vi skrive en skallfunksjon som kaller på rotas \verb|instert|-metode. Vi har en indre \verb|Node|-klasse med en rekursiv insertmetode. Den kan implementeres slik:
+Vi kan implementere denne funksjonen rekursivt. I en ytre klasse kan vi skrive en skallfunksjon som kaller på rotas \verb|insert|-metode. Vi har en indre \verb|Node|-klasse med en rekursiv insertmetode. Den kan implementeres slik:
 \javaimport{kode/ex_bintree_insert.java}
 
 

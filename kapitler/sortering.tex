@@ -74,7 +74,7 @@ eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_for
 \subsubsection{Boblesortering}
 \label{bubblesort}
 \textbf{Boblesortering} (engelsk: \textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
-Idéen bak er derimot forholdsvis enkel:
+Ideen bak er derimot forholdsvis enkel:
 Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
 
 \paragraph*{Wikipedias utgave}\label{sec:bubble-wiki}
@@ -90,7 +90,7 @@ Dette gjentas helt til lista er ferdig sortert.
     (1~ 4~ \mathbf{5}~ \mathbf{2}~ 8) \rightarrow (1~ 4~ \mathbf{2}~ \mathbf{5}~ 8)     &\quad \text{Bytter, siden 5 > 2} \\
     (1~ 4~ 2~ \mathbf{5}~ \mathbf{8}) \rightarrow (1~ 4~ 2~ \mathbf{5}~ \mathbf{8})     &\quad \text{Bytter ikke, siden 5 < 8}
   \end{align*}
-  Deretter går vil tilbake til start og gjentar prosessen, helt til vi har gått gjennom lista uten at noen elementer har byttet plass.
+  Deretter går vi tilbake til start og gjentar prosessen, helt til vi har gått gjennom lista uten at noen elementer har byttet plass.
   I dette tilfellet kreves tre gjennomganger.
 \end{eks}
 
@@ -121,8 +121,8 @@ $(n-1)$ sammenligninger. Altså $O(n-1) = O(n)$
 
 
 \subsubsection{Innstikksortering}\label{insertsort}
-\textbf{Innstikksortering} (engelsk: \textbf{insertion sort}) er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$
-Idéen her er at elementene vi hittil har besøkt, er sorterte, isolert sett.
+\textbf{Innstikksortering} (engelsk: \textbf{insertion sort}) er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$.
+Ideen her er at elementene vi hittil har besøkt, er sorterte, isolert sett.
 Deretter tar vi neste element, ``skyver'' de foregående elementene oppover,
 helt til det nye elementet står på riktig plass.
 Altså kan denne metoden minne mye om den~\hyperref[sec:bubbleoptimal]{optimaliserte boblesorteringen}. 
@@ -192,14 +192,14 @@ Fra teorem \ref{teo:bintre} har vi at innsetting i et binært søketre tar $ O(\
 \subsubsection{Quicksort}
 \label{quick}
 Som navnet antyder, er dette en ganske rask algoritme.
-Idéen er at vi velger et (vilkårlig) element i arrayen (pivotelement), og ordner resten av
+Ideen er at vi velger et (vilkårlig) element i arrayen (pivotelement), og ordner resten av
 elementene slik at de som er mindre pivotelementet står på venstre side, og de
 som er større på venstre. Deretter gjentar vi denne prosessen for disse to
 subarrayene på hver side av pivotelementet.
 
 \javaimport{kode/quickSort.java}
 
-Som man kan se i koden ovenfor, er det litt problematisk å foreta selve
+Som man kan se i koden ovenfor er det litt problematisk å foreta selve
 flyttingen av elementene i forhold til pivoten når vi jobber med arrayer, siden
 vi ikke kan dele opp og sette sammen arrayer. En detaljert beskrivning (og
 illustrering) av tankegangen finnes i boka i seksjon 7.7.2 (side 312). 
