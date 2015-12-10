@@ -313,3 +313,27 @@ programmet som er sekvensielt blir mindre etterhvert som problemet blir større.
 Altså er ikke Amdahls lov fast.
 
 \subsubsection{\color{red}Parallell Quicksort}\label{parquick}
+Siden \nameref{quick} deler lista opp i to deler der alle elementene i den ene lista er mindre enn alle elementene i den andre lista er den velegnet til å parallellisere. Vi må gjøre de første rekursjonene sekvensielt og deler opp lista i $ n $ biter (merk at $ n $ på være på formen $ 2^k, k\in \mathbb{N} $). Deretter starter vi $ n $ tråder med hver sin del å sortere. For å $ n $ tråder må vi gjøre $ \log_2 n $ nivåer med rekursjon sekvensielt først. Når alle trådene er ferdig har vi $ n $ sortere biter, der vi vet at alle elementene i tråd 1 er mindre enn elementene i tråd 2, som er mindre enn elementene i tråd 3, osv. Da kan vi sette sammen bitene sekvensielt til slutt og få en sortert liste. 
+\begin{figure}[H]
+\caption{Illustrasjon av parallell quicksort med to tråder}
+\centering
+Utgangspunkt:\\
+\begin{tabular}{| c |c| c |}
+\hline
+\quad\quad\quad\quad...\quad\quad\quad\quad&$ p $&\quad\quad\quad\quad...\quad\quad\quad\quad\\
+\hline
+\end{tabular}\\
+~\\$ p $ som pivot, deler opp:\\
+\begin{tabular}{| c |}
+\hline
+\quad\quad\quad\quad$ < p $\quad\quad\quad\quad\quad\\
+\hline
+\end{tabular}\quad\quad
+\begin{tabular}{| c |}
+\hline
+\quad\quad\quad\quad$ \geq p $\quad\quad\quad\quad\quad\\
+\hline
+\end{tabular}\\
+~\\ Starter egne tråder som sorterer disse to bitene, setter sammen til slutt.
+\end{figure}
+
