@@ -50,6 +50,39 @@ En type grafer vi jobber mye med er \textbf{DAG}er. DAG står for \emph{Directed
 \end{figure}
 
 
+\paragraph{Implementasjon}~\\
+Det finnes i hovedsak to måter å implementere en graf på, \textbf{Adjacency matrix} (nabomatrise) og \textbf{Adjacency list} (naboliste). Vi kan også implementere grafen som instanser av en \verb|Node|-klasse med pekere til sine naboer, men det er mindre utbredt (dette vil også være en slags implementasjon av en naboliste). Måten vi implementerer grafen på har faktisk en del å si for kompleksiteten til enkelte algoritmer.
+
+Nabolisten til en graf er en liste over nodene og deres tilhørende naboer. Nabomatrisen er en $ n\times n $-matrise $ A $ der $ a_{i, j} $ angir vekten til kanten fra node nr $ i $ til node nr $ j $. Hvis det ikke finnes en kant er $ a_{i, j} = 0 $, og som diskutert tidligere kan en uvektet graf sees på som en vektet graf der alle vektene er 1.
+
+For tynne grafer er nabolister klart mer plasseffektive enn nabomatriser. Nabolister gir også bedre kjøretid i enkelte algoritmer, som for eksempel \nameref{prim}, som er $ O(n^2) $ hvis grafen er representert ved en matrise, og $ O(n\log n) $ hvis grafen er representert som en liste.
+
+\begin{figure}[H]
+\centering
+\caption{Grafen i figur \ref{fig:graf} representert som naboliste (venstre) og nabomatrise (høyre)}
+\begin{tabular}{c | l}
+Node & Naboer \\ \hline
+A & B, D \\
+B & A, C \\
+C & B, D, G, E \\
+D & A, C \\
+E & C, F \\
+F & E, G \\
+G & C, F
+\end{tabular}\quad\quad\quad
+$ \begin{bmatrix}
+0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 & 0 & 1 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 0 & 0 & 1 & 0 
+\end{bmatrix} $
+\end{figure}
+Merk at for en urettet graf vil nabomatrisen alltid være symmetrisk, siden at kantene går begge veier. 
+
+
 \subsection{Begreper}
 
 \subsubsection{Hamiltonsk sti}
