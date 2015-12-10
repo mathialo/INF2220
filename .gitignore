@@ -10,3 +10,4 @@
 kapitler/auto/
 *.fls
 *.fdb_latexmk
+*.DS_STORE
