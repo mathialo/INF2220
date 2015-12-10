@@ -246,7 +246,7 @@ til det første, siste og midterste elementet i arrayen som pivot.
 
 
 \paragraph{Kompleksitet}
-Man kan også finne kompleksiteten til Quicksort ved å bruke diskret sannsynlighetsteori (god innføring i dette på Wikipedia). Her skal vi bruke en alternativ metode. Vi setter opp det som kalles en \emph{rekurrent følge} for kjøretiden og analyserer den. For hver rekursjon må vi gjennom lista og dele den i to kategorier, vi har altså lineær tid $ O(n) $ for hvert steg. Analysen går derfor i hovedsak ut på å finne ut hvor mange rekursjoner som må til. 
+Det er flere måter å analysere kompleksiteten til Quicksort. En metode er ved å bruke diskret sannsynlighetsteori (god innføring i dette på Wikipedia). Her skal vi bruke en annen metode. Vi setter opp det som kalles en \emph{rekurrent følge} for kjøretiden og analyserer den. For hver rekursjon må vi gjennom lista og dele den i to kategorier, vi har altså lineær tid $ O(n) $ for hvert steg. Analysen går derfor i hovedsak ut på å finne ut hvor mange rekursjoner som må til. 
 
 \subparagraph{Worst case: $ O(n^2) $}
 Hvis vi i hver rekursjon velger det største elementet som pivot vil vi i den $ i $-te rekursjonen gjøre $ n-i $ flyttinger. Setter vi opp et uttrykk (rekurrent følge) for kjøretiden får vi:
@@ -259,9 +259,9 @@ I et perfekt tilfelle vil vi velge medianen som pivot i hver eneste rekursjon. V
 Vi ser at vi halverer argumentet til $ T $ hver gang. Vi må derfor gjøre $ \log n $ rekursjoner før vi når et trivielt problem. Følgelig er best case for quicksort $ O(n\log n) $
 
 \subparagraph{Avarage case: $ O(n\log n) $}
-Vi har fra forrige avsnitt at hvis vi velger medianen som pivot vil vi ha $ O(n\log n) $ tid.  Vi kjenner ikke medianen, men estimerer den med medianen av et tilfeldig utvalg elementer. Dette er en forventningsrett estimator for median. Pivoten vi velger vil derfor være en god tilnærming til den optimale pivoten. 
+Vi har fra forrige avsnitt at hvis vi velger medianen som pivot vil vi ha $ O(n\log n) $ tid.  Vi kjenner ikke medianen, men estimerer den med medianen av et tilfeldig utvalg elementer. Dette er en forventningsrett estimator for median. Pivoten vi velger vil derfor være en god tilnærming til den optimale pivoten. Det at estimatoren for medianen er forventningsrett gir oss at i det lange løp vil gjennomsnittet gå mot tilfellet der vi velger medianen som pivot, altså $ O(n\log n) $
 
-Nå har det seg slik at som diskuterte tidligere velger vi sjeldent tre \emph{tilfeldige} elementer i lista, men heller første, midterste og siste element. Likevel, hvis vi antar at innholdet i lista er tilfeldig (uniformt) fordelt vil \emph{innholdet} i de tre elementene være tilfeldig, selv om \emph{indexen} er deterministisk
+Nå har det seg slik at som diskuterte tidligere velger vi sjeldent tre \emph{tilfeldige} elementer i lista, men heller første, midterste og siste element. Likevel, hvis vi antar at innholdet i lista er tilfeldig (uniformt) fordelt vil \emph{innholdet} i de tre elementene være tilfeldig, selv om \emph{indexen} er deterministisk.
 
 
 
