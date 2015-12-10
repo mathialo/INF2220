@@ -1,4 +1,4 @@
-\section{\color{red}Tekstalgoritmer}
+\section{Tekstalgoritmer}
 	Generelt problem: Vi er interesserte i å finne ut om en streng er en substreng av en annen streng. Vi kaller substringen for en nål $i$, av lengde $m$, og stringen for en høystakk $h$, av lengde $n$.
 
 	\subsection{Brute force}
@@ -31,7 +31,7 @@
 			\end{tabular}
 		\end{center}
 
-		Vi konstruerer bad character shift for denne med regelen \verb|value = length - index - 1|.
+		\noindent Vi konstruerer bad character shift for denne med regelen \verb|value = length - index - 1|.
 
 \begin{center}
 \begin{tabular}{cccl}
@@ -41,8 +41,9 @@ O = & $5-1-2$&= 2&Erstatter her forrige verdi av O med ny verdi til O.\\
 T = &$5-3-1$& = 1&Erstatter her forrige verdi av T med ny verdi til T.\\
 H = &5 &&Verdien skal ikke være mindre enn 1. Får da verdi lik lengden.\\
 \end{tabular}
-
-Vi sitter igjen med dette som bad character shift-tabell: \newline
+\end{center}
+\noindent Vi sitter igjen med dette som bad character shift-tabell:
+\begin{center}
 \begin{tabular}{r|cccc}
 Bokstav&T&O&H&$*$\\
 \hline
@@ -50,7 +51,7 @@ Verdi&1&2&5&5\\
 \end{tabular}
 \end{center}
 
-Vi bruker nå bad character shift på eksemplet vårt: \vspace{10pt}\\
+\noindent Vi bruker nå bad character shift på eksemplet vårt: \vspace{10pt}\\
 \scalebox{0.9}{
 \begin{tabular}{c|ccccccccccccccccccccc}
 &T&R&U&S&\textcolor{red}{T}&\textcolor{red}{H}&A&R&D&T&\textcolor{red}{O}&O&\textcolor{red}{T}&H&B&R&U&S&H&E&S\\\hline
