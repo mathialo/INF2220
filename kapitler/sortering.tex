@@ -218,6 +218,18 @@ En noe forenklet utgave følger her:
   som er større. Dersom vi nå bytter plass på verdien på $i$ og pivoten.
 \end{enumerate}
 
+\begin{eks} ~\newline
+\[
+  \begin{array}{c c c c c c c c c}
+    3&1&4&\underline{5}&9&2&6&8&7 \quad \text{Der elementet med linje under er pivoten.}\\
+    3&1&2&4&\underline{5}&9&6&8&7 \quad \text{Etter at vi har ordnet elementene
+    i forhold til pivoten}
+  \end{array}
+\]
+Nå står pivoten på riktig plass. Vi gjentar prosessen på subarrayen som består
+av elementene på høyre side, og på elementene på venstre side av pivoten.
+\end{eks}
+
 \paragraph{Om å velge pivot}
 Hvilket element vi velger som pivotelement kan ha veldig mye å si for kjøretiden
 til algoritmen. Dersom vi får en array som allerede er sortert, og vi velger det
