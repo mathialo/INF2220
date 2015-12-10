@@ -294,7 +294,7 @@ I figur \ref{fig:dfs} har vi brukt A som rotnode. Vi gikk deretter til et av bar
 DFS-algorigmer er velegnet for å programmere rekursivt. Et eksempel på en enkel implementasjon i Java (som en metode i en Node-klasse):
 
 \javaimport{kode/dfs.java}
-\newpage
+
 
 \subsubsection{Kosarajus algoritme (Finne SCC)}
 Vi kan finne SCCer i en graf $ G $ ved å utføre to dfs. Et på $ G $ og et på $ G^t $, som er grafen vi får ved å snu alle kantene i $ G $. Denne algoritmen kalles Kosarajus algoritme.
@@ -440,7 +440,7 @@ Vi skal finne korteste vei fra en node $ s $ til alle andre noder i en vektet, u
 \end{enumerate}
 \end{teorem}
 
-\newpage
+
 \noindent Vi ser på et eksempel:
 
 \begin{eks} Finn korteste vei fra $ v1 $ til alle andre noder:
@@ -512,54 +512,54 @@ Nå kommer Dijkstras grådige kriterium: Vi velger den noden som har lavest avst
 	$ v_7 $ & F     & $ \infty $ & -
 \end{tabular}
 \end{center}
-Neste ukjente node med lavest avstand er $ v_3 $. Vi fortsetter derfra. De neste stegene ser slik ut:
-\begin{center}
-\begin{tabular}{c | c | c | l}
-	 Node   & Kjent & Avstand    & Vei                                   \\ \hline
-	$ v_1 $ & T     & 0          & -                                     \\
-	$ v_2 $ & T     & $ 2 $      & $ v_1 \leftarrow v_2 $                \\
-	$ v_3 $ & T     & $ 4 $      & $ v_1 \leftarrow v_3 $                \\
-	$ v_4 $ & F     & $ 5 $      & $ v_1 \leftarrow v_2 \leftarrow v_4 $ \\
-	$ v_5 $ & F     & $ 12 $     & $ v_1 \leftarrow v_2 \leftarrow v_5 $ \\
-	$ v_6 $ & F     & $ 9 $      & $ v_1 \leftarrow v_3 \leftarrow v_6 $ \\
-	$ v_7 $ & F     & $ \infty $ & -
-\end{tabular}~~
-\begin{tabular}{c | c | c | l}
-	 Node   & Kjent & Avstand & Vei                                                  \\ \hline
-	$ v_1 $ & T     & 0       & -                                                    \\
-	$ v_2 $ & T     & $ 2 $   & $ v_1 \leftarrow v_2 $                               \\
-	$ v_3 $ & T     & $ 4 $   & $ v_1 \leftarrow v_3 $                               \\
-	$ v_4 $ & T     & $ 5 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 $                \\
-	$ v_5 $ & F     & $ 12 $  & $ v_1 \leftarrow v_2 \leftarrow v_5 $                \\
-	$ v_6 $ & F     & $ 9 $   & $ v_1 \leftarrow v_3 \leftarrow v_6 $                \\
-	$ v_7 $ & F     & $ 9 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 $
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{c | c | c | l}
-	 Node   & Kjent & Avstand & Vei                                                  \\ \hline
-	$ v_1 $ & T     & 0       & -                                                    \\
-	$ v_2 $ & T     & $ 2 $   & $ v_1 \leftarrow v_2 $                               \\
-	$ v_3 $ & T     & $ 4 $   & $ v_1 \leftarrow v_3 $                               \\
-	$ v_4 $ & T     & $ 5 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 $                \\
-	$ v_5 $ & F     & $ 12 $  & $ v_1 \leftarrow v_2 \leftarrow v_5 $                \\
-	$ v_6 $ & T     & $ 9 $   & $ v_1 \leftarrow v_3 \leftarrow v_6 $                \\
-	$ v_7 $ & F     & $ 9 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 $
-\end{tabular}
-\end{center}
-\begin{center}
-\begin{tabular}{c | c | c | l}
-	 Node   & Kjent & Avstand & Vei                                                                 \\ \hline
-	$ v_1 $ & T     & 0       & -                                                                   \\
-	$ v_2 $ & T     & $ 2 $   & $ v_1 \leftarrow v_2 $                                              \\
-	$ v_3 $ & T     & $ 4 $   & $ v_1 \leftarrow v_3 $                                              \\
-	$ v_4 $ & T     & $ 5 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 $                               \\
-	$ v_5 $ & F     & $ 11 $  & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 \leftarrow v_5 $ \\
-	$ v_6 $ & T     & $ 9 $   & $ v_1 \leftarrow v_3 \leftarrow v_6 $                               \\
-	$ v_7 $ & T     & $ 9 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 $
-\end{tabular}
-\end{center}
+Neste ukjente node med lavest avstand er $ v_3 $. Vi fortsetter derfra. Vi hopper over et par steg. Slutttabellen ser slik ut:
+%\begin{center}
+%\begin{tabular}{c | c | c | l}
+%	 Node   & Kjent & Avstand    & Vei                                   \\ \hline
+%	$ v_1 $ & T     & 0          & -                                     \\
+%	$ v_2 $ & T     & $ 2 $      & $ v_1 \leftarrow v_2 $                \\
+%	$ v_3 $ & T     & $ 4 $      & $ v_1 \leftarrow v_3 $                \\
+%	$ v_4 $ & F     & $ 5 $      & $ v_1 \leftarrow v_2 \leftarrow v_4 $ \\
+%	$ v_5 $ & F     & $ 12 $     & $ v_1 \leftarrow v_2 \leftarrow v_5 $ \\
+%	$ v_6 $ & F     & $ 9 $      & $ v_1 \leftarrow v_3 \leftarrow v_6 $ \\
+%	$ v_7 $ & F     & $ \infty $ & -
+%\end{tabular}~~
+%\begin{tabular}{c | c | c | l}
+%	 Node   & Kjent & Avstand & Vei                                                  \\ \hline
+%	$ v_1 $ & T     & 0       & -                                                    \\
+%	$ v_2 $ & T     & $ 2 $   & $ v_1 \leftarrow v_2 $                               \\
+%	$ v_3 $ & T     & $ 4 $   & $ v_1 \leftarrow v_3 $                               \\
+%	$ v_4 $ & T     & $ 5 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 $                \\
+%	$ v_5 $ & F     & $ 12 $  & $ v_1 \leftarrow v_2 \leftarrow v_5 $                \\
+%	$ v_6 $ & F     & $ 9 $   & $ v_1 \leftarrow v_3 \leftarrow v_6 $                \\
+%	$ v_7 $ & F     & $ 9 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 $
+%\end{tabular}
+%\end{center}
+%
+%\begin{center}
+%\begin{tabular}{c | c | c | l}
+%	 Node   & Kjent & Avstand & Vei                                                  \\ \hline
+%	$ v_1 $ & T     & 0       & -                                                    \\
+%	$ v_2 $ & T     & $ 2 $   & $ v_1 \leftarrow v_2 $                               \\
+%	$ v_3 $ & T     & $ 4 $   & $ v_1 \leftarrow v_3 $                               \\
+%	$ v_4 $ & T     & $ 5 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 $                \\
+%	$ v_5 $ & F     & $ 12 $  & $ v_1 \leftarrow v_2 \leftarrow v_5 $                \\
+%	$ v_6 $ & T     & $ 9 $   & $ v_1 \leftarrow v_3 \leftarrow v_6 $                \\
+%	$ v_7 $ & F     & $ 9 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 $
+%\end{tabular}
+%\end{center}
+%\begin{center}
+%\begin{tabular}{c | c | c | l}
+%	 Node   & Kjent & Avstand & Vei                                                                 \\ \hline
+%	$ v_1 $ & T     & 0       & -                                                                   \\
+%	$ v_2 $ & T     & $ 2 $   & $ v_1 \leftarrow v_2 $                                              \\
+%	$ v_3 $ & T     & $ 4 $   & $ v_1 \leftarrow v_3 $                                              \\
+%	$ v_4 $ & T     & $ 5 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 $                               \\
+%	$ v_5 $ & F     & $ 11 $  & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 \leftarrow v_5 $ \\
+%	$ v_6 $ & T     & $ 9 $   & $ v_1 \leftarrow v_3 \leftarrow v_6 $                               \\
+%	$ v_7 $ & T     & $ 9 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 $
+%\end{tabular}
+%\end{center}
 \begin{center}
 \begin{tabular}{c | c | c | l}
 	 Node   & Kjent & Avstand & Vei                                                                 \\ \hline
