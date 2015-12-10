@@ -291,6 +291,40 @@ akkurat brukte i telle-arrayen med 1 så vi lett kan finne ut hvor neste tall me
 samme siffer på gjeldende plass. Dette gjentar vi helt til vi har vært gjennom
 maks antall gjeldende siffer.
 
+\begin{eks}
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c}
+      170&45&75&90&802&2&24&66
+    \end{array}
+  \end{displaymath}
+  Teller deretter opp antall tall som slutter på 0, 1 osv. resulterer i
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c c c}
+      2&0&2&0&1&2&1&0&0&0
+    \end{array}
+  \end{displaymath}
+  Altså har vi to tall som slutter på 0, to som slutter på 2 osv. For å finne
+  den nye plasseringen til elementene, summerer vi opp plassene i denne arrayen,
+  og får
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c c c}
+      0&2&2&4&4&5&7&8&8&8
+    \end{array}
+  \end{displaymath}
+  Da vet vi f.eks. at tall som slutter på 0 skal settes inn på indeks 0. Siden
+  vi har to slike, kan vi ikke sette inn de som slutter på 2 noe lenger ut i
+  arrayen enn indeks 2. Når vi setter inn, og beholder innbyrdes ordning, får
+  vi.
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c}
+      170&90&802&2&24&45&75&66
+    \end{array}
+  \end{displaymath}
+  Deretter gjentar vi prosesen men denne arrayen, og sorterter på siffer nr 2
+  fra høyre. Dette gjentar vi til vi har vært gjennom så mange gjeldende siffer
+  som det største tallet i arrayen har. I dette tilfellet 3 (siden 802 har tre
+  gjeldende siffer.) Merk at f.eks. 2 er å betrakte som 002 videre i sorteringen.
+\end{eks}
 
 \subsection{Parallell Sortering}
 
