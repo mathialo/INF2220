@@ -21,12 +21,12 @@
 		Ved en mismatch vil vi dytte nåla framover til en av to ting skjer: Mismatch blir match eller nåla beveger seg forbi tegnet vi fikk mismatch på.
 		I praksis gjør vi dette slik: Verdien til et tegns bad character shift er lengden på nåla minus den siste indeksen som tegnet befinner seg på, minus 1. Altså \verb|value = length - index - 1|.
 		
-		\subsubsection*{Eksempel}
+		\begin{eks}
 		La nåla være ``tooth'', og teksten være ``trusthardtoothbrushes''.
 		
 		\begin{center}
-			\begin{tabular}{c c c c c c}
-				& T & O & O & T & H \\
+			\begin{tabular}{r | c c c c c}
+				& T & O & O & T & H \\ \hline
 				index & 0 & 1 & 2 & 3 & 4
 			\end{tabular}
 		\end{center}
@@ -43,17 +43,17 @@ H = &5 &&Verdien skal ikke være mindre enn 1. Får da verdi lik lengden.\\
 \end{tabular}
 
 Vi sitter igjen med dette som bad character shift-tabell: \newline
-\begin{tabular}{l|llll}
+\begin{tabular}{r|cccc}
 Bokstav&T&O&H&$*$\\
 \hline
 Verdi&1&2&5&5\\
 \end{tabular}
 \end{center}
 
-Vi bruker nå bad character shift på eksemplet vårt: \newline
+Vi bruker nå bad character shift på eksemplet vårt: \vspace{10pt}\\
 \scalebox{0.9}{
-\begin{tabular}{cccccccccccccccccccccc}
-&T&R&U&S&\textcolor{red}{T}&\textcolor{red}{H}&A&R&D&T&\textcolor{red}{O}&O&\textcolor{red}{T}&H&B&R&U&S&H&E&S\\
+\begin{tabular}{c|ccccccccccccccccccccc}
+&T&R&U&S&\textcolor{red}{T}&\textcolor{red}{H}&A&R&D&T&\textcolor{red}{O}&O&\textcolor{red}{T}&H&B&R&U&S&H&E&S\\\hline
 \textbf{1.}&T&O&O&T&\textcolor{red}{H}\\
 \textbf{2.}&&T&O&\textcolor{red}{O}&\textcolor{dkgreen}{T}&\textcolor{dkgreen}{H}\\
 \textbf{3.}&&&&&&&T&O&O&T&\textcolor{red}{H}\\
@@ -61,12 +61,14 @@ Vi bruker nå bad character shift på eksemplet vårt: \newline
 \textbf{5.}&&&&&&&&&&\textcolor{dkgreen}{T}&\textcolor{dkgreen}{O}&\textcolor{dkgreen}{O}&\textcolor{dkgreen}{T}&\textcolor{dkgreen}{H}\\
 \end{tabular}
 }
-
+\vspace{10pt}\\
 I steg \textbf{1.} får vi mismatch på H, fordi den ikke er det samme som T. Da må vi slå opp i tabellen på den bokstaven som \textbf{\textit{vi møter i teksten}}, og hoppe fram tilsvarende antall steg. I første tilfellet skal vi hoppe 1 plass fram (for 1 er verdien til T). 
 
 Sjekker på nytt i steg \textbf{2.}, her får vi match på T og H, men mismatch på O. Da hopper vi S-plasser frem. Siden S ikke er med i tabellen vår (eller den er med som $*$, som er alle andre bokstaver), så hopper vi 5 plasser frem.
 
 I steg \textbf{3.} får vi mismatch på H mot O, og må hoppe O-plasser frem---altså 2. I steg \textbf{4.} er det mismatch mellom H og T, vi hopper T-plasser frem---altså 1. Og nå har vi funnet nåla vår!
+
+\end{eks}
 
 \paragraph{Analyse}
 Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, og nål $011\dots1$ kjører $m$ ganger. Dette gir O($nm$). Best case har input tekst $1^n$ og nål $0^m$, som gir O($n/m$). Average case er O($m/|\Sigma|$), altså raskere enn brute force.
@@ -75,39 +77,31 @@ Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, o
 		Anta at vi har en substring $t$ av nåla (altså lengst til høyre i nåla) som allerede er matchet. Vi får så mismatch på neste tegn. Vi kan nå være smarte og finne ut
 		Vi må tenke på to tilfeller: $t$ forekommer et annet sted i nåla. Da kan vi ikke skippe lenger enn til neste gang det skjer. Eller, en del av $t$ forekommer i starten av nåla. Da må vi skippe til vi er på linje med dette.
 	
-		\subsubsection*{Eksempel}
+		\begin{eks}
 		Vi ser på nåla ``TTCTATTCTT''.
 
-\begin{minipage}{0.5\textwidth}
 \paragraph{1.} Sjekker først \textit{ikke}-\texttt{T}, det er to shift før vi finner dette.
 \\
 \noindent\texttt{TCCTATTCT\textcolor{red}{T}}\\
-\texttt{--TCCTATT\textcolor{red}{C}TT}
-\\
+\texttt{---TCCTATT\textcolor{red}{C}TT}
+
 \paragraph{2.} Så sjekker vi \textit{ikke}-\texttt{TT}. Dette finner vi etter ett shift.
 \\
 \noindent\texttt{TCCTATTC\textcolor{red}{TT}}\\
-\texttt{-TCCTATT\textcolor{red}{CT}T}
-\\
+\texttt{--TCCTATT\textcolor{red}{CT}T}
+
 \paragraph{3.} For å finne \textit{ikke}-\texttt{CTT} må vi flytte 3 steg; til \texttt{ATT}.
 \\
 \noindent\texttt{TCCTATT\textcolor{red}{CTT}}\\
-\texttt{---TCCT\textcolor{red}{ATT}CTT}
-\end{minipage}
-\hspace{10pt}
-\begin{minipage}{0.5\textwidth}
+\texttt{------TCCT\textcolor{red}{ATT}CTT}
+
 \paragraph{4.} Så kommer vi til \textit{ikke}-\texttt{TCTT}. Denne eksisterer ikke, MEN om nålen har lik suffix som prefiks (her \texttt{T} som start og slutt), så flytter vi bare fram til prefiksen. Da må vi flytte nålen 9 hakk, selv om lengden er 10.
 \\
 \noindent\texttt{TCCTATTCT\textcolor{red}{T}}\\
-\texttt{---------\textcolor{red}{T}CCTATTCTT}
-\\
-Alle de neste shiftene vil også være dette, fordi de får ingen andre treff i nålen.
-\end{minipage}
+\texttt{------------------\textcolor{red}{T}CCTATTCTT}
 
-\vspace{10pt}
-
-\noindent Vi får da følgende good suffix table:
-\begin{table}[H]
+~\\Alle de neste shiftene vil også være dette, fordi de får ingen andre treff i nålen. Vi får da følgende good suffix table:
+\begin{figure}[H]
 \centering
 \begin{tabular}{crc}
 index&mismatch&shift\\
@@ -123,9 +117,8 @@ index&mismatch&shift\\
 8&\texttt{\textcolor{red}{C}CTATTCTT}&9\\
 9&\texttt{\textcolor{red}{T}CCTATTCTT}&9\\
 \end{tabular}
-\caption{Eksempel på good suffix table.}
-\label{tab:gst}
-\end{table}
+\end{figure}
+\end{eks}
 
 	\subsection{Huffmankoding}\label{huffman}
 		Huffmankoding er en måte å kode informasjon på (her tekst) på en måte der vi ikke mister noe informasjon (\textit{lossless}). Den forutsetter at vi har tilgang på teksten før vi lager en kode. Dette er ikke tilfellet med vanlig tekstenkoding, der hvert tegn har en standard kode. Huffmankoding går ut på å se på frekvensen til tegnene som forekommer, og gi kort kode til de tegnene som forekommer ofte, og lang kode til de som forekommer sjelden. Dette kan vi gjøre slik at vi har prefiksegenskapen intakt: Ingen koder er et prefiks av noen andre. Kodealfabetet \{9, 55\} har prefiksegenskapen, men \{9, 5, 59, 55\} har ikke. Måten Huffmankoding beholder denne egenskapen blir fort tydelig når vi ser på algoritmen. Kort fortalt er grunnen at vi benytter binære trær til å finne kodene.
