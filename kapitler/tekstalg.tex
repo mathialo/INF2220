@@ -15,8 +15,8 @@
 	\subsubsection{\color{red}Good suffix shift}
 		Vi bruker antall match før mismatch for å finne skip-avstand.
 
-	\subsection{\color{red}Huffmankoding}\label{huffman}
-		Huffmankoding er en måte å kode informasjon på, her tekst, på en måte der vi ikke mister noe informasjon (\textit{lossless}). Prinsippet går ut på å se på frekvensen til tegnene som forekommer, og gi kort kode til de tegnene som forekommer ofte, og lang kode til de som forekommer sjelden. Dette kan vi gjøre slik at vi har prefiksegenskapen intakt: Ingen koder er et prefiks av noen andre. Kodealfabetet \{9, 55\} har prefiksegenskapen, men \{9, 5, 59, 55\} har ikke. Måten Huffmankoding beholder denne egenskapen blir fort tydelig når vi ser på algoritmen. Kort fortalt er grunnen at vi benytter binære trær til å finne kodene.
+	\subsection{Huffmankoding}\label{huffman}
+		Huffmankoding er en måte å kode informasjon på, her tekst, på en måte der vi ikke mister noe informasjon (\textit{lossless}). Den forutsetter at vi har tilgang på teksten før vi lager en kode. Dette er ikke tilfellet med vanlig tekstenkoding, der hvert tegn har en standard kode. Huffmankoding går ut på å se på frekvensen til tegnene som forekommer, og gi kort kode til de tegnene som forekommer ofte, og lang kode til de som forekommer sjelden. Dette kan vi gjøre slik at vi har prefiksegenskapen intakt: Ingen koder er et prefiks av noen andre. Kodealfabetet \{9, 55\} har prefiksegenskapen, men \{9, 5, 59, 55\} har ikke. Måten Huffmankoding beholder denne egenskapen blir fort tydelig når vi ser på algoritmen. Kort fortalt er grunnen at vi benytter binære trær til å finne kodene.
 		
 		Algoritmen:
 		\begin{enumerate}
@@ -102,4 +102,4 @@ level 4/.style={sibling distance=1.3cm}
 					H & 1 & 0101
 				\end{tabular}
 			\end{center}
-			Vi kan lett sjekke at prefiksegenskapen er intakt.
+			Vi kan lett sjekke at prefiksegenskapen er intakt, og teksten ``BACADAEAFABBAAAGAH'' får koden \verb|011100001000110010100111011011111010010101|. Dette er åpenbart mye kortere enn standard enkoding. Hvis vi for eksempel hadde brukt ASCII-enkoding, der hvert tegn har en 7-bits kode, hadde vi hatt en kode på lengde $7n$, der $n$ er lengden på teksten.
