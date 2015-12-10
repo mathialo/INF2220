@@ -326,6 +326,15 @@ maks antall gjeldende siffer.
   gjeldende siffer.) Merk at f.eks. 2 er å betrakte som 002 videre i sorteringen.
 \end{eks}
 
+\paragraph{Kompleksitet}
+I radix sort gjør vi kun lineære operasjoner: Først går vi gjennom lista for å
+finne den største verdien, deretter går vi gjennom lista for å telle, så går vi
+gjennom for å plassere elementene på sine nye plasser. De siste to punktene
+gjøres like mange ganger som vi har gjeldende sifre. La oss kalle denne verdien
+for $k$. Da får vi $O(n + 2kn)$, som er lik $O(kn)$ siden $k\geq 1$. Alternativt
+kan vi betrakte $k$ som en konstant, og vi får at radix sort er $O(n)$
+
+
 \subsection{Parallell Sortering}
 
 \subsubsection{Amdahls lov}
