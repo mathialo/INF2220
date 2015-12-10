@@ -574,7 +574,7 @@ Neste ukjente node med lavest avstand er $ v_3 $. Vi fortsetter derfra. Vi hoppe
 \end{center}
 \end{eks}
 
-\paragraph{Tidsanalyse}~\\
+\paragraph{Tidsanalyse}
 Hvis vi søker gjennom grafen etter den noden med lavest avstand vil det ta $ O(|V|) $ tid, og dette gjør vi $ |V| $ ganger. Total tid for å finne minste avstand er derfor $ O(|V|^2) $. I tillegg må vi oppdatere avstandene. Det er maksimalt én oppdatering for hver kant, det vil si at det tilsammen tar $ O(|E|) $. Total kjøretid for algoritmen er derfor:
 \[ \text{Kjøretid} = O\left(|V|^2 + |E|\right) = O\left(|V|^2\right) \]
 
@@ -595,7 +595,7 @@ Vi skal finne et minimalt spenntre for en graf $ G $. Velg først en startnode (
 Vi velger $ v_1 $ som rotnode (vi kunne valgt hvilken som helst annen). Den kanten med lavest vekt ut fra treet (som kun består av $ v_1 $) er kanten $ v_1-v_4 $, så vi legger den til. Videre er kanten $ v_1-v_2 $ den kanten med lavest vekt som går til en ukjent node, så vi legger til den. $ v_4-v_3 $ er neste kant vi legger til. Kanten $ v_2-v_4 $ er nå den kanten med lavest vekt som går ut fra treet, men siden $ v_2 $ og $ v_4 $ begge er inneholdt i treet er ikke den interessant. Neste kant vi legger til er $ v_4-v_7 $, deretter $ v_7-v_6 $ og $ v_7-v_5 $. Treet er nå et komplett spenntre for $ G $. 
 \end{eks}
 
-\paragraph{Tidsanalyse}~\\
+\paragraph{Tidsanalyse}
 Samme argument som tidsanalysen til Dijkstra. Total kjøretid: $ O\left(|V|^2\right) $
 
 
@@ -617,7 +617,7 @@ Vi finner kanten(e) i grafen med den minste vekten. $ v_6-v_7 $ og $ v_1-v_4 $ h
 \end{eks}
 
 
-\paragraph{Tidsanalyse}~\\
+\paragraph{Tidsanalyse}
 Vi må loope gjennom alle kantene én gang, det gir tid $ O(|E|) $. Vi kan implementere algoritmen ved hjelp av en stack. Gjør vi det må vi utføre én sletting, to søk og en union. Sletting og søk tar $ O(\log_2 n) $ tid (for sletting er $ n = |E| $, for søk er $ n = |V| $), og union tar $ O(1) $ tid. For hver iterasjon har vi da:
 
 \[ \text{Kjøretid, hver iterasjon} ~=~ O(\log_2 |E| + \log_2 |V| + 1) ~=~ O(\log_2 |V|) \]
@@ -627,8 +627,8 @@ Vi må loope gjennom alle kantene én gang, det gir tid $ O(|E|) $. Vi kan imple
 \[ \text{Kjøretid, total} ~=~ O(|E| \cdot \log_2 |V|) \]
 
 
-~\\
-\paragraph{Prim vs Kruskal}~\\
+
+\paragraph{Prim vs Kruskal}
 Prim er som regel noe mer effektiv enn Kruskal, spesielt på tette grafer. Prim har likevel den svakheten at den kun fungerer på sammenhengende grafer. Kruskal anvendt på en usammenhengende graf vil gi et minimalt spenntre for hver sammenhengende del av grafen.
 
 
@@ -657,7 +657,7 @@ Vi ser fra kodeeksempelet at det er to løkker som må kjøres gjennom. En dobbe
 
 \noindent Floyds algoritme har forøvrig samme kompleksitet som å kjøre \nameref{dijkstra} én gang for alle nodene i grafen. Fordelen med Floyds algoritme er at den er litt mer robust i møte med løkker og negative vekter. 
 
-~\\
+
 \paragraph{Hvordan tolke input/output fra Floyds algoritme}~\\
 Ved start inneholder \verb|nabo[i][j]| lengden av kanten fra $ i $ til $ j $, \verb|nabo[i][j] = |$ \infty $ hvis det ikke er noen kant. Algoritmen lar \verb|nabo| være uendret, og legger resultatene i \verb|avstand| og \verb|vei|. \verb|avstand[i][j]| er lengden av korteste vei fra $ i $ til $ j $. Når vi oppdager at den korteste veien fra $ i $ til $ j $ går gjennom $ k $ setter vi \verb|vei[i][j] = k|. \verb|vei| sier derfor om den korteste veien. Vi finner korteste vei slik:
 \begin{itemize}

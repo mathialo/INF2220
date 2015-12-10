@@ -1,4 +1,4 @@
-\section{\color{red}Sortering}
+\section{Sortering}
 \subsection{Formaliteter}
 \label{sort_form}
 Før vi kan begynne å se på noen spesielle sorteringsalgoritmer må vi formalisere hva vi mener med sortering. Vi definerer sortering slik:
@@ -66,7 +66,7 @@ Fra teorem \ref{teo:sortbound} har vi at gjennomsnittlig antall inversjoner er $
 
 
 
-\subsection{\color{red}Noen algoritmer}
+\subsection{Noen algoritmer}
 Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle
 eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_form} vil vi enkelt kunne tilpasse algoritmene til å sortere på andre kriterier. 
 
@@ -265,12 +265,12 @@ Nå har det seg slik at som diskuterte tidligere velger vi sjeldent tre \emph{ti
 
 
 
-\subsubsection{\color{red}Radixsort}\label{radixsort}
+\subsubsection{Radixsort}\label{radixsort}
 Radix sort sorterer en array på et siffer av gangen.
 Metoden forekommer i to varianter, en fra høyre til venstre, og en som gjør
 motsatt. Generelt for begge algoritmene har vi
 \begin{enumerate}
-\item Finn max verdi i arrayen. (Største siffer i alle tallene)\color{red}??
+\item Finn max verdi i arrayen. (Største siffer i alle tallene)
 \item\label{item:tell} Tell opp hvor mange elementer det er av hver verdi av det sifferet vi ser
   på. (hvor mange 0-er, 1-ere osv)
 \item Ved å addere disse antallene, finner vi ut hvor i arrayen tallene skal stå
@@ -279,7 +279,7 @@ motsatt. Generelt for begge algoritmene har vi
 En spesiell ting ved Radix sort er at den aldri gjør sammenligninger mellom to
 tall.
 
-\paragraph{\color{red}Right-Radix (RR)}
+\paragraph{Right-Radix (RR)}
 Den ``vanlige'' formen for Radix-sort, og er iterativ.
 Den begynner med det minst gjeldende sifferet (det bakerste). Etter
 ``fellesstegene'' blir den siste arrayen vi lagde brukt til å slå opp hvor vi
