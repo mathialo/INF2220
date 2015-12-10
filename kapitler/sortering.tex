@@ -15,7 +15,7 @@ Det andre kriteriet kan virke litt snodig, men uten det ville sortering vært ve
 
 Med ``sammenlignbare'' mener vi at det finnes en måte å entydig bestemme om et element er større enn, mindre enn eller lik et annet element. Hvis vi skal sortere tall er jobben enkel: vi sammenligner numerisk verdi. Hvis vi skal sammenligne to tekststrenger er det ikke like opplagt hvordan vi skal gjøre det. Skal vi sortere alfabetisk? Etter lengde på ordet? I et sånt tilfelle er det opp til oss å velge et fornuftig sammenligningskriterie. Det er vilkårlig hvordan vi sammenligner to elementer, så lenge vi gjør det likt gjennom hele sorteringen. 
 
-\subsubsection{\color{red}Paradigmer og begreper}
+\subsubsection{Paradigmer og begreper}
 \label{sec:sortbegrep}
 
 \paragraph{Klasser av sorteringsalgoritmer}
@@ -25,13 +25,13 @@ to og to verdier i arrayen, mens de verdibaserte finner den riktige plasseringen
 til hvert element kun ut ifra verdien på elementet. 
 
 
-\paragraph{\color{red}Stabil Sortering}\label{stabil}
+\paragraph{Stabil Sortering}\label{stabil}
 Noen ganger ønsker vi å sortere etter flere kriterier. Et eksempel kan være
 epost, der vi f.eks. vil sortere både etter avsender og alfabetisk, slik at vi
 får at alle som er fra samme avsender står alfabetisk i forhold til hverandre.
 
-\begin{definisjon} Stabil Sortering
-  Dersom en algoritme er \textbf{stabil}, er det et krav at innbyrdes rekkefølge beholdes
+\begin{definisjon}
+  En algoritme er \textbf{stabil} dersom innbyrdes rekkefølge beholdes
   etter sortering. Dvs at dersom \verb|a[i]| $ = $ \verb|a[j]|, og \verb|a[i]| kommer før \verb|a[j]| i \verb|a[]|, så skal \verb|a[i]| komme før \verb|a[j]| i den sorterte lista \verb|a'[]|.
 \end{definisjon}
 
@@ -40,7 +40,7 @@ stabil sortering:
 \begin{itemize}
 \item \nameref{insertsort} 
 \item \nameref{radixsort} 
-\item \nameref{mergesort}: Kommer an på implementasjon \color{red}Si noe om vår.
+\item \nameref{mergesort} kan være stabil, avhengig av hvordan flettemetoden er implementert. I vårt (og bokas) eksempel er det en stabil sortering.
 \end{itemize}
 
 
@@ -280,7 +280,7 @@ samme siffer på gjeldende plass. Dette gjentar vi helt til vi har vært gjennom
 maks antall gjeldende siffer.
 
 
-\subsection{\color{red}Parallell Sortering}
+\subsection{Parallell Sortering}
 
 \subsubsection{Amdahls lov}
 \label{sec:amdahl}
@@ -300,7 +300,7 @@ Denne loven har imidlertid møtt motstand i Gustafson, som hevder at andelen av
 programmet som er sekvensielt blir mindre etterhvert som problemet blir større.
 Altså er ikke Amdahls lov fast.
 
-\subsubsection{\color{red}Parallell Quicksort}\label{parquick}
+\subsubsection{Parallell Quicksort}\label{parquick}
 Siden \nameref{quick} deler lista opp i to deler der alle elementene i den ene lista er mindre enn alle elementene i den andre lista er den velegnet til å parallellisere. Vi må gjøre de første rekursjonene sekvensielt og deler opp lista i $ n $ biter (merk at $ n $ på være på formen $ 2^k, k\in \mathbb{N} $). Deretter starter vi $ n $ tråder med hver sin del å sortere. For å $ n $ tråder må vi gjøre $ \log_2 n $ nivåer med rekursjon sekvensielt først. Når alle trådene er ferdig har vi $ n $ sortere biter, der vi vet at alle elementene i tråd 1 er mindre enn elementene i tråd 2, som er mindre enn elementene i tråd 3, osv. Da kan vi sette sammen bitene sekvensielt til slutt og få en sortert liste. 
 \begin{figure}[H]
 \caption{Illustrasjon av parallell quicksort med to tråder}
