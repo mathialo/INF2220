@@ -7,17 +7,17 @@
 	\subsubsection{Analyse}
 		Worst case så får vi mismatch $(n-m)$ ganger og suksess $(n-m)+1$ ganger, Totale sammenligninger er $((n-m)+1\times m)$ som gir kjøretid $O(n^2)$.
 
-	\subsection{\color{red}Boyer-Moore}
+	\subsection{Boyer-Moore}
 		Dette er en rask substringalgoritme. Med Boyer-Moore preprosserer vi nåla før vi begynner å søke. Vi regner ut hvor mange hopp vi kan gjøre for hvert enkelt tegn vi får mismatch på. Dette kaller vi \textit{bad character shift}. Vi beregner også \textit{good character shift}, som er verdier vi kan hoppe på et gitt sted i nåla hvis vi har hatt match tidligere i nåla, men ikke på denne plassen. \newline Algoritmen er slik:
 		\begin{itemize}
 			\item[-] Beregn bad character shift for alle tegn.
 			\item[-] Sammenlign nåla med teksten, starter med tegnet lengst til høyre i nåla.
 			\item[-] Hvis mismatch på \verb|c|, flytt nåla fram med den \textbf{største} verdien av \verb|badCharShift[c]| og \verb|goodSuffixShift[c]|. Hvis match, dytt nåla en til høyre og sjekk neste tegn. Gjenta.
 		\end{itemize}
-		Merk at når vi snakker om å skippe så er det alltid i forhold til det siste tegnet i nåla.
+		Merk at når vi snakker om å skippe så er det alltid i forhold til det siste tegnet i nåla. Vær også obs på, som det står i algoritmen, at når vi bruker denne for eksempel på eksamen, vil vi skippe maks av \verb|badCharShift[c]| og \verb|goodSuffixShift[c]|, der \verb|c| er tegnet.
 
 	\subsubsection{Bad character shift}
-		Vi beregner avstand til neste gang nål er på linje med høystakk\ref{huffman}.
+		Vi beregner avstand til neste gang nål er på linje med høystakk.
 		Ved en mismatch vil vi dytte nåla framover til en av to ting skjer: Mismatch blir match eller nåla beveger seg forbi tegnet vi fikk mismatch på.
 		I praksis gjør vi dette slik: Verdien til et tegns bad character shift er lengden på nåla minus den siste indeksen som tegnet befinner seg på, minus 1. Altså \verb|value = length - index - 1|.
 		
@@ -71,7 +71,7 @@ I steg \textbf{3.} får vi mismatch på H mot O, og må hoppe O-plasser frem---a
 \paragraph{Analyse}
 Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, og nål $011\dots1$ kjører $m$ ganger. Dette gir O($nm$). Best case har input tekst $1^n$ og nål $0^m$, som gir O($n/m$). Average case er O($m/|\Sigma|$), altså raskere enn brute force.
 	
-	\subsubsection{\color{red}Good suffix shift}
+	\subsubsection{Good suffix shift}
 		Anta at vi har en substring $t$ av nåla (altså lengst til høyre i nåla) som allerede er matchet. Vi får så mismatch på neste tegn. Vi kan nå være smarte og finne ut
 		Vi må tenke på to tilfeller: $t$ forekommer et annet sted i nåla. Da kan vi ikke skippe lenger enn til neste gang det skjer. Eller, en del av $t$ forekommer i starten av nåla. Da må vi skippe til vi er på linje med dette.
 	
