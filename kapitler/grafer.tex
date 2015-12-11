@@ -253,14 +253,14 @@ Et \textbf{articulation point} er et kritisk punkt i en sammenhengende graf som 
 
 En \textbf{biconnected} graf er en graf uten articulation points, altså en graf der det alltid finnes mer enn én vei fra en node til en annen. Grafen (til venstre) i figur \ref{fig:min_spenntre} er en slik graf. \index{graf!biconnected}
 
-\subsection{Grafalgoritmer}
+~\\~\\\subsection{Grafalgoritmer}
 
 \subsubsection{Dybde-først-søk}
 \label{dfs}
 Dybde-først-traversering (herfra dfs: depth first search) er en måte å traversere gjennom en graf på. Det kan tenkes på som en generalisering av dybde-først-traversering gjennom trær. Vi velger oss en (hvilken som helst) startnode, og beveger oss ned til etterfølgerne til noden. Når vi kommer til en node som ikke har kanter til en ubesøkt node (enten at noden har utgrad 0, eller at alle etterfølgerne er besøkt) går vi tilbake. 
 
 Underveis i traverseringen har vi en teller som holder styr på hvor mange skritt vi har tatt. I hver node lagrer vi verdien av telleren prefix og postfix, det vil si første gang vi kommer til noden og når vi kommer tilbake etter å ha vært nedom barna. 
-
+~\\
 \begin{figure}[H]
 \centering
 \captionsetup{justification=centering,margin=1cm}
@@ -288,7 +288,7 @@ Underveis i traverseringen har vi en teller som holder styr på hvor mange skrit
 \draw[eh] (E) to (B);
 \end{tikzpicture}
 \end{figure}
-
+~\\
 I figur \ref{fig:dfs} har vi brukt A som rotnode. Vi gikk deretter til et av barna, B. Videre gikk vi til C, og siden C har utgrad 0 måtte vi gå tilbake til B igjen. Fra B gikk vi videre til D, så til E og til F. Fra F går det en kant til C, men siden vi har besøkt C fra før går vi tilbake igjen. 
 
 DFS-algorigmer er velegnet for å programmere rekursivt. Et eksempel på en enkel implementasjon i Java (som en metode i en Node-klasse):
@@ -424,12 +424,12 @@ Siden G har høyest postfixteller (20) begynner vi der. Vi ser i $ G^t $ at G ik
 
 Alle SCCer til $ G $ er: \{ \{G\}, \{H, I, J\}, \{A, B, C, F\}, \{D\}, \{E\} \}
 \end{eks}
-
+~\\
 \subsubsection{Dijkstras algoritme}
 \label{dijkstra}
 
 Dijkstras algoritme er en algoritme for å finne korteste vei fra en node til alle andre noder i en urettet graf. Algoritmen er i utgangspunktet for vektede grafer, men kan også anvendes på uvektede. Vi tenker da på en uvektet graf som en vektet graf der alle vektene er like ($ =1 $). Algoritmen er grådig siden vi alltid velger den noden med lavest avstand, og fortsetter derfra. 
-
+~\\~\\~\\
 \begin{teorem}Dijkstras algoritme
 
 Vi skal finne korteste vei fra en node $ s $ til alle andre noder i en vektet, urettet graf $ G $. 
@@ -587,9 +587,7 @@ Prims algoritme er en algoritme for å finne minimale spenntrær. Det er en grå
 
 Vi skal finne et minimalt spenntre for en graf $ G $. Velg først en startnode (rotnode). Den kan velges helt tilfeldig. Så lenge treet ikke spenner hele $ G $ legger vi til den kanten fra treet, til en ukjent node som har lavest vekt.
 \end{teorem}
-
 \noindent Vi ser på et eksempel.
-
 \begin{eks} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
 
 Vi velger $ v_1 $ som rotnode (vi kunne valgt hvilken som helst annen). Den kanten med lavest vekt ut fra treet (som kun består av $ v_1 $) er kanten $ v_1-v_4 $, så vi legger den til. Videre er kanten $ v_1-v_2 $ den kanten med lavest vekt som går til en ukjent node, så vi legger til den. $ v_4-v_3 $ er neste kant vi legger til. Kanten $ v_2-v_4 $ er nå den kanten med lavest vekt som går ut fra treet, men siden $ v_2 $ og $ v_4 $ begge er inneholdt i treet er ikke den interessant. Neste kant vi legger til er $ v_4-v_7 $, deretter $ v_7-v_6 $ og $ v_7-v_5 $. Treet er nå et komplett spenntre for $ G $. 

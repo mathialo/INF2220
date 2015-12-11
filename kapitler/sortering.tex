@@ -134,7 +134,7 @@ Faktisk lønner det seg å ikke ha med denne testen.
 Siden if-tester er relativt dyre operasjoner, lønner det seg å ``plukke opp'' et
 element, for deretter å sette den ned igjen på samme plass, enn å sjekke om det
 står på feil plass.
-
+~\\
 \paragraph{Kompleksitet}
 Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen uegnet til store lister. Når lista er kort\footnote{Generell tommelfingerregel: mindre enn 50 elementer} derimot, er innstikksortering en ganske god algoritme - til og med bedre enn \nameref{quick}. Gode quicksortimplementasjoner bruker derfor innstikksortering hvis lista blir for kort. 
 
@@ -145,7 +145,7 @@ Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen 
 \subparagraph{Avarage case: $ O(n^2) $} fra teorem \ref{teo:swapkompl}
 
 
-
+\newpage
 \subsubsection{Flettesortering}\label{mergesort}
 \textbf{Flettesortering} (engelsk: \textbf{mergesort}) er et ekempel på en \hyperref[splitthersk]{splitt-og-hersk}-algoritme, og er et eksempel på elegant rekursjon. Anta at vi har en liste $ L $ som er $ n $ elementer lang. Vi deler først $ L $ opp i $ n $ biter slik at vi har $ n $ lister på ett element. Deretter fletter vi listene sammen til vi bare har én liste. 
 
@@ -204,6 +204,7 @@ flyttingen av elementene i forhold til pivoten når vi jobber med arrayer, siden
 vi ikke kan dele opp og sette sammen arrayer. En detaljert beskrivning (og
 illustrering) av tankegangen finnes i boka i seksjon 7.7.2 (side 312). 
 En noe forenklet utgave følger her:
+
 \begin{enumerate}
 \item Bytt plass på pivoten og det siste elementet, slik at vi unngår at den
   kommer i veien for oss.
@@ -217,7 +218,7 @@ En noe forenklet utgave følger her:
   passert hverandre. Nå peker $j$ på et element mindre enn pivot, og $i$ på et
   som er større. Dersom vi nå bytter plass på verdien på $i$ og pivoten.
 \end{enumerate}
-
+~\\
 \begin{eks} ~\newline
 \[
   \begin{array}{c c c c c c c c c l}

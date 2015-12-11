@@ -154,7 +154,7 @@ Den grunnleggende idéen bak hashtabeller er å la verdien til elementet vi skal
 
 \noindent Et eksempel på en hashfunksjon kan være $ f(x) = x \mod tableSize $
 
-
+~\\
 \subsubsection{Håndtering av like hashresultater}
 Hashfunksjoner trenger ikke å være injektive. Det vil si at vi fort kan få $ f(x) = f(y) $ selv om $ x \neq y $. Hvis vi skal sette inn $ y $ i en hashtabell, men plassen med index $ f(y) $ allerede er okkupert av $ x $ må vi finne en ny plass til $ y $. Det kan gjøres på flere måter, vi deler opp i to hovedgrupper: Seperate chaining og probing. 
 
@@ -176,11 +176,11 @@ Kvadratisk probing ligner veldig på lineær probing, med den forskjellen at $ g
 \paragraph{Dobbel hashing}~\\
 Med dobbel hashing har vi en ekstra hashfunksjon $ f_2(x) $ som vi regner ut hvis vi skulle støte på problemer. Vi får da at $ g(k) = k f_2(x) $. Et eksempel på en funksjon $ f_2 $ kan være $ f_2(x) = R-(x \mod R) $ der $ R $ er det største primtallet som er mindre enn $ tableSize $. 
 
-
+~\\
 \subsubsection{Rehashing}
 Hvis hashtabellen begynner å bli full kan det lønne seg å rehashe. Det betyr ganske greit å lage en ny tabell med større $ tableSize $ og flytte alle elementet over. Når vi rehasher lager vi som regel en tabell som er ca dobbelt så stor (men fortsatt primtall). Siden $ f $ ofte avhenger av $ tableSize $ må vi regne ut alle hashverdiene på nytt. Rehashing er derfor en ganske dyr affære, så vi gjør det veldig sjeldent, men hvis tabellen begynner å bli for full kan vi tjene ganske mye tid i lengden. 
 
-
+~\\
 \subsubsection{Gode hashfunksjoner}
 Vi står helt fritt til å velge hashfunksjoner selv. Gode hashfunksjoner er raske å regne ut, kan gi alle mulige verdier fra $ 0 $ til $ tableSize - 1 $, og har en god fordeling (spredning). utover tabellindexene. 
 

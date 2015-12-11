@@ -32,5 +32,4 @@ public void insert(T otherElement) {
 		// The two elements are the same. Since this is a tree
 		// for searching, we'll just forget about it
 		return;
-	}
-}
+	}}
