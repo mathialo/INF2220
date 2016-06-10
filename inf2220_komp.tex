@@ -8,6 +8,9 @@
 
 \makeindex
 
+% counterstyr. starte på nytt hver sekjson
+\usepackage{chngcntr}
+
 % header and footer:
 \usepackage{fancyhdr}
 \pagestyle{fancy}				% fjern comment når projektet er ferdig. liker ikke \color i sectiontittel. legger til section- og subsectiontittel i header og aktiverer de to neste statementene
@@ -23,8 +26,10 @@
 \usetikzlibrary{trees}
 
 
-% multiline caption i fig:
+% multiline caption i fig, counter i fig:
 \usepackage{caption}
+\counterwithin{figure}{subsection}
+\counterwithin{table}{subsection}
 
 
 % funksjon for import av javakode
@@ -71,6 +76,16 @@
 \subsectionfont{\Large\color{tittelfarge}\sffamily}
 \subsubsectionfont{\large\color{tittelfarge}\sffamily\slshape}
 
+% Nummerering av sections og toc:
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{3}
+
+% spacing over/under titler:
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{0pt}{30pt}
+\titlespacing{\subsection}{0pt}{40pt}{10pt}
+\titlespacing{\subsubsection}{0pt}{20pt}{4pt}
+
 % fornuftige sitattegn:
 \newcommand{\say}[1]{\emph{``#1''}}
 
@@ -79,7 +94,7 @@
 \author{\sffamily Mathias Lohne\\ \footnotesize\sffamily mathialo@student.matnat.uio.no\\~\\\sffamily Kristian Monsen Haug\\ \footnotesize\sffamily krimha@student.matnat.uio.no \\~\\ \sffamily Vegard Stikbakke \\ \footnotesize \footnotesize\sffamily vegarsti@student.matnat.uio.no}
 \date{~\\~\\~\\\sffamily Høsten, 2015}
 
-% spesielle ting:
+% Teoremer og sånt:
 \makeatletter
 \newtheoremstyle{indented}
   {3pt}% space before
@@ -98,11 +113,13 @@
 
 \newtheorem{myDef}{\sffamily Definisjon}
 \newenvironment{definisjon}{~\\\begin{myDef}}{\end{myDef}~\\}
+\counterwithin{myDef}{subsection}
 
-\newtheorem*{myEks}{\sffamily Eksempel}
+\newtheorem{myEks}[myDef]{\sffamily Eksempel}
 \newenvironment{eks}{~\\\begin{myEks}}{\end{myEks}~\\}
 
-\newtheorem{myTeo}{\sffamily Teorem}
+
+\newtheorem{myTeo}[myDef]{\sffamily Teorem}
 \newenvironment{teorem}{~\\\begin{myTeo}}{\end{myTeo}~\\}
 
 \newtheorem*{myProof}{\sffamily Bevis}
@@ -128,6 +145,9 @@ Feel free til å bruke, modifisere, og stjele innholdet i notatet, men krediter 
 ~\\Denne utgaven er kompilert \today.
 
 ~\\
+
+\newpage
+\thispagestyle{plain}
 
 \tableofcontents
 \thispagestyle{plain}
