@@ -1,0 +1,47 @@
+\section{Big-O Cheat-sheet}
+\subsection*{Datastrukturer}
+
+\begin{table}[H]
+\footnotesize
+\centering
+\begin{tabular}{c || c  c | c c | c c | c c} 
+	                   & \textbf{Sett inn} &               & \textbf{Søke} & & \textbf{Slette} & & \textbf{Access} & \\
+	 \textbf{Type}     & {Avarage}         & {Worst}       &Avg.&Worst&Avg.&Worst&Avg.&Worst\\ \hline
+	 Array & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(1) $ & $ O(1) $ \\
+	 Lenket liste & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ & $ O(n) $ \\
+	 \nameref{ko_stack} & $ O(1) $ & $ O(1) $ & $ O(n) $ & $ O(n) $ & $ O(1) $ & $ O(1) $ & $ O(n) $ & $ O(n) $ \\
+	 \nameref{hashmap} & $ O(1) $ & $ O(n) $ & $ O(1) $ & $ O(n) $ & $ O(1) $ & $ O(n) $ & & \\
+	\nameref{bintraer} & $ O(\log n) $     & $ O(n) $   & $ O(\log n) $     & $ O(n) $  & $ O(\log n) $     & $ O(n) $  & $ O(\log n) $     & $ O(n) $ \\
+	 \nameref{rb_tre}  & $ O(\log n) $     & $ O(\log n) $ & $ O(\log n) $     & $ O(\log n) $& $ O(\log n) $     & $ O(\log n) $& $ O(\log n) $     & $ O(\log n) $\\
+	 \nameref{b-tre}   & $ O(\log n) $     & $ O(\log n) $ & $ O(\log n) $     & $ O(\log n) $& $ O(\log n) $     & $ O(\log n) $& $ O(\log n) $     & $ O(\log n) $
+\end{tabular}
+\end{table}
+
+
+~\\\subsection*{Grafalgoritmer}
+\begin{center}
+\begin{tabular}{c || c | c}
+	\textbf{Algoritme} & \textbf{Kjøretid (worst)}   & \textbf{Plass} \\ \hline
+	  \nameref{dfs}    & $ O(|E|) $                  & $ O(|V|) $     \\
+	\nameref{dijkstra} & $ O(|V|^2) $                & $ O(|V|) $     \\
+	  \nameref{prim}   & $ O(|V|^2) $                & $ O(|V|) $     \\
+	\nameref{kruskal}  & $ O(|E| \cdot \log |V|) $ & $ O(|V|) $     \\
+	 \nameref{floyd}   & $ O(|V|^3) $                & $ O(|V|^2) $
+\end{tabular}
+\end{center}
+
+
+~\\\subsection*{Sorteringsalgoritmer}
+\begin{center}
+\begin{tabular}{c || c  c  c | c}
+	                             & \textbf{Tid} &            &            &  \\
+	\textbf{Sorteringsalgoritme} & {Best}       & {Avarage}  & {Worst}    & \textbf{Plass} \\ \hline
+	    \nameref{bubblesort}     & $ O(n) $     & $ O(n^2) $ & $ O(n^2) $ & $ O(1) $ \\
+	    \nameref{insertsort}     & $ O(n) $     & $ O(n^2) $ & $ O(n^2) $ & $ O(1) $ \\
+	    \nameref{mergesort}     & $ O(n\log n) $     & $ O(n\log n) $ & $ O(n\log n) $ & $ O(n) $ \\
+	    \nameref{heapsort}     & $ O(n\log n) $     & $ O(n\log n) $ & $ O(n\log n) $ & $ O(n) $ \\
+	    \nameref{treesort}     & $ O(n\log n) $     & $ O(n\log n) $ & $ O(n^2) $ & $ O(n) $ \\
+	    \nameref{quick}     & $ O(n\log n) $     & $ O(n\log n) $ & $ O(n^2) $ & $ O(\log n) $ \\
+	    \nameref{radixsort}     & $ O(nk) $     & $ O(nk) $ & $ O(nk) $ & $ O(n+k) $ \\
+\end{tabular}
+\end{center}

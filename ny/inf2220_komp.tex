@@ -1,0 +1,181 @@
+\documentclass[11pt, english, a4paper, sans, hidelinks]{report}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp, float, bookmark}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% todo-command:
+\newcommand{\todo}[1]{{\color{red}TODO: #1}}
+
+
+% import source code
+\usepackage{listings}
+\lstset{
+	basicstyle=\monofont\small,
+	breaklines=true,
+	keepspaces=true,
+	tabsize=4,
+	numbers=left,
+	numberstyle=\monofont\color{darkgray},
+	backgroundcolor=\color{source_gray},
+	rulecolor=\color{gray},
+	xleftmargin=2.6em,
+	frame=single,
+	framexleftmargin=2.1em,
+	showstringspaces=false,
+	literate={æ}{{\ae}}1{ø}{{\o}}1{å}{{\aa}}1
+}
+\newcommand{\pythonimport}[1]{
+	\vspace{6pt}
+	\lstinputlisting[
+	language=Python,
+	commentstyle=\color{source_brown}\monofontitalic, 
+	morekeywords={True, False},
+	keywordstyle=\color{source_blue}\monofontbold,
+	stringstyle=\color{source_orange}]{#1}
+	\vspace{6pt}
+}
+\newcommand{\javaimport}[1]{
+	\vspace{6pt}
+	\lstinputlisting[
+	language=Java,
+	commentstyle=\color{source_brown}\monofontitalic, 
+	morekeywords={String},
+	keywordstyle=\color{source_blue}\monofontbold,
+	stringstyle=\color{source_orange}]{#1}
+	\vspace{6pt}
+}
+\newcommand{\textimport}[1]{
+	\vspace{6pt}
+	\lstinputlisting{#1}
+	\vspace{6pt}
+}
+
+
+% Code floating environment (like figure, table, etc)
+\usepackage{newfloat, caption}
+\DeclareFloatingEnvironment[fileext=cde,placement={H},name={Code snippet}]{code}
+
+
+% custom fonts
+\usepackage{fontspec}
+\newfontface{\titlefontreg}{Lato Regular}
+\newfontface{\titlefontthin}{Lato Light}
+\newfontface{\monofont}{Source Code Pro Light}
+\newfontface{\monofontbold}{Source Code Pro}
+\newfontface{\monofontitalic}{Source Code Pro Light Italic}
+\setmainfont{Liberation Serif}
+
+
+% title styling
+\usepackage{sectsty}
+\allsectionsfont{\color{title_color}\titlefontreg}
+\sectionfont{\color{title_color}\huge\titlefontthin}
+\subsectionfont{\color{title_color}\Large\titlefontthin}
+\subsubsectionfont{\color{title_color}\large\titlefontthin}
+
+
+% colors
+\usepackage{xcolor}
+\definecolor{source_blue}{HTML}{003399}
+\definecolor{source_brown}{HTML}{AAAA53}
+\definecolor{source_gray}{HTML}{F9F9F9}
+\definecolor{source_orange}{HTML}{E18A07}
+\definecolor{title_color}{HTML}{333370}
+
+
+% fix oversized margins
+\usepackage{geometry}
+\geometry{bottom=1.2in}
+
+
+% lipsum for testing
+\usepackage{lipsum}
+
+
+% mathfonts and -symbols
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools, latexsym}
+
+
+% more math functions and symbols
+\newcommand{\abs}[1]{\left|#1\right|}					% absulute value (singe line norm): | |
+\newcommand{\ans}[1]{\underline{\underline{~#1~}}}		% two lines (for answers)
+\newcommand{\sqrtl}[1]{\sqrt{#1~}}						% sqrt with longer line (nice for big equations)
+\newcommand{\der}[2]{\frac{d}{d#2}\left(#1\right)}		% derivative
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}		% double line norm: || ||
+
+\newcommand{\twopartdef}[4]{							% for two-part definitions of functions, etc
+	\left\{
+	\begin{array}{ll}
+		#1 & #2 \\
+		#3 & #4
+	\end{array}
+	\right.
+}
+
+\newcommand{\N}{\mathbb{N}}								% natural, real, complex, etc.. numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Cx}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+
+
+% function for importing the front page for obligatory assignments
+\usepackage{pdfpages}
+\newcommand{\obligforside}{
+	\includepdf{/home/mathias/mit/obligforside.pdf}
+	\thispagestyle{empty}
+	~\newpage
+	\setcounter{page}{1}
+}
+
+
+% Theorem syle
+\makeatletter
+\newtheoremstyle{indented}
+{3pt}% space before
+{3pt}% space after
+{\addtolength{\@totalleftmargin}{3.5em}
+	\addtolength{\linewidth}{-3.5em}
+	\parshape 1 3.5em \linewidth}% body font
+{}% indent
+{\bfseries}% header font
+{.}% punctuation
+{.5em}% after theorem header
+{}% header specification (empty for default)
+\makeatother
+\theoremstyle{indented}
+
+\newtheorem{myTheo}{\titlefontreg\color{title_color}Theorem}
+\newenvironment{theorem}{
+	\vspace{22pt}
+	\begin{myTheo}
+	}{
+\end{myTheo}	
+\vspace{12pt}
+}
+
+
+% Better typesetting
+\usepackage{microtype}
+
+
+% Referencing
+\usepackage{hyperref}
+
+\title{\titlefontthin\Huge INF2220: Algoritmer og datastrukturer\\Pensumsammendrag}
+\author{\titlefontreg Mathias Lohne\\\footnotesize\titlefontreg mathialo@student.matnat.uio.no \\ \vspace{10pt} \\
+		\titlefontreg Kristian Monsen Haug\\\footnotesize\titlefontreg krimha@student.matnat.uio.no \\ \vspace{10pt} \\
+		\titlefontreg Vegard Stikbakke\\\footnotesize\titlefontreg vegarsi@student.matnat.uio.no
+}
+\date{}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+
+
+\end{document}
