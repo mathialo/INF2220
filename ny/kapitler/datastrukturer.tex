@@ -2,12 +2,12 @@
 \subsection{Heap (prioritetskø)}\label{heap}
 En heap (også kalt prioritetskø) er en type binært tre med noen spesielle struktur- og ordningskrav. Vi har to typer heap: min- og maksheap. Vi vil beskrive minheap i dette kapitlet, men maksheap fremgår helt analogt.
 
-\begin{definisjon} En minheap er et binært tre der følgende krav er oppfylt:  \label{def:heap}
+\begin{definition} En minheap er et binært tre der følgende krav er oppfylt:  \label{def:heap}
 \begin{enumerate}
 \item Treet er komplett (høyden til treet er $ \lceil\log_2 n\rceil $)
 \item En node har alltid (sorterings)verdi mindre enn, eller lik sine barn. 
 \end{enumerate}
-\end{definisjon}
+\end{definition}
 
 En maksheap defineres nesten likt, eneste forskjell er at pt. 2 i definisjonen blir ``En node alltid er større enn, eller lik sine barn.''
 
@@ -67,17 +67,17 @@ I Java har vi en ferdig heap: \verb|java.util.PriorityQueue<E>|. Java krever at 
 
 \paragraph{Tidsanalyse}~\\
 Vi ser på kjøretiden til de to omtalte operajonene:
-\begin{teorem} Kjøretid for heapoperasjoner \label{teo:heapop}
+\begin{theorem} Kjøretid for heapoperasjoner \label{teo:heapop}
 \begin{enumerate}[i]
 \item Innsetting i en heap tar $ O(\log_2 n) $ tid
 \item Fjerne minste element tar $ O(\log_2 n) $ tid
 \end{enumerate}
-\end{teorem}
+\end{theorem}
 Beviset følger av strukturkravet i definisjon \ref{def:heap}:
-\begin{bevis} Teorem \ref{teo:heapop}, del i:
+\begin{proof} Teorem \ref{teo:heapop}, del i:
 
 Når vi setter inn et element i en heap må vi først sette elementet på slutten av heapen. Siden vi vet hvor siste element er vil dette ta $ O(1) $ tid. Deretter må vi justere plassen til elementet ved å la elementet sive oppover. Siden treet er komplett vil høyden på treet være $ \lceil\log_2 n\rceil $, og vi kan maksimalt foreta $ \lceil\log_2 n\rceil - 1 $ byttinger. Total tid blir derfor være $ O(\log_2 n) $
-\end{bevis}
+\end{proof}
 Argumentet for teo. \ref{teo:heapop}, del ii er helt analogt. 
 
 
@@ -91,12 +91,12 @@ Vi kan også sortere en liste med elementer ved hjelp av en heap. Se \ref{heapso
 \subsubsection{Venstreorientert (leftist) heap}
 En venstreorientert heap er en en heap med et annet strukturkrav enn vanlig heap. Motivasjonen bak venstreorienterte heaper er at å flette (merge) to heaper av samme størrelse tar $ O(n) $ tid, vi ønsker å forbedre det. Før vi kan definere en venstreorientert heap må vi definere \say{null path length} (herfra: npl). Npl til en node $ n $ er lengden av den korteste veien fra $ n $ til en etterkommer uten to barn ($ 0 $ hvis $ n $ har $ <2 $ barn). 
 
-\begin{definisjon} En venstreorientert heap er et binært tre der følgende krav er oppfylt:
+\begin{definition} En venstreorientert heap er et binært tre der følgende krav er oppfylt:
 \begin{enumerate}
 \item For hver node $ n $ i treet er $ \text{npl}(l) \geq \text{npl}(r) $, der $ l $ er venstre og $ r $ er høyre barn til $ n $.
 \item En node har alltid (sorterings)verdi mindre enn, eller lik sine barn. 
 \end{enumerate}
-\end{definisjon}
+\end{definition}
 
 \begin{figure}[H]
 \centering

@@ -21,7 +21,7 @@
 		Ved en mismatch vil vi dytte nåla framover til en av to ting skjer: Mismatch blir match eller nåla beveger seg forbi tegnet vi fikk mismatch på.
 		I praksis gjør vi dette slik: Verdien til et tegns bad character shift er lengden på nåla minus den siste indeksen som tegnet befinner seg på, minus 1. Altså \verb|value = length - index - 1|.
 		
-		\begin{eks}
+		\begin{example}
 		La nåla være ``tooth'', og teksten være ``trusthardtoothbrushes''.
 		
 		\begin{center}
@@ -69,7 +69,7 @@ Sjekker på nytt i steg \textbf{2.}, her får vi match på T og H, men mismatch 
 
 I steg \textbf{3.} får vi mismatch på H mot O, og må hoppe O-plasser frem---altså 2. I steg \textbf{4.} er det mismatch mellom H og T, vi hopper T-plasser frem---altså 1. Og nå har vi funnet nåla vår!
 
-\end{eks}
+\end{example}
 
 \paragraph{Analyse}
 Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, og nål $011\dots1$ kjører $m$ ganger. Dette gir O($nm$). Best case har input tekst $1^n$ og nål $0^m$, som gir O($n/m$). Average case er O($m/|\Sigma|$), altså raskere enn brute force.
@@ -78,7 +78,7 @@ Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, o
 		Anta at vi har en substring $t$ av nåla (altså lengst til høyre i nåla) som allerede er matchet. Vi får så mismatch på neste tegn. Vi kan nå være smarte og finne ut, og
 		vi må tenke på to tilfeller: $t$ forekommer et annet sted i nåla. Da kan vi ikke skippe lenger enn til neste gang det skjer. Eller, en del av $t$ forekommer i starten av nåla. Da må vi skippe til vi er på linje med dette.
 	
-		\begin{eks}
+		\begin{example}
 		Vi ser på nåla ``TTCTATTCTT''.
 
 \paragraph{1.} Sjekker først \textit{ikke}-\texttt{T}, det er to shift før vi finner dette.
@@ -119,7 +119,7 @@ index&mismatch&shift\\
 9&\texttt{\textcolor{red}{T}CCTATTCTT}&9\\
 \end{tabular}
 \end{figure}
-\end{eks}
+\end{example}
 
 	\subsection{Huffmankoding}\label{huffman}
 		Huffmankoding er en måte å kode informasjon på (her tekst) på en måte der vi ikke mister noe informasjon (\textit{lossless}). Den forutsetter at vi har tilgang på teksten før vi lager en kode. Dette er ikke tilfellet med vanlig tekstenkoding, der hvert tegn har en standard kode. Huffmankoding går ut på å se på frekvensen til tegnene som forekommer, og gi kort kode til de tegnene som forekommer ofte, og lang kode til de som forekommer sjelden. Dette kan vi gjøre slik at vi har prefiksegenskapen intakt: Ingen koder er et prefiks av noen andre. Kodealfabetet \{9, 55\} har prefiksegenskapen, men \{9, 5, 59, 55\} har ikke. Måten Huffmankoding beholder denne egenskapen blir fort tydelig når vi ser på algoritmen. Kort fortalt er grunnen at vi benytter binære trær til å finne kodene.
@@ -139,7 +139,7 @@ index&mismatch&shift\\
 		\end{enumerate}
 		Algoritmen burde bli klar når vi ser på et eksempel.
 
-		\begin{eks}
+		\begin{example}
 		Anta at vi har en tekst ``BACADAEAFABBAAAGAH''. Vi setter opp en frekvenstabell for bokstavene i koden.
 			\begin{center}
 				\begin{tabular}{c c c}
@@ -212,4 +212,4 @@ index&mismatch&shift\\
 				\end{tabular}
 			\end{center}
 			Vi kan lett sjekke at prefiksegenskapen er intakt, og teksten ``BACADAEAFABBAAAGAH'' får koden \verb|011100001000110010100111011011111010010101|. Dette er åpenbart mye kortere enn standard enkoding. Hvis vi for eksempel hadde brukt ASCII-enkoding, der hvert tegn har en 7-bits kode, hadde vi hatt en kode på lengde $7n$, der $n$ er lengden på teksten.
-			\end{eks}
+			\end{example}

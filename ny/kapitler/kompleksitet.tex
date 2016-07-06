@@ -12,19 +12,17 @@ Gitt et alfabet $ \Sigma $ bruker vi $ \Sigma ^* $ for å betegne mengden av all
 \item $ L = \{i : M \text{ stopper på input } i \} $ (Den inputen som gjør at en turingmaskin stopper. En variant av haltingproblemet, se \ref{haltingProof})\index{haltingproblemet}
 \end{itemize}
 \label{språk}
-
-\begin{eks} Gitt alfabetet $ \{0, 1, \text{`,'}\} $, hva er det formelle språket som tilsvarer sorteringsproblemet over dette alfabetet?
+\begin{example} Gitt alfabetet $ \{0, 1, \text{`,'}\} $, hva er det formelle språket som tilsvarer sorteringsproblemet over dette alfabetet?
 
 \emph{Svar:}
 \[ L = \{(0), (1), ..., (0,1), (0, 10), (1, 10), ...\} \]
 
-\end{eks}
-
+\end{example}
 
 \subsubsection{Turingmaskinen}
 Turingmaskinen er en teoretisk maskin. Den eksisterer ikke i virkeligheten, men er noe vi bruker for å bevise teoremer. Selvfølgelig finnes det ingen formell definisjon på \emph{hva} en Turingmaskin egentlig er, så alle læreverk definerer den litt forskjellig. Det høres kanskje helt Texas ut, men alle definisjonene er tilnærmet ekvivalente. \index{Alan Turing}\index{turingmaskin}
 
-\begin{definisjon}
+\begin{definition}
 \label{def:turingmaskin}
 Litt forenklet kan vi si at en Turingmaskin $ M = (\Sigma, \Gamma, Q, \delta) $ består av fire komponenter:
 \begin{itemize}
@@ -33,7 +31,7 @@ Litt forenklet kan vi si at en Turingmaskin $ M = (\Sigma, \Gamma, Q, \delta) $ 
 \item En liste $ Q $ over mulige statuser for Turingmaskinen.
 \item En liste $ \delta $ over `responser' på input. For eksempel: \say{Hvis jeg er i status 7 og leser en `a' skal jeg gå til status 21}.
 \end{itemize}
-\end{definisjon}
+\end{definition}
 
 Hvis vi skal prøve å se for oss en Turingmaskin intuitivt kan vi se for oss et uendelig lang papirremse (formelt kalt teip). På denne papirremsa står det symboler (fra $ \Sigma $). Dette er inputen til Turingmaskinen. Maskinen leser ett og ett symbol, og reagerer på symbolet (etter hva $ \delta $ sier den skal gjøre). Det kan deretter la symbolet stå, viske det vekk eller erstatte det med et nytt symbol (fra $ \Gamma $).
 
@@ -60,25 +58,25 @@ EXPTIME er mengden av alle problemer som løses og sjekkes i eksponentiell tid. 
 \paragraph{Uløselige problemer} 
 En del problemer har ikke en mulig løsning. Et eksempel på et slikt problem er halting-problemet. Dette problemet går ut på om en turingmaskin kan vite om den noen gang vil gi et resultat (det vil si stoppe, engelsk: halt), eller om den vil gå i evig loop. Et bevis for hvorfor haltingproblemet er uløselig finnes i \ref{haltingProof}. 
 
-~\\~\\
+~\\
 \noindent Vi skal se på noen eksempler på problemer:
 
-\begin{eks}
+\begin{example}
 Traveling salesperson (TSP)
 
 Et av de mest kjente og studerte optimeringsproblemene kalles \emph{Traveling salesperson}. Problemet går slik: En handelsmann har en liste med byer han må innom. Han vil reise innom hver by én gang, og vil bruke minst mulig penger på turen. Han vet prisen det vil koste å reise mellom hver by. Hvilken rekkefølge burde handelsmannen besøke byene i for å betale minst mulig i reisepenger?
 
 Dette problemet er av eksponentiell karakter. Vi kan ikke si noe om hvilken vei som blir billigst uten å sjekke alle muligheter. Problemet er NP-komplett.
-\end{eks}
+\end{example}
 
 
-\begin{eks}
+\begin{example}
 Subset sum
 
 Problemet er slik: Gitt en mengde $ M $ av tall, skal vi avjøre om det finnes en delmengde $ M' \subset M $ slik at  \[ \sum_{m~\in~M'} m = 0  \] Mengden $ A =  \{-2, -3, 1, 4, 6\} $ er en slik mengde, siden $ 1 + 4 + (-2) + (-3) = 0 $. Mengden $ B = \{-6, -3, 1, 4, 7\} $ er ikke en slik mengde, siden det ikke er mulig å plukke ut noen elementer slik at summen av elementene blir 0.
 
 Å løse dette problemet er ganske vanskelig siden det er NP-komplett. Vi må (slik som i TSP) prøve oss fram med forskjellige kombinasjoner. 
-\end{eks}
+\end{example}
 
 
 
@@ -87,43 +85,47 @@ Når vi skal analysere kjøretid er vi sjeldent opptatt av et nøyaktig svar, me
 
 Hvorfor big O? Vi er interessert i å vite noe om generell tid, fordi faktisk tid vil avhenge av maskin etc. 
 
-\begin{definisjon}
+\begin{definition}
 \label{def:O}
 La $ f $ og $ g $ være to funksjoner $ f, g:\mathbb{N} \rightarrow \mathbb{R} $. Vi sier da at $ f(n) = O(g(n))$ hvis det eksisterer positive heltall $ c $ og $ N $ slik at for hvert heltall $ n\geq N $ er $ f(n) \leq c\,g(n) $
-\end{definisjon}
+\end{definition}
 $ O(g(n)) $ blir dermed en øvre skranke for kjøretid.
 
 Når vi i denne sammenhengen bruker O-notasjon vil vi bruke det som et mål på hvordan kjøretiden øker med inputen. Vi ser på et eksempel:
 
-\begin{eks}
+\begin{example}
 Gitt et tall $ n $ skal vi finne alle mulige heltall som $ n $ er delelig med. En veldig enkel algoritme for å løse dette er å forsøke å dele på alle tallene fra 1 til $ n $. 
 
 Hvis $ n=5 $ vil dette gå raskt, da vi bare må teste 5 mulige utfall ($ n/k, k \in \{1, 2, 3, 4, 5\} $). Hvis $ n=139\,823 $ blir problemet mer komplisert, og algoritmen vil måtte gjøre mange flere tester. Generelt må vi gjøre $ n $ tester for et inputtall $ n $.
 
 Vi ser at kjøretiden øker lineært med størrelsen på input. Vi sier derfor at algoritmen bruker $ O(n) $ tid.
-\end{eks}
+\end{example}
 
 Som nevnt tidligere er vi mer opptatt av størrelsesorden enn den konkrete kjøretiden. Vi bryr oss derfor ikke om konstanter. Hvis vi i eksempelet hadde måttet gjøre 2 tester for hver input hadde vi fortsatt hatt $ O(n) $ tid, selv om kjøretiden hadde vært $ T(n) = 2n $. Vi kan sette opp noen regneregler for O-notasjon:
-\begin{teorem}
+\begin{theorem}
 \label{teo:O}
 Regneregler for O-notasjon:
 \begin{enumerate}[i]
 \item $ O(k\,g(n)) = O(g(n)) \quad \text{for } k = 1,2,... $
 \item La $ f $ og $ g $ være to funksjoner, og anta at det finnes et tall $ N $ slik at $ f(n) > g(n) $ for alle $ n > N$ . Da er $ O(f(n)+g(n)) = O(f(n)) $
 \end{enumerate}
-\end{teorem}
+\end{theorem}
 
-\begin{bevis} Teorem \ref{teo:O}, del i
+\begin{proof} Teorem \ref{teo:O}, del i
 
 La $ f $ og $ g $ være to funksjoner $ f,g:\mathbb{N}\rightarrow\mathbb{R} $ og la $ k $ være et tall $ \in \mathbb{N} $. Videre antar vi at $ f(n) = O(g(n)) $. Da har vi fra definisjon \ref{def:O} at $ f(n) \leq c\,g(n) $ for en konstant $ c $. Vi setter $ g'(n) = k\,g(n) $ for et positivt heltall $ k $. Da har vi at
 \[ f(n) \leq c\,g(n) \leq c\,k\,g(n) = c\,g'(n) \]
 Dermed er $ f(n) = O(g'(n)) $, og fra antagelsen har vi at $ f(n) = O(g(n)) $. Vi har derfor at $ O(k\,g(n)) = O(g(n)) $
-\end{bevis}
+\end{proof}
 
 Beviset for del ii følger samme strategi. Det teorem \ref{teo:O} del ii egentlig sier er at vi kun bryr oss om den `største' funksjonen. Har vi for eksempel kjøretid lik $ T(n) = n^2 + n $ har vi kun $ O(n^2) $.
 
-\begin{eks} Beregning av kjøretid. Vi har gitt følgende program
-\begin{verbatim}
+\begin{example} Beregning av kjøretid. Vi har gitt følgende program
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
 for (int i=0; i<n; i++) {
     for (int j=i; j<n; j++) {
         // Do something simple...
@@ -133,26 +135,33 @@ for (int i=0; i<n; i++) {
 for (int i=0; i<n-3; i++) {
     // Do something else...
 }
-\end{verbatim}
+\end{lstlisting}
 og skal beregne worst case kjøretid til programmet. Vi ser at den indre for-løkka i den øverste for-løkka starter på \verb|i|, og ikke på 0. Fra teorem \ref{teo:O} del i har vi at det ikke har noe å si. Vi regner med den løkka. Vi ser også at det er en enkel for-løkke etterpå, men fra teorem \ref{teo:O} del ii har vi at vi kan se bort fra den. Kjøretiden blir altså $ O(n^2) $.
-\end{eks}
+\end{example}
 
 
-\begin{eks} Finn kjøretid for følgende program: (Ex14 1b)
+\begin{example} Finn kjøretid for følgende program: (Ex14 1b)
 
-\begin{verbatim}
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
 for (i=n; i >= 1; i = i/2) {
     for (j=1; j<n; j++) {
         // do something
     }
 }
-\end{verbatim}
+\end{lstlisting}
 Vi ser at den indre løkka vil gå $ n $ ganger. Den ytre løkka halverer telleren hver gang, det vil si at den kjører $ \log_2 n $ ganger. Kjøretiden blir derfor $ O(n\log_2 n) $.
-\end{eks}
+\end{example}
 
-~\\~\\
-\begin{eks} Finn kjøretid for følgende program: (Ex11 2b)
-\begin{verbatim}
+\begin{example} Finn kjøretid for følgende program: (Ex11 2b)
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
 float foo(A) {
     n = A.length;
     
@@ -176,7 +185,7 @@ float foo(A) {
     b3 = foo(A3);
     b4 = foo(A4);
 }
-\end{verbatim}
+\end{lstlisting}
 
 Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sakte gjennom hva programmet gjør og forsøker å sette opp en funksjon for kjøretiden. Vi ser at \verb|foo| har to nestede for-løkker, hver av dem går $ n/2 $ ganger. Vi har derfor at hver gang vi kommer til denne løkka blir kjøretiden $ T_{\text{løkke}}(m) = (m/2)^2 $. Mot slutten av programmet har vi fire rekursive kall. Alle kallene kjører \verb|foo| med input av lengde $ n/2 $. Vi kan dermed sette opp en funksjon for kjøretiden:
 
@@ -189,4 +198,4 @@ Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sak
 Igjen kan vi sette inn for $ T(n/2) $, og slik kan vi fortsette. Siden vi halverer $ n $ hver gang ser vi at vi må gjøre dette $ \log_2(n) $ ganger før vi får at $ n=1 $, og rekursjonen stoppes av den øverste if-testen. Vi går over til O-notasjon slik at vi kan droppe konstanter. Vi har dermed at kjøretiden er
 
 \[ O\left(n^2\log_2 n + n^2\right) = O\left(n^2 \log_2 n\right) \]
-\end{eks}
+\end{example}

@@ -3,13 +3,13 @@
 \label{sort_form}
 Før vi kan begynne å se på noen spesielle sorteringsalgoritmer må vi formalisere hva vi mener med sortering. Vi definerer sortering slik:
 
-\begin{definisjon}
+\begin{definition}
 Anta at \verb|a[]| er en liste av sammenlignbare elementer. Vi sier at \verb|a'[]| er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
 \begin{enumerate}[i]
 \item \verb|a'[i]| $ < $ \verb|a'[i+1]| for alle $ \verb|i| = 0, 1, \ldots, n-1 $
 \item Alle elementene i \verb|a[]| er med i \verb|a'[]|
 \end{enumerate}
-\end{definisjon}
+\end{definition}
 
 Det andre kriteriet kan virke litt snodig, men uten det ville sortering vært veldig enkelt. Vi kunne i så fall bare generert en ny liste med elementer i sortert rekkefølge, og det første kriteriet ville vært oppfylt. Vi trenger derfor bevaringskriteriet. 
 
@@ -30,10 +30,10 @@ Noen ganger ønsker vi å sortere etter flere kriterier. Et eksempel kan være
 epost, der vi f.eks. vil sortere både etter avsender og alfabetisk, slik at vi
 får at alle som er fra samme avsender står alfabetisk i forhold til hverandre.
 
-\begin{definisjon}
+\begin{definition}
   En algoritme er \textbf{stabil} dersom innbyrdes rekkefølge beholdes
   etter sortering. Dvs at dersom \verb|a[i]| $ = $ \verb|a[j]|, og \verb|a[i]| kommer før \verb|a[j]| i \verb|a[]|, så skal \verb|a[i]| komme før \verb|a[j]| i den sorterte lista \verb|a'[]|.
-\end{definisjon}
+\end{definition}
 
 Følgende algoritmer (altså ikke alle) gjennomgått i kurset oppfyller kravet om
 stabil sortering:
@@ -45,23 +45,23 @@ stabil sortering:
 
 
 \paragraph{Nedre grense for enkle sorteringsalgoritmer}
-\begin{teorem} (7.1 i læreboka): Det gjennomsnittlige antall inversjoner i en \label{teo:sortbound}
+\begin{theorem} (7.1 i læreboka): Det gjennomsnittlige antall inversjoner i en \label{teo:sortbound}
   array med $n$ unike elementer er $\frac{n(n-1)}{4}$
-\end{teorem}
+\end{theorem}
 Beviset bruker at summen av en aritmetisk rekke er $ n(n-1)/2 $:
-\begin{bevis}
+\begin{proof}
   La $L$ være en array og $L_r$ den reverserte. Et hvilket som helst ordnet par
   i $L$ vil være en inversjon i enten $L$ eller $L_r$. Det totale antallet slike
   par i $L$ og $L_r$ vil være $\frac{n(n-1)}{2}$, altså har en gjennomsnittlig
   liste halvparten så mange, altså $\frac{n(n-1)}{4}$ 
-\end{bevis}
+\end{proof}
 Vi har da et korollar til teorem \ref{teo:sortbound} som gir oss gjennomsnittlig tid for algoritmer som bytter naboelementer:
-\begin{teorem} (7.2 i læreboka): \label{teo:swapkompl}
+\begin{theorem} (7.2 i læreboka): \label{teo:swapkompl}
   Enhver sorteringsalgoritme som sorterer ved å bytte to naboelementer krever i gjennomsnitt $ O(n^2) $ tid.
-\end{teorem}
-\begin{bevis}
+\end{theorem}
+\begin{proof}
 Fra teorem \ref{teo:sortbound} har vi at gjennomsnittlig antall inversjoner er $ n(n-1)/4 $. Hvert plassbytte av to naboer inversjon fjerner én inversjon, dermed tar algoritmer som baserer seg på plassbytte av naboer gjennomsnittlig $ O(n^2) $ tid.
-\end{bevis}
+\end{proof}
 
 
 
@@ -82,7 +82,7 @@ Wikipedias versjon av boblesortering er forskjellig fra den som er gjennomgått 
 Her flytter vi oss hele tiden oppover i lista, og begynner på nytt når vi har kommet til slutten.
 Dette gjentas helt til lista er ferdig sortert.
 
-\begin{eks} Sortering av (5 1 2 5 8) \newline
+\begin{example} Sortering av (5 1 2 5 8) \newline
   \textbf{Første gjennomgang}
   \begin{align*}
     (\mathbf{5}~ \mathbf{1}~ 2~ 5~ 8) \rightarrow (\mathbf{1}\, \mathbf{5} ~ 2 ~ 5 ~ 8) &\quad \text{Bytter, siden 5 > 1} \\
@@ -92,7 +92,7 @@ Dette gjentas helt til lista er ferdig sortert.
   \end{align*}
   Deretter går vi tilbake til start og gjentar prosessen, helt til vi har gått gjennom lista uten at noen elementer har byttet plass.
   I dette tilfellet kreves tre gjennomganger.
-\end{eks}
+\end{example}
 
 \javaimport{kode/bubbleSort.java}
 
@@ -219,7 +219,7 @@ En noe forenklet utgave følger her:
   som er større. Dersom vi nå bytter plass på verdien på $i$ og pivoten.
 \end{enumerate}
 ~\\
-\begin{eks} ~\newline
+\begin{example} ~\newline
 \[
   \begin{array}{c c c c c c c c c l}
     3&1&4&\underline{5}&9&2&6&8&7 &\quad \text{Der elementet med linje under er pivoten.}\\
@@ -229,7 +229,7 @@ En noe forenklet utgave følger her:
 \]
 Nå står pivoten på riktig plass. Vi gjentar prosessen på subarrayen som består
 av elementene på høyre side, og på elementene på venstre side av pivoten.
-\end{eks}
+\end{example}
 
 \paragraph{Om å velge pivot}
 Hvilket element vi velger som pivotelement kan ha veldig mye å si for kjøretiden
@@ -292,7 +292,7 @@ akkurat brukte i telle-arrayen med 1 så vi lett kan finne ut hvor neste tall me
 samme siffer på gjeldende plass. Dette gjentar vi helt til vi har vært gjennom
 maks antall gjeldende siffer.
 
-\begin{eks}
+\begin{example}
   \begin{displaymath}
     \begin{array}{c c c c c c c c}
       170&45&75&90&802&2&24&66
@@ -325,7 +325,7 @@ maks antall gjeldende siffer.
   fra høyre. Dette gjentar vi til vi har vært gjennom så mange gjeldende siffer
   som det største tallet i arrayen har. I dette tilfellet 3 (siden 802 har tre
   gjeldende siffer.) Merk at f.eks. 2 er å betrakte som 002 videre i sorteringen.
-\end{eks}
+\end{example}
 
 \paragraph{Kompleksitet}
 I radix sort gjør vi kun lineære operasjoner: Først går vi gjennom lista for å
@@ -343,14 +343,14 @@ kan vi betrakte $k$ som en konstant, og vi får at radix sort er $O(n)$
 
 Amdahls lov gir oss en slags øvre grense for hvor mye tid vi kan spare på å
 parallellisere en algoritme.
-\begin{teorem}\textbf{Amdahls lov: } 
+\begin{theorem}\textbf{Amdahls lov: } 
   Anta at du har en algoritme der en andel
   $p\%$ må kjøres sekvensielt, men at resten kan gjøres i parallell.
   Med $k$ lik antall prosessorer, får vi at maksimal speedup er
   \[
     S = \frac{\text{Sekvensiell tid}}{\text{Parallell tid}} \leq \frac{100}{p + \frac{100 - p}{k}}
   \]
-\end{teorem}
+\end{theorem}
 
 Denne loven har imidlertid møtt motstand i Gustafson, som hevder at andelen av
 programmet som er sekvensielt blir mindre etterhvert som problemet blir større.

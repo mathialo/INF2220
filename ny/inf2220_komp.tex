@@ -1,11 +1,32 @@
-\documentclass[11pt, english, a4paper, sans, hidelinks]{report}
+\documentclass[10pt, norsk, a4paper, sans, hidelinks, twoside]{article}
 \usepackage[T1]{fontenc}
-\usepackage{textcomp, float, bookmark}
+\usepackage{textcomp, float, bookmark, enumerate}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[norsk]{babel}
+
+
+
+% fix oversized margins
+\usepackage{geometry}
+\geometry{bottom=1.2in}
+
+
+% Header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[LO,RE]{\thepage}	
+\cfoot{}
+
 
 % todo-command:
 \newcommand{\todo}[1]{{\color{red}TODO: #1}}
+
+
+% drawing:
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{arrows}
+\usetikzlibrary{trees}
 
 
 % import source code
@@ -28,21 +49,21 @@
 \newcommand{\pythonimport}[1]{
 	\vspace{6pt}
 	\lstinputlisting[
-	language=Python,
-	commentstyle=\color{source_brown}\monofontitalic, 
-	morekeywords={True, False},
-	keywordstyle=\color{source_blue}\monofontbold,
-	stringstyle=\color{source_orange}]{#1}
+		language=Python,
+		commentstyle=\color{source_brown}\monofontitalic, 
+		morekeywords={True, False},
+		keywordstyle=\color{source_blue}\monofontbold,
+		stringstyle=\color{source_orange}]{#1}
 	\vspace{6pt}
 }
 \newcommand{\javaimport}[1]{
 	\vspace{6pt}
 	\lstinputlisting[
-	language=Java,
-	commentstyle=\color{source_brown}\monofontitalic, 
-	morekeywords={String},
-	keywordstyle=\color{source_blue}\monofontbold,
-	stringstyle=\color{source_orange}]{#1}
+		language=Java,
+		commentstyle=\color{source_brown}\monofontitalic, 
+		morekeywords={String},
+		keywordstyle=\color{source_blue}\monofontbold,
+		stringstyle=\color{source_orange}]{#1}
 	\vspace{6pt}
 }
 \newcommand{\textimport}[1]{
@@ -65,14 +86,15 @@
 \newfontface{\monofontbold}{Source Code Pro}
 \newfontface{\monofontitalic}{Source Code Pro Light Italic}
 \setmainfont{Liberation Serif}
+\newcommand{\mono}[1]{{\monofont \small #1}}
 
 
 % title styling
 \usepackage{sectsty}
 \allsectionsfont{\color{title_color}\titlefontreg}
-\sectionfont{\color{title_color}\huge\titlefontthin}
-\subsectionfont{\color{title_color}\Large\titlefontthin}
-\subsubsectionfont{\color{title_color}\large\titlefontthin}
+\sectionfont{\color{title_color}\Huge\titlefontthin}
+\subsectionfont{\color{title_color}\LARGE\titlefontthin}
+\subsubsectionfont{\color{title_color}\Large\titlefontthin}
 
 
 % colors
@@ -82,11 +104,7 @@
 \definecolor{source_gray}{HTML}{F9F9F9}
 \definecolor{source_orange}{HTML}{E18A07}
 \definecolor{title_color}{HTML}{333370}
-
-
-% fix oversized margins
-\usepackage{geometry}
-\geometry{bottom=1.2in}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
 
 
 % lipsum for testing
@@ -130,51 +148,120 @@
 }
 
 
-% Theorem syle
-\makeatletter
-\newtheoremstyle{indented}
-{3pt}% space before
-{3pt}% space after
-{\addtolength{\@totalleftmargin}{3.5em}
-	\addtolength{\linewidth}{-3.5em}
-	\parshape 1 3.5em \linewidth}% body font
-{}% indent
-{\bfseries}% header font
-{.}% punctuation
-{.5em}% after theorem header
-{}% header specification (empty for default)
-\makeatother
-\theoremstyle{indented}
-
-\newtheorem{myTheo}{\titlefontreg\color{title_color}Theorem}
+% Theorems, definitions, examples
+\usepackage{mdframed}
+\newtheorem{myTheo}{\titlefontreg\color{title_color}Teorem}
 \newenvironment{theorem}{
-	\vspace{22pt}
+	\vspace{10pt}
+	\begin{mdframed}[backgroundcolor=source_gray]
 	\begin{myTheo}
-	}{
-\end{myTheo}	
-\vspace{12pt}
+}{
+	\end{myTheo}	
+	\vspace{7pt}
+	\end{mdframed}
+	\vspace{10pt}
 }
+\numberwithin{myTheo}{subsection}
+
+\newtheorem{myDef}[myTheo]{\titlefontreg\color{title_color}Definisjon}
+\newenvironment{definition}{
+	\vspace{10pt}
+	\begin{mdframed}[backgroundcolor=source_gray]
+	\begin{myDef}
+}{
+	\end{myDef}	
+	\vspace{7pt}
+	\end{mdframed}
+	\vspace{10pt}
+}
+
+\newtheorem*{myExmp}{\titlefontreg\color{title_color}Eksempel}
+\newenvironment{example}{
+	\vspace{10pt}
+	\paragraph{Eksempel}
+	%\begin{mdframed}[topline=false,bottomline=false]
+	%\begin{myExmp}
+}{
+	%\end{myExmp}	
+	%\vspace{7pt}
+	%\end{mdframed}
+	$ \hfill\clubsuit $
+	\vspace{10pt}
+}
+
+
+% Nummerering av sections og toc:
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{3}
+
+
+% counterstyr. starte på nytt hver sekjson
+\usepackage{chngcntr}
 
 
 % Better typesetting
 \usepackage{microtype}
 
 
+% Quotation symbols
+\newcommand{\say}[1]{\emph{``#1''}}
+
+
 % Referencing
 \usepackage{hyperref}
 
-\title{\titlefontthin\Huge INF2220: Algoritmer og datastrukturer\\Pensumsammendrag}
-\author{\titlefontreg Mathias Lohne\\\footnotesize\titlefontreg mathialo@student.matnat.uio.no \\ \vspace{10pt} \\
-		\titlefontreg Kristian Monsen Haug\\\footnotesize\titlefontreg krimha@student.matnat.uio.no \\ \vspace{10pt} \\
-		\titlefontreg Vegard Stikbakke\\\footnotesize\titlefontreg vegarsi@student.matnat.uio.no
-}
+
+% horizontal lines
+\newcommand{\hhline}{\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}}
+
+
+\title{\titlefontthin INF2220: Algoritmer og datastrukturer \\ Pensumsammendrag}
+\author{\vspace{30pt}\\\titlefontthin Mathias Lohne, Kristian Monsen Haug og Vegard Stikbakke}
 \date{}
 
 
 \begin{document}
 \maketitle
-\tableofcontents
+\thispagestyle{empty}
+\newpage
 
+\pagenumbering{roman}
+\thispagestyle{plain}
+
+\section*{Noen kommentarer}
+Dette notatet har i hovedsak fungert som min egne lille gummiand i eksamenstreninga, men kan være nyttig til repetisjon og som notater under eksamen. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \mono{mathialo@student.matnat.uio.no}
+
+Innhold og eksempler er basert på stoff fra læreboka, forelesninger, tidligere eksamener, mine egne notater og obliger, Wikipedia og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
+
+Feel free til å bruke, modifisere, og stjele innholdet i notatet, men krediter gjerne. Kildefilene ligger tilgjengelig på GitHub\footnote{https://github.com/mathialo/INF2220}.
+
+~\\Denne utgaven er kompilert \today.
+
+~\\
+
+\newpage
+\thispagestyle{plain}
+
+\tableofcontents
+\thispagestyle{plain}
+\newpage
+\pagenumbering{arabic}
+
+\input{kapitler/kompleksitet.tex}
+\newpage
+\input{kapitler/paradigmer.tex}
+\newpage
+\input{kapitler/traer.tex}
+\newpage
+\input{kapitler/grafer.tex}
+\newpage
+\input{kapitler/datastrukturer.tex}
+\newpage
+\input{kapitler/tekstalg.tex}
+\newpage
+\input{kapitler/sortering.tex}
+\newpage
+\input{kapitler/bevis.tex}
 
 
 

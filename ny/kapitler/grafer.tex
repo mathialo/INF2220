@@ -1,9 +1,9 @@
 \section{Grafer}
 En graf er en samling av kanter og noder. Vi kaller mengden av alle nodene $ V $ (verticies), og mengden av alle kantene $ E $ (edges). Grafen $ G $ blir da en samling av disse to mengdene. Formelt kan vi definere en graf slik: \index{graf}
 
-\begin{definisjon}
+\begin{definition}
 En graf $ G $  er et par $ (V, E) $, der $ V $ er en ikke-tom mengde noder og $ E $ en mengde nodepar $ \{v_1, v_2\} $; $ v_1, v_2 \in V $ der $ \{v_1, v_2\} $ angir at grafen inneholder en kant fra $ v_1 $ til $ v_2 $.
-\end{definisjon}
+\end{definition}
 
 
 \paragraph{Terminologi}~\\
@@ -116,9 +116,9 @@ En hamiltonsk sti er en sti som besøker alle nodene én gang. Dette kan virke s
 \subsubsection{Spenntrær}
 Vi begynner med en definisjon:\index{spenntre} \index{minimalt spenntre}
 
-\begin{definisjon}
+\begin{definition}
 Et \textbf{spenntre} for en urettet graf $ G $ er et tre med kanter fra grafen slik at alle nodene i $ G $ er forbundet. Spesielt er et \textbf{minimalt spenntre} de(t) spenntre(ene) med lavest total kostnad.
-\end{definisjon}
+\end{definition}
 
 \noindent Minimale spenntrær er sjeldent entydig bestemt. Vi har et entydig minimalt spenntre hvis alle kantene har forskjellig vekt. Vi tegner opp et eksempel:
 
@@ -178,7 +178,7 @@ For å finne et minimalt spenntre til en graf kan vi bruke Prims algoritme (\ref
 \subsubsection{Topologisk sortering}
 Topologisk sortering er en ordning av noder i en DAG slik at dersom det finnes en vei fra $ v_i $ til $ v_j $ i grafen kommer $ v_i $ før $ v_j $ i sorteringa. En topologisk sortering er ikke nødvendigvis entydig bestemt, ofte finnes det veldig mange. Hvis en graf er syklisk eksisterer det ikke en topologisk sortering av grafen. Vi ser på et eksempel: \index{topologisk sortering}
 
-\begin{eks} Gitt følgende graf, finn alle topologiske sorteringer.
+\begin{example} Gitt følgende graf, finn alle topologiske sorteringer.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[->]
@@ -212,19 +212,19 @@ Vi ser at Q har inngrad 0, det er derfor et logisk sted å begynne. Etter Q komm
 \end{itemize}
 
 Vi kan ta med et moteksempel også: Q, A, J, B, Z, P er ikke en gyldig topologisk sortering siden J kommer før B i sorteringa, men i grafen ser vi at J er avhengig av B (det går en kant fra B til J).
-\end{eks}
+\end{example}
 
 
 
 \subsubsection{Strongly connected components (SCC)}
 Vi ser på definisjonen av strongly connected components (heretter SCC): \index{SCC (strongly connected components)}
-\begin{definisjon}
+\begin{definition}
 Anta at vi har en rettet graf $ G = (V, E) $. Vi har da at en \textbf{SCC} av $ G $ er et maksimalt sett av noder $ U \subseteq V $ slik at for alle $ u_i $, $ u_j \in U $ har vi at $ u_i \leadsto u_j $ og $ u_j \leadsto u_i $.
-\end{definisjon}
+\end{definition}
 
 Med andre ord: en SCC er en del (partisjon) av grafen der alle nodene i den partisjonen kan nå alle andre noder i partisjonen. Vi ser på et eksempel: \index{graf!partisjon}
 
-\begin{eks} Finn alle SCCer i grafen:
+\begin{example} Finn alle SCCer i grafen:
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[->]
@@ -246,7 +246,7 @@ Med andre ord: en SCC er en del (partisjon) av grafen der alle nodene i den part
 \end{tikzpicture}
 \end{figure}
 Vi ser at \{A, B, C\} danner en SCC. D har ingen kanter ut. Den må derfor være sin egen SCC. E ingen kanter inn, den må også være sin egen SCC. Vi har da at vi kan partisjonere grafen slik: \{\{A, B, C\}, \{D\}, \{E\} \}
-\end{eks}
+\end{example}
 
 \subsubsection{Articulation points og biconnectivity}
 Et \textbf{articulation point} er et kritisk punkt i en sammenhengende graf som ikke kan fjernes uten at grafen ikke lenger er sammenhengende. I grafen i figur \ref{fig:graf} er C et slikt punkt. Vi ser at vi kan ta vekk A uten noen store komplikasjoner, men hvis vi tar vekk C vil ikke lenger B og E være sammenknyttet.\index{graf!articulation points}
@@ -299,17 +299,17 @@ DFS-algorigmer er velegnet for å programmere rekursivt. Et eksempel på en enke
 \subsubsection{Kosarajus algoritme (Finne SCC)}
 Vi kan finne SCCer i en graf $ G $ ved å utføre to dfs. Et på $ G $ og et på $ G^t $, som er grafen vi får ved å snu alle kantene i $ G $. Denne algoritmen kalles Kosarajus algoritme.
 
-\begin{teorem} Kosarajus algoritme
+\begin{theorem} Kosarajus algoritme
 
 La $ G $ være en rettet graf. Utfør et dfs på $ G $ fra en hvilken som helst startnode, og lagre postfix-telleren (det som ble kalt \verb|highNum| i kodeekempelet i \ref{dfs}). Hvis søket slutter før alle nodene er besøkt, starter vi fra en ny, ubesøkt node.
 
 Snu alle kantene i (transponer) $ G $ og dann $ G^t $. Sorter nodene i $ G $ synkende etter verdien på postfix-telleren. Start et dfs i $ G^t $ fra den noden som har høyest verdi. Alle nodene vi da besøker danner en SCC. Fjern så alle nodene vi besøkte fra grafen $ G^t $, og utfør et nytt dfs fra den noden som nå har høyest tellerverdi. Fortsett slik til alle nodene er besøkt. 
-\end{teorem}
+\end{theorem}
 
 
 \noindent Vi ser på et eksempel:
 
-\begin{eks} Finn alle SCCer i grafen:
+\begin{example} Finn alle SCCer i grafen:
 
 \begin{figure}[H]
 \centering
@@ -423,14 +423,14 @@ Vi begynner med å gjøre et dfs. Vi starter i A. Søket stopper etter å ha bes
 Siden G har høyest postfixteller (20) begynner vi der. Vi ser i $ G^t $ at G ikke har noen kanter ut. Første SCC er derfor \{G\}. Når vi tar vekk G fra grafen er det H som har høyest postfixverdi (19), vi starter derfor neste dfs derfra. Vi går fra H til I og J, før vi treffer på H igjen. Vi går tilbake, men siden hverken J eller I har flere etterfølgere stopper søket, og neste SCC er derfor \{H, I, J\}. Nå er det A som har høyest postfixteller (12), så vi starter derfra. Fra A går vi til C, og til B. Da møter vi på A igjen, så vi går tilbake til C og videre til F. Vi går \emph{ikke} fra F til G eller H, siden de allerede er besøkt tidligere. Vi går derfor tilbake til C og tilbake til A. I det søke besøkte vi \{A, B, C, F\}, det blir derfor neste SCC. Til slutt starter vi i D (7), men siden D ikke har noen kanter til ubesøkte noder stopper søket med en gang. Det samme skjer i E (6). 
 
 Alle SCCer til $ G $ er: \{ \{G\}, \{H, I, J\}, \{A, B, C, F\}, \{D\}, \{E\} \}
-\end{eks}
+\end{example}
 ~\\
 \subsubsection{Dijkstras algoritme}
 \label{dijkstra}
 
 Dijkstras algoritme er en algoritme for å finne korteste vei fra en node til alle andre noder i en urettet graf. Algoritmen er i utgangspunktet for vektede grafer, men kan også anvendes på uvektede. Vi tenker da på en uvektet graf som en vektet graf der alle vektene er like ($ =1 $). Algoritmen er grådig siden vi alltid velger den noden med lavest avstand, og fortsetter derfra. 
 ~\\~\\~\\
-\begin{teorem}Dijkstras algoritme
+\begin{theorem}Dijkstras algoritme
 
 Vi skal finne korteste vei fra en node $ s $ til alle andre noder i en vektet, urettet graf $ G $. 
 \begin{enumerate}
@@ -438,12 +438,12 @@ Vi skal finne korteste vei fra en node $ s $ til alle andre noder i en vektet, u
 \item Velg den naboen $ v $ til $ s $ med lavest avstand og marker den som kjent.
 \item For hver nabonode $ w $ til $ v $: Dersom avstanden vi får ved å følge veien gjennom $ v $ er kortere enn den gamle avstanden, reduserer vi avstanden fra $ s $ til $ w $, og setter bakoverpekeren i $ w $ til $ v $. 
 \end{enumerate}
-\end{teorem}
+\end{theorem}
 
 
 \noindent Vi ser på et eksempel:
 
-\begin{eks} Finn korteste vei fra $ v1 $ til alle andre noder:
+\begin{example} Finn korteste vei fra $ v1 $ til alle andre noder:
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[auto,node distance=2cm]
@@ -572,7 +572,7 @@ Neste ukjente node med lavest avstand er $ v_3 $. Vi fortsetter derfra. Vi hoppe
 	$ v_7 $ & T     & $ 9 $   & $ v_1 \leftarrow v_2 \leftarrow v_4 \leftarrow v_7 $
 \end{tabular}
 \end{center}
-\end{eks}
+\end{example}
 
 \paragraph{Tidsanalyse}
 Hvis vi søker gjennom grafen etter den noden med lavest avstand vil det ta $ O(|V|) $ tid, og dette gjør vi $ |V| $ ganger. Total tid for å finne minste avstand er derfor $ O(|V|^2) $. I tillegg må vi oppdatere avstandene. Det er maksimalt én oppdatering for hver kant, det vil si at det tilsammen tar $ O(|E|) $. Total kjøretid for algoritmen er derfor:
@@ -583,15 +583,15 @@ Hvis vi søker gjennom grafen etter den noden med lavest avstand vil det ta $ O(
 
 Prims algoritme er en algoritme for å finne minimale spenntrær. Det er en grådig algoritme siden den bygger treet trinnvis ved å velge den kanten som går ut av treet med lavest vekt. 
 
-\begin{teorem} Prims algoritme
+\begin{theorem} Prims algoritme
 
 Vi skal finne et minimalt spenntre for en graf $ G $. Velg først en startnode (rotnode). Den kan velges helt tilfeldig. Så lenge treet ikke spenner hele $ G $ legger vi til den kanten fra treet, til en ukjent node som har lavest vekt.
-\end{teorem}
+\end{theorem}
 \noindent Vi ser på et eksempel.
-\begin{eks} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
+\begin{example} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
 
 Vi velger $ v_1 $ som rotnode (vi kunne valgt hvilken som helst annen). Den kanten med lavest vekt ut fra treet (som kun består av $ v_1 $) er kanten $ v_1-v_4 $, så vi legger den til. Videre er kanten $ v_1-v_2 $ den kanten med lavest vekt som går til en ukjent node, så vi legger til den. $ v_4-v_3 $ er neste kant vi legger til. Kanten $ v_2-v_4 $ er nå den kanten med lavest vekt som går ut fra treet, men siden $ v_2 $ og $ v_4 $ begge er inneholdt i treet er ikke den interessant. Neste kant vi legger til er $ v_4-v_7 $, deretter $ v_7-v_6 $ og $ v_7-v_5 $. Treet er nå et komplett spenntre for $ G $. 
-\end{eks}
+\end{example}
 
 \paragraph{Tidsanalyse}
 Samme argument som tidsanalysen til Dijkstra. Total kjøretid: $ O\left(|V|^2\right) $
@@ -602,17 +602,17 @@ Samme argument som tidsanalysen til Dijkstra. Total kjøretid: $ O\left(|V|^2\ri
 
 Kruskals algoritme er en annen algoritme for å finne minimale spenntrær. Det er også en grådig algoritme, siden vi til enhver tid velger den kanten med lavest vekt som ikke danner en løkke.
 
-\begin{teorem} Kruskals algoritme
+\begin{theorem} Kruskals algoritme
 
 Vi skal finne et minimalt spenntre for en graf $ G $. La $ F $ være en skog (en mengde av trær). Så lenge $ F $ ikke utspenner alle nodene velger vi den kanten med lavest vekt fra $ G $, og som ikke danner en løkke, og legger den til i $ F $. Når $ F $ har blitt ett sammenhengende tre og alle nodene er nådd har vi et minimalt spenntre.
-\end{teorem}
+\end{theorem}
 
 \noindent Vi ser på et eksempel.
 
-\begin{eks} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
+\begin{example} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
 
 Vi finner kanten(e) i grafen med den minste vekten. $ v_6-v_7 $ og $ v_1-v_4 $ har begge vekt 1. Vi legger de til i spenntreet. Kantene $ v_3-v_4 $ og $ v_1-v_2 $ har begge vekt 2, og ingen av dem danner en løkke, så vi legger dem til i spenntreet. Neste kant med lavest vekt er $ v_2-v_4 $ (3), men den vil danne en løkke, så vi hopper over den. Videre ser vi at $ v_1-v_3 $ og $ v_4-v_7 $ begge har vekt 4. Kanten $ v_1-v_3 $ vil danne en løkke så den hopper vi over, men $ v_4-v_7 $ legger vi til. Neste kant med lavest vekt, og som ikke danner en løkke er $ v_5-v_7 $. Vi legger den til i spenntreet, og da er alle noder nådd, og vi har en sammenhengende graf. Vi har derfor et minimalt spenntre (se figur \ref{fig:min_spenntre}). 
-\end{eks}
+\end{example}
 
 
 \paragraph{Tidsanalyse}
@@ -635,7 +635,7 @@ Prim er som regel noe mer effektiv enn Kruskal, spesielt på tette grafer. Prim 
 
 Floyds algoritme er en algoritme som beregner korteste vei fra alle noder til alle andre noder. Algoritmen er et eksempel på en algoritme som benytter seg av dynamisk programmering. 
 
-\begin{teorem} Floyds algoritme
+\begin{theorem} Floyds algoritme
 
 Denne betraktningen gjentas systematisk for alle tripler i, k og j:
 \begin{itemize}
@@ -643,7 +643,7 @@ Denne betraktningen gjentas systematisk for alle tripler i, k og j:
 \item Trinn 0: Se etter forbedringer ved å velge node 0 som mellomnode
 \item Etter trinn $ k $: Avstanden mellom to noder er den korteste veien som bare bruker nodene $ 0, 1, ... , k $ som mellomnoder
 \end{itemize}
-\end{teorem}
+\end{theorem}
 
 \noindent Eksempel på implementasjon i Java:
 \javaimport{kode/floyd.java}
