@@ -48,12 +48,19 @@ En av grunnene til at vi deler opp problemer i kompleksitetsklasser er at vi på
 P er mengden av alle problemene som kan løses i polynomisk tid, altså har tid på formen $ O(n^k) $ for en $ k \in \mathbb{N} $
 
 \paragraph{NP (nondeterministic polynomial time)}
-NP er mengden av alle problemer hvor vi ikke vet hvor lang tid det vil ta i forkant å finne en løsning, men som blir gjort i polynomisk tid. NP-problemer er vanskelige å regne ut, men en gitt løsning enkelt lar seg sjekke. Hvis jeg for eksempel ber deg faktorisere et stort tall $ n $, vil det ta lang tid for deg å gjøre det, men det er lett for meg å gange sammen de tallene du påstår er faktorene til $ n $ og se om jeg får $ n $. Hele P er inneholdt i NP, og det er usikkert hvorvidt det er en reell forskjell på N og NP.
+NP kan defineres på flere måter. En enkel måte å tenke om NP på er at NP er alle problemene som kan være vanskelige å løse, men som kan sjekkes i polynomisk tid. For eksempel kan sudoku være veldig å løse, men å skjekke at en løsning er rett er ganske enkelt, det er bare å skjekke at alle rader, kolonner og bokser er riktig utfylt. 
 
-Vi har en undermengde av NP kalt NP-komplett. Denne mengden består av de ``vanskeligste'' problemene i NP, og hvis man har en løsning på et av disse problemene vil man, ved reduksjon, ha en løsning på alle andre problemer i NP, inkludert P.
+Siden alle problemer i P kan skjekkes i polynomisk tid (man kan bare løse problemet på nytt å se om man får samme svar) er det klart at P $ \subseteq $ NP. Det er faktisk ikke helt klart hvorvidt NP $ \subseteq $ P også, dvs om det faktisk er en reell forskjell på P og NP. Dette er faktisk et av millenniumsproblemene, og et av de store uløste problemene i matematikk. Det er verdt å nevne at de fleste tror at P $ \neq $ NP, det mangler bare et formelt bevis.
+
+Alle problemene som er like vanskelig eller vanskeligere enn alle problemene i NP kalles NP-hard. De problemene som er i både NP-hard og NP er dermed de vanskeligste problemene i NP. Denne mengden kalles NP-komplett. 
 
 \paragraph{EXPTIME (exponetial time)}
-EXPTIME er mengden av alle problemer som løses og sjekkes i eksponentiell tid. Hvis jeg for eksempel ber deg fortelle meg hva det beste trekket jeg burde gjøre i et parti sjakk er, er det vanskelig for deg å regne ut, men også vanskelig for meg å sjekke om svaret ditt stemmer. Vi kaller problemer i denne klassen \say{intractable}. I mange tilfeller er brute force den eneste muligheten vi har. 
+EXPTIME er mengden av alle problemer som løses og sjekkes i eksponentiell tid. Hvis jeg for eksempel ber deg fortelle meg hva det beste trekket jeg burde gjøre i et parti sjakk er, er det vanskelig for deg å regne ut, men også vanskelig for meg å sjekke om svaret ditt stemmer. I mange tilfeller er brute force den eneste muligheten vi har. 
+
+På samme måte som for NP har vi EXPTIME-hard og EXPTIME-komplett. Det å avgjøre hvilket trekk i et parti sjakk som er det beste er et EXPTIME-komplett . 
+
+\paragraph{R}
+R er mengden av problemer som er løselig i endelig tid. De kan ta flere ganger av alderen til universet å komme til en løsning, men det er mulig. 
 
 \paragraph{Uløselige problemer} 
 En del problemer har ikke en mulig løsning. Et eksempel på et slikt problem er halting-problemet. Dette problemet går ut på om en turingmaskin kan vite om den noen gang vil gi et resultat (det vil si stoppe, engelsk: halt), eller om den vil gå i evig loop. Et bevis for hvorfor haltingproblemet er uløselig finnes i \ref{haltingProof}. 
@@ -75,7 +82,7 @@ Subset sum
 
 Problemet er slik: Gitt en mengde $ M $ av tall, skal vi avjøre om det finnes en delmengde $ M' \subset M $ slik at  \[ \sum_{m~\in~M'} m = 0  \] Mengden $ A =  \{-2, -3, 1, 4, 6\} $ er en slik mengde, siden $ 1 + 4 + (-2) + (-3) = 0 $. Mengden $ B = \{-6, -3, 1, 4, 7\} $ er ikke en slik mengde, siden det ikke er mulig å plukke ut noen elementer slik at summen av elementene blir 0.
 
-Å løse dette problemet er ganske vanskelig siden det er NP-komplett. Vi må (slik som i TSP) prøve oss fram med forskjellige kombinasjoner. 
+Å løse dette problemet er ganske vanskelig siden det er NP-komplett. Vi må (slik som i TSP) prøve oss fram med forskjellige kombinasjoner. Å skjekke om en antatt delmengde har sum $ = 0 $ er enkelt: det er bare å summere og skjekke, og kan gjøres i $ O(n) $ tid. 
 \end{example}
 
 
@@ -136,7 +143,7 @@ for (int i=0; i<n-3; i++) {
     // Do something else...
 }
 \end{lstlisting}
-og skal beregne worst case kjøretid til programmet. Vi ser at den indre for-løkka i den øverste for-løkka starter på \verb|i|, og ikke på 0. Fra teorem \ref{teo:O} del i har vi at det ikke har noe å si. Vi regner med den løkka. Vi ser også at det er en enkel for-løkke etterpå, men fra teorem \ref{teo:O} del ii har vi at vi kan se bort fra den. Kjøretiden blir altså $ O(n^2) $.
+og skal beregne worst case kjøretid til programmet. Vi ser at den indre for-løkka i den øverste for-løkka starter på \mono{i}, og ikke på 0. Fra teorem \ref{teo:O} del i har vi at det ikke har noe å si. Vi regner med den løkka. Vi ser også at det er en enkel for-løkke etterpå, men fra teorem \ref{teo:O} del ii har vi at vi kan se bort fra den. Kjøretiden blir altså $ O(n^2) $.
 \end{example}
 
 
@@ -187,7 +194,7 @@ float foo(A) {
 }
 \end{lstlisting}
 
-Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sakte gjennom hva programmet gjør og forsøker å sette opp en funksjon for kjøretiden. Vi ser at \verb|foo| har to nestede for-løkker, hver av dem går $ n/2 $ ganger. Vi har derfor at hver gang vi kommer til denne løkka blir kjøretiden $ T_{\text{løkke}}(m) = (m/2)^2 $. Mot slutten av programmet har vi fire rekursive kall. Alle kallene kjører \verb|foo| med input av lengde $ n/2 $. Vi kan dermed sette opp en funksjon for kjøretiden:
+Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sakte gjennom hva programmet gjør og forsøker å sette opp en funksjon for kjøretiden. Vi ser at \mono{foo} har to nestede for-løkker, hver av dem går $ n/2 $ ganger. Vi har derfor at hver gang vi kommer til denne løkka blir kjøretiden $ T_{\text{løkke}}(m) = (m/2)^2 $. Mot slutten av programmet har vi fire rekursive kall. Alle kallene kjører \mono{foo} med input av lengde $ n/2 $. Vi kan dermed sette opp en funksjon for kjøretiden:
 
 \[ T(n) = C + 4\left(\frac{n}{2}\right)^2 + 4\,T\left(\frac{n}{2}\right) \]
 

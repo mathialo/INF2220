@@ -12,9 +12,11 @@ Skal man vise at en påstand er falsk, kan man ganske enkelt finne et eksempel s
 
 
 \subsection{Reduksjon}
+Reduksjon er å ta et ukjent problem, og \say{omforme} det til noe kjent. Vi ser på et eksempel:
+
 Anta at vi har et problem $ A $, og vi lurer på om problemet er løselig eller ikke. $ A $ kan være latterlig komplekst og vanskelig å forstå, men kanskje vi kan uttrykke det på en annen måte? Hvis vi kan vise at hvis $ A $ er løselig er også $ B $ løselig, og hvis $ B $ er løselig er også $ C $ løselig. Slik kan vi fortsette til vi kommer til noe kjent, for eksempel haltingproblemet (\ref{haltingProof}). For matematikere:
 \[ \text{$ A $ er løselig} \Rightarrow \text{$ B $ er løselig} \Rightarrow ... \Rightarrow \text{haltingproblemet er løselig} \]
-Hvis vi kan vise en slik rekke av implikasjonspiler har vi \emph{redusert} $ A $ til haltingproblemet, og dermed vet vi at $ A $ er uløselig.  
+Hvis vi kan vise en slik rekke av implikasjonspiler har vi \emph{redusert} $ A $ til haltingproblemet, og dermed vet vi at $ A $ er uløselig.
 
 \subsection{Noen beviser}
 \subsubsection{Haltingproblemet}
@@ -72,6 +74,8 @@ Vi kan nemlig lage et nytt reellt tall som ikke eksisterer i denne tabellen. Hvi
 
 Siden dette tallet er ulikt tall nummer $ i $ i tabellen på $ i $-te siffer vet vi at det ikke er inneholdt i tabellen, og vi har dermed vist at det ikke kan lages en 1-1 korrespondanse mellom $ \mathbb{R} $ og $ \mathbb{N} $. Følgelig er $ \mathbb{R} $ større enn $ \mathbb{N} \hfill\qed$ 
 
+
+\newpage
 \subsubsection{Antall noder i et binært tre}
 Vi skal vise at antall noder $ n $ i et binært tre er begrenset slik:
 \begin{equation*}

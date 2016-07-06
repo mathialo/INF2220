@@ -63,7 +63,7 @@ Vi kan implementere en heap som et tre (dvs, lage nodeobjekter med pekere til ba
 \end{tabular}
 \end{figure}
 
-I Java har vi en ferdig heap: \verb|java.util.PriorityQueue<E>|. Java krever at \verb|E| er sammenlignbar med seg selv (\verb|E| implementerer \verb|comparable<E>|) og vil bruke den sammenligningen som grunnlag for sortering. Javas heap er implementert som array. 
+I Java har vi en ferdig heap: \mono{java.util.PriorityQueue<E>}. Java krever at \mono{E} er sammenlignbar med seg selv (\mono{E} implementerer \mono{comparable<E>}) og vil bruke den sammenligningen som grunnlag for sortering. Javas heap er implementert som array. 
 
 \paragraph{Tidsanalyse}~\\
 Vi ser på kjøretiden til de to omtalte operajonene:
@@ -198,14 +198,14 @@ der $ c $-ene er konstanter vi velger. Denne er rask å enkel å beregne, og gir
 \subsubsection{Tidsanalyse}
 Det er åpenbart at best case tid for innsetting, søking og fjerning i hashtabeller er $ O(1) $. Det oppstår når vi kommer rett til elementet/tom index på første forsøk. Worst case er når vi får kollisjoner på hvert eneste treff, og vi i praksis har en liste. Da vil alle operasjoner på tabellen være $ O(n) $. 
 
-Vi ser at en tabell starter som $ O(1) $, og beveger seg mot $ O(n) $ når den blir fullere. Det er derfor vi ofte velger å rehashe når tabellen blir for full. Selv om rehashing har $ O(n) $ tid, er det en operasjon vi gjør én gang. Det vil forbedre kjøretiden på alle andre operasjoner drastisk, siden det er mindre sannsynlighet for å få kollisjoner i en tabell med mindre tetthet. Som regel prøver vi å holde andelen av tabellen som er opptatt (kalt \say{load factor}, ofte forkortet $ LF $) under en gitt grense. Java sin innebygde \verb|HashMap<K,V>| tvinger $ LF < 0.75 $.
+Vi ser at en tabell starter som $ O(1) $, og beveger seg mot $ O(n) $ når den blir fullere. Det er derfor vi ofte velger å rehashe når tabellen blir for full. Selv om rehashing har $ O(n) $ tid, er det en operasjon vi gjør én gang. Det vil forbedre kjøretiden på alle andre operasjoner drastisk, siden det er mindre sannsynlighet for å få kollisjoner i en tabell med mindre tetthet. Som regel prøver vi å holde andelen av tabellen som er opptatt (kalt \say{load factor}, ofte forkortet $ LF $) under en gitt grense. Java sin innebygde \mono{HashMap<K,V>} tvinger $ LF < 0.75 $.
 
 
 
 
 
 \subsection{Kø/stack} \label{ko_stack}
-Kø og stack er to forskjellige typer lister. Felles for dem er at vi kun opererer med én \verb|insert()|- og én \verb|remove()|-metode. Forskjellen er hvilket element vi vil hente ut når vi kaller \verb|remove()|-metoden. Innsetting og fjerning i både kø og stack tar $ O(1) $ tid, siden vi på forhånd vet hvor elementet skal fjernes fra/legges til. 
+Kø og stack er to forskjellige typer lister. Felles for dem er at vi kun opererer med én \mono{insert()}- og én \mono{remove()}-metode. Forskjellen er hvilket element vi vil hente ut når vi kaller \mono{remove()}-metoden. Innsetting og fjerning i både kø og stack tar $ O(1) $ tid, siden vi på forhånd vet hvor elementet skal fjernes fra/legges til. 
 
 
 \subsubsection{Kø (FIFO)}
@@ -215,5 +215,5 @@ En kø er en liste der første element inn er det første som kommer ut, derav n
 \subsubsection{Stack (LIFO)}
 En stack (norsk: stabel) er en liste der siste element som settes inn er det første som kommer ut. Slike lister kalles også LIFO-lister (Last In, First Out). Elementene som settes inn legges på toppen av stabelen, og når vi skal hente ut et element henter vi det øverste elementet. 
 
-Konvensjonelt kalles insert-metoden i en stack \verb|push()|, og remove-funksjonen \verb|pop()|
+Konvensjonelt kalles insert-metoden i en stack \mono{push()}, og remove-funksjonen \mono{pop()}
 

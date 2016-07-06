@@ -51,7 +51,7 @@ En type grafer vi jobber mye med er \textbf{DAG}er. DAG står for \emph{Directed
 
 
 \paragraph{Implementasjon}~\\
-Det finnes i hovedsak to måter å implementere en graf på, \textbf{Adjacency matrix} (nabomatrise) og \textbf{Adjacency list} (naboliste). Vi kan også implementere grafen som instanser av en \verb|Node|-klasse med pekere til sine naboer, men det er mindre utbredt (dette vil også være en slags implementasjon av en naboliste). Måten vi implementerer grafen på har faktisk en del å si for kompleksiteten til enkelte algoritmer.
+Det finnes i hovedsak to måter å implementere en graf på, \textbf{Adjacency matrix} (nabomatrise) og \textbf{Adjacency list} (naboliste). Vi kan også implementere grafen som instanser av en \mono{Node}-klasse med pekere til sine naboer, men det er mindre utbredt (dette vil også være en slags implementasjon av en naboliste). Måten vi implementerer grafen på har faktisk en del å si for kompleksiteten til enkelte algoritmer.
 
 Nabolisten til en graf er en liste over nodene og deres tilhørende naboer. Nabomatrisen er en $ n\times n $-matrise $ A $ der $ a_{i, j} $ angir vekten til kanten fra node nr $ i $ til node nr $ j $. Hvis det ikke finnes en kant er $ a_{i, j} = 0 $, og som diskutert tidligere kan en uvektet graf sees på som en vektet graf der alle vektene er 1.
 
@@ -301,7 +301,7 @@ Vi kan finne SCCer i en graf $ G $ ved å utføre to dfs. Et på $ G $ og et på
 
 \begin{theorem} Kosarajus algoritme
 
-La $ G $ være en rettet graf. Utfør et dfs på $ G $ fra en hvilken som helst startnode, og lagre postfix-telleren (det som ble kalt \verb|highNum| i kodeekempelet i \ref{dfs}). Hvis søket slutter før alle nodene er besøkt, starter vi fra en ny, ubesøkt node.
+La $ G $ være en rettet graf. Utfør et dfs på $ G $ fra en hvilken som helst startnode, og lagre postfix-telleren (det som ble kalt \mono{highNum} i kodeekempelet i \ref{dfs}). Hvis søket slutter før alle nodene er besøkt, starter vi fra en ny, ubesøkt node.
 
 Snu alle kantene i (transponer) $ G $ og dann $ G^t $. Sorter nodene i $ G $ synkende etter verdien på postfix-telleren. Start et dfs i $ G^t $ fra den noden som har høyest verdi. Alle nodene vi da besøker danner en SCC. Fjern så alle nodene vi besøkte fra grafen $ G^t $, og utfør et nytt dfs fra den noden som nå har høyest tellerverdi. Fortsett slik til alle nodene er besøkt. 
 \end{theorem}
@@ -657,11 +657,11 @@ Vi ser fra kodeeksempelet at det er to løkker som må kjøres gjennom. En dobbe
 
 
 \paragraph{Hvordan tolke input/output fra Floyds algoritme}~\\
-Ved start inneholder \verb|nabo[i][j]| lengden av kanten fra $ i $ til $ j $, \verb|nabo[i][j] = |$ \infty $ hvis det ikke er noen kant. Algoritmen lar \verb|nabo| være uendret, og legger resultatene i \verb|avstand| og \verb|vei|. \verb|avstand[i][j]| er lengden av korteste vei fra $ i $ til $ j $. Når vi oppdager at den korteste veien fra $ i $ til $ j $ går gjennom $ k $ setter vi \verb|vei[i][j] = k|. \verb|vei| sier derfor om den korteste veien. Vi finner korteste vei slik:
+Ved start inneholder \mono{nabo[i][j]} lengden av kanten fra $ i $ til $ j $, \mono{nabo[i][j]}= |$ \infty $ hvis det ikke er noen kant. Algoritmen lar \mono{nabo} være uendret, og legger resultatene i \mono{avstand} og \mono{vei}. \mono{avstand[i][j]} er lengden av korteste vei fra $ i $ til $ j $. Når vi oppdager at den korteste veien fra $ i $ til $ j $ går gjennom $ k $ setter vi \mono{vei[i][j] = k}. \mono{vei} sier derfor om den korteste veien. Vi finner korteste vei slik:
 \begin{itemize}
-\item \verb|k1 = vei[i][j]| er den største verdien av $ k $ slik at $ k $ ligger på den korteste veien fra $ i $ til $ j $
-\item \verb|k2 = vei[i][k1]| er den største verdien av $ k $ slik at $ k $ ligger på den korteste veien fra $ i $ til $ k_1 $
+\item \mono{k1 = vei[i][j]} er den største verdien av $ k $ slik at $ k $ ligger på den korteste veien fra $ i $ til $ j $
+\item \mono{k2 = vei[i][k1]} er den største verdien av $ k $ slik at $ k $ ligger på den korteste veien fra $ i $ til $ k_1 $
 \\ $ \vdots $
-\item Når \verb|vei[i][km] = -1| er $ (i, k_m) $ den første kanten i korteste vei fra $ i $ til $ j $
+\item Når \mono{vei[i][km] = -1} er $ (i, k_m) $ den første kanten i korteste vei fra $ i $ til $ j $
 \end{itemize}
 Dermed er korteste vei fra $ i $ til $ j $ slik: $ i \rightarrow k_m \rightarrow k_{m-1} \rightarrow ... \rightarrow k_2 \rightarrow k_1 \rightarrow j $. 

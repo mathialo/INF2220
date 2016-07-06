@@ -12,14 +12,14 @@
 		\begin{itemize}
 			\item[-] Beregn bad character shift for alle tegn.
 			\item[-] Sammenlign nåla med teksten, starter med tegnet lengst til høyre i nåla.
-			\item[-] Hvis mismatch på \verb|c|, flytt nåla fram med den \textbf{største} verdien av \verb|badCharShift[c]| og \verb|goodSuffixShift[c]|. Hvis match, dytt nåla en til høyre og sjekk neste tegn. Gjenta.
+			\item[-] Hvis mismatch på \mono{c}, flytt nåla fram med den \textbf{største} verdien av \mono{badCharShift[c]} og \mono{goodSuffixShift[c]}. Hvis match, dytt nåla en til høyre og sjekk neste tegn. Gjenta.
 		\end{itemize}
-		Merk at når vi snakker om å skippe så er det alltid i forhold til det siste tegnet i nåla. Vær også obs på, som det står i algoritmen, at når vi bruker denne for eksempel på eksamen, vil vi skippe maks av \verb|badCharShift[c]| og \verb|goodSuffixShift[c]|, der \verb|c| er tegnet.
+		Merk at når vi snakker om å skippe så er det alltid i forhold til det siste tegnet i nåla. Vær også obs på, som det står i algoritmen, at når vi bruker denne for eksempel på eksamen, vil vi skippe maks av \mono{badCharShift[c]} og \mono{goodSuffixShift[c]}, der \mono{c} er tegnet.
 
 	\subsubsection{Bad character shift}
 		Vi beregner avstand til neste gang nål er på linje med høystakk.
 		Ved en mismatch vil vi dytte nåla framover til en av to ting skjer: Mismatch blir match eller nåla beveger seg forbi tegnet vi fikk mismatch på.
-		I praksis gjør vi dette slik: Verdien til et tegns bad character shift er lengden på nåla minus den siste indeksen som tegnet befinner seg på, minus 1. Altså \verb|value = length - index - 1|.
+		I praksis gjør vi dette slik: Verdien til et tegns bad character shift er lengden på nåla minus den siste indeksen som tegnet befinner seg på, minus 1. Altså \mono{value = length - index - 1}.
 		
 		\begin{example}
 		La nåla være ``tooth'', og teksten være ``trusthardtoothbrushes''.
@@ -31,7 +31,7 @@
 			\end{tabular}
 		\end{center}
 
-		\noindent Vi konstruerer bad character shift for denne med regelen \verb|value = length - index - 1|.
+		\noindent Vi konstruerer bad character shift for denne med regelen \mono{value = length - index - 1}.
 
 \begin{center}
 \begin{tabular}{cccl}
@@ -211,5 +211,5 @@ index&mismatch&shift\\
 					H & 1 & 0101
 				\end{tabular}
 			\end{center}
-			Vi kan lett sjekke at prefiksegenskapen er intakt, og teksten ``BACADAEAFABBAAAGAH'' får koden \verb|011100001000110010100111011011111010010101|. Dette er åpenbart mye kortere enn standard enkoding. Hvis vi for eksempel hadde brukt ASCII-enkoding, der hvert tegn har en 7-bits kode, hadde vi hatt en kode på lengde $7n$, der $n$ er lengden på teksten.
+			Vi kan lett sjekke at prefiksegenskapen er intakt, og teksten ``BACADAEAFABBAAAGAH'' får koden \mono{011100001000110010100111011011111010010101}, som er $ 42 $ bits lang. Dette er åpenbart mye kortere enn standard enkoding. Hvis vi for eksempel hadde brukt ASCII-enkoding, der hvert tegn har en $ 7 $-bits kode, hadde vi hatt en kode med $7\cdot18 = 126$ bits.
 			\end{example}

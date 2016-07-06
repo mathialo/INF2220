@@ -4,10 +4,10 @@
 Før vi kan begynne å se på noen spesielle sorteringsalgoritmer må vi formalisere hva vi mener med sortering. Vi definerer sortering slik:
 
 \begin{definition}
-Anta at \verb|a[]| er en liste av sammenlignbare elementer. Vi sier at \verb|a'[]| er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
+Anta at \mono{a[]} er en liste av sammenlignbare elementer. Vi sier at \mono{a'[]} er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
 \begin{enumerate}[i]
-\item \verb|a'[i]| $ < $ \verb|a'[i+1]| for alle $ \verb|i| = 0, 1, \ldots, n-1 $
-\item Alle elementene i \verb|a[]| er med i \verb|a'[]|
+\item \mono{a'[i]} $ < $ \mono{a'[i+1]} for alle  \mono{i}$ = 0, 1, \ldots, n-1 $
+\item Alle elementene i \mono{a[]} er med i \mono{a'[]}
 \end{enumerate}
 \end{definition}
 
@@ -32,7 +32,7 @@ får at alle som er fra samme avsender står alfabetisk i forhold til hverandre.
 
 \begin{definition}
   En algoritme er \textbf{stabil} dersom innbyrdes rekkefølge beholdes
-  etter sortering. Dvs at dersom \verb|a[i]| $ = $ \verb|a[j]|, og \verb|a[i]| kommer før \verb|a[j]| i \verb|a[]|, så skal \verb|a[i]| komme før \verb|a[j]| i den sorterte lista \verb|a'[]|.
+  etter sortering. Dvs at dersom \mono{a[i]} $ = $ \mono{a[j]}, og \mono{a[i]} kommer før \mono{a[j]} i \mono{a[]}, så skal \mono{a[i]} komme før \mono{a[j]} i den sorterte lista \mono{a'[]}.
 \end{definition}
 
 Følgende algoritmer (altså ikke alle) gjennomgått i kurset oppfyller kravet om
