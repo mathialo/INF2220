@@ -12,11 +12,13 @@ Skal man vise at en påstand er falsk, kan man ganske enkelt finne et eksempel s
 
 
 \subsection{Reduksjon}
-Reduksjon er å ta et ukjent problem, og \say{omforme} det til noe kjent. Vi ser på et eksempel:
+Reduksjon er å starte med noe ukjent, og \say{omforme} det til noe kjent. Vi kan for eksempel ha et problem, og lure på hvilken kompleksitetsklasse det tilhører. Hvis vi kan vise at en løsning på problemet vårt vil generere en løsning på f.eks TSP-problemet, som vi vet er NP-hard, må problemet vårt også være i NP-hard. Vi ser på noen eksempler:
 
 Anta at vi har et problem $ A $, og vi lurer på om problemet er løselig eller ikke. $ A $ kan være latterlig komplekst og vanskelig å forstå, men kanskje vi kan uttrykke det på en annen måte? Hvis vi kan vise at hvis $ A $ er løselig er også $ B $ løselig, og hvis $ B $ er løselig er også $ C $ løselig. Slik kan vi fortsette til vi kommer til noe kjent, for eksempel haltingproblemet (\ref{haltingProof}). For matematikere:
 \[ \text{$ A $ er løselig} \Rightarrow \text{$ B $ er løselig} \Rightarrow ... \Rightarrow \text{haltingproblemet er løselig} \]
 Hvis vi kan vise en slik rekke av implikasjonspiler har vi \emph{redusert} $ A $ til haltingproblemet, og dermed vet vi at $ A $ er uløselig.
+
+Vi ser på et annet eksempel. Vi skal vise at mengden av alle løselige problemer er tellbart uendelig. Alle løselige problemer kan løses ved å implementere et program i et turingkomplett programmeringsspråk, for eksempel Java. Dette programmet lagres som en tekstfil på dataen, enkodet i UTF-8 eller en annen enkoding. Denne enkodingen består av en sekvens med \mono{1} og \mono{0}. Denne sekvensen kan sees på som et binært tall, altså et tall i $ \N $. Vi har nå \textit{redusert} mengden av løselige problemer til mengden av naturlige tall, som vi vet er tellbart uendelig. Dermed må mengden av løselige problemer også være tellbart uendelig. Det er også mulig å redusere mengden av alle problemer (løselige og uløselige) til $ \R $, og dermed vise at mengden av uløselige problemer er større enn mengden av løselige problemer (ved å bruke $ \abs{\R} \gg \abs{\N} $ som vi har fra \nameref{cantor})
 
 \subsection{Noen beviser}
 \subsubsection{Haltingproblemet}
@@ -33,7 +35,7 @@ Hva vil skje hvis vi bruker denne Turingmaskinen på seg selv? Hvis $ M $ sier a
 
 \noindent Beviset er analogt med Cantors diagonaliseringsargument.
 
-\subsubsection{Cantors diagonaliseringsargument}
+\subsubsection{Cantors diagonaliseringsargument} \label{cantor}
 Vi skal vise at størrelsen av $ \mathbb{R} $ er større enn $ \mathbb{N} $, altså at det er flere reelle tall enn naturlige tall. Dette er et eksempel på bevis ved selvmotsigelse. Vi skal anta at vi kan vise at $ \mathbb{R} $ og $ \mathbb{N} $ er like store, og så vise at det fører til en motsigelse.
 
 Vi kan begynne med noe som kanskje går litt mot intuisjonen. Det er nemlig like mange rasjonelle tall som naturlige tall. For å vise dette må vi vise at vi har en 1-1-korrespondanse mellom naturlige tall og rasjonale tall. Vi starter med å liste opp \say{alle} de naturlige og rasjonale tall. Vi setter rasjonale tall inn i en tabell:
@@ -75,7 +77,7 @@ Vi kan nemlig lage et nytt reellt tall som ikke eksisterer i denne tabellen. Hvi
 Siden dette tallet er ulikt tall nummer $ i $ i tabellen på $ i $-te siffer vet vi at det ikke er inneholdt i tabellen, og vi har dermed vist at det ikke kan lages en 1-1 korrespondanse mellom $ \mathbb{R} $ og $ \mathbb{N} $. Følgelig er $ \mathbb{R} $ større enn $ \mathbb{N} \hfill\qed$ 
 
 
-\newpage
+
 \subsubsection{Antall noder i et binært tre}
 Vi skal vise at antall noder $ n $ i et binært tre er begrenset slik:
 \begin{equation*}
