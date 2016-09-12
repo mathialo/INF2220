@@ -150,38 +150,38 @@ farget enten rød eller svart slik at:
 Dette sikrer at høyden maksimalt er $ 2\log_2 (n+1) $
 
 \paragraph{Insetting}~\\
-For å sette inn en node i rød-svarte trær kan vi bruke følgende algoritme:
+Vi zoomer inn på en del av treet og jobber kun med de nodene som har noe å si for innsetting. X er noden vi skal sette inn, P er foreldernoden, U er onkelnoden (søsken av forelder), G er besteforeldernoden. Når vi setter inn ei node i et rød-svart tre er den nye noda alltid rød. Deretter må vi se på fargene til P, U og G for å finne ut om vi må ta noen videre steg:
 
-La $ N $ være noden vi ønsker å sette inn i treet. La $ P $ være forelder, $ G $ besteforelder, og $ U $ onkel til $ N $.
-\begin{enumerate}
-\item Gjør innsetting som i vanlig binært søketre, der $ N $ farges rød.
-\item Hvis $ N $ er rota i treet: farg $ N $ svart. 
-\item Hvis $ P $ er svart: alt OK. Innsetting ferdig. 
-\item Hvis $ P $ er rød og $ N $ ikke er rot:
-	\begin{enumerate}
-		\item Hvis $ U $ er svart:
-		\begin{enumerate}
-			\item Farg $ P $ svart
-			\item Farg $ G $ rød
-			\item Repeter fra pt. 2 med $ G $ som $ N $
-		\end{enumerate}
-		\item Hvis $ U $ er rød:
-		\begin{enumerate}
-			\item $ N $ er venstre barn av $ P $, som er venstre barn av $ G $:\\
-			\includegraphics[width=0.65\textwidth]{fig/rbt_ll.png}\\
+\begin{figure}[H]
+	\caption{Situasjon for innsetting}
+	\centering
+	\begin{tikzpicture}[level distance=1cm,
+	level 1/.style={sibling distance=2cm},
+	level 2/.style={sibling distance=1.5cm},
+	level 3/.style={sibling distance=1cm},
+	every node/.style = {shape=circle, draw, align=center}]
+	
+	\node{G}
+	child {node {P}
+		child {node {X}}
+		child [missing]{}
+	}
+	child {node {U}};
+	\end{tikzpicture}
+\end{figure}
 
-			\item $ N $ er høyre barn av $ P $, som er venstre barn av $ G $:\\
-			\includegraphics[width=0.65\textwidth]{fig/rbt_lr.png}\\
-			
-			\item $ N $ er høyre barn av $ P $, som er høyre barn av $ G $ (speilvendt av i):\\
-			\includegraphics[width=0.65\textwidth]{fig/rbt_rr.png}\\
-			
-			\item $ N $ er venstre barn av $ P $, som er høyre barn av $ G $ (speilvendt av ii):\\
-			\includegraphics[width=0.65\textwidth]{fig/rbt_rl.png}\\
-			
-		\end{enumerate}
-	\end{enumerate}
-\end{enumerate}
+\begin{theorem} Innsetting i rød-svarte trær
+	
+	\begin{itemize}
+		\item Hvis P er svart er alt OK, og vi er ferdig
+		\item Hvis P er rød må vi ta noen steg for å opprettholde krav \textit{ii} og \textit{iii}:
+		\begin{itemize}
+			\item Hvis U også er rød: Farg P og U svarte og farg G rød. Dette kan føre til trøbbel videre oppover i treet, så vi må fortsette oppover å rette opp feil.
+			\item Hvis U er svart, utfør en Zig-rotasjon mhp P, og utfør nødvendige fargeendringer
+		\end{itemize}
+		\item Hvis rota på noe tidspunkt blir farget rød kan man bare farge den svart igjen.
+	\end{itemize}
+\end{theorem}
 
 
 \paragraph{Fjerning}~\\
