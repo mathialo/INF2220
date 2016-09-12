@@ -143,20 +143,21 @@ For å \textbf{fjerne} minste node kan vi ta vekk rota (som vi vet er minst fra 
 \subsection{Hashmap (hashtabell)} \label{hashmap}
 Sett at vi har en liste med $ n $ elementer. Vi skal søke etter et element $ x $. Hvis vi har implementer lista vår som en array eller lenket liste vil dette ta $ O(n) $ tid. Det vil også operasjoner som sletting, og å sette inn på første ledige plass. Vi ønsker å finne en datastruktur som er bedre på disse tingene. 
 
-Den grunnleggende idéen bak hashtabeller er å la verdien til elementet vi skal sette inn bestemme indexen. Vi bruker en hashfunksjon $ f:\mathbb{N}\rightarrow\mathbb{N} $ på elementet vårt $ x $, og lar $ f(x) $ betegne indexen til elementet i en array. 
+Den grunnleggende idéen bak hashtabeller er å la verdien til elementet vi skal sette inn bestemme indexen. Vi bruker en hashfunksjon $ H:\mathbb{N}\rightarrow\mathbb{N} $ på elementet vårt $ x $, og lar $ H(x) $ betegne indexen til elementet i en array. 
 
 \begin{itemize}
 \item Når vi oppretter en hashtabell lager vi en ny array som er $ tableSize $ lang. Størrelsen på arrayen er et primtall. 
-\item Når vi skal sette inn et element $ x $ i en hashtabell regner vi ut $ f(x) $ og setter $ x $ inn i arrayen på plass $ f(x) $
-\item Når vi skal søke etter et element $ x $ i hashtabellen regner vi ut $ f(x) $ og slår opp på den plassen i arrayen. Hvis elementet er der har vi funnet det. Hvis elementet ikke er der må vi muligens sjekke noen andre steder. Hvor vi må lete videre avhenger av hvordan vi håndterer like hashresultater. 
+\item Når vi skal sette inn et element $ x $ i en hashtabell regner vi ut $ H(x) $ og setter $ x $ inn i arrayen på plass $ H(x) $
+\item Når vi skal søke etter et element $ x $ i hashtabellen regner vi ut $ H(x) $ og slår opp på den plassen i arrayen. Hvis elementet er der har vi funnet det. Hvis elementet ikke er der må vi muligens sjekke noen andre steder. Hvor vi må lete videre avhenger av hvordan vi håndterer like hashresultater. 
 \item Når vi skal fjerne et element $ x $ i en hashtabell søker vi opp elementet i tabellen, og sletter det. 
 \end{itemize}
 
-\noindent Et eksempel på en hashfunksjon kan være $ f(x) = x \mod tableSize $
+\noindent Vi har ofte en hash-funksjon på formen:
+\[ H(x) = f(x) \mod tableSize \]
 
 ~\\
 \subsubsection{Håndtering av like hashresultater}
-Hashfunksjoner trenger ikke å være injektive. Det vil si at vi fort kan få $ f(x) = f(y) $ selv om $ x \neq y $. Hvis vi skal sette inn $ y $ i en hashtabell, men plassen med index $ f(y) $ allerede er okkupert av $ x $ må vi finne en ny plass til $ y $. Det kan gjøres på flere måter, vi deler opp i to hovedgrupper: Seperate chaining og probing. 
+Hashfunksjoner trenger ikke å være injektive (de er i praksis aldri det). Det vil si at vi fort kan få $ f(x) = f(y) $ selv om $ x \neq y $. Hvis vi skal sette inn $ y $ i en hashtabell, men plassen med index $ f(y) $ allerede er okkupert av $ x $ må vi finne en ny plass til $ y $. Det kan gjøres på flere måter, vi deler opp i to hovedgrupper: Seperate chaining og probing. 
 
 
 \paragraph{Seperate chaining}~\\
@@ -174,11 +175,13 @@ der $ f $ er hashfunksjonen, $ g $ er i dette tilfellet $ g(k) = k $, $ k $ er a
 Kvadratisk probing ligner veldig på lineær probing, med den forskjellen at $ g(k) = k^2 $. Vi går altså til den plassen som ligger $ 1, 4, 9, ... $ plasser bak $ f(x) $
 
 \paragraph{Dobbel hashing}~\\
-Med dobbel hashing har vi en ekstra hashfunksjon $ f_2(x) $ som vi regner ut hvis vi skulle støte på problemer. Vi får da at $ g(k) = k f_2(x) $. Et eksempel på en funksjon $ f_2 $ kan være $ f_2(x) = R-(x \mod R) $ der $ R $ er det største primtallet som er mindre enn $ tableSize $. 
+Med dobbel hashing har vi en ekstra hashfunksjon $ f_2(x) $ som vi regner ut hvis vi skulle støte på problemer. Vi får da at $ g(k) = k f_2(x) $. Et eksempel på en funksjon $ f_2 $ kan være $ f_2(x) = R-(x \mod R) $ der $ R $ er det største primtallet som er mindre enn $ tableSize $. Den totale hashfunksjonen blir dermed 
+
+\[ H(x) = (f_1(x) + f_2(x)) \mod tableSize \]
 
 ~\\
 \subsubsection{Rehashing}
-Hvis hashtabellen begynner å bli full kan det lønne seg å rehashe. Det betyr ganske greit å lage en ny tabell med større $ tableSize $ og flytte alle elementet over. Når vi rehasher lager vi som regel en tabell som er ca dobbelt så stor (men fortsatt primtall). Siden $ f $ ofte avhenger av $ tableSize $ må vi regne ut alle hashverdiene på nytt. Rehashing er derfor en ganske dyr affære, så vi gjør det veldig sjeldent, men hvis tabellen begynner å bli for full kan vi tjene ganske mye tid i lengden. 
+Hvis hashtabellen begynner å bli full kan det lønne seg å rehashe. Det betyr ganske greit å lage en ny tabell med større $ tableSize $ og flytte alle elementet over. Når vi rehasher lager vi som regel en tabell som er ca dobbelt så stor (men fortsatt primtall). Siden $ H(x) $ ofte avhenger av $ tableSize $ må vi regne ut alle hashverdiene på nytt. Rehashing er derfor en ganske dyr affære, så vi gjør det veldig sjeldent, men hvis tabellen begynner å bli for full kan vi tjene ganske mye tid i lengden. 
 
 ~\\
 \subsubsection{Gode hashfunksjoner}
@@ -187,10 +190,10 @@ Vi står helt fritt til å velge hashfunksjoner selv. Gode hashfunksjoner er ras
 Ofte bruker vi strenger som nøkler. Vi må derfor ha en måte å regne ut et tall av en tekststreng på. Det kan gjøres på mange måter, her er et par eksempler:
 \begin{itemize}
 \item Summer verdiene til hvert tegn:
-\[ f(x) = \left( \sum_{i=0}^{keyLength-1} = \text{charVal}(key_i) \right) \mod{tableSize} \]
+\[ H(x) = \left( \sum_{i=0}^{keyLength-1} = \text{charVal}(key_i) \right) \mod{tableSize} \]
 der $ \text{charVal} $ er en funksjon som tilordner en numerisk verdi til hver bokstav, feks ascii/unicode-verdien til tegnet. $ key_i $ betegner det $ i $-te tegnet i $ key $. Denne funksjonen er rask og enkel å implementere, men vil gi dårlig spredning for store tabeller. 
 \item En vektet sum av de tre første tegnene:
-\[ f(x) = \left( c_1\,\text{charVal}(key_1) + c_2\,\text{charVal}(key_2) + c_3\,\text{charVal}(key_3)\right)  \mod{tableSize} \]
+\[ H(x) = \left( c_1\,\text{charVal}(key_1) + c_2\,\text{charVal}(key_2) + c_3\,\text{charVal}(key_3)\right)  \mod{tableSize} \]
 der $ c $-ene er konstanter vi velger. Denne er rask å enkel å beregne, og gir en grei fordeling for tilfeldige strenger, problemet er at naturlig språk ikke er tilfeldig.
 \end{itemize}
 
@@ -217,3 +220,17 @@ En stack (norsk: stabel) er en liste der siste element som settes inn er det fø
 
 Konvensjonelt kalles insert-metoden i en stack \mono{push()}, og remove-funksjonen \mono{pop()}
 
+
+\subsection{ADT}
+En ADT (\textit{eng: Abstract Data Type}) er en generalisering av datastrukturer. Det er en matematisk modell som beskriver semantikken til en datastruktur fra brukerens synsvinkel, men ikke konkret hvordan den blir implementert. 
+
+\begin{definition}
+	En ADT består av en mengde elementer, og en mengde operasjoner på disse elementene. 
+\end{definition}
+
+\subsubsection{Eksempler}
+\begin{itemize}
+	\item FIFO. Mengden  er alle elementene, mulige operasjoner er legg til of ta ut, der elementet som tas ut er det første som ble lagt til.
+	\item LIFO. Mengden er alle elementene. Operasjoner: push og pop. I tillegg kan vi snakke om opersjoner som peek.
+	\item For matematikere: $ \Z $ under operasjonene $ \{+, -, ~\cdot~, /, <, >, =\} $ danner en ADT. Vi bryr oss ikke om hvordan heltallsaritmetikk er implementert på datamaskinen, men vi vet hvordan $ + $ burde oppføre seg.
+\end{itemize}
