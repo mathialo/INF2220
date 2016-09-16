@@ -1,0 +1,7 @@
+Notatet bruker custom fonter, noe som pdflatex ikke støtter. Man må derfor kompilere med xelatex eller lignende.
+
+Man må også ha følgende fonter installert på systemet:
+    - Source Code Pro (Light, Reguar, Italic)
+    - Lato (Light, Regular)
+    - Liberation Serif
+    
