@@ -176,8 +176,9 @@ Kvadratisk probing ligner veldig på lineær probing, med den forskjellen at $ g
 
 \paragraph{Dobbel hashing}~\\
 Med dobbel hashing har vi en ekstra hashfunksjon $ f_2(x) $ som vi regner ut hvis vi skulle støte på problemer. Vi får da at $ g(k) = k f_2(x) $. Et eksempel på en funksjon $ f_2 $ kan være $ f_2(x) = R-(x \mod R) $ der $ R $ er det største primtallet som er mindre enn $ tableSize $. Den totale hashfunksjonen blir dermed 
+\[ H(x;i) = (f_1(x) + if_2(x)) \mod tableSize \]
+der $ i $ er antall kollisoner, og er $ 0 $ når vi starter.
 
-\[ H(x) = (f_1(x) + f_2(x)) \mod tableSize \]
 
 ~\\
 \subsubsection{Rehashing}
@@ -232,5 +233,5 @@ En ADT (\textit{eng: Abstract Data Type}) er en generalisering av datastrukturer
 \begin{itemize}
 	\item FIFO. Mengden  er alle elementene, mulige operasjoner er legg til of ta ut, der elementet som tas ut er det første som ble lagt til.
 	\item LIFO. Mengden er alle elementene. Operasjoner: push og pop. I tillegg kan vi snakke om opersjoner som peek.
-	\item For matematikere: $ \Z $ under operasjonene $ \{+, -, ~\cdot~, /, <, >, =\} $ danner en ADT. Vi bryr oss ikke om hvordan heltallsaritmetikk er implementert på datamaskinen, men vi vet hvordan $ + $ burde oppføre seg.
+	\item For matematikere: $ \Z $ under operasjonene $ \{+, -, ~\cdot~, /\} $ danner en ADT. Vi bryr oss ikke om hvordan heltallsaritmetikk er implementert på datamaskinen, men vi vet hvordan $ + $ burde oppføre seg.
 \end{itemize}
