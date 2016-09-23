@@ -6,7 +6,7 @@ En graf $ G $  er et par $ (V, E) $, der $ V $ er en ikke-tom mengde noder og $ 
 \end{definition}
 
 
-\paragraph{Terminologi}~\\
+\subsubsection{Terminologi}
 Vi bruker $ |E| $ for å betegne antall kanter og $ |V| $ for å betegne antall noder. \index{graf!kant}\index{graf!node}\index{node!graf}
 
 Vi sier at en node er \textbf{nabo} med en annen node hvis de har en kant mellom seg. I figur \ref{fig:graf} er B og A naboer, men A og C er ikke naboer. \index{graf!nabo}
@@ -50,7 +50,7 @@ En type grafer vi jobber mye med er \textbf{DAG}er. DAG står for \emph{Directed
 \end{figure}
 
 
-\paragraph{Implementasjon}~\\
+\subsubsection{Implementasjon}
 Det finnes i hovedsak to måter å implementere en graf på, \textbf{Adjacency matrix} (nabomatrise) og \textbf{Adjacency list} (naboliste). Vi kan også implementere grafen som instanser av en \mono{Node}-klasse med pekere til sine naboer, men det er mindre utbredt (dette vil også være en slags implementasjon av en naboliste). Måten vi implementerer grafen på har faktisk en del å si for kompleksiteten til enkelte algoritmer.
 
 Nabolisten til en graf er en liste over nodene og deres tilhørende naboer. Nabomatrisen er en $ n\times n $-matrise $ A $ der $ a_{i, j} $ angir vekten til kanten fra node nr $ i $ til node nr $ j $. Hvis det ikke finnes en kant er $ a_{i, j} = 0 $, og som diskutert tidligere kan en uvektet graf sees på som en vektet graf der alle vektene er 1.
@@ -84,7 +84,7 @@ Merk at for en urettet graf vil nabomatrisen alltid være symmetrisk, siden at k
 
 
 \subsection{Begreper}
-
+\vspace{-40pt}
 \subsubsection{Hamiltonsk sti}
 En hamiltonsk sti er en sti som besøker alle nodene én gang. Dette kan virke som en triviell sak, men i en del tilfeller er det faktisk ikke mulig å finne en hamiltonsk sti. I grafen i figur \ref{fig:graf} er B, A, D, C, G, F, E en hamiltonsk sti (det finnes fler). 
 
@@ -172,7 +172,7 @@ Et \textbf{spenntre} for en urettet graf $ G $ er et tre med kanter fra grafen s
 \end{tikzpicture}~\\~\\
 \end{figure}
 
-For å finne et minimalt spenntre til en graf kan vi bruke Prims algoritme (\ref{prim}) eller Kruskals algoritme (\ref{kruskal})
+For å finne et minimalt spenntre til en graf kan vi bruke Prims algoritme eller Kruskals algoritme  (se \ref{kruskal})
 
 
 \subsubsection{Topologisk sortering}
@@ -253,8 +253,8 @@ Et \textbf{articulation point} er et kritisk punkt i en sammenhengende graf som 
 
 En \textbf{biconnected} graf er en graf uten articulation points, altså en graf der det alltid finnes mer enn én vei fra en node til en annen. Grafen (til venstre) i figur \ref{fig:min_spenntre} er en slik graf. \index{graf!biconnected}
 
-~\\~\\\subsection{Grafalgoritmer}
-
+\subsection{Grafalgoritmer}
+\vspace{-40pt}
 \subsubsection{Dybde-først-søk}
 \label{dfs}
 Dybde-først-traversering (herfra dfs: depth first search) er en måte å traversere gjennom en graf på. Det kan tenkes på som en generalisering av dybde-først-traversering gjennom trær. Vi velger oss en (hvilken som helst) startnode, og beveger oss ned til etterfølgerne til noden. Når vi kommer til en node som ikke har kanter til en ubesøkt node (enten at noden har utgrad 0, eller at alle etterfølgerne er besøkt) går vi tilbake. 
@@ -424,7 +424,8 @@ Siden G har høyest postfixteller (20) begynner vi der. Vi ser i $ G^t $ at G ik
 
 Alle SCCer til $ G $ er: \{ \{G\}, \{H, I, J\}, \{A, B, C, F\}, \{D\}, \{E\} \}
 \end{example}
-~\\
+
+
 \subsubsection{Dijkstras algoritme}
 \label{dijkstra}
 
@@ -648,15 +649,15 @@ Denne betraktningen gjentas systematisk for alle tripler i, k og j:
 \noindent Eksempel på implementasjon i Java:
 \javaimport{kode/floyd.java}
 
-\paragraph{Tidsanalyse}~\\
+\paragraph{Tidsanalyse}
 Vi ser fra kodeeksempelet at det er to løkker som må kjøres gjennom. En dobbel og en trippel for-løkke. Kjøretiden blir derfor:
 
-\[ \text{Kjøretid} ~=~ O\left(n^2 + n^3\right)  ~=~ O\left(n^3\right) \]
+\[ \text{Kjøretid} ~=~ n^2 + n^3  ~=~ O\left(n^3\right) \]
 
 \noindent Floyds algoritme har forøvrig samme kompleksitet som å kjøre \nameref{dijkstra} én gang for alle nodene i grafen. Fordelen med Floyds algoritme er at den er litt mer robust i møte med løkker og negative vekter. 
 
 
-\paragraph{Hvordan tolke input/output fra Floyds algoritme}~\\
+\paragraph{Hvordan tolke input/output fra Floyds algoritme}
 Ved start inneholder \mono{nabo[i][j]} lengden av kanten fra $ i $ til $ j $, \mono{nabo[i][j]}= |$ \infty $ hvis det ikke er noen kant. Algoritmen lar \mono{nabo} være uendret, og legger resultatene i \mono{avstand} og \mono{vei}. \mono{avstand[i][j]} er lengden av korteste vei fra $ i $ til $ j $. Når vi oppdager at den korteste veien fra $ i $ til $ j $ går gjennom $ k $ setter vi \mono{vei[i][j] = k}. \mono{vei} sier derfor om den korteste veien. Vi finner korteste vei slik:
 \begin{itemize}
 \item \mono{k1 = vei[i][j]} er den største verdien av $ k $ slik at $ k $ ligger på den korteste veien fra $ i $ til $ j $

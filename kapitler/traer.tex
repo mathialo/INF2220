@@ -24,7 +24,7 @@ every node/.style = {shape=circle, draw, align=center}]
 \end{tikzpicture}
 \end{figure}
 
-\paragraph{Terminologi}~\\
+\subsubsection{Terminologi}
 Vi skal se litt på ord og uttrykk for trær. Gjennomgående bruker vi treet i figur \ref{fig:tre} som eksempel
 
 I figuren blir nodene tegnet som rundinger. For å betegne relasjonen mellom nodene bruker vi ofte familierelasjoner. Vi sier at $ e $ og $ f $ er \textbf{søsken}, $ d $ er \textbf{forelder} til $ e $, og $ e $ er \textbf{barn} av $ d $. Vi kan også si at $ g $ er \textbf{onkel} til $ f $, men dette er mindre vanlig, da vi sjeldent har bruk for å snakke om \say{onkelnoder}. 
@@ -100,14 +100,14 @@ every node/.style = {shape=circle, draw, align=center}]
 
 
 
-\paragraph{Innsetting}~\\
+\subsubsection{Innsetting}
 Når vi skal sette inn en node i et binært søketre starter vi i rota. Vi sammenligner verdien vi skal sette inn med verdien i rota. Hvis verdien vi setter inn er mindre enn rota går vil til venstre, er den større går vi til høyre. Hva som skjer ved likhet er opp til oss å bestemme, men vi må være konsekvente. Når vi kommer til en nullpeker kan vi sette denne pekeren til å peke på noden vi setter inn.
 
 Vi kan implementere denne funksjonen rekursivt. I en ytre klasse kan vi skrive en skallfunksjon som kaller på rotas \mono{insert}-metode. Vi har en indre \mono{Node}-klasse med en rekursiv insertmetode. Den kan implementeres slik:
 \javaimport{kode/ex_bintree_insert.java}
 
 
-\paragraph{Fjerning}~\\
+\subsubsection{Sletting}
 Når vi skal fjerne en node fra et binært søketre har vi tre forskjellige situasjoner som vi må se på.
 
 {\bfseries Noden har ingen barn} (løvnode). Denne situasjonen er ganske grei. Siden noden ikke har noen barn å forholde seg til er det bare å fjerne den fra treet.
@@ -120,7 +120,7 @@ Eksempel på implementasjon i Java (rekursiv metode i en \mono{Node}-klasse):
 \javaimport{kode/ex_bintree_remove.java}
 
 
-\paragraph{Søking}~\\
+\subsubsection{Søking}
 Når vi skal søke etter et element i et søketre starter vi i rota og sammenligner det elementet vi søker etter med det elementet som finnes i rota. Er elementet vår mindre enn noden vi ser på går vi til venstre, og er det større går vi til høyre. Deretter foretar vi samme testen på nytt og fortsetter slik til vi enten finner elementet vi leter etter, eller kommer til en nullpeker (bunnen av treet).
 
 Eksempel på implementasjon i Java:
@@ -129,8 +129,6 @@ Eksempel på implementasjon i Java:
 
 
 
-
-~\\~\\
 \subsection{Rød-svarte trær} \label{rb_tre}
 Rødsvarte trær er binære søketrær med noen spesielle strukturkrav. Kravene er designet for å motkjempe skjevhet (som illustrert i figur \ref{fig:bintre}), og dermed forbedre kjøretid.
 
@@ -149,7 +147,7 @@ farget enten rød eller svart slik at:
 
 Dette sikrer at høyden maksimalt er $ 2\log_2 (n+1) $
 
-\paragraph{Insetting}~\\
+\subsubsection{Insetting}
 Vi zoomer inn på en del av treet og jobber kun med de nodene som har noe å si for innsetting. X er noden vi skal sette inn, P er foreldernoden, U er onkelnoden (søsken av forelder), G er besteforeldernoden. Når vi setter inn ei node i et rød-svart tre er den nye noda alltid rød. Deretter må vi se på fargene til P, U og G for å finne ut om vi må ta noen videre steg:
 
 \begin{figure}[H]
@@ -184,19 +182,17 @@ Vi zoomer inn på en del av treet og jobber kun med de nodene som har noe å si 
 \end{theorem}
 
 
-\paragraph{Fjerning}~\\
-Vi skal fjerne en node $ N $ fra et rød-svart tre.
+\subsubsection{Sletting}
+Sletting fra rød-svarte trær handler til syvende og sist om å slette løvnoder. Skal vi slette en indre node kan vi gå en plass til høyre, og deretter gå til venstre helt til vi er i bunnen av treet, og swappe de to nodene. Deretter kan vi slette (det som nå er) løvnoden. Når vi gjør dette kan det hende vi bryter med noen av kravene i definisjon \ref{def:rb_tree}. Vi må derfor bruke samme type strategi som for innsetting for å rette opp feil. 
 
-Vi ser på noen spesialtifeller: Hvis $ N $ er en rød node er jobben enkel. Vi sletter da $ N $ som om vi hadde et vanlig søketre. Det samme gjelder hvis forelderen til $ N $ er rød og $ N $ er eneste barn. Hvis $ N $ er svart og har ett barn sletter vi $ N $ og farger barnet svart. 
-
-Generelt sletter vi noden som i et vanlig binært søketre, og utfører nødvendige rotasjoner og omfarginger for å beholde kravet i definisjon \ref{def:rb_tree}.
+Sletting er noe mer komplisert enn innsetting. Se seksjon 12.2.3 i læreboka for gjennomgang av en del situasjoner med figurer og forklaringer. 
 
 
-\paragraph{Tidsanalyse}~\\
+\subsubsection{Tidsanalyse}
 Siden høyden til et rød-svart tre maksimalt er $ 2\log_2 (n+1) $ har vi worst case tid $ O(\log_2 n) $. Selv om vi risikerer å måtte gjøre rotasjoner er innsetningstiden også $ O(\log_2 n) $.
 
 
-~\\
+
 \subsection{B-trær} \label{b-tre}
 B-trær er konstruert for å effektivisere antall disklesninger, og gir mening å bruke hvis vi har et tre som er så stort at det må lagres på gammeldagse spinnedisker, og ikke i RAM. Vi lagrer dataene i blokker, og leser en og en blokk av gangen. Alle dataene er lagret i løvnodene, mens de indre nodene brukes for søking. En vanlig måte å implementere B-trær på er å ha så mye av toppen i RAM som mulig, og lagre resten på disk. B-trær er ikke binære, dvs at de kan ha flere enn 2 barn. 
 
@@ -213,7 +209,7 @@ B-trær er konstruert for å effektivisere antall disklesninger, og gir mening �
 \end{definition}
 
 
-\paragraph{Innsetting}~\\
+\subsubsection{Innsetting}
 Når vi skal sette inn et element i et B-tre finner vi plassen elementet skal på, og setter det der. Hvis løvnoden vi setter elementet inn i er full må vi splitte noden i to like store deler. Vi må da oppdatere nøklene i foreldrenoden $ P $. Hvis $ P $ ikke har plass til en ekstra nøkkel må vi splitte den også, og oppdatere nøklene i foreldrenoden til $ P $. Slik fortsetter vi oppover til vi får en node som har plass til en ekstra nøkkel. Den eneste måten et B-tre kan øke høyden på er at rota splittes i to, og at vi lager en ny rot. 
 
 \begin{example} Sett inn 13 og 42 i følgende B-tre ($ M = 3 $ og $ L = 4 $):
@@ -298,8 +294,9 @@ child {
 \end{figure}
 \end{example}
 
-~\\
-\paragraph{Fjerning}~\\
+
+
+\subsubsection{Sletting}
 Hvis vi skal fjerne et element fra et B-tre søker vi opp elementet, tar det vekk, og hvis mengden elementer i noden blir mindre enn grensen satt i def. \ref{def:b_tre}.vi slår vi sammen to noder. Den eneste måten B-trær kan minke i høyde på er om alle barna til rota blir slått sammen til én node (vi fjerner da rota). 
 
 \begin{example} Fjern 41 fra følgende B-tre:
@@ -381,7 +378,7 @@ child {
 
 
 
-\paragraph{Tidsanalyse}
+\subsubsection{Tidsanalyse}
 
 \begin{theorem} Å søke etter, sette inn og fjerne elementer fra et B-tre tar, både i beste og verste fall, $ O(\log n) $ tid.
 \end{theorem}
@@ -392,7 +389,7 @@ child {
 \newpage
 \subsection{Rotasjon}
 \label{trerotasjon}
-
+\vspace{-40pt}
 \subsubsection{Zig}
 For å skjønne zig-rotasjon ser vi på en figur:
 

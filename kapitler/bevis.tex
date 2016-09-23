@@ -1,5 +1,6 @@
 \section{Bevisføring}
 \subsection{Noen bevisteknikker}
+\vspace{-20pt}
 \paragraph{Bevis ved selvmotsigelse}
 Teknikken går ut på å gjøre noen antagelser, og vise til at det fører til en motsigelse. Da må noen av antagelsene være gale, og hvis vi kun har to muligheter (for eksempel rett/galt) kan vi konkludere med at det andre alternativet må være rett. Eksempel på et slik bevis er beviset for haltingproblemet (\ref{haltingProof})
 
@@ -21,6 +22,7 @@ Hvis vi kan vise en slik rekke av implikasjonspiler har vi \emph{redusert} $ A $
 Vi ser på et annet eksempel. Vi skal vise at mengden av alle løselige problemer er tellbart uendelig. Alle løselige problemer kan løses ved å implementere et program i et turingkomplett programmeringsspråk, for eksempel Java. Dette programmet lagres som en tekstfil på dataen, enkodet i UTF-8 eller en annen enkoding. Denne enkodingen består av en sekvens med \mono{1} og \mono{0}. Denne sekvensen kan sees på som et binært tall, altså et tall i $ \N $. Vi har nå \textit{redusert} mengden av løselige problemer til mengden av naturlige tall, som vi vet er tellbart uendelig. Dermed må mengden av løselige problemer også være tellbart uendelig. Det er også mulig å redusere mengden av alle problemer (løselige og uløselige) til $ \R $, og dermed vise at mengden av uløselige problemer er større enn mengden av løselige problemer (ved å bruke $ \abs{\R} \gg \abs{\N} $ som vi har fra \nameref{cantor})
 
 \subsection{Noen beviser}
+\vspace{-40pt}
 \subsubsection{Haltingproblemet}
 Kan en Turingmaskin avgjøre om en annen Turingmaskin noen sinne vil stoppe, eller om den vil gå i evig loop, om den ser på inputen til maskinen? Som nevnt i \ref{språk} kan vi definere en språk som mengden av input som vil få en maskin til å stoppe:\index{haltingproblemet}
 \[ L = \{i : M \text{ stopper på input } i \} \]
@@ -78,12 +80,8 @@ Siden dette tallet er ulikt tall nummer $ i $ i tabellen på $ i $-te siffer vet
 
 
 
-\subsubsection{Antall noder i et binært tre}
-Vi skal vise at antall noder $ n $ i et binært tre er begrenset slik:
-\begin{equation*}
-n \leq 2^{h} - 1
-\end{equation*}
-Vi skal vise dette ved induksjon.
+\subsubsection{Høyden til et komplett binært tre}\label{sec:treeheightproof}
+Vi skal vise at høyden til et komplett binært tre er $ \log(n+1) $. Før vi gjør det skal vi vise et hjelperesultat: nemlig at antall noder $ n $ i et komplett binært tre er $ 2^n - 1 $. Vi skal vise dette ved induksjon.
 
 Vi starter med å vise at formelen gjelder for et tre med høyde $ h=1 $:
 \[ n = 2^1 - 1 = 1 \]
@@ -95,7 +93,7 @@ Vi antar at formelen gjelder for alle $ h $ opp til $ n $, og skal vise at det i
 \node[isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=north]{$ T_1 $};
 \end{tikzpicture}
 \end{center}
-Vi antar at formelen stemmer, og dermed at antall noder i $ T_1 $ maksimalt er $ 2^n - 1 $. Vi skal nå øke høyden til $ n+1 $. Vi lager en ny rot, med to fulle subtrær som barn:
+Vi antar at formelen stemmer, og dermed at antall noder i $ T_1 $ er $ 2^n - 1 $. Vi skal nå øke høyden til $ h+1 $. Vi lager en ny rot, med to fulle subtrær som barn:
 \begin{center}
 \begin{tikzpicture}[sibling distance=8em]
 \node[shape=circle, draw, align=center]{r} 
@@ -103,7 +101,18 @@ Vi antar at formelen stemmer, og dermed at antall noder i $ T_1 $ maksimalt er $
 	child {node[isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=north]{$ T_2 $}};
 \end{tikzpicture}
 \end{center}
-Fra formelen har vi at $ T_1 $ og $ T_2 $ maksimalt har $ 2^n-1 $ noder hver. Legger vi sammen antall noder i treet nå får vi:
+Fra induksjonsantagelsen har vi at $ T_1 $ og $ T_2 $ har $ 2^n-1 $ noder hver. Legger vi sammen antall noder i treet nå får vi:
 \[ n ~=~ \text{noder i } T_1 + \text{noder i } T_2 + 1 ~\leq~ 2(2^n -1) + 1 ~=~ 2^{n+1} - 1 \]
 
-Oppsummering: Vi har vist at hvis formelen gjelder for $ h=n $ gjelder den også for $ h=n+1 $, vi har vist at den gjelder for $ h=1 $, og dermed har vi vist at den gjelder for alle $ h \in \mathbb{N} \hfill\qed$
+Altså: Vi har vist at hvis formelen gjelder for $ h=k $ gjelder den også for $ h=ks+1 $, vi har vist at den gjelder for $ h=1 $, og dermed har vi vist at den gjelder for alle $ h \in \mathbb{N} \hfill\qed$
+
+Vi kan nå vise det endelige resultatet. Vi har at antall noder $ n $ er gitt slik:
+\[ n = 2^h -1 \]
+Vi flytter over $ 1 $, og tar logaritmen på begge sider:
+\begin{align*}
+	n &= 2^h - 1 \\
+	n + 1 &= 2^h \\
+	\log_2(n+1) &= \log_2(2^h) \\
+	\log_2(n+1) &= h\log(2) \\
+	\log_2(n+1) &= h
+\end{align*}

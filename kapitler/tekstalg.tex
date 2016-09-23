@@ -5,16 +5,19 @@
 		Brute force-metoden er som navnet tilsier ikke spesielt gjennomtenkt: Til å begynne med sjekker vi hver karakter i høystakken mot den første i nåla. Hvis vi har likhet sjekker vi det neste tegnet i høystakken mot det neste i nåla. Vi fortsetter slik til vi enten finner hele nåla i høystakken eller til vi har ulikhet, og i så fall fortsetter vi med å sjekke det neste tegnet i høystakken mot det første i nåla.
 
 	\subsubsection{Analyse}
-		Worst case så får vi mismatch $(n-m)$ ganger og suksess $(n-m)+1$ ganger, Totale sammenligninger er $((n-m)+1\times m)$ som gir kjøretid $O(n^2)$.
+		Worst case så får vi mismatch $(n-m)$ ganger og suksess $(n-m)+1$ ganger, Totale sammenligninger er $((n-m)+1 \cdot m)$ som gir kjøretid $O(n^2)$.
 
 	\subsection{Boyer-Moore}
-		Dette er en rask substringalgoritme. Med Boyer-Moore preprosserer vi nåla før vi begynner å søke. Vi regner ut hvor mange hopp vi kan gjøre for hvert enkelt tegn vi får mismatch på. Dette kaller vi \textit{bad character shift}. Vi beregner også \textit{good character shift}, som er verdier vi kan hoppe på et gitt sted i nåla hvis vi har hatt match tidligere i nåla, men ikke på denne plassen. \newline Algoritmen er slik:
-		\begin{itemize}
-			\item[-] Beregn bad character shift for alle tegn.
-			\item[-] Sammenlign nåla med teksten, starter med tegnet lengst til høyre i nåla.
-			\item[-] Hvis mismatch på \mono{c}, flytt nåla fram med den \textbf{største} verdien av \mono{badCharShift[c]} og \mono{goodSuffixShift[c]}. Hvis match, dytt nåla en til høyre og sjekk neste tegn. Gjenta.
-		\end{itemize}
-		Merk at når vi snakker om å skippe så er det alltid i forhold til det siste tegnet i nåla. Vær også obs på, som det står i algoritmen, at når vi bruker denne for eksempel på eksamen, vil vi skippe maks av \mono{badCharShift[c]} og \mono{goodSuffixShift[c]}, der \mono{c} er tegnet.
+		Dette er en rask substringalgoritme. Med Boyer-Moore preprosserer vi nåla før vi begynner å søke. Vi regner ut hvor mange hopp vi kan gjøre for hvert enkelt tegn vi får mismatch på. Dette kaller vi \textit{bad character shift}. Vi beregner også \textit{good character shift}, som er verdier vi kan hoppe på et gitt sted i nåla hvis vi har hatt match tidligere i nåla, men ikke på denne plassen. 
+		
+		\begin{theorem} Boyer-Moore-Horspool
+			\begin{enumerate}
+				\item Beregn bad character shift for alle tegn.
+				\item Sammenlign nåla med teksten, starter med tegnet lengst til høyre i nåla.
+				\item Hvis mismatch på \mono{c}, flytt nåla fram med den \textbf{største} verdien av \mono{badCharShift[c]} og \mono{goodSuffixShift[c]}. Hvis match, dytt nåla en til høyre og sjekk neste tegn. Gjenta.
+			\end{enumerate}
+		\end{theorem}
+		Merk at når vi snakker om å skippe så er det alltid i forhold til det siste tegnet i nåla. Vær også obs på, som det står i algoritmen, at når vi bruker denne vil vi skippe maks av \mono{badCharShift[c]} og \mono{goodSuffixShift[c]}, der \mono{c} er tegnet vi sammenligner.
 
 	\subsubsection{Bad character shift}
 		Vi beregner avstand til neste gang nål er på linje med høystakk.
@@ -71,8 +74,8 @@ I steg \textbf{3.} får vi mismatch på H mot O, og må hoppe O-plasser frem---a
 
 \end{example}
 
-\paragraph{Analyse}
-Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, og nål $011\dots1$ kjører $m$ ganger. Dette gir O($nm$). Best case har input tekst $1^n$ og nål $0^m$, som gir O($n/m$). Average case er O($m/|\Sigma|$), altså raskere enn brute force.
+%\paragraph{Analyse}
+%Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, og nål $011\dots1$ kjører $m$ ganger. Dette gir O($nm$). Best case har input tekst $1^n$ og nål $0^m$, som gir O($n/m$). Average case er O($m/|\Sigma|$), altså raskere enn brute force.
 	
 	\subsubsection{Good suffix shift}
 		Anta at vi har en substring $t$ av nåla (altså lengst til høyre i nåla) som allerede er matchet. Vi får så mismatch på neste tegn. Vi kan nå være smarte og finne ut, og
@@ -80,26 +83,24 @@ Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, o
 	
 		\begin{example}
 		Vi ser på nåla ``TTCTATTCTT''.
+\begin{enumerate}
+	
+\item Sjekker først \textit{ikke}-\mono{T}, det er to shift før vi finner dette. \\
+\noindent\mono{TCCTATTCT\textcolor{red}{T}}\\
+\mono{---TCCTATT\textcolor{red}{C}TT}
 
-\paragraph{1.} Sjekker først \textit{ikke}-\texttt{T}, det er to shift før vi finner dette.
-\\
-\noindent\texttt{TCCTATTCT\textcolor{red}{T}}\\
-\texttt{---TCCTATT\textcolor{red}{C}TT}
+\item Så sjekker vi \textit{ikke}-\mono{TT}. Dette finner vi etter ett shift. \\
+\noindent\mono{TCCTATTC\textcolor{red}{TT}}\\
+\mono{--TCCTATT\textcolor{red}{CT}T}
 
-\paragraph{2.} Så sjekker vi \textit{ikke}-\texttt{TT}. Dette finner vi etter ett shift.
-\\
-\noindent\texttt{TCCTATTC\textcolor{red}{TT}}\\
-\texttt{--TCCTATT\textcolor{red}{CT}T}
+\item For å finne \textit{ikke}-\mono{CTT} må vi flytte 3 steg; til \mono{ATT}. \\
+\noindent\mono{TCCTATT\textcolor{red}{CTT}}\\
+\mono{------TCCT\textcolor{red}{ATT}CTT}
 
-\paragraph{3.} For å finne \textit{ikke}-\texttt{CTT} må vi flytte 3 steg; til \texttt{ATT}.
-\\
-\noindent\texttt{TCCTATT\textcolor{red}{CTT}}\\
-\texttt{------TCCT\textcolor{red}{ATT}CTT}
-
-\paragraph{4.} Så kommer vi til \textit{ikke}-\texttt{TCTT}. Denne eksisterer ikke, MEN om nålen har lik suffix som prefiks (her \texttt{T} som start og slutt), så flytter vi bare fram til prefiksen. Da må vi flytte nålen 9 hakk, selv om lengden er 10.
-\\
-\noindent\texttt{TCCTATTCT\textcolor{red}{T}}\\
-\texttt{------------------\textcolor{red}{T}CCTATTCTT}
+\item Så kommer vi til \textit{ikke}-\mono{TCTT}. Denne eksisterer ikke, MEN om nålen har lik suffix som prefiks (her \mono{T} som start og slutt), så flytter vi bare fram til prefiksen. Da må vi flytte nålen 9 hakk, selv om lengden er 10. \\
+\noindent\mono{TCCTATTCT\textcolor{red}{T}}\\
+\mono{------------------\textcolor{red}{T}CCTATTCTT}
+\end{enumerate}
 
 ~\\Alle de neste shiftene vil også være dette, fordi de får ingen andre treff i nålen. Vi får da følgende good suffix table:
 \begin{figure}[H]
@@ -107,16 +108,16 @@ Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, o
 \begin{tabular}{crc}
 index&mismatch&shift\\
 \hline
-0&\texttt{\textcolor{red}{T}}&2\\
-1&\texttt{\textcolor{red}{T}T}&1\\
-2&\texttt{\textcolor{red}{C}TT}&3\\
-3&\texttt{\textcolor{red}{T}CTT}&9\\
-4&\texttt{\textcolor{red}{T}TCTT}&9\\
-5&\texttt{\textcolor{red}{A}TTCTT}&9\\
-6&\texttt{\textcolor{red}{T}ATTCTT}&9\\
-7&\texttt{\textcolor{red}{C}TATTCTT}&9\\
-8&\texttt{\textcolor{red}{C}CTATTCTT}&9\\
-9&\texttt{\textcolor{red}{T}CCTATTCTT}&9\\
+0&\mono{\textcolor{red}{T}}&2\\
+1&\mono{\textcolor{red}{T}T}&1\\
+2&\mono{\textcolor{red}{C}TT}&3\\
+3&\mono{\textcolor{red}{T}CTT}&9\\
+4&\mono{\textcolor{red}{T}TCTT}&9\\
+5&\mono{\textcolor{red}{A}TTCTT}&9\\
+6&\mono{\textcolor{red}{T}ATTCTT}&9\\
+7&\mono{\textcolor{red}{C}TATTCTT}&9\\
+8&\mono{\textcolor{red}{C}CTATTCTT}&9\\
+9&\mono{\textcolor{red}{T}CCTATTCTT}&9\\
 \end{tabular}
 \end{figure}
 \end{example}

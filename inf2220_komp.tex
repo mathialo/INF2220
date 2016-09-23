@@ -97,6 +97,44 @@
 \subsubsectionfont{\color{title_color}\Large\titlefontthin}
 
 
+\makeatletter
+\let\origsubsection\subsection
+\renewcommand\subsection{\@ifstar{\starsubsection}{\nostarsubsection}}
+
+\newcommand\nostarsubsection[1]
+{\subsectionprelude\origsubsection{#1}\subsectionpostlude}
+
+\newcommand\starsubsection[1]
+{\subsectionprelude\origsubsection*{#1}\subsectionpostlude}
+
+\newcommand\subsectionprelude{%
+	\vspace{3em}
+}
+
+\newcommand\subsectionpostlude{%
+	\vspace{-1.4em}
+	{\color{title_color_light} \hhline}
+	~\\
+}
+
+\let\origsubsubsection\subsubsection
+\renewcommand\subsubsection{\@ifstar{\starsubsubsection}{\nostarsubsubsection}}
+
+\newcommand\nostarsubsubsection[1]
+{\subsubsectionprelude\origsubsubsection{#1}\subsubsectionpostlude}
+
+\newcommand\starsubsubsection[1]
+{\subsubsectionprelude\origsubsection*{#1}\subsubsectionpostlude}
+
+\newcommand\subsubsectionprelude{%
+	\vspace{1.3em}
+}
+
+\newcommand\subsubsectionpostlude{%
+	%\vspace{0.1em}
+}
+\makeatother
+
 % colors
 \usepackage{xcolor}
 \definecolor{source_blue}{HTML}{003399}
@@ -104,6 +142,7 @@
 \definecolor{source_gray}{HTML}{F9F9F9}
 \definecolor{source_orange}{HTML}{E18A07}
 \definecolor{title_color}{HTML}{333370}
+\definecolor{title_color_light}{HTML}{C2C2D6}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 
 
@@ -163,16 +202,28 @@
 }
 \numberwithin{myTheo}{subsection}
 
+\newtheorem{myCor}[myTheo]{\titlefontreg\color{title_color}Korollar}
+\newenvironment{corollary}{
+	\vspace{10pt}
+	\begin{mdframed}[backgroundcolor=source_gray]
+	\begin{myCor}
+}{
+	\end{myCor}	
+	\vspace{7pt}
+	\end{mdframed}
+	\vspace{10pt}
+}
+
 \newtheorem{myDef}[myTheo]{\titlefontreg\color{title_color}Definisjon}
 \newenvironment{definition}{
 	\vspace{10pt}
 	\begin{mdframed}[backgroundcolor=source_gray]
-	\begin{myDef}
-}{
+		\begin{myDef}
+		}{
 	\end{myDef}	
 	\vspace{7pt}
-	\end{mdframed}
-	\vspace{10pt}
+\end{mdframed}
+\vspace{10pt}
 }
 
 \newtheorem*{myExmp}{\titlefontreg\color{title_color}Eksempel}
@@ -230,11 +281,11 @@
 \thispagestyle{plain}
 
 \section*{Noen kommentarer}
-Dette notatet har i hovedsak fungert som min egne lille gummiand i eksamenstreninga, men kan være nyttig til repetisjon og som notater under eksamen. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \mono{mathialo@student.matnat.uio.no}
+Dette notatet begynte som min egen eksamenstrening, og har blitt litt oppdatert, korrigert og fylt ut etter det. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \mono{mathialo@student.matnat.uio.no}
 
 Innhold og eksempler er basert på stoff fra læreboka, forelesninger, tidligere eksamener, mine egne notater og obliger, Wikipedia og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
 
-Feel free til å bruke, modifisere, og stjele innholdet i notatet, men krediter gjerne. Kildefilene ligger tilgjengelig på GitHub\footnote{https://github.com/mathialo/INF2220}.
+Det er bare å bruke, modifisere, og stjele innholdet i notatet. Hvis du gjør det er det kult om du krediterer. Alle \LaTeX-filer ligger tilgjengelig på GitHub\footnote{https://github.com/mathialo/INF2220}.
 
 ~\\Denne utgaven er kompilert \today.
 

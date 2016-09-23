@@ -56,9 +56,9 @@ Beviset bruker at summen av en aritmetisk rekke er $ n(n-1)/2 $:
   liste halvparten så mange, altså $\frac{n(n-1)}{4}$ 
 \end{proof}
 Vi har da et korollar til teorem \ref{teo:sortbound} som gir oss gjennomsnittlig tid for algoritmer som bytter naboelementer:
-\begin{theorem} (7.2 i læreboka): \label{teo:swapkompl}
+\begin{corollary} (7.2 i læreboka): \label{teo:swapkompl}
   Enhver sorteringsalgoritme som sorterer ved å bytte to naboelementer krever i gjennomsnitt $ O(n^2) $ tid.
-\end{theorem}
+\end{corollary}
 \begin{proof}
 Fra teorem \ref{teo:sortbound} har vi at gjennomsnittlig antall inversjoner er $ n(n-1)/4 $. Hvert plassbytte av to naboer inversjon fjerner én inversjon, dermed tar algoritmer som baserer seg på plassbytte av naboer gjennomsnittlig $ O(n^2) $ tid.
 \end{proof}
@@ -117,7 +117,7 @@ Altså gjør vi $n(n-1)$ sammenligninger. $O(n(n-1)) = O(n^2 )$
 siden vi ikke foretar noen bytter, vil algoritmen terminere etter å ha gjort
 $(n-1)$ sammenligninger. Altså $O(n-1) = O(n)$
 
-\subparagraph{Average Case: $O(n^2)$} fra teorem \ref{teo:swapkompl}
+\subparagraph{Average Case: $O(n^2)$} fra korollar \ref{teo:swapkompl}
 
 
 \subsubsection{Innstikksortering}\label{insertsort}
@@ -134,7 +134,7 @@ Faktisk lønner det seg å ikke ha med denne testen.
 Siden if-tester er relativt dyre operasjoner, lønner det seg å ``plukke opp'' et
 element, for deretter å sette den ned igjen på samme plass, enn å sjekke om det
 står på feil plass.
-~\\
+
 \paragraph{Kompleksitet}
 Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen uegnet til store lister. Når lista er kort\footnote{Generell tommelfingerregel: mindre enn 50 elementer} derimot, er innstikksortering en ganske god algoritme - til og med bedre enn \nameref{quick}. Gode quicksortimplementasjoner bruker derfor innstikksortering hvis lista blir for kort. 
 
@@ -142,14 +142,14 @@ Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen 
 
 \subparagraph{Best case: $ O(n) $} Hvis lista vi sender inn allerede er sortert vil den ytterste for-løkka gå gjennom lista én gang og så avslutte. 
 
-\subparagraph{Avarage case: $ O(n^2) $} fra teorem \ref{teo:swapkompl}
+\subparagraph{Avarage case: $ O(n^2) $} fra korollar \ref{teo:swapkompl}
 
 
-\newpage
+
 \subsubsection{Flettesortering}\label{mergesort}
 \textbf{Flettesortering} (engelsk: \textbf{mergesort}) er et ekempel på en \hyperref[splitthersk]{splitt-og-hersk}-algoritme, og er et eksempel på elegant rekursjon. Anta at vi har en liste $ L $ som er $ n $ elementer lang. Vi deler først $ L $ opp i $ n $ biter slik at vi har $ n $ lister på ett element. Deretter fletter vi listene sammen til vi bare har én liste. 
 
-Spørsmålet blir da hva vi mener med å \say{flette listene sammen}. Vi beskriver samme metode som boka: Anta at vi skal flette to lister $ A $ og $ B $. $ A $ er $ m $ elementer lang, og $ B $ er $ o $ elementer. Vi har en resultatliste $ C $ som har $ m+o $ elementer. Vi har tre tellere: $ i $, $ j $ og $ k $ som går over henholdsvis $ A $, $ B $ og $ C $. Vi starter med å sette $ i=j=k=0 $ og sammenligner $ A_i $ med $ B_j $. Den minste av dem setter vi inn i $ C_k $. Hentet vi elementet fra $ A $ øker vi $ i $ med 1, hentet vi elementet fra $ B $ øker vi $ j $ med 1. Uansett øker vi $ k $ med 1. Deretter sammenligner vi $ A_i $ med $ B_j $, setter minste inn i $ C_k $, og øker riktig teller. Slik fortsetter vi så lenge $ j \leq m+o $. Se seksjon 7.6 (side 302) i boka for et nais eksempel med figurer. 
+Spørsmålet blir da hva vi mener med å \say{flette listene sammen}. Vi beskriver samme metode som boka: Anta at vi skal flette to lister $ A $ og $ B $. $ A $ er $ m $ elementer lang, og $ B $ er $ o $ elementer. Vi har en resultatliste $ C $ som har $ m+o $ elementer. Vi har tre tellere: $ i $, $ j $ og $ k $ som går over henholdsvis $ A $, $ B $ og $ C $. Vi starter med å sette $ i=j=k=0 $ og sammenligner $ A_i $ med $ B_j $. Den minste av dem setter vi inn i $ C_k $. Hentet vi elementet fra $ A $ øker vi $ i $ med 1, hentet vi elementet fra $ B $ øker vi $ j $ med 1. Uansett øker vi $ k $ med 1. Deretter sammenligner vi $ A_i $ med $ B_j $, setter minste inn i $ C_k $, og øker riktig teller. Slik fortsetter vi så lenge $ k < m+o $. Se seksjon 7.6 (side 302) i boka for et nais eksempel med figurer. 
 
 \paragraph{Kompleksitet} Vi setter opp en rekkurant følge for kjøretiden $ T $. Fra definisjonen av flettesortering fremgår det at
 \begin{align*}
@@ -170,8 +170,8 @@ resultat-arrayen, vil vi få arrayen ut i sortert form.
 \paragraph{Kompleksitet}
 Fra teorem \ref{teo:heapop} har vi at innsetting og sletting i en heap tar, i verste fall, $ O(\log_2 n) $ tid. I beste fall har vi at innsetting tar $ O(1) $ tid, og at sletting tar $ O(\log_2 n) $ tid. Siden lista er $ n $ elementer lang må vi gjøre $ n $ innsettinger og $ n $ slettinger. Det gir at total kjøretid er
 \begin{align*}
-\text{I beste fall:\quad} & T(n) = O(n + n\log_2 n) = O(n\log_2 n)\\
-\text{I verste fall:\quad} & T(n) = O(n\log_2 n + n\log_2 n) = O(n\log_2 n)
+\text{I beste fall:\quad} & T(n) = n + n\log_2 n = O(n\log_2 n)\\
+\text{I verste fall:\quad} & T(n) = n\log_2 n + n\log_2 n = O(n\log_2 n)
 \end{align*}
 
 \subsubsection{Tresortering}\label{treesort}
@@ -337,7 +337,7 @@ kan vi betrakte $k$ som en konstant, og vi får at radix sort er $O(n)$
 
 
 \subsection{Parallell Sortering}
-
+\vspace{-40pt}
 \subsubsection{Amdahls lov}
 \label{sec:amdahl}
 
