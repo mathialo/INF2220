@@ -1,0 +1,377 @@
+\documentclass[book, 10pt, hidelinks, norsk, a4paper]{memoir}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+
+\usepackage{float}
+
+% test text
+\usepackage{lipsum}
+
+
+% colors
+\usepackage{xcolor}
+\definecolor{source_blue}{HTML}{003399}
+\definecolor{source_brown}{HTML}{AAAA53}
+\definecolor{source_gray}{HTML}{F9F9F9}
+\definecolor{source_orange}{HTML}{E18A07}
+\definecolor{title_color}{HTML}{333370}
+\definecolor{title_color_light}{HTML}{C2C2D6}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+
+
+% custom fonts
+\usepackage{fontspec}
+\newfontface{\titlefontreg}{Lato Regular}
+\newfontface{\titlefontthin}{Lato Light}
+\newfontface{\monofont}{Source Code Pro Light}
+\newfontface{\monofontbold}{Source Code Pro}
+\newfontface{\monofontitalic}{Source Code Pro Light Italic}
+\setmainfont{Liberation Serif}
+\newcommand{\mono}[1]{{\monofont \small #1}}
+
+
+% style headings
+\renewcommand*{\thepart}{\Roman{part}}									% Part
+\renewcommand*{\parttitlefont}{\color{black}\titlefontthin\Huge}
+\renewcommand*{\partnamefont}{\color{gray}\titlefontreg\scshape}
+\renewcommand*{\partnumfont}{\titlefontreg\scshape}
+\chapterstyle{hangnum}
+\renewcommand*{\chaptitlefont}{\color{title_color}\Huge\titlefontthin}  % Chapter
+\setsecheadstyle{\LARGE\color{title_color}\titlefontthin}               % Section
+\setsubsecheadstyle{\large\color{title_color}\titlefontreg}             % Subsection
+\setparaheadstyle{\color{title_color}\titlefontreg}                     % Paragraph
+
+
+
+%% Cross references
+\usepackage{varioref}
+\usepackage{hyperref}
+\urlstyle{sf}
+\usepackage[nameinlink, capitalize, noabbrev]{cleveref}
+
+
+%% Mathematics
+\usepackage{amssymb}   % Extra symbols
+\usepackage{amsthm}    % Theorem-like environments
+\usepackage{thmtools}  % Theorem-like environments
+\usepackage{mathtools} % Fonts and environments for mathematical formuale
+\usepackage{mathrsfs}  % Script font with \mathscr{}
+
+
+%% Theorem-like environments
+\declaretheorem[style = plain, numberwithin = section, name = Teorem]{rawtheorem}
+\declaretheorem[style = plain,      sibling = rawtheorem, name = Korollar]{rawcorollary}
+\declaretheorem[style = definition, sibling = rawtheorem, name = Definisjon]{rawdefinition}
+\declaretheorem[style = definition, numbered = no, name = Eksempel]{rawexample}
+\declaretheorem[style = remark,    numbered = no]{remark}
+
+
+% boxes around theorems
+\usepackage{mdframed}
+\newenvironment{theorem}{
+	\vspace{10pt}
+	\begin{mdframed}[backgroundcolor=source_gray]
+		\begin{rawtheorem}
+		}{
+	\end{rawtheorem}	
+	\vspace{7pt}
+\end{mdframed}
+\vspace{10pt}
+}
+\newenvironment{corollary}{
+	\vspace{10pt}
+	\begin{mdframed}[backgroundcolor=source_gray]
+		\begin{rawcorollary}
+		}{
+	\end{rawcorollary}	
+	\vspace{7pt}
+\end{mdframed}
+\vspace{10pt}
+}
+\newenvironment{definition}{
+	\vspace{10pt}
+	\begin{mdframed}[backgroundcolor=source_gray]
+		\begin{rawdefinition}
+		}{
+	\end{rawdefinition}	
+	\vspace{7pt}
+\end{mdframed}
+\vspace{10pt}
+}
+\newenvironment{example}{
+	\vspace{10pt}
+%	\paragraph{Eksempel}
+	%\begin{mdframed}[topline=false,bottomline=false]
+	\begin{rawexample}
+	}{
+	\end{rawexample}	
+	%\vspace{7pt}
+	%\end{mdframed}
+	$ \hfill\clubsuit $
+	\vspace{10pt}
+}
+
+
+
+%% Numbering within chapter
+\counterwithin{equation}{chapter}
+\counterwithin{figure}{chapter}
+
+
+% quotes
+\newcommand{\say}[1]{\textit{``#1''}}
+
+
+% drawing:
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{arrows}
+\usetikzlibrary{trees}
+
+
+% import source code
+\usepackage{listings}
+\lstset{
+	basicstyle=\monofont\scriptsize,
+	breaklines=true,
+	keepspaces=true,
+	tabsize=4,
+	numbers=left,
+	numberstyle=\monofont\color{darkgray},
+	backgroundcolor=\color{source_gray},
+	rulecolor=\color{gray},
+	xleftmargin=2.6em,
+	frame=single,
+	framexleftmargin=2.1em,
+	showstringspaces=false,
+	literate={æ}{{\ae}}1{ø}{{\o}}1{å}{{\aa}}1
+}
+\newcommand{\pythonimport}[1]{
+	\vspace{6pt}
+	\lstinputlisting[
+	language=Python,
+	commentstyle=\color{source_brown}\monofontitalic, 
+	morekeywords={True, False},
+	keywordstyle=\color{source_blue}\monofontbold,
+	stringstyle=\color{source_orange}]{#1}
+	\vspace{6pt}
+}
+\newcommand{\javaimport}[1]{
+	\vspace{6pt}
+	\lstinputlisting[
+	language=Java,
+	commentstyle=\color{source_brown}\monofontitalic, 
+	morekeywords={String},
+	keywordstyle=\color{source_blue}\monofontbold,
+	stringstyle=\color{source_orange}]{#1}
+	\vspace{6pt}
+}
+\newcommand{\textimport}[1]{
+	\vspace{6pt}
+	\lstinputlisting{#1}
+	\vspace{6pt}
+}
+
+
+% More mathstuff
+\newcommand{\N}{\mathbb{N}}   % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}   % Integers
+\newcommand{\Q}{\mathbb{Q}}   % Rational numbers
+\newcommand{\R}{\mathbb{R}}   % Real numbers
+\newcommand{\Cx}{\mathbb{C}}   % Complex numbers
+\newcommand{\K}{\mathbb{K}}   % R or C 
+\renewcommand{\P}{\mathbb{P}} % Projective space
+\newcommand{\indexset}[1]{\set{1, 2, \ldots, #1}}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nul}{Nul}							% matrix-stuf
+\DeclareMathOperator{\rref}{rref}
+\DeclareMathOperator{\col}{Col}
+\DeclareMathOperator{\row}{Row}
+\newcommand{\inner}[2]{\langle #1 , #2 \rangle}
+\DeclareMathOperator{\supp}{supp}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\abs}[1]{\left|#1\right|}					% absulute value (singe line norm): | |
+\newcommand{\ans}[1]{\underline{\underline{~#1~}}}		% two lines (for answers)
+\newcommand{\sqrtl}[1]{\sqrt{#1~}}						% sqrt with longer line (nice for big equations)
+\newcommand{\der}[2]{\frac{d}{d#2}\left(#1\right)}		% derivative
+\newcommand{\norm}[1]{\lVert#1\rVert}		% double line norm: || ||
+
+
+%% Increase spacing before section and chapter titles
+\makeatletter
+\let\origsection\section
+\renewcommand\section{\@ifstar{\starsection}{\nostarsection}}
+
+\newcommand\nostarsection[1]
+{\sectionprelude\origsection{#1}\sectionpostlude}
+
+\newcommand\starsection[1]
+{\sectionprelude\origsection*{#1}\sectionpostlude}
+
+\newcommand\sectionprelude{%
+	\vspace{2.5em}
+}
+
+\newcommand\sectionpostlude{%
+	\vspace{-5pt}
+	{\color{title_color_light}\hrule}
+	\vspace{15pt}
+}
+\let\origsubsection\subsection
+\renewcommand\subsection{\@ifstar{\starsubsection}{\nostarsubsection}}
+
+\newcommand\nostarsubsection[1]
+{\subsectionprelude\origsubsection{#1}\subsectionpostlude}
+
+\newcommand\starsubsection[1]
+{\subsectionprelude\origsubsection*{#1}\subsectionpostlude}
+
+\newcommand\subsectionprelude{%
+	\vspace{1.2em}
+}
+
+\newcommand\subsectionpostlude{%
+	%	\vspace{-1.4em}
+}
+\makeatother
+
+
+
+\title{{\Huge\titlefontthin Algoritmer og datastrukturer}\\{\Large\titlefontthin Pensumsammendrag i INF2220}}
+\author{\titlefontreg Mathias Lohne}
+\date{}
+
+\begin{document}
+\frontmatter
+\maketitle
+\thispagestyle{empty}
+\newpage
+~\thispagestyle{empty}
+\newpage
+
+\begin{KeepFromToc}
+	\chapter*{Noen kommentarer}
+	Dette notatet begynte som min egen eksamenstrening, og har blitt litt oppdatert, korrigert og fylt ut etter det. Vær oppmerksom på at det sikkert inneholder feil, mangler og alt mulig sånt. Finner du noen teite blemmer er det kult om du sender meg en mail: \mono{mathialo@student.matnat.uio.no}
+	
+	Innhold og eksempler er basert på stoff fra læreboka, forelesninger, tidligere eksamener, mine egne notater og obliger, Wikipedia og et tilsvarende kompendium laget av Veronika Heimsbakk\footnote{http://folk.uio.no/veronahe/}.
+	
+	Det er bare å bruke, modifisere, og stjele innholdet i notatet. Hvis du gjør det er det kult om du krediterer. Alle \LaTeX-filer ligger tilgjengelig på GitHub\footnote{https://github.com/mathialo/INF2220}.
+	
+	~\\Denne utgaven er kompilert \today.
+	\newpage
+	
+	\tableofcontents
+\end{KeepFromToc}
+
+\mainmatter
+
+\part{Algoritmeteori og kompleksitetsanalyse}
+
+
+\chapter{Kompleksitet og tidsanalyse}
+\input{sections/terminologi_og_begreper.tex}
+\input{sections/kompleksitetsklasser.tex}
+\input{sections/bigonotasjon.tex}
+
+
+\chapter{Paradigmer for algoritmedesign}
+\vspace{-10pt}
+\input{sections/splittoghersk.tex}
+\input{sections/graadigealg.tex}
+\input{sections/dynprog.tex}
+\input{sections/kombsok.tex}
+
+
+\chapter{Bevisføring}
+\input{sections/bevisteknikker.tex}
+\input{sections/reduksjon.tex}
+\input{sections/noenbeviser.tex}
+
+
+
+\part{Datastrukturer}
+
+
+\chapter{Trær}
+\input{sections/treintro.tex}\newpage
+\input{sections/soketre.tex}
+\input{sections/rodsvarttre.tex}
+\input{sections/btre.tex}
+\input{sections/rotasjoner.tex}
+
+
+\chapter{Grafer}
+\input{sections/grafintro.tex}
+\input{sections/hamiltonsksti.tex}
+\input{sections/spenntre.tex}
+\input{sections/topsort.tex} \vspace{-15pt}
+\input{sections/scc.tex}
+\input{sections/articulationpoints.tex}
+
+
+\chapter{Heap}
+\input{sections/heap.tex}
+\input{sections/leftistheap.tex}
+
+
+\chapter{Map}
+\input{sections/mapintro.tex}
+\input{sections/hashmap.tex}
+
+
+\chapter{Abstrakte datatyper}
+\input{sections/adt.tex}
+\input{sections/fifolifo.tex}
+
+
+\part{Noen konkrete algoritmer}
+
+
+\chapter{Traversering av grafer}
+\input{sections/dfs.tex}
+\input{sections/kosaraju.tex}
+
+
+
+\chapter{Korteste vei}
+\input{sections/bfs.tex}
+\input{sections/dijkstra.tex}
+\input{sections/floyd.tex}
+
+
+\chapter{Minimale spenntrær}
+\input{sections/prim.tex}
+\input{sections/kruskal.tex}
+
+
+\chapter{Komprimering}
+\input{sections/huffman.tex}
+
+
+\chapter{Tekstsøk}
+\input{sections/tekstsokintro.tex}
+\input{sections/bruteforcesok.tex}
+\input{sections/boyermoore.tex}
+
+
+\chapter{Sortering}
+\input{sections/sortintro.tex}
+\input{sections/bubblesort.tex}
+\input{sections/insertionsort.tex}
+\input{sections/mergesort.tex}
+\input{sections/heapsort.tex}
+\input{sections/treesort.tex}
+\input{sections/quicksort.tex}
+\input{sections/radixsort.tex}
+\input{sections/parallelsort.tex}
+
+
+\appendix
+\input{sections/cheatsheet.tex}
+
+
+
+\end{document}

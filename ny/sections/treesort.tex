@@ -1,0 +1,13 @@
+\section{Tresortering}\label{treesort}
+I likhet med \nameref{heapsort} utnytter vi her egenskapene til en datastruktur,
+nemlig binære søketrær. I et slikt tre vet vi at venstre barn til en node er
+mindre enn noden selv, og at høyre barn er større eller lik noden.
+Deretter traverserer vi treet i infix-rekkefølge. På den måten vil vi altså gå
+gjennom treet i stigende rekkefølge, og vi har dermed sortert arrayen.
+
+\paragraph{Kompleksitet}
+Fra teorem \ref{teo:bintre} har vi at innsetting i et binært søketre tar $ O(\log_2 n) $ beste tid, og $ O(n) $ verste tid. En traversering av treet tar opplagt $ O(n) $ tid, siden vi går gjennom hver node én gang. Tilsammen har vi da at kjøretiden for algoritmen er 
+\begin{align*}
+\text{I beste fall / gjennomsnittlig:\quad} & T(n) = O(n\log_2 n)\\
+\text{I verste fall:\quad} & T(n) = O(n\cdot n) = O(n^2)
+\end{align*}

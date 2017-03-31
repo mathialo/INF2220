@@ -1,0 +1,189 @@
+\section{B-trær} \label{b-tre}
+B-trær er konstruert for å effektivisere antall disklesninger, og gir mening å bruke hvis vi har et tre som er så stort at det må lagres på gammeldagse spinnedisker, og ikke i RAM. Vi lagrer dataene i blokker, og leser en og en blokk av gangen. Alle dataene er lagret i løvnodene, mens de indre nodene brukes for søking. En vanlig måte å implementere B-trær på er å ha så mye av toppen i RAM som mulig, og lagre resten på disk. B-trær er ikke binære, dvs at de kan ha flere enn 2 barn. 
+
+\begin{definition} La $ M $ angi antall mulige nøkler i hver indre node, og $ L $ angi maksimalt antall dataelementer i hver løvnode. B-trær er søketrær der følgende kriterier er oppfylt:
+\begin{enumerate}[i]
+\item Alle dataene er lagret i løvnodene
+\item Interne noder lagrer inntil $ M-1 $ nøkler for søking: nøkkel $ i $ angir den minste verdien i subtre $ i+1 $.
+\item Roten er enten en løvnode, eller har mellom 2 og $ M $ barn. 
+\item Alle andre indre noder har mellom $ \lceil M/2\rceil $ og $ M $ barn. 
+\item Alle løvnoder har samme dybde.
+\item Alle løvnoder har mellom $ \lceil L/2\rceil $ og $ L $ dataelementer
+\end{enumerate}
+\label{def:b_tre}
+\end{definition}
+
+
+\subsection{Innsetting}
+Når vi skal sette inn et element i et B-tre finner vi plassen elementet skal på, og setter det der. Hvis løvnoden vi setter elementet inn i er full må vi splitte noden i to like store deler. Vi må da oppdatere nøklene i foreldrenoden $ P $. Hvis $ P $ ikke har plass til en ekstra nøkkel må vi splitte den også, og oppdatere nøklene i foreldrenoden til $ P $. Slik fortsetter vi oppover til vi får en node som har plass til en ekstra nøkkel. Den eneste måten et B-tre kan øke høyden på er at rota splittes i to, og at vi lager en ny rot. 
+
+\begin{example} Sett inn 13 og 42 i følgende B-tre ($ M = 3 $ og $ L = 4 $):
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
+
+\node[inner] {17; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\14\\~\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; -}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\41}
+	}
+	child[missing]
+}
+;
+
+\end{tikzpicture}
+\end{figure}
+
+Vi starter med å sette inn 13. Vi ser først på rota: (17; -). 13 er mindre enn 17, så vi går til første barn. Så sammenligner vi med (12; -). 13 er sørre enn 13, og mindre enn uendelig (- symboliserer minste verdi i tredje barn, men siden det barnet ikke eksisterer tenker vi på verdier som $ \infty $). Vi går derfor til andre barn. Der ser vi at vi kan sette inn 13 uten problemer. 
+
+Vi skal nå sette inn 42. 42 er større enn 33 så vi går til andre barn. Igjen er 42 større enn 33 så vi går til andre barn igjen. Her ser vi at hvis vi legger til 42 i bunn av noden (33, 37, 40, 41) blir størrelsen lik 5, altså større enn $ N $. Vi må splitte noden. Når vi splitter en node med et odde antall elementer er det ikke helt klart som vi skal ta med oss størsteparten, eller la størsteparten være igjen. I dette tilfellet vil vi få en node med 3 og en node med 2 elementer. Vi kan selv velge om den nye noden skal ha 2 eller 3 elementer, men vi må være konsekvente. I dette tilfellet lar vi den nye noden ha 2 elementer. Vi oppdaterer foreldrenoden. Siden den har to barn fra før og $ M=3 $ går det fint, vi trenger ikke splitte videre oppover. 
+
+Resultatet etter innsetting ser slik ut:
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
+
+\node[inner] {17; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\13\\14\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; 41}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\~}
+	}
+	child {
+		node[leaf] {41\\42\\~\\~}
+	}
+}
+;
+
+\end{tikzpicture}
+\end{figure}
+\end{example}
+
+
+
+\subsection{Sletting}
+Hvis vi skal fjerne et element fra et B-tre søker vi opp elementet, tar det vekk, og hvis mengden elementer i noden blir mindre enn grensen satt i def. \ref{def:b_tre}.vi slår vi sammen to noder. Den eneste måten B-trær kan minke i høyde på er om alle barna til rota blir slått sammen til én node (vi fjerner da rota). 
+
+\begin{example} Fjern 41 fra følgende B-tre:
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
+
+\node[inner] {17; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\13\\14\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; 41}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\~}
+	}
+	child {
+		node[leaf] {41\\42\\~\\~}
+	}
+}
+;
+
+\end{tikzpicture}
+\end{figure}
+Vi ser at 41 er mellom 17 og $ \infty $, så vi går til andre barn. Deretter ser vi at 41 er større enn 33 og større enn eller lik 41. Vi går derfor til tredje barn og fjerner 41. Vi ser at da vi noden kun ha ett element, og vi slår den sammen med noden før. Resultatet etter fjerning blir
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+[level distance=1.5cm,
+  level 1/.style={sibling distance=4cm},
+  level 2/.style={sibling distance=1.3cm},
+every node/.style = {align=center}]
+\tikzstyle{inner} = [ellipse, draw=black]
+\tikzstyle{leaf} = [rectangle, draw=black]
+
+\node[inner] {17; -}
+child {
+	node[inner] {12; - }
+	child {
+		node[leaf] {2\\3\\6\\~}
+	}
+	child {
+		node[leaf] {12\\13\\14\\~}
+	}
+	child[missing]
+}
+child {
+	node[inner] {33; -}
+	child {
+		node[leaf] {17\\18\\29\\30}
+	}
+	child {
+		node[leaf] {33\\37\\40\\42}
+	}
+	child[missing]
+}
+;
+
+\end{tikzpicture}
+\end{figure}
+\end{example}
+
+
+
+\subsection{Tidsanalyse}
+Følgende teorem angir kompliksteten til de ulike operasjonene på et B-tre:
+\begin{theorem} Å søke etter, sette inn og fjerne elementer fra et B-tre tar, både i beste og verste fall, $ O(\log n) $ tid.
+\end{theorem}

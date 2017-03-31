@@ -1,0 +1,48 @@
+\section{Kompleksitetsklasser}
+
+Noen problemer kan løses veldig enkelt, for eksempel som å søke i et binært søketre, andre problemer er mye mer kompliserte, og noen er uløselige. I dette kurset skiller vi i hovedsak mellom P, NP og uløselige problemer, selv om kompleksitetsklasser er mye finere oppdelt enn det. 
+
+En av grunnene til at vi deler opp problemer i kompleksitetsklasser er at vi på forhånd kan si noe om løsbarheten til problemene, før vi begynner å løse dem. En annen grunn er at problemer i samme klasse kan ha løsninger som ligner, selv om problemene er ganske ulike. Se kapitlet om paradigmer (\ref{paradigmer}). For eksempel er både søk i binærtre og quicksort eksempler på splitt og hersk-algoritmer. De ligner i utforming, men gjør ganske forskjellige ting. Begge de to algoritmene ligger i P. 
+
+
+
+\paragraph{P (polynomial time)}
+P er mengden av alle problemene som kan løses i polynomisk tid, altså de problemene der det finnes en algoritme som løser problemet med kjøretid på formen $ O(n^k) $ for en $ k \in \mathbb{N} $
+
+\paragraph{NP (nondeterministic polynomial time)}
+NP kan defineres på flere måter. En enkel måte å tenke om NP på er at NP er alle problemene som kan være vanskelige å løse, men hvor en løsning kan sjekkes i polynomisk tid. For eksempel kan sudoku være veldig vanskelig å løse, men å skjekke at en løsning er rett er ganske enkelt, det er bare å skjekke at alle rader, kolonner og bokser er riktig utfylt (ikke inneholder en verdi mer enn 1 gang). 
+
+Siden alle problemer i P kan skjekkes i polynomisk tid (man kan bare løse problemet på nytt å se om man får samme svar) er det klart at P $ \subseteq $ NP. Det er faktisk ikke helt klart hvorvidt NP $ \subseteq $ P også, dvs om det faktisk er en reell forskjell på P og NP. Dette er faktisk et av millenniumsproblemene, og et av de store uløste problemene i matematikk. Det er verdt å nevne at de fleste tror at P $ \neq $ NP, det mangler bare et formelt bevis.
+
+Alle problemene som er like vanskelig eller vanskeligere enn alle problemene i NP kalles NP-hard. De problemene som er i både NP-hard og NP er dermed de vanskeligste problemene i NP. Denne mengden kalles NP-komplett. 
+
+\paragraph{EXPTIME (exponetial time)}
+EXPTIME er mengden av alle problemer som løses og sjekkes i eksponentiell tid. Hvis jeg for eksempel ber deg fortelle meg hva det beste trekket jeg burde gjøre i et parti sjakk er, er det vanskelig for deg å regne ut, men også vanskelig for meg å sjekke om svaret ditt stemmer. I mange tilfeller er brute force den eneste muligheten vi har. 
+
+På samme måte som for NP har vi EXPTIME-hard og EXPTIME-komplett. Det å avgjøre hvilket trekk i et parti sjakk som er det beste er et EXPTIME-komplett . 
+
+\paragraph{R}
+R er mengden av problemer som er løselig i endelig tid. De kan ta flere ganger av alderen til universet å komme til en løsning, men det er mulig. 
+
+\paragraph{Uløselige problemer} 
+En del problemer har ikke en mulig løsning. Et eksempel på et slikt problem er halting-problemet. Dette problemet går ut på om en turingmaskin kan vite om den noen gang vil gi et resultat (det vil si stoppe, engelsk: halt), eller om den vil gå i evig loop. Et bevis for hvorfor haltingproblemet er uløselig finnes i \ref{haltingProof}. 
+
+~\\
+\noindent Vi skal se på noen eksempler på problemer:
+
+\begin{example}
+Traveling salesperson (TSP)
+
+Et av de mest kjente og studerte optimeringsproblemene kalles \emph{Traveling salesperson}. Problemet går slik: En handelsmann har en liste med byer han må innom. Han vil reise innom hver by én gang, og vil bruke minst mulig penger på turen. Han vet prisen det vil koste å reise mellom hver by. Hvilken rekkefølge burde handelsmannen besøke byene i for å betale minst mulig i reisepenger?
+
+Dette problemet er av eksponentiell karakter. Vi kan ikke si noe om hvilken vei som blir billigst uten å sjekke alle muligheter. Problemet er NP-komplett.
+\end{example}
+
+\newpage
+\begin{example}
+Subset sum
+
+Problemet er slik: Gitt en mengde $ M $ av tall, skal vi avjøre om det finnes en delmengde $ M' \subset M $ slik at  \[ \sum_{m~\in~M'} m = 0  \] Mengden $ A =  \{-2, -3, 1, 4, 6\} $ er en slik mengde, siden $ 1 + 4 + (-2) + (-3) = 0 $. Mengden $ B = \{-6, -3, 1, 4, 7\} $ er ikke en slik mengde, siden det ikke er mulig å plukke ut noen elementer slik at summen av elementene blir 0.
+
+Å løse dette problemet er ganske vanskelig siden det er NP-komplett. Vi må (slik som i TSP) prøve oss fram med forskjellige kombinasjoner. Å skjekke om en antatt delmengde har sum $ = 0 $ er enkelt: det er bare å summere og skjekke, og kan gjøres i $ O(n) $ tid. 
+\end{example}

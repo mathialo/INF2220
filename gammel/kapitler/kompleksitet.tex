@@ -1,6 +1,5 @@
 \section{Kompleksitet og tidsanalyse}
 \subsection{Terminologi og begreper}
-\vspace{-40pt}
 \subsubsection{Alfabeter og språk}
 Når vi bruker begrepene alfabet og språk snakker vi som regel ikke om språk som engelsk, norsk eller Java (selv om disse også er språk i formell forstand), men om en samling strenger av tegn (tenk: ord). Hvilke tegn vi kan bruke avhenger av hvilket alfabet vi har.
 
@@ -13,17 +12,19 @@ Gitt et alfabet $ \Sigma $ bruker vi $ \Sigma ^* $ for å betegne mengden av all
 \item $ L = \{i : M \text{ stopper på input } i \} $ (Den inputen som gjør at en turingmaskin stopper. En variant av haltingproblemet, se \ref{haltingProof})\index{haltingproblemet}
 \end{itemize}
 \label{språk}
-\begin{example} Gitt alfabetet $ \{0, 1, \text{`,'}\} $, hva er det formelle språket som tilsvarer sorteringsproblemet over dette alfabetet?
+
+\begin{eks} Gitt alfabetet $ \{0, 1, \text{`,'}\} $, hva er det formelle språket som tilsvarer sorteringsproblemet over dette alfabetet?
 
 \emph{Svar:}
 \[ L = \{(0), (1), ..., (0,1), (0, 10), (1, 10), ...\} \]
 
-\end{example}
+\end{eks}
+
 
 \subsubsection{Turingmaskinen}
 Turingmaskinen er en teoretisk maskin. Den eksisterer ikke i virkeligheten, men er noe vi bruker for å bevise teoremer. Selvfølgelig finnes det ingen formell definisjon på \emph{hva} en Turingmaskin egentlig er, så alle læreverk definerer den litt forskjellig. Det høres kanskje helt Texas ut, men alle definisjonene er tilnærmet ekvivalente. \index{Alan Turing}\index{turingmaskin}
 
-\begin{definition}
+\begin{definisjon}
 \label{def:turingmaskin}
 Litt forenklet kan vi si at en Turingmaskin $ M = (\Sigma, \Gamma, Q, \delta) $ består av fire komponenter:
 \begin{itemize}
@@ -32,7 +33,7 @@ Litt forenklet kan vi si at en Turingmaskin $ M = (\Sigma, \Gamma, Q, \delta) $ 
 \item En liste $ Q $ over mulige statuser for Turingmaskinen.
 \item En liste $ \delta $ over `responser' på input. For eksempel: \say{Hvis jeg er i status 7 og leser en `a' skal jeg gå til status 21}.
 \end{itemize}
-\end{definition}
+\end{definisjon}
 
 Hvis vi skal prøve å se for oss en Turingmaskin intuitivt kan vi se for oss et uendelig lang papirremse (formelt kalt teip). På denne papirremsa står det symboler (fra $ \Sigma $). Dette er inputen til Turingmaskinen. Maskinen leser ett og ett symbol, og reagerer på symbolet (etter hva $ \delta $ sier den skal gjøre). Det kan deretter la symbolet stå, viske det vekk eller erstatte det med et nytt symbol (fra $ \Gamma $).
 
@@ -46,45 +47,38 @@ En av grunnene til at vi deler opp problemer i kompleksitetsklasser er at vi på
 
 
 \paragraph{P (polynomial time)}
-P er mengden av alle problemene som kan løses i polynomisk tid, altså de problemene der det finnes en algoritme som løser problemet med kjøretid på formen $ O(n^k) $ for en $ k \in \mathbb{N} $
+P er mengden av alle problemene som kan løses i polynomisk tid, altså har tid på formen $ O(n^k) $ for en $ k \in \mathbb{N} $
 
 \paragraph{NP (nondeterministic polynomial time)}
-NP kan defineres på flere måter. En enkel måte å tenke om NP på er at NP er alle problemene som kan være vanskelige å løse, men hvor en løsning kan sjekkes i polynomisk tid. For eksempel kan sudoku være veldig vanskelig å løse, men å skjekke at en løsning er rett er ganske enkelt, det er bare å skjekke at alle rader, kolonner og bokser er riktig utfylt (ikke inneholder en verdi mer enn 1 gang). 
+NP er mengden av alle problemer hvor vi ikke vet hvor lang tid det vil ta i forkant å finne en løsning, men som blir gjort i polynomisk tid. NP-problemer er vanskelige å regne ut, men en gitt løsning enkelt lar seg sjekke. Hvis jeg for eksempel ber deg faktorisere et stort tall $ n $, vil det ta lang tid for deg å gjøre det, men det er lett for meg å gange sammen de tallene du påstår er faktorene til $ n $ og se om jeg får $ n $. Hele P er inneholdt i NP, og det er usikkert hvorvidt det er en reell forskjell på N og NP.
 
-Siden alle problemer i P kan skjekkes i polynomisk tid (man kan bare løse problemet på nytt å se om man får samme svar) er det klart at P $ \subseteq $ NP. Det er faktisk ikke helt klart hvorvidt NP $ \subseteq $ P også, dvs om det faktisk er en reell forskjell på P og NP. Dette er faktisk et av millenniumsproblemene, og et av de store uløste problemene i matematikk. Det er verdt å nevne at de fleste tror at P $ \neq $ NP, det mangler bare et formelt bevis.
-
-Alle problemene som er like vanskelig eller vanskeligere enn alle problemene i NP kalles NP-hard. De problemene som er i både NP-hard og NP er dermed de vanskeligste problemene i NP. Denne mengden kalles NP-komplett. 
+Vi har en undermengde av NP kalt NP-komplett. Denne mengden består av de ``vanskeligste'' problemene i NP, og hvis man har en løsning på et av disse problemene vil man, ved reduksjon, ha en løsning på alle andre problemer i NP, inkludert P.
 
 \paragraph{EXPTIME (exponetial time)}
-EXPTIME er mengden av alle problemer som løses og sjekkes i eksponentiell tid. Hvis jeg for eksempel ber deg fortelle meg hva det beste trekket jeg burde gjøre i et parti sjakk er, er det vanskelig for deg å regne ut, men også vanskelig for meg å sjekke om svaret ditt stemmer. I mange tilfeller er brute force den eneste muligheten vi har. 
-
-På samme måte som for NP har vi EXPTIME-hard og EXPTIME-komplett. Det å avgjøre hvilket trekk i et parti sjakk som er det beste er et EXPTIME-komplett . 
-
-\paragraph{R}
-R er mengden av problemer som er løselig i endelig tid. De kan ta flere ganger av alderen til universet å komme til en løsning, men det er mulig. 
+EXPTIME er mengden av alle problemer som løses og sjekkes i eksponentiell tid. Hvis jeg for eksempel ber deg fortelle meg hva det beste trekket jeg burde gjøre i et parti sjakk er, er det vanskelig for deg å regne ut, men også vanskelig for meg å sjekke om svaret ditt stemmer. Vi kaller problemer i denne klassen \say{intractable}. I mange tilfeller er brute force den eneste muligheten vi har. 
 
 \paragraph{Uløselige problemer} 
 En del problemer har ikke en mulig løsning. Et eksempel på et slikt problem er halting-problemet. Dette problemet går ut på om en turingmaskin kan vite om den noen gang vil gi et resultat (det vil si stoppe, engelsk: halt), eller om den vil gå i evig loop. Et bevis for hvorfor haltingproblemet er uløselig finnes i \ref{haltingProof}. 
 
-~\\
+~\\~\\
 \noindent Vi skal se på noen eksempler på problemer:
 
-\begin{example}
+\begin{eks}
 Traveling salesperson (TSP)
 
 Et av de mest kjente og studerte optimeringsproblemene kalles \emph{Traveling salesperson}. Problemet går slik: En handelsmann har en liste med byer han må innom. Han vil reise innom hver by én gang, og vil bruke minst mulig penger på turen. Han vet prisen det vil koste å reise mellom hver by. Hvilken rekkefølge burde handelsmannen besøke byene i for å betale minst mulig i reisepenger?
 
 Dette problemet er av eksponentiell karakter. Vi kan ikke si noe om hvilken vei som blir billigst uten å sjekke alle muligheter. Problemet er NP-komplett.
-\end{example}
+\end{eks}
 
 
-\begin{example}
+\begin{eks}
 Subset sum
 
 Problemet er slik: Gitt en mengde $ M $ av tall, skal vi avjøre om det finnes en delmengde $ M' \subset M $ slik at  \[ \sum_{m~\in~M'} m = 0  \] Mengden $ A =  \{-2, -3, 1, 4, 6\} $ er en slik mengde, siden $ 1 + 4 + (-2) + (-3) = 0 $. Mengden $ B = \{-6, -3, 1, 4, 7\} $ er ikke en slik mengde, siden det ikke er mulig å plukke ut noen elementer slik at summen av elementene blir 0.
 
-Å løse dette problemet er ganske vanskelig siden det er NP-komplett. Vi må (slik som i TSP) prøve oss fram med forskjellige kombinasjoner. Å skjekke om en antatt delmengde har sum $ = 0 $ er enkelt: det er bare å summere og skjekke, og kan gjøres i $ O(n) $ tid. 
-\end{example}
+Å løse dette problemet er ganske vanskelig siden det er NP-komplett. Vi må (slik som i TSP) prøve oss fram med forskjellige kombinasjoner. 
+\end{eks}
 
 
 
@@ -93,56 +87,43 @@ Når vi skal analysere kjøretid er vi sjeldent opptatt av et nøyaktig svar, me
 
 Hvorfor big O? Vi er interessert i å vite noe om generell tid, fordi faktisk tid vil avhenge av maskin etc. 
 
-\begin{definition}
+\begin{definisjon}
 \label{def:O}
 La $ f $ og $ g $ være to funksjoner $ f, g:\mathbb{N} \rightarrow \mathbb{R} $. Vi sier da at $ f(n) = O(g(n))$ hvis det eksisterer positive heltall $ c $ og $ N $ slik at for hvert heltall $ n\geq N $ er $ f(n) \leq c\,g(n) $
-\end{definition}
+\end{definisjon}
 $ O(g(n)) $ blir dermed en øvre skranke for kjøretid.
 
 Når vi i denne sammenhengen bruker O-notasjon vil vi bruke det som et mål på hvordan kjøretiden øker med inputen. Vi ser på et eksempel:
 
-\begin{example}
-Vi er gitt en array \mono{int a[]}, med $ n $ elementer, og skal summere alle elementene i \mono{a[]}. Det kan gjøres slik:
-\begin{lstlisting}[language=Java,
-commentstyle=\color{source_brown}\monofontitalic, 
-morekeywords={String},
-keywordstyle=\color{source_blue}\monofontbold,
-stringstyle=\color{source_orange}]
-int sum = 0;
+\begin{eks}
+Gitt et tall $ n $ skal vi finne alle mulige heltall som $ n $ er delelig med. En veldig enkel algoritme for å løse dette er å forsøke å dele på alle tallene fra 1 til $ n $. 
 
-for (int i=0; i<n; i++) {
-	sum += a[i];
-}
-\end{lstlisting}
-Vi lurer nå på, hva er kjøretiden til denne algoritmen? Vi ser at vi gjør to forskjellige operasjoner her: oppretter en variabel, og plusser sammen to tall. Den siste operasjonen gjør vi $ n $ ganger på grunn av løkka.
+Hvis $ n=5 $ vil dette gå raskt, da vi bare må teste 5 mulige utfall ($ n/k, k \in \{1, 2, 3, 4, 5\} $). Hvis $ n=139\,823 $ blir problemet mer komplisert, og algoritmen vil måtte gjøre mange flere tester. Generelt må vi gjøre $ n $ tester for et inputtall $ n $.
 
-Vi har dermed at kjøretiden, $ T(n) $, blir:
-\[ T(n) = t_{\text{opprett variabel}} + n \cdot t_{\text{pluss}}  \]
-der $ t_{\text{opprett variabel}} $ angir tiden det tar å opprette en variabel i minne, og $ t_{\text{pluss}} $ angir tiden det tar å plusse sammen to tall. Problemet er at disse konstantene varierer ut fra hvilken datamaskin vi bruker, hvilket språk vi implementerer i, etc. Det eneste vi vet noe om er at tiden øker lineært med størrelsen. Derfor er 
-\[ T(n) = O(n) \]
-\end{example}
+Vi ser at kjøretiden øker lineært med størrelsen på input. Vi sier derfor at algoritmen bruker $ O(n) $ tid.
+\end{eks}
 
 Som nevnt tidligere er vi mer opptatt av størrelsesorden enn den konkrete kjøretiden. Vi bryr oss derfor ikke om konstanter. Hvis vi i eksempelet hadde måttet gjøre 2 tester for hver input hadde vi fortsatt hatt $ O(n) $ tid, selv om kjøretiden hadde vært $ T(n) = 2n $. Vi kan sette opp noen regneregler for O-notasjon:
-\begin{theorem}
+\begin{teorem}
 \label{teo:O}
 Regneregler for O-notasjon:
 \begin{enumerate}[i]
-	\item Hvis $ T(n) = c\cdot f(n) $ for en konstant $ c $ og en funksjon $ f $, så er $ T(n) = O(f(n)) $
-	\item Hvis $ T(n) = f(n) + g(n) $ for to funksjoner $ f $ og $ g $, og det finnes et tall $ N $ slik at $ f(n) > g(n) $ for alle $ n > N$ , så er $ T(n) = O(f(n)) $
+\item $ O(k\,g(n)) = O(g(n)) \quad \text{for } k = 1,2,... $
+\item La $ f $ og $ g $ være to funksjoner, og anta at det finnes et tall $ N $ slik at $ f(n) > g(n) $ for alle $ n > N$ . Da er $ O(f(n)+g(n)) = O(f(n)) $
 \end{enumerate}
-\end{theorem}
+\end{teorem}
 
-Dette er ikke veldig storlagne resultater, de følger egentlig direkte fra definisjonen. Det del \textit{i} egentlig sier er at vi kan droppe konstanter når vi jobber med O-notasjon. Vi vil aldri se uttrykk som $ O(4n^2) $, vi skriver bare $ O(n^2) $. Det er fordi at forskjellen mellom $ 4n^2 $ og $ n^2 $ er så liten i forhold til forskjellen mellom $ n^2 $ og $ n^3 $. 
+\begin{bevis} Teorem \ref{teo:O}, del i
 
-Del \textit{ii} sier at vi bare trenger å se på den største funksjonen. Vi vil for eksempel aldri skrive $ O(n^2 + n) $, vi vil bare skrive $ O(n^2) $ siden $ n $ blir så liten i forhold til $ n^2 $.
+La $ f $ og $ g $ være to funksjoner $ f,g:\mathbb{N}\rightarrow\mathbb{R} $ og la $ k $ være et tall $ \in \mathbb{N} $. Videre antar vi at $ f(n) = O(g(n)) $. Da har vi fra definisjon \ref{def:O} at $ f(n) \leq c\,g(n) $ for en konstant $ c $. Vi setter $ g'(n) = k\,g(n) $ for et positivt heltall $ k $. Da har vi at
+\[ f(n) \leq c\,g(n) \leq c\,k\,g(n) = c\,g'(n) \]
+Dermed er $ f(n) = O(g'(n)) $, og fra antagelsen har vi at $ f(n) = O(g(n)) $. Vi har derfor at $ O(k\,g(n)) = O(g(n)) $
+\end{bevis}
 
+Beviset for del ii følger samme strategi. Det teorem \ref{teo:O} del ii egentlig sier er at vi kun bryr oss om den `største' funksjonen. Har vi for eksempel kjøretid lik $ T(n) = n^2 + n $ har vi kun $ O(n^2) $.
 
-\begin{example} Beregning av kjøretid. Vi har gitt følgende program
-\begin{lstlisting}[language=Java,
-commentstyle=\color{source_brown}\monofontitalic, 
-morekeywords={String},
-keywordstyle=\color{source_blue}\monofontbold,
-stringstyle=\color{source_orange}]
+\begin{eks} Beregning av kjøretid. Vi har gitt følgende program
+\begin{verbatim}
 for (int i=0; i<n; i++) {
     for (int j=i; j<n; j++) {
         // Do something simple...
@@ -152,33 +133,26 @@ for (int i=0; i<n; i++) {
 for (int i=0; i<n-3; i++) {
     // Do something else...
 }
-\end{lstlisting}
-og skal beregne worst case kjøretid til programmet. Vi ser at den indre for-løkka i den øverste for-løkka starter på \mono{i}, og ikke på 0. Fra teorem \ref{teo:O} del i har vi at det ikke har noe å si. Vi regner med den løkka. Vi ser også at det er en enkel for-løkke etterpå, men fra teorem \ref{teo:O} del ii har vi at vi kan se bort fra den. Kjøretiden blir altså $ O(n^2) $.
-\end{example}
+\end{verbatim}
+og skal beregne worst case kjøretid til programmet. Vi ser at den indre for-løkka i den øverste for-løkka starter på \verb|i|, og ikke på 0. Fra teorem \ref{teo:O} del i har vi at det ikke har noe å si. Vi regner med den løkka. Vi ser også at det er en enkel for-løkke etterpå, men fra teorem \ref{teo:O} del ii har vi at vi kan se bort fra den. Kjøretiden blir altså $ O(n^2) $.
+\end{eks}
 
 
-\begin{example} Finn kjøretid for følgende program: (Ex14 1b)
+\begin{eks} Finn kjøretid for følgende program: (Ex14 1b)
 
-\begin{lstlisting}[language=Java,
-commentstyle=\color{source_brown}\monofontitalic, 
-morekeywords={String},
-keywordstyle=\color{source_blue}\monofontbold,
-stringstyle=\color{source_orange}]
+\begin{verbatim}
 for (i=n; i >= 1; i = i/2) {
     for (j=1; j<n; j++) {
         // do something
     }
 }
-\end{lstlisting}
+\end{verbatim}
 Vi ser at den indre løkka vil gå $ n $ ganger. Den ytre løkka halverer telleren hver gang, det vil si at den kjører $ \log_2 n $ ganger. Kjøretiden blir derfor $ O(n\log_2 n) $.
-\end{example}
+\end{eks}
 
-\begin{example} Finn kjøretid for følgende program: (Ex11 2b)
-\begin{lstlisting}[language=Java,
-commentstyle=\color{source_brown}\monofontitalic, 
-morekeywords={String},
-keywordstyle=\color{source_blue}\monofontbold,
-stringstyle=\color{source_orange}]
+~\\~\\
+\begin{eks} Finn kjøretid for følgende program: (Ex11 2b)
+\begin{verbatim}
 float foo(A) {
     n = A.length;
     
@@ -202,9 +176,9 @@ float foo(A) {
     b3 = foo(A3);
     b4 = foo(A4);
 }
-\end{lstlisting}
+\end{verbatim}
 
-Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sakte gjennom hva programmet gjør og forsøker å sette opp en funksjon for kjøretiden. Vi ser at \mono{foo} har to nestede for-løkker, hver av dem går $ n/2 $ ganger. Vi har derfor at hver gang vi kommer til denne løkka blir kjøretiden $ T_{\text{løkke}}(m) = (m/2)^2 $. Mot slutten av programmet har vi fire rekursive kall. Alle kallene kjører \mono{foo} med input av lengde $ n/2 $. Vi kan dermed sette opp en funksjon for kjøretiden:
+Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sakte gjennom hva programmet gjør og forsøker å sette opp en funksjon for kjøretiden. Vi ser at \verb|foo| har to nestede for-løkker, hver av dem går $ n/2 $ ganger. Vi har derfor at hver gang vi kommer til denne løkka blir kjøretiden $ T_{\text{løkke}}(m) = (m/2)^2 $. Mot slutten av programmet har vi fire rekursive kall. Alle kallene kjører \verb|foo| med input av lengde $ n/2 $. Vi kan dermed sette opp en funksjon for kjøretiden:
 
 \[ T(n) = C + 4\left(\frac{n}{2}\right)^2 + 4\,T\left(\frac{n}{2}\right) \]
 
@@ -212,6 +186,7 @@ Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sak
 
 \[ T(n) = C + 4\left(\frac{n}{2}\right)^2 + 4\,\left(C + 4\left(\frac{n/2}{2}\right)^2 + 4\,T\left(\frac{n/2}{2}\right)\right)  \]
 
-Igjen kan vi sette inn for $ T(n/2) $, og slik kan vi fortsette. Siden vi halverer $ n $ hver gang ser vi at vi må gjøre dette $ \log_2(n) $ ganger før vi får at $ n=1 $, og rekursjonen stoppes av den øverste if-testen. Vi ser at i hvert rekursjonssteg så gjør vi $ O(n^2) $ operasjoner, og siden vi gjør $ O(\log_2 n) $ rekusjonssteg, får vi at
-\[ T(n) = O(n^2 \log_2 n) \]
-\end{example}
+Igjen kan vi sette inn for $ T(n/2) $, og slik kan vi fortsette. Siden vi halverer $ n $ hver gang ser vi at vi må gjøre dette $ \log_2(n) $ ganger før vi får at $ n=1 $, og rekursjonen stoppes av den øverste if-testen. Vi går over til O-notasjon slik at vi kan droppe konstanter. Vi har dermed at kjøretiden er
+
+\[ O\left(n^2\log_2 n + n^2\right) = O\left(n^2 \log_2 n\right) \]
+\end{eks}

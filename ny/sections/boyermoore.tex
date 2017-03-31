@@ -1,15 +1,6 @@
-\section{Tekstalgoritmer}
-	Generelt problem: Vi er interesserte i å finne ut om en streng er en substreng av en annen streng. Vi kaller substringen for en nål $i$, av lengde $m$, og stringen for en høystakk $h$, av lengde $n$.
-
-	\subsection{Brute force}
-		Brute force-metoden er som navnet tilsier ikke spesielt gjennomtenkt: Til å begynne med sjekker vi hver karakter i høystakken mot den første i nåla. Hvis vi har likhet sjekker vi det neste tegnet i høystakken mot det neste i nåla. Vi fortsetter slik til vi enten finner hele nåla i høystakken eller til vi har ulikhet, og i så fall fortsetter vi med å sjekke det neste tegnet i høystakken mot det første i nåla.
-
-	\subsubsection{Analyse}
-		Worst case så får vi mismatch $(n-m)$ ganger og suksess $(n-m)+1$ ganger, Totale sammenligninger er $((n-m)+1 \cdot m)$ som gir kjøretid $O(n^2)$.
-
-\subsection{Boyer-Moore(-Horspool)}
+\section{Boyer-Moore(-Horspool)}
 Dette er en rask substringalgoritme. Med Boyer-Moore preprosserer vi nåla før vi begynner å søke. Vi regner ut hvor mange hopp vi kan gjøre for hvert enkelt tegn vi får mismatch på. Dette kaller vi \textit{bad character shift}. Vi beregner også \textit{good character shift}, som er verdier vi kan hoppe på et gitt sted i nåla hvis vi har hatt match tidligere i nåla, men ikke på denne plassen. 
-
+\newpage
 \begin{theorem} Boyer-Moore
 	\begin{enumerate}
 		\item Beregn bad character shift for alle tegn.
@@ -19,7 +10,7 @@ Dette er en rask substringalgoritme. Med Boyer-Moore preprosserer vi nåla før 
 \end{theorem}
 Merk at når vi snakker om å skippe så er det alltid i forhold til det siste tegnet i nåla. Vær også obs på, som det står i algoritmen, at når vi bruker denne vil vi skippe maks av \mono{badCharShift[c]} og \mono{goodSuffixShift[c]}, der \mono{c} er tegnet vi sammenligner.
 
-\subsubsection{Bad character shift}
+\subsection{Bad character shift}
 Vi beregner avstand til neste gang nål er på linje med høystakk.
 Ved en mismatch vil vi dytte nåla framover til en av to ting skjer: Mismatch blir match eller nåla beveger seg forbi tegnet vi fikk mismatch på.
 I praksis gjør vi dette slik: Verdien til et tegns bad character shift er lengden på nåla minus den siste indeksen som tegnet befinner seg på, minus 1. Altså \mono{value = length - index - 1}.
@@ -77,7 +68,7 @@ I praksis gjør vi dette slik: Verdien til et tegns bad character shift er lengd
 %\paragraph{Analyse}
 %Worst case er det samme som brute force. Input tekst $1^n$ kjører $n$ ganger, og nål $011\dots1$ kjører $m$ ganger. Dette gir O($nm$). Best case har input tekst $1^n$ og nål $0^m$, som gir O($n/m$). Average case er O($m/|\Sigma|$), altså raskere enn brute force.
 
-\subsubsection{Good suffix shift}
+\subsection{Good suffix shift}
 Anta at vi har en substring $t$ av nåla (altså lengst til høyre i nåla) som allerede er matchet. Vi får så mismatch på neste tegn. Vi kan nå være smarte og finne ut, og
 vi må tenke på to tilfeller: $t$ forekommer et annet sted i nåla. Da kan vi ikke skippe lenger enn til neste gang det skjer. Eller, en del av $t$ forekommer i starten av nåla. Da må vi skippe til vi er på linje med dette.
 
@@ -87,14 +78,14 @@ vi må tenke på to tilfeller: $t$ forekommer et annet sted i nåla. Da kan vi i
 		
 		\item Sjekker først \textit{ikke}-\mono{T}, det er to shift før vi finner dette.
 		\begin{align*}
-		\text{\mono{TCCTATTCT}}&\text{\mono{{\textcolor{red}{T}}}}\\
-		\text{\mono{TCCTATT}}&\text{\mono{\textcolor{red}{C}TT}}
+			\text{\mono{TCCTATTCT}}&\text{\mono{{\textcolor{red}{T}}}}\\
+			\text{\mono{TCCTATT}}&\text{\mono{\textcolor{red}{C}TT}}
 		\end{align*}
 		
 		\item Så sjekker vi \textit{ikke}-\mono{TT}. Dette finner vi etter ett shift.
 		\begin{align*}
-		\text{\mono{TCCTATTC}}&\text{\mono{\textcolor{red}{TT}}} \\
-		\text{\mono{TCCTATT}}&\text{\mono{\textcolor{red}{CT}T}}
+			\text{\mono{TCCTATTC}}&\text{\mono{\textcolor{red}{TT}}} \\
+			\text{\mono{TCCTATT}}&\text{\mono{\textcolor{red}{CT}T}}
 		\end{align*}
 		
 		\item For å finne \textit{ikke}-\mono{CTT} må vi flytte 3 steg; til \mono{ATT}.
@@ -132,97 +123,3 @@ vi må tenke på to tilfeller: $t$ forekommer et annet sted i nåla. Da kan vi i
 		\end{tabular}
 	\end{figure}
 \end{example}
-
-
-	\subsection{Huffmankoding}\label{huffman}
-		Huffmankoding er en måte å kode informasjon på (her tekst) på en måte der vi ikke mister noe informasjon (\textit{lossless}). Den forutsetter at vi har tilgang på teksten før vi lager en kode. Dette er ikke tilfellet med vanlig tekstenkoding, der hvert tegn har en standard kode. Huffmankoding går ut på å se på frekvensen til tegnene som forekommer, og gi kort kode til de tegnene som forekommer ofte, og lang kode til de som forekommer sjelden. Dette kan vi gjøre slik at vi har prefiksegenskapen intakt: Ingen koder er et prefiks av noen andre. Kodealfabetet \{9, 55\} har prefiksegenskapen, men \{9, 5, 59, 55\} har ikke. Måten Huffmankoding beholder denne egenskapen blir fort tydelig når vi ser på algoritmen. Kort fortalt er grunnen at vi benytter binære trær til å finne kodene.
-		
-		Algoritmen:
-		\begin{enumerate}
-			\item Lag frekvenstabell for alle tegn som forekommer i teksten.
-			\item Betrakt hvert tegn som en node som skal settes sammen til et tre, og legg alle noder i en prioritetskø (heap. Se \ref{heap}) $P$.
-			\item Mens $P$ har mer enn ett element:
-				\begin{itemize}
-					\item[-] Ta ut de to minste nodene fra $P$.	
-					\item[-] Gi disse to en foreldernode med vekt lik summen av de to nodene.	
-					\item[-] Legg foreldrenoden inn i $P$.	
-				\end{itemize}
-				Når dette er ferdig har vi et binært tre. Merk at det finnes svært sjeldent et entydig tre!
-			\item Vi leser koden til et tegn ved å følge stien fra rotnoden ned til tegnets løvnode. Vi får en `0' når vi går til venstre, og en `1' når vi går til høyre. (Dette fungerer selvfølgelig ved å gjøre motsatt, så lenge man er konsekvent.) Merk igjen at det svært sjelden finnes entydige koder, men med denne algoritmen vil de uansett være optimale.
-		\end{enumerate}
-		Algoritmen burde bli klar når vi ser på et eksempel.
-
-		\begin{example}
-		Anta at vi har en tekst ``BACADAEAFABBAAAGAH''. Vi setter opp en frekvenstabell for bokstavene i koden.
-			\begin{center}
-				\begin{tabular}{c c c}
-					Tegn & Frekvens \\
-					\hline
-					A & 9\\
-					B & 3\\
-					C & 1\\
-					D & 1\\
-					E & 1\\
-					F & 1\\
-					G & 1\\
-					H & 1
-				\end{tabular}
-			\end{center}
-			Vi ser at vi kan parvis slå sammen to og to av nodene som har vekt 1: Vi slår sammen C og D, E og F, og G og H. Nå har (CD), (EF) og (GH) alle vekt 2. Vi slår så sammen B og (CD) til en node (B, CD) med vekt 5, og vi slår sammen (EF) og (GH) til en node (EF, GH) med vekt 4. Vi slår så igjen sammen (B, CD) og (EF, GH) slik at de får en foreldrenode med vekt 9. Til slutt slår vi sammen denne med noden A. Det resulterende treet er:
-
-			\begin{figure}[H]
-				\centering
-				\begin{tikzpicture}[level distance=1.2cm,
-				level 1/.style={sibling distance=5cm},
-				level 2/.style={sibling distance=5cm},
-				level 3/.style={sibling distance=4cm},
-				level 3/.style={sibling distance=2.5cm},
-				level 4/.style={sibling distance=1.3cm}
-				]
-				\tikzstyle{every node}=[circle,draw]
-				
-				\node {18}
-					child {
-					node {9} 
-					child {
-				    	node {4}
-				    	child { node {2}
-				    	child {node {C/1}}
-				    	child {node {D/1}}}
-				    	child { node {2}
-				    	child {node {E/1}}
-				    	child {node {F/1}}}
-					}
-					child {
-				    	node {5}
-				    	child { node {2}
-				    	child {node {G/1}}
-				    	child {node {H/1}}}
-				    	child { node {B/3}
-				    	}
-					}
-						}
-					child {
-					node {A/9}
-					}
-				;
-				\end{tikzpicture}
-			\end{figure}
-
-			Hvis vi nå følger regelen fra algoritmen om å skrive `0' når vi går venstre og 1 når vi går høyre får vi kodene:
-			\begin{center}
-				\begin{tabular}{c c c}
-					Tegn & Frekvens & Kode \\
-					\hline
-					A & 9 & 1\\
-					B & 3 & 011\\
-					C & 1 & 0000\\
-					D & 1 & 0001\\
-					E & 1 & 0010\\
-					F & 1 & 0011\\
-					G & 1 & 0100\\
-					H & 1 & 0101
-				\end{tabular}
-			\end{center}
-			Vi kan lett sjekke at prefiksegenskapen er intakt, og teksten ``BACADAEAFABBAAAGAH'' får koden \mono{011100001000110010100111011011111010010101}, som er $ 42 $ bits lang. Dette er åpenbart mye kortere enn standard enkoding. Hvis vi for eksempel hadde brukt ASCII-enkoding, der hvert tegn har en $ 7 $-bits kode, hadde vi hatt en kode med $7\cdot18 = 126$ bits.
-			\end{example}

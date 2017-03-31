@@ -1,0 +1,47 @@
+\section{Boblesortering}
+\label{bubblesort}
+\textbf{Boblesortering} (engelsk: \textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
+Ideen bak er derimot forholdsvis enkel:
+Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
+
+\paragraph*{Wikipedias utgave}\label{sec:bubble-wiki}
+Wikipedias versjon av boblesortering er forskjellig fra den som er gjennomgått i forelesning.
+Her flytter vi oss hele tiden oppover i lista, og begynner på nytt når vi har kommet til slutten.
+Dette gjentas helt til lista er ferdig sortert.
+
+%\begin{example} Sortering av (5 1 2 5 8) \newline
+%  \textbf{Første gjennomgang}
+%  \begin{align*}
+%    (\mathbf{5}~ \mathbf{1}~ 2~ 5~ 8) \rightarrow (\mathbf{1}\, \mathbf{5} ~ 2 ~ 5 ~ 8) &\quad \text{Bytter, siden 5 > 1} \\
+%    (1~ \mathbf{5}~ \mathbf{4}~ 2~ 8) \rightarrow (1 ~ \mathbf{4} ~ \mathbf{5} ~ 2 ~ 8) &\quad \text{Bytter, siden 5 > 4} \\
+%    (1~ 4~ \mathbf{5}~ \mathbf{2}~ 8) \rightarrow (1~ 4~ \mathbf{2}~ \mathbf{5}~ 8)     &\quad \text{Bytter, siden 5 > 2} \\
+%    (1~ 4~ 2~ \mathbf{5}~ \mathbf{8}) \rightarrow (1~ 4~ 2~ \mathbf{5}~ \mathbf{8})     &\quad \text{Bytter ikke, siden 5 < 8}
+%  \end{align*}
+%  Deretter går vi tilbake til start og gjentar prosessen, helt til vi har gått gjennom lista uten at noen elementer har byttet plass.
+%  I dette tilfellet kreves tre gjennomganger.
+%\end{example}
+
+\javaimport{code/bubbleSort.java}
+
+\paragraph*{Utgaven presentert i forelesning}\label{sec:bubbleoptimal}
+I forelesningen ble en noe alternativ utgave av boblesortering presentert, og det kan være lurt å forholde seg til denne, siden det er denne som er pensum.
+Denne utgaven ligner veldig på innstikksortering, fordi den ``bobler'' et element som står på feil plass nedover i lista helt til den står på riktig plass.
+
+\javaimport{code/optBubbleSort.java}
+
+\paragraph{Kompleksitet}
+Merk at selv om utgaven av boblesortering presentert i forelesning i mange tilfeller kan være
+betydelig raskere, vil disse to algoritmene ha samme kompleksitet.
+
+\textbf{Worst Case: $O(n^2)$} Dersom vi ser for oss at vi skal sortere en
+liste som er den reverserte av den sorterte, må vi gå gjennom lista $n$ ganger.
+Dette fordi vi plasserer det største elementet i første gjennomgang, nest
+største i andre gjennomgang osv. Det minste elementet behøver vi ikke å flytte,
+men til slutt vil vi gå gjennom lista en gang for å sjekke at den er sortert.
+Altså gjør vi $n(n-1)$ sammenligninger. $O(n(n-1)) = O(n^2 )$
+
+\textbf{Best Case: $O(n)$} En allerede sortert liste: Vi sammenligner alle nabo-par i arrayen, og
+siden vi ikke foretar noen bytter, vil algoritmen terminere etter å ha gjort
+$(n-1)$ sammenligninger. Altså $O(n-1) = O(n)$
+
+\textbf{Average Case: $O(n^2)$} fra korollar \ref{teo:swapkompl}

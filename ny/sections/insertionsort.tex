@@ -1,0 +1,23 @@
+\section{Innstikksortering}\label{insertsort}
+\textbf{Innstikksortering} (engelsk: \textbf{insertion sort}) er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$.
+Ideen her er at elementene vi hittil har besøkt, er sorterte, isolert sett.
+Deretter tar vi neste element, ``skyver'' de foregående elementene oppover,
+helt til det nye elementet står på riktig plass.
+Altså kan denne metoden minne mye om den~\hyperref[sec:bubbleoptimal]{optimaliserte boblesorteringen}. 
+
+\javaimport{code/insertionSort.java}
+
+Merk at if-testen ikke trengs for at algoritmen skal fungere.
+Faktisk lønner det seg å ikke ha med denne testen.
+Siden if-tester er relativt dyre operasjoner, lønner det seg å ``plukke opp'' et
+element, for deretter å sette den ned igjen på samme plass, enn å sjekke om det
+står på feil plass.
+
+\paragraph{Kompleksitet}
+Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen uegnet til store lister. Når lista er kort\footnote{Generell tommelfingerregel: mindre enn 50 elementer} derimot, er innstikksortering en ganske god algoritme - til og med bedre enn \nameref{quick}. Gode quicksortimplementasjoner bruker derfor innstikksortering hvis lista blir for kort. 
+
+\textbf{Worst case: $ O(n^2) $} Et enkelt eksempel på et worst case tilfelle er hvis lista er sortert i motsatt rekkefølge. Vi må derfor flytte alle elementene i snitt $ n/2 $ ganger.
+
+\textbf{Best case: $ O(n) $} Hvis lista vi sender inn allerede er sortert vil den ytterste for-løkka gå gjennom lista én gang og så avslutte. 
+
+\textbf{Avarage case: $ O(n^2) $} fra korollar \ref{teo:swapkompl}

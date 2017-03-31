@@ -1,0 +1,74 @@
+\section{Quicksort}
+\label{quick}
+Som navnet antyder, er dette en ganske rask algoritme.
+Ideen er at vi velger et (vilkårlig) element i arrayen (pivotelement), og ordner resten av
+elementene slik at de som er mindre pivotelementet står på venstre side, og de
+som er større på venstre. Deretter gjentar vi denne prosessen for disse to
+subarrayene på hver side av pivotelementet.
+
+\javaimport{code/quickSort.java}
+
+Som man kan se i koden ovenfor er det litt problematisk å foreta selve
+flyttingen av elementene i forhold til pivoten når vi jobber med arrayer, siden
+vi ikke kan dele opp og sette sammen arrayer. En detaljert beskrivning (og
+illustrering) av tankegangen finnes i boka i seksjon 7.7.2 (side 312). 
+En noe forenklet utgave følger her:
+
+\begin{enumerate}
+\item Bytt plass på pivoten og det siste elementet, slik at vi unngår at den
+  kommer i veien for oss.
+\item La $i$ og $j$ starte på henholdsvis første og \textbf{nest siste} plass i
+  arrayen. 
+\item\label{item:bevege} La $i$ bevege seg oppover, og $j$ nedover, helt til $i$ står på et
+  element som er større enn pivotelementet, og $j$ står på et element som er
+  mindre.
+\item\label{item:bytt} Bytt plass på elementene som $i$ og $j$ peker på.
+\item Gjenta~\ref{item:bevege} og~\ref{item:bytt} helt til $i$ og $j$ har
+  passert hverandre. Nå peker $j$ på et element mindre enn pivot, og $i$ på et
+  som er større. Dersom vi nå bytter plass på verdien på $i$ og pivoten.
+\end{enumerate}
+
+\begin{example} ~\newline
+\[
+  \begin{array}{c c c c c c c c c l}
+    3&1&4&\underline{5}&9&2&6&8&7 &\quad \text{Der elementet med linje under er pivoten.}\\
+    3&1&2&4&\underline{5}&9&6&8&7 &\quad \text{Etter at vi har ordnet elementene
+    i forhold til pivoten}
+  \end{array}
+\]
+Nå står pivoten på riktig plass. Vi gjentar prosessen på subarrayen som består
+av elementene på høyre side, og på elementene på venstre side av pivoten.
+\end{example}
+
+\paragraph{Om å velge pivot}
+Hvilket element vi velger som pivotelement kan ha veldig mye å si for kjøretiden
+til algoritmen. Dersom vi får en array som allerede er sortert, og vi velger det
+første elementet (altså det minste) som pivotelement, vil vi bruke kvadratisk
+tid på å gjøre egentlig ingenting!
+
+Det beste valget av pivot, ville vært medianen. Da vil størrelsen på
+subarrayene bli det samme (med en forskjell på 1 hvis vi har partall antall
+elementer). Dessverre vil det å regne ut medianen til en stor array ta alt for
+lang tid. Boka foreslår en mulig løsning ved å trekke tilfeldige tall, og
+deretter bruke medianen til disse som pivot. Det tilfeldige elementet viser seg
+imidlertid å hjelpe lite. Derfor blir det til slutt anbefalt å bruke medianen
+til det første, siste og midterste elementet i arrayen som pivot.
+
+
+\paragraph{Kompleksitet}
+Det er flere måter å analysere kompleksiteten til Quicksort. En metode er ved å bruke diskret sannsynlighetsteori (god innføring i dette på Wikipedia). Her skal vi bruke en annen metode. Vi setter opp det som kalles en \emph{rekurrent følge} for kjøretiden og analyserer den. For hver rekursjon må vi gjennom lista og dele den i to kategorier, vi har altså lineær tid $ O(n) $ for hvert steg. Analysen går derfor i hovedsak ut på å finne ut hvor mange rekursjoner som må til. 
+
+\textbf{Worst case: $ O(n^2) $}
+Hvis vi i hver rekursjon velger det største elementet som pivot vil vi i den $ i $-te rekursjonen gjøre $ n-i $ flyttinger. Setter vi opp et uttrykk (rekurrent følge) for kjøretiden får vi:
+\[ T(n) ~=~ O(n) + T(n-1) ~=~ O(n) + O(n-1) + T(n-2) ~=~ ... \]
+Vi ser at vi må gjøre $ n $ rekursjoner før vi når et problem der løsninga er triviell, og vi kan nøste sammen den totale løsninga. Følgelig er worst case for quicksort $ O(n^2) $.
+
+\textbf{Best case: $ O(n\log n) $}
+I et perfekt tilfelle vil vi velge medianen som pivot i hver eneste rekursjon. Vi vil dermed halvere problemet for hver gang. Setter vi opp et uttrykk for kjøretiden får vi:
+\[ T(n) ~=~ O(n) + 2\,T\left( \frac{n}{2} \right) ~=~ ... \]
+Vi ser at vi halverer argumentet til $ T $ hver gang. Vi må derfor gjøre $ \log n $ rekursjoner før vi når et trivielt problem. Følgelig er best case for quicksort $ O(n\log n) $
+
+\textbf{Avarage case: $ O(n\log n) $}
+Vi har fra forrige avsnitt at hvis vi velger medianen som pivot vil vi ha $ O(n\log n) $ tid.  Vi kjenner ikke medianen, men estimerer den med medianen av et tilfeldig utvalg elementer. Dette er en forventningsrett estimator for median. Pivoten vi velger vil derfor være en god tilnærming til den optimale pivoten. Det at estimatoren for medianen er forventningsrett gir oss at i det lange løp vil gjennomsnittet gå mot tilfellet der vi velger medianen som pivot, altså $ O(n\log n) $
+
+Nå har det seg slik at som diskuterte tidligere velger vi sjeldent tre \emph{tilfeldige} elementer i lista, men heller første, midterste og siste element. Likevel, hvis vi antar at innholdet i lista er tilfeldig (uniformt) fordelt vil \emph{innholdet} i de tre elementene være tilfeldig, selv om \emph{indexen} er deterministisk.

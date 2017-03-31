@@ -1,0 +1,132 @@
+\section{Rotasjon}
+\label{trerotasjon}
+
+\subsection{Zig}
+For å skjønne zig-rotasjon ser vi på en figur:
+
+\begin{figure}[H]
+\caption{Zig-rotasjon mhp X}
+\centering
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {P}
+child {
+	node[n] {X}
+	child {
+		node[subtree] {A}
+	}
+	child {
+		node[subtree] {B}
+	}
+}
+child {
+	node[subtree] {C}
+}
+;
+\end{tikzpicture}
+\quad\raisebox{5\height}{\scalebox{2}{$\rightarrow$}}\quad
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {X}
+child {
+	node[subtree] {A}
+}
+child {
+	node[n] {P}
+	child {
+		node[subtree] {B}
+	}
+	child {
+		node[subtree] {C}
+	}
+}
+;
+\end{tikzpicture}
+\end{figure}
+
+En zig-rotasjon vil beholde egenskapene til et binært søketre siden alle nodene i A er mindre enn X og P, alle nodene i B er større enn X og mindre enn P, og alle nodene i C er større enn både X og P. Vi ser at alle høyre barn av P også er høyre barn av P \emph{etter} rotasjonen, etc. 
+
+Vi har også noe som heter zig-zig-rotasjon, som er å utføre en zig-rotasjon to ganger.
+
+
+\subsection{Zig-zag}
+Igjen ser vi på en figur:
+
+\begin{figure}[H]
+
+% Dette er helt forferdelig kode. Jeg vet, og jeg beklager. 
+
+\caption{Zig-zag-rotasjon mhp X:}
+\centering
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {G}
+child {
+	node[n] {P}
+	child {
+		node[subtree] {A}
+	}
+	child {
+		node[n] {X}
+		child {
+			node[subtree] {B}
+		}
+		child {
+			node[subtree] {C}
+		}
+	}
+}
+child {
+	node[subtree] {D}
+}
+;
+\end{tikzpicture}
+\quad\raisebox{9\height}{\scalebox{2}{$\rightarrow$}}\quad
+\raisebox{.25\height}{
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2.7cm},
+  level 2/.style={sibling distance=1.3cm}]
+
+\tikzstyle{subtree} = [isosceles triangle, draw=black, align=center, minimum height=0.5cm, minimum width=1cm, shape border rotate=90, anchor=center]
+\tikzstyle{n} = [draw=black, draw=black, align=center, circle]
+
+\node[n] {X}
+child {
+	node[n] {P}
+	child {
+		node[subtree] {A}
+	}
+	child {
+		node[subtree] {B}
+	}
+}
+child {
+	node[n] {G}
+	child {
+		node[subtree] {C}
+	}
+	child {
+		node[subtree] {D}
+	}
+}
+;
+\end{tikzpicture}
+}
+\end{figure}
+
+Som i tilfellet med zig-rotasjon ser vi at egenskapene til et binært søketre er bevart. 

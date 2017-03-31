@@ -1,0 +1,11 @@
+En map er en form for ADT som inneholder par av nøkler og verdier. Hvis vi for eksempel skal lagre aldere til mennesker gir det ingen mening å kun lagre verdiene i en array/liste: \mono{[21, 19, 32, 25]}. Hvis vi derimot lagrer par med (navn, alder), er situasjonen en annen:
+\begin{center}
+	\begin{tabular}{r l}
+		Anne & 21 \\
+		Knut & 19 \\
+		Nils & 32 \\
+		Kari & 25
+	\end{tabular}
+\end{center}
+I Java har vi interfacet \mono{Map<K,V>} som beskriver denne funksjonaliteten. De med python-bakgrunn har jobbet med maps før, men kalt dem \textit{dictionaries} i stedet. Dictionaries i Python er implementert som hashmaps bak kulissene. \mono{OrderedDict} i Python er implementert etter samme prinsipp tom \mono{TreeMap<K,V>} i Java
+

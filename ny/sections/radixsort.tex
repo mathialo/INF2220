@@ -1,0 +1,68 @@
+\section{Radixsort}\label{radixsort}
+Radix sort sorterer en array på et siffer av gangen.
+Metoden forekommer i to varianter, en fra høyre til venstre, og en som gjør
+motsatt. Generelt for begge algoritmene har vi
+\begin{enumerate}
+\item Finn max verdi i arrayen. (Største siffer i alle tallene)
+\item\label{item:tell} Tell opp hvor mange elementer det er av hver verdi av det sifferet vi ser
+  på. (hvor mange 0-er, 1-ere osv)
+\item Ved å addere disse antallene, finner vi ut hvor i arrayen tallene skal stå
+  ved å addere verdiene i arrayen vi lagde i~\ref{item:tell}, men starte på 0.
+\end{enumerate}
+En spesiell ting ved Radix sort er at den aldri gjør sammenligninger mellom to
+tall.
+
+\paragraph{Right-Radix (RR)}
+Den ``vanlige'' formen for Radix-sort, og er iterativ.
+Den begynner med det minst gjeldende sifferet (det bakerste). Etter
+``fellesstegene'' blir den siste arrayen vi lagde brukt til å slå opp hvor vi
+skal plassere elementet. Vi går gjennom arrayen fra venstre til høyre, og setter
+inn elementer i den nye arrayen. At vi gjør det fra høyre til venstre er viktig,
+siden vi ønsker en~\hyperref[stabil]{stabil} sortering. Etter at vi har plassert
+et element på sin plass i den nye ``sorterte'' arrayen, bør vi øke verdien vi
+akkurat brukte i telle-arrayen med 1 så vi lett kan finne ut hvor neste tall med
+samme siffer på gjeldende plass. Dette gjentar vi helt til vi har vært gjennom
+maks antall gjeldende siffer.
+
+\begin{example}
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c}
+      170&45&75&90&802&2&24&66
+    \end{array}
+  \end{displaymath}
+  Teller deretter opp antall tall som slutter på 0, 1 osv. resulterer i
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c c c}
+      2&0&2&0&1&2&1&0&0&0
+    \end{array}
+  \end{displaymath}
+  Altså har vi to tall som slutter på 0, to som slutter på 2 osv. For å finne
+  den nye plasseringen til elementene, summerer vi opp plassene i denne arrayen,
+  og får
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c c c}
+      0&2&2&4&4&5&7&8&8&8
+    \end{array}
+  \end{displaymath}
+  Da vet vi f.eks. at tall som slutter på 0 skal settes inn på indeks 0. Siden
+  vi har to slike, kan vi ikke sette inn de som slutter på 2 noe lenger ut i
+  arrayen enn indeks 2. Når vi setter inn, og beholder innbyrdes ordning, får
+  vi.
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c}
+      170&90&802&2&24&45&75&66
+    \end{array}
+  \end{displaymath}
+  Deretter gjentar vi prosesen men denne arrayen, og sorterter på siffer nr 2
+  fra høyre. Dette gjentar vi til vi har vært gjennom så mange gjeldende siffer
+  som det største tallet i arrayen har. I dette tilfellet 3 (siden 802 har tre
+  gjeldende siffer.) Merk at f.eks. 2 er å betrakte som 002 videre i sorteringen.
+\end{example}
+
+\paragraph{Kompleksitet}
+I radix sort gjør vi kun lineære operasjoner: Først går vi gjennom lista for å
+finne den største verdien, deretter går vi gjennom lista for å telle, så går vi
+gjennom for å plassere elementene på sine nye plasser. De siste to punktene
+gjøres like mange ganger som vi har gjeldende sifre. La oss kalle denne verdien
+for $k$. Da får vi $O(n + 2kn)$, som er lik $O(kn)$ siden $k\geq 1$. Alternativt
+kan vi betrakte $k$ som en konstant, og vi får at radix sort er $O(n)$

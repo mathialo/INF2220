@@ -1,0 +1,35 @@
+\section{Terminologi og begreper}
+\subsection{Alfabeter og språk}
+Når vi bruker begrepene alfabet og språk snakker vi som regel ikke om språk som engelsk, norsk eller Java (selv om disse også er språk i formell forstand), men om en samling strenger av tegn (tenk: ord). Hvilke tegn vi kan bruke avhenger av hvilket alfabet vi har.
+
+Et \textbf{alfabet} er en ikke-tom mengde av tegn (også kalt symboler og bokstaver). Vi betegner ofte et alfabet med $ \Sigma $. Eksempler på alfabeter kan være det binære alfabetet $ \{0, 1\} $ eller det norske alfabetet \{a, b, c, d, e, f, g, h, i, j, k, l,  m, n, o, p, q, r, s, t, u, v, w, x, y, z, æ, ø, å\}. \index{alfabet}
+
+Gitt et alfabet $ \Sigma $ bruker vi $ \Sigma ^* $ for å betegne mengden av alle mulige kombinasjoner (strenger) av tegn fra $ \Sigma $ av en endelig lengde. En mengde av strenger, med eller uten noen bestemte regler, kalles et \textbf{språk}. Vi konstruerer språk enten ved å liste opp alle ordene i språket, eller ved å gi noen regler som ordene i språket må følge. Under følger noen eksempler på språk, og hvordan de defineres:\index{språk}
+\begin{itemize}
+\item $ L = \{\say{a}, \say{b}, \say{ab}, \say{ba}\}$ (eksempel på et endelig språk)
+\item $ L = \Sigma^* $ (alle ordene over $ \Sigma $) (eksempel på et uendelig språk)
+\item $ L = \{i : M \text{ stopper på input } i \} $ (Den inputen som gjør at en turingmaskin stopper. En variant av haltingproblemet, se \ref{haltingProof})\index{haltingproblemet}
+\end{itemize}
+\label{språk}
+\begin{example} Gitt alfabetet $ \{0, 1, \text{`,'}\} $, hva er det formelle språket som tilsvarer sorteringsproblemet over dette alfabetet?
+
+\emph{Svar:}
+\[ L = \{(0), (1), ..., (0,1), (0, 10), (1, 10), ...\} \]
+
+\end{example}
+
+\subsection{Turingmaskinen}
+Turingmaskinen er en teoretisk maskin. Den eksisterer ikke i virkeligheten, men er noe vi bruker for å bevise teoremer. Selvfølgelig finnes det ingen formell definisjon på \emph{hva} en Turingmaskin egentlig er, så alle læreverk definerer den litt forskjellig. Det høres kanskje helt Texas ut, men alle definisjonene er tilnærmet ekvivalente. \index{Alan Turing}\index{turingmaskin}
+
+\begin{definition}
+\label{def:turingmaskin}
+Litt forenklet kan vi si at en Turingmaskin $ M = (\Sigma, \Gamma, Q, \delta) $ består av fire komponenter:
+\begin{itemize}
+\item Et inputalfabet $ \Sigma $. Alle mulige tegn Turingmaskinen kan forstå.
+\item Et teipalfabet $ \Gamma $. Alle mulige tegn som kan finnes på teipen. $ \Sigma $ er alltid inneholdt i $ \Gamma $. $ \Gamma $ inneholder også et blankt symbol (mellomrom), og kan inneholde andre symboler. 
+\item En liste $ Q $ over mulige statuser for Turingmaskinen.
+\item En liste $ \delta $ over `responser' på input. For eksempel: \say{Hvis jeg er i status 7 og leser en `a' skal jeg gå til status 21}.
+\end{itemize}
+\end{definition}
+
+Hvis vi skal prøve å se for oss en Turingmaskin intuitivt kan vi se for oss et uendelig lang papirremse (formelt kalt teip). På denne papirremsa står det symboler (fra $ \Sigma $). Dette er inputen til Turingmaskinen. Maskinen leser ett og ett symbol, og reagerer på symbolet (etter hva $ \delta $ sier den skal gjøre). Det kan deretter la symbolet stå, viske det vekk eller erstatte det med et nytt symbol (fra $ \Gamma $).

@@ -1,0 +1,15 @@
+\section{ADT}
+En ADT (\textit{eng: Abstract Data Type}) er en generalisering av datastrukturer. Det er en matematisk modell som beskriver semantikken til en datastruktur fra brukerens synsvinkel, men ikke konkret hvordan den blir implementert. 
+
+\begin{definition}
+	En ADT består av en mengde elementer, og en mengde operasjoner på disse elementene. 
+\end{definition}
+
+\subsubsection{Eksempler}
+\begin{itemize}
+	\item FIFO. Mengden  er alle elementene, mulige operasjoner er legg til of ta ut, der elementet som tas ut er det første som ble lagt til.
+	\item LIFO. Mengden er alle elementene. Operasjoner: push og pop. I tillegg kan vi snakke om opersjoner som peek.
+	\item Map. Mengden er alle nøkkel/verdi-parene, under operasjonene legg til par, fjern par, modifiser par og søk opp verdi basert på nøkkel. Eksempel på en implementasjon av ADTen \say{map} er en Hashmap eller Treemap
+	\item Prioritetskø. Mengden er alle elementene i køen, operasjonene er legg til, og ta ut elementet med høyest prioritet. Eksempel på implementasjoner av denne ADTen er heap og leftist heap. Man kan også bruke et binært søketre til å implementere en prioritetskø.
+	\item For matematikere: $ \Z $ under operasjonene $ \{+, -, ~\cdot~, /\} $ danner en ADT. Vi bryr oss ikke om hvordan heltallsaritmetikk er implementert på datamaskinen, men vi vet hvordan $ + $ burde oppføre seg.
+\end{itemize}

@@ -1,0 +1,17 @@
+\section{Prims algoritme}
+\label{prim}
+
+Prims algoritme er en algoritme for å finne minimale spenntrær. Det er en grådig algoritme siden den bygger treet trinnvis ved å velge den kanten som går ut av treet med lavest vekt. 
+
+\begin{theorem} Prims algoritme
+
+Vi skal finne et minimalt spenntre for en graf $ G $. Velg først en startnode (rotnode). Den kan velges helt tilfeldig. Så lenge treet ikke spenner hele $ G $ legger vi til den kanten fra treet, til en ukjent node som har lavest vekt.
+\end{theorem}
+\noindent Vi ser på et eksempel.
+\begin{example} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
+
+Vi velger $ v_1 $ som rotnode (vi kunne valgt hvilken som helst annen). Den kanten med lavest vekt ut fra treet (som kun består av $ v_1 $) er kanten $ v_1-v_4 $, så vi legger den til. Videre er kanten $ v_1-v_2 $ den kanten med lavest vekt som går til en ukjent node, så vi legger til den. $ v_4-v_3 $ er neste kant vi legger til. Kanten $ v_2-v_4 $ er nå den kanten med lavest vekt som går ut fra treet, men siden $ v_2 $ og $ v_4 $ begge er inneholdt i treet er ikke den interessant. Neste kant vi legger til er $ v_4-v_7 $, deretter $ v_7-v_6 $ og $ v_7-v_5 $. Treet er nå et komplett spenntre for $ G $. 
+\end{example}
+
+\subsection{Tidsanalyse}
+Samme argument som tidsanalysen til Dijkstra. Total kjøretid: $ O\left(|V|^2\right) $

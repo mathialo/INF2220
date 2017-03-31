@@ -1,0 +1,26 @@
+\section{Hamiltonske og eulerske stier}
+En hamiltonsk sti er en sti som besøker alle \textit{nodene} én gang. Dette kan virke som en triviell sak, men i en del tilfeller er det faktisk ikke mulig å finne en hamiltonsk sti. I grafen i figur \ref{fig:graf} er B, A, D, C, G, F, E en hamiltonsk sti (det finnes fler). Å avgjøre om en generell graf har en hamiltonsk sti eller ikke er et NP-komplett problem. 
+
+En eulersk sti er en sti som besøker alle \textit{kantene} {\'e}n gang. I grafen i figur \ref{fig:graf} er C, B, A, D, C, G, F, E, C en eulersk sti. Den er lukket siden den starter og slutter i samme node. Hvis stien slutter på en ulik node enn den startet på er stien åpen. Et kjent eksempel på en graf som ikke har noen eulersk sti er broene i Königsberg. %Se figur \ref{fig:konigbridge}.
+%\begin{figure}[h!]
+%\centering
+%\caption{Broene i Königsberg}
+%\label{fig:konigbridge}
+%\begin{tikzpicture}
+%\tikzstyle{vertex} = [circle, draw=black]
+%\tikzstyle{edge} = [draw=black]
+%
+%\node[vertex] (A) at (0,0) {A};
+%\node[vertex] (B) at (0,1.5) {B};
+%\node[vertex] (C) at (2,0) {C};
+%\node[vertex] (D) at (0, -1.5) {D};
+%
+%\draw[edge] (A) to (C);
+%\draw[edge] (B) to [bend left] (C);
+%\draw[edge] (A) to [bend left] (B);
+%\draw[edge] (A) to [bend right] (B);
+%\draw[edge] (A) to [bend left] (D);
+%\draw[edge] (A) to [bend right] (D);
+%\draw[edge] (D) to [bend right] (C);
+%\end{tikzpicture}
+%\end{figure}

@@ -1,0 +1,156 @@
+\section{O-notasjon}
+Når vi skal analysere kjøretid er vi sjeldent opptatt av et nøyaktig svar, men mer opptatt av hva slags størrelsesorden kjøretiden befinner seg i. Dette er litt av motivasjonen for O-notasjon. Formelt kan vi definere det slik:
+
+\begin{definition}
+\label{def:O}
+La $ f $ og $ g $ være to funksjoner $ f, g\colon\mathbb{N} \rightarrow \mathbb{R} $. Vi sier da at $ f(n) = O(g(n))$ hvis det eksisterer positive heltall $ c $ og $ N $ slik at for hvert heltall $ n\geq N $ er $ f(n) \leq c\,g(n) $
+\end{definition}
+$ O(g(n)) $ blir dermed en øvre skranke for kjøretid.
+
+Når vi i denne sammenhengen bruker O-notasjon vil vi bruke det som et mål på hvordan kjøretiden øker med inputen. Vi ser på et eksempel:
+
+\begin{example}
+Vi er gitt en array \mono{int a[]}, med $ n $ elementer, og skal summere alle elementene i \mono{a[]}. Det kan gjøres slik:
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
+int sum = 0;
+
+for (int i=0; i<n; i++) {
+	sum += a[i];
+}
+\end{lstlisting}
+Vi lurer nå på, hva er kjøretiden til denne algoritmen? Vi ser at vi gjør to forskjellige operasjoner her: oppretter en variabel, og plusser sammen to tall. Den siste operasjonen gjør vi $ n $ ganger på grunn av løkka.
+
+Vi har dermed at kjøretiden, $ T(n) $, blir:
+\[ T(n) = t_{\text{opprett variabel}} + n \cdot t_{\text{pluss}}  \]
+der $ t_{\text{opprett variabel}} $ angir tiden det tar å opprette en variabel i minne, og $ t_{\text{pluss}} $ angir tiden det tar å plusse sammen to tall. Problemet er at disse konstantene varierer ut fra hvilken datamaskin vi bruker, hvilket språk vi implementerer i, etc. Det eneste vi vet noe om er at tiden øker lineært med størrelsen. Derfor er 
+\[ T(n) = O(n) \]
+\end{example}
+
+Som nevnt tidligere er vi mer opptatt av størrelsesorden enn den konkrete kjøretiden. Vi bryr oss derfor ikke om konstanter. Hvis vi i eksempelet hadde måttet gjøre 2 tester for hver input hadde vi fortsatt hatt $ O(n) $ tid, selv om kjøretiden hadde vært $ T(n) = 2n $. Vi kan sette opp noen regneregler for O-notasjon:
+\begin{theorem}
+\label{teo:O}
+Regneregler for O-notasjon:
+\begin{enumerate}[i]
+	\item Hvis $ T(n) = c\cdot f(n) $ for en konstant $ c $ og en funksjon $ f $, så er $ T(n) = O(f(n)) $
+	\item Hvis $ T(n) = f(n) + g(n) $ for to funksjoner $ f $ og $ g $, og det finnes et tall $ N $ slik at $ f(n) > g(n) $ for alle $ n > N$ , så er $ T(n) = O(f(n)) $
+\end{enumerate}
+\end{theorem}
+
+Dette er ikke veldig storlagne resultater, de følger egentlig direkte fra definisjonen. Det del \textit{i} egentlig sier er at vi kan droppe konstanter når vi jobber med O-notasjon. Vi vil aldri se uttrykk som $ O(4n^2) $, vi skriver bare $ O(n^2) $. Det er fordi at forskjellen mellom $ 4n^2 $ og $ n^2 $ er så liten i forhold til forskjellen mellom $ n^2 $ og $ n^3 $. 
+
+Del \textit{ii} sier at vi bare trenger å se på den største funksjonen. Vi vil for eksempel aldri skrive $ O(n^2 + n) $, vi vil bare skrive $ O(n^2) $ siden $ n $ blir så liten i forhold til $ n^2 $.
+
+
+\begin{example} Beregning av kjøretid. Vi har gitt følgende program
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
+for (int i=0; i<n; i++) {
+    for (int j=i; j<n; j++) {
+        // Do something simple...
+    }
+}
+
+for (int i=0; i<n-3; i++) {
+    // Do something else...
+}
+\end{lstlisting}
+og skal beregne worst case kjøretid til programmet. Vi ser at den indre for-løkka i den øverste for-løkka starter på \mono{i}, og ikke på 0. Fra teorem \ref{teo:O} del i har vi at det ikke har noe å si. Vi regner med den løkka. Vi ser også at det er en enkel for-løkke etterpå, men fra teorem \ref{teo:O} del ii har vi at vi kan se bort fra den. Kjøretiden blir altså $ O(n^2) $.
+\end{example}
+
+\subsection{Rekursjon}
+Å finne kjøretid for en rekursiv metode kan være litt mer vrient, men fullstendig gjørbart. Se for eksempel på 
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
+int printNums(int n) {
+if (n > 0) printNums(n-1);
+System.out.println(n);
+}
+\end{lstlisting}
+Metoden vil printe alle tall fra $ 0 $ til $ n $. Vi ser at for hvert kall får vi ett nytt kall, dette hinter til at det vil være lineær tid. Vi kan sette opp tidsfunksjonen:
+\[ T(n) = t_{print} + T(n-1) = t_{print} + (t_{print} + T(n-2)) = \cdots = t_{print} + \cdots + t_{print} \]
+Vi ser at vi får tilsammen $ n $ print-statements, og funksjonen har kompleksitet $ O(n) $.
+
+Et annet eksempel:
+
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
+void func(int n) {
+// do something
+
+if (n>1) func(n/2);
+}
+\end{lstlisting}
+Denne gir $ O(\log_2 n) $ siden vi halverer $ n $ hver gang. Vi trenger derfor $ \log_2 n $ funksjonskall før vi når basistilfelle i rekursjonen. 
+
+
+\begin{example} Finn kjøretid for følgende program: (Ex14 1b)
+
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
+for (i=n; i >= 1; i = i/2) {
+    for (j=1; j<n; j++) {
+        // do something
+    }
+}
+\end{lstlisting}
+Vi ser at den indre løkka vil gå $ n $ ganger. Den ytre løkka halverer telleren hver gang, det vil si at den kjører $ \log_2 n $ ganger. Kjøretiden blir derfor $ O(n\log_2 n) $.
+\end{example}
+
+\begin{example} Finn kjøretid for følgende program: (Ex11 2b)
+\begin{lstlisting}[language=Java,
+commentstyle=\color{source_brown}\monofontitalic, 
+morekeywords={String},
+keywordstyle=\color{source_blue}\monofontbold,
+stringstyle=\color{source_orange}]
+float foo(A) {
+    n = A.length;
+    
+    if (n==1) {
+        return A[0];
+    }
+    
+    // let A1, A2, A3 and A4 be arrays of length n/2
+    
+    for (i=0; i<=n/2; i++) {
+        for (j=0; j<=n/2; j++) {
+            A1[i] = A[i];
+            A2[i] = A[i+j];
+            A3[i] = A[n/2 + j];
+            A4[i] = A[j];
+        }
+    }
+	
+    b1 = foo(A1);
+    b2 = foo(A2);
+    b3 = foo(A3);
+    b4 = foo(A4);
+}
+\end{lstlisting}
+
+Her kan vi ikke like lett se løsninga siden funksjonen er rekursiv. Vi går sakte gjennom hva programmet gjør og forsøker å sette opp en funksjon for kjøretiden. Vi ser at \mono{foo} har to nestede for-løkker, hver av dem går $ n/2 $ ganger. Vi har derfor at hver gang vi kommer til denne løkka blir kjøretiden $ T_{\text{løkke}}(m) = (m/2)^2 $. Mot slutten av programmet har vi fire rekursive kall. Alle kallene kjører \mono{foo} med input av lengde $ n/2 $. Vi kan dermed sette opp en funksjon for kjøretiden:
+
+\[ T(n) = C + 4\left(\frac{n}{2}\right)^2 + 4\,T\left(\frac{n}{2}\right) \]
+
+\noindent der $ C $ er en konstant.  Vi kan sette inn for $ T(n/2) $:
+
+\[ T(n) = C + 4\left(\frac{n}{2}\right)^2 + 4\,\left(C + 4\left(\frac{n/2}{2}\right)^2 + 4\,T\left(\frac{n/2}{2}\right)\right)  \]
+
+Igjen kan vi sette inn for $ T(n/2) $, og slik kan vi fortsette. Siden vi halverer $ n $ hver gang ser vi at vi må gjøre dette $ \log_2(n) $ ganger før vi får at $ n=1 $, og rekursjonen stoppes av den øverste if-testen. Vi ser at i hvert rekursjonssteg så gjør vi $ O(n^2) $ operasjoner, og siden vi gjør $ O(\log_2 n) $ rekusjonssteg, får vi at
+\[ T(n) = O(n^2 \log_2 n) \]
+\end{example}

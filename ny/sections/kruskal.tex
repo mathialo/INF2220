@@ -1,0 +1,31 @@
+\section{Kruskals algoritme}
+\label{kruskal}
+
+Kruskals algoritme er en annen algoritme for å finne minimale spenntrær. Det er også en grådig algoritme, siden vi til enhver tid velger den kanten med lavest vekt som ikke danner en løkke.
+
+\begin{theorem} Kruskals algoritme
+
+Vi skal finne et minimalt spenntre for en graf $ G $. La $ F $ være en skog (en mengde av trær). Så lenge $ F $ ikke utspenner alle nodene velger vi den kanten med lavest vekt fra $ G $, og som ikke danner en løkke, og legger den til i $ F $. Når $ F $ har blitt ett sammenhengende tre og alle nodene er nådd har vi et minimalt spenntre.
+\end{theorem}
+
+\noindent Vi ser på et eksempel.
+
+\begin{example} Finn et minimalt spenntre for grafen i figur \ref{fig:min_spenntre}.
+
+Vi finner kanten(e) i grafen med den minste vekten. $ v_6-v_7 $ og $ v_1-v_4 $ har begge vekt 1. Vi legger de til i spenntreet. Kantene $ v_3-v_4 $ og $ v_1-v_2 $ har begge vekt 2, og ingen av dem danner en løkke, så vi legger dem til i spenntreet. Neste kant med lavest vekt er $ v_2-v_4 $ (3), men den vil danne en løkke, så vi hopper over den. Videre ser vi at $ v_1-v_3 $ og $ v_4-v_7 $ begge har vekt 4. Kanten $ v_1-v_3 $ vil danne en løkke så den hopper vi over, men $ v_4-v_7 $ legger vi til. Neste kant med lavest vekt, og som ikke danner en løkke er $ v_5-v_7 $. Vi legger den til i spenntreet, og da er alle noder nådd, og vi har en sammenhengende graf. Vi har derfor et minimalt spenntre (se figur \ref{fig:min_spenntre}). 
+\end{example}
+
+
+\subsection{Tidsanalyse}
+Vi må loope gjennom alle kantene én gang, det gir tid $ O(|E|) $. Vi kan implementere algoritmen ved hjelp av en stack. Gjør vi det må vi utføre én sletting, to søk og en union. Sletting og søk tar $ O(\log_2 n) $ tid (for sletting er $ n = |E| $, for søk er $ n = |V| $), og union tar $ O(1) $ tid. For hver iterasjon har vi da:
+
+\[ \text{Kjøretid, hver iterasjon} ~=~ O(\log_2 |E| + \log_2 |V| + 1) ~=~ O(\log_2 |V|) \]
+
+\noindent Siste likhet har vi siden $ |V| > |E| $. Vi kan dermed sette opp total kjøretid:
+
+\[ \text{Kjøretid, total} ~=~ O(|E| \cdot \log_2 |V|) \]
+
+
+
+\subsection{Prim vs Kruskal}
+Prim er som regel noe mer effektiv enn Kruskal, spesielt på tette grafer. Prim har likevel den svakheten at den kun fungerer på sammenhengende grafer. Kruskal anvendt på en usammenhengende graf vil gi et minimalt spenntre for hver sammenhengende del av grafen.

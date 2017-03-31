@@ -1,0 +1,12 @@
+\section{Kø/stack} \label{ko_stack}
+Kø og stack er to forskjellige typer lister. Felles for dem er at vi kun opererer med én \mono{insert()}- og én \mono{remove()}-metode. Forskjellen er hvilket element vi vil hente ut når vi kaller \mono{remove()}-metoden. Innsetting og fjerning i både kø og stack tar $ O(1) $ tid, siden vi på forhånd vet hvor elementet skal fjernes fra/legges til. 
+
+
+\subsection{Kø (FIFO)}
+En kø er en liste der første element inn er det første som kommer ut, derav navnet. Vi kaller også slike lister for FIFO-lister (First In, First Out). Elementene som settes inn stilles bakerst i køen, og når vi henter ut et element starter vi foran. 
+
+
+\subsection{Stack (LIFO)}
+En stack (norsk: stabel) er en liste der siste element som settes inn er det første som kommer ut. Slike lister kalles også LIFO-lister (Last In, First Out). Elementene som settes inn legges på toppen av stabelen, og når vi skal hente ut et element henter vi det øverste elementet. 
+
+Konvensjonelt kalles insert-metoden i en stack \mono{push()}, og remove-funksjonen \mono{pop()}

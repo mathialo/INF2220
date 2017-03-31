@@ -1,0 +1,383 @@
+\section{Sortering}
+\subsection{Formaliteter}
+\label{sort_form}
+Før vi kan begynne å se på noen spesielle sorteringsalgoritmer må vi formalisere hva vi mener med sortering. Vi definerer sortering slik:
+
+\begin{definisjon}
+Anta at \verb|a[]| er en liste av sammenlignbare elementer. Vi sier at \verb|a'[]| er den tilhørende sorterte lista hvis følgende kriterier er oppfylt:
+\begin{enumerate}[i]
+\item \verb|a'[i]| $ < $ \verb|a'[i+1]| for alle $ \verb|i| = 0, 1, \ldots, n-1 $
+\item Alle elementene i \verb|a[]| er med i \verb|a'[]|
+\end{enumerate}
+\end{definisjon}
+
+Det andre kriteriet kan virke litt snodig, men uten det ville sortering vært veldig enkelt. Vi kunne i så fall bare generert en ny liste med elementer i sortert rekkefølge, og det første kriteriet ville vært oppfylt. Vi trenger derfor bevaringskriteriet. 
+
+Med ``sammenlignbare'' mener vi at det finnes en måte å entydig bestemme om et element er større enn, mindre enn eller lik et annet element. Hvis vi skal sortere tall er jobben enkel: vi sammenligner numerisk verdi. Hvis vi skal sammenligne to tekststrenger er det ikke like opplagt hvordan vi skal gjøre det. Skal vi sortere alfabetisk? Etter lengde på ordet? I et sånt tilfelle er det opp til oss å velge et fornuftig sammenligningskriterie. Det er vilkårlig hvordan vi sammenligner to elementer, så lenge vi gjør det likt gjennom hele sorteringen. 
+
+\subsubsection{Paradigmer og begreper}
+\label{sec:sortbegrep}
+
+\paragraph{Klasser av sorteringsalgoritmer}
+Avhengig av hvordan de virker, deler vi sorteringsalgoritmer inn i to klasser:
+Sammenligningsbaserte og Verdibaserte. Førstnevnte baserer seg på å sammenligne
+to og to verdier i arrayen, mens de verdibaserte finner den riktige plasseringen
+til hvert element kun ut ifra verdien på elementet. 
+
+
+\paragraph{Stabil Sortering}\label{stabil}
+Noen ganger ønsker vi å sortere etter flere kriterier. Et eksempel kan være
+epost, der vi f.eks. vil sortere både etter avsender og alfabetisk, slik at vi
+får at alle som er fra samme avsender står alfabetisk i forhold til hverandre.
+
+\begin{definisjon}
+  En algoritme er \textbf{stabil} dersom innbyrdes rekkefølge beholdes
+  etter sortering. Dvs at dersom \verb|a[i]| $ = $ \verb|a[j]|, og \verb|a[i]| kommer før \verb|a[j]| i \verb|a[]|, så skal \verb|a[i]| komme før \verb|a[j]| i den sorterte lista \verb|a'[]|.
+\end{definisjon}
+
+Følgende algoritmer (altså ikke alle) gjennomgått i kurset oppfyller kravet om
+stabil sortering:
+\begin{itemize}
+\item \nameref{insertsort} 
+\item \nameref{radixsort} 
+\item \nameref{mergesort} kan være stabil, avhengig av hvordan flettemetoden er implementert. I vårt (og bokas) eksempel er det en stabil sortering.
+\end{itemize}
+
+
+\paragraph{Nedre grense for enkle sorteringsalgoritmer}
+\begin{teorem} (7.1 i læreboka): Det gjennomsnittlige antall inversjoner i en \label{teo:sortbound}
+  array med $n$ unike elementer er $\frac{n(n-1)}{4}$
+\end{teorem}
+Beviset bruker at summen av en aritmetisk rekke er $ n(n-1)/2 $:
+\begin{bevis}
+  La $L$ være en array og $L_r$ den reverserte. Et hvilket som helst ordnet par
+  i $L$ vil være en inversjon i enten $L$ eller $L_r$. Det totale antallet slike
+  par i $L$ og $L_r$ vil være $\frac{n(n-1)}{2}$, altså har en gjennomsnittlig
+  liste halvparten så mange, altså $\frac{n(n-1)}{4}$ 
+\end{bevis}
+Vi har da et korollar til teorem \ref{teo:sortbound} som gir oss gjennomsnittlig tid for algoritmer som bytter naboelementer:
+\begin{teorem} (7.2 i læreboka): \label{teo:swapkompl}
+  Enhver sorteringsalgoritme som sorterer ved å bytte to naboelementer krever i gjennomsnitt $ O(n^2) $ tid.
+\end{teorem}
+\begin{bevis}
+Fra teorem \ref{teo:sortbound} har vi at gjennomsnittlig antall inversjoner er $ n(n-1)/4 $. Hvert plassbytte av to naboer inversjon fjerner én inversjon, dermed tar algoritmer som baserer seg på plassbytte av naboer gjennomsnittlig $ O(n^2) $ tid.
+\end{bevis}
+
+
+
+
+\subsection{Noen algoritmer}
+Vi skal nå se på noen konkrete sorteringsalgoritmer. Gjennomgående i alle
+eksempler vil vi sortere tall etter tallverdi, men som diskutert i~\ref{sort_form} vil vi enkelt kunne tilpasse algoritmene til å sortere på andre kriterier. 
+
+
+\subsubsection{Boblesortering}
+\label{bubblesort}
+\textbf{Boblesortering} (engelsk: \textbf{bubble/ (sinking) sort})  er en veldig ineffektiv sorteringsalgoritme, og brukes derfor lite i den virkelige verden. 
+Ideen bak er derimot forholdsvis enkel:
+Vi parvis sammenligner naboer i lista, og bytter om plassene deres dersom de står på feil plass.
+
+\paragraph*{Wikipedias utgave}\label{sec:bubble-wiki}
+Wikipedias versjon av boblesortering er forskjellig fra den som er gjennomgått i forelesning.
+Her flytter vi oss hele tiden oppover i lista, og begynner på nytt når vi har kommet til slutten.
+Dette gjentas helt til lista er ferdig sortert.
+
+\begin{eks} Sortering av (5 1 2 5 8) \newline
+  \textbf{Første gjennomgang}
+  \begin{align*}
+    (\mathbf{5}~ \mathbf{1}~ 2~ 5~ 8) \rightarrow (\mathbf{1}\, \mathbf{5} ~ 2 ~ 5 ~ 8) &\quad \text{Bytter, siden 5 > 1} \\
+    (1~ \mathbf{5}~ \mathbf{4}~ 2~ 8) \rightarrow (1 ~ \mathbf{4} ~ \mathbf{5} ~ 2 ~ 8) &\quad \text{Bytter, siden 5 > 4} \\
+    (1~ 4~ \mathbf{5}~ \mathbf{2}~ 8) \rightarrow (1~ 4~ \mathbf{2}~ \mathbf{5}~ 8)     &\quad \text{Bytter, siden 5 > 2} \\
+    (1~ 4~ 2~ \mathbf{5}~ \mathbf{8}) \rightarrow (1~ 4~ 2~ \mathbf{5}~ \mathbf{8})     &\quad \text{Bytter ikke, siden 5 < 8}
+  \end{align*}
+  Deretter går vi tilbake til start og gjentar prosessen, helt til vi har gått gjennom lista uten at noen elementer har byttet plass.
+  I dette tilfellet kreves tre gjennomganger.
+\end{eks}
+
+\javaimport{kode/bubbleSort.java}
+
+\paragraph*{Utgaven presentert i forelesning}\label{sec:bubbleoptimal}
+I forelesningen ble en noe alternativ utgave av boblesortering presentert, og det kan være lurt å forholde seg til denne, siden det er denne som er pensum.
+Denne utgaven ligner veldig på innstikksortering, fordi den ``bobler'' et element som står på feil plass nedover i lista helt til den står på riktig plass.
+
+\javaimport{kode/optBubbleSort.java}
+
+\paragraph{Kompleksitet}
+Merk at selv om utgaven av boblesortering presentert i forelesning i mange tilfeller kan være
+betydelig raskere, vil disse to algoritmene ha samme kompleksitet.
+
+\subparagraph{Worst Case: $O(n^2)$} Dersom vi ser for oss at vi skal sortere en
+liste som er den reverserte av den sorterte, må vi gå gjennom lista $n$ ganger.
+Dette fordi vi plasserer det største elementet i første gjennomgang, nest
+største i andre gjennomgang osv. Det minste elementet behøver vi ikke å flytte,
+men til slutt vil vi gå gjennom lista en gang for å sjekke at den er sortert.
+Altså gjør vi $n(n-1)$ sammenligninger. $O(n(n-1)) = O(n^2 )$
+
+\subparagraph{Best Case: $O(n)$} En allerede sortert liste: Vi sammenligner alle nabo-par i arrayen, og
+siden vi ikke foretar noen bytter, vil algoritmen terminere etter å ha gjort
+$(n-1)$ sammenligninger. Altså $O(n-1) = O(n)$
+
+\subparagraph{Average Case: $O(n^2)$} fra teorem \ref{teo:swapkompl}
+
+
+\subsubsection{Innstikksortering}\label{insertsort}
+\textbf{Innstikksortering} (engelsk: \textbf{insertion sort}) er også en veldig enkel sorteringsalgoritme, og den er faktisk best for $n<50$.
+Ideen her er at elementene vi hittil har besøkt, er sorterte, isolert sett.
+Deretter tar vi neste element, ``skyver'' de foregående elementene oppover,
+helt til det nye elementet står på riktig plass.
+Altså kan denne metoden minne mye om den~\hyperref[sec:bubbleoptimal]{optimaliserte boblesorteringen}. 
+
+\javaimport{kode/insertionSort.java}
+
+Merk at if-testen ikke trengs for at algoritmen skal fungere.
+Faktisk lønner det seg å ikke ha med denne testen.
+Siden if-tester er relativt dyre operasjoner, lønner det seg å ``plukke opp'' et
+element, for deretter å sette den ned igjen på samme plass, enn å sjekke om det
+står på feil plass.
+~\\
+\paragraph{Kompleksitet}
+Vi ser at gjennomsnittlig er innstikksortering $ O(n^2) $, som gjør algoritmen uegnet til store lister. Når lista er kort\footnote{Generell tommelfingerregel: mindre enn 50 elementer} derimot, er innstikksortering en ganske god algoritme - til og med bedre enn \nameref{quick}. Gode quicksortimplementasjoner bruker derfor innstikksortering hvis lista blir for kort. 
+
+\subparagraph{Worst case: $ O(n^2) $} Et enkelt eksempel på et worst case tilfelle er hvis lista er sortert i motsatt rekkefølge. Vi må derfor flytte alle elementene i snitt $ n/2 $ ganger.
+
+\subparagraph{Best case: $ O(n) $} Hvis lista vi sender inn allerede er sortert vil den ytterste for-løkka gå gjennom lista én gang og så avslutte. 
+
+\subparagraph{Avarage case: $ O(n^2) $} fra teorem \ref{teo:swapkompl}
+
+
+\newpage
+\subsubsection{Flettesortering}\label{mergesort}
+\textbf{Flettesortering} (engelsk: \textbf{mergesort}) er et ekempel på en \hyperref[splitthersk]{splitt-og-hersk}-algoritme, og er et eksempel på elegant rekursjon. Anta at vi har en liste $ L $ som er $ n $ elementer lang. Vi deler først $ L $ opp i $ n $ biter slik at vi har $ n $ lister på ett element. Deretter fletter vi listene sammen til vi bare har én liste. 
+
+Spørsmålet blir da hva vi mener med å \say{flette listene sammen}. Vi beskriver samme metode som boka: Anta at vi skal flette to lister $ A $ og $ B $. $ A $ er $ m $ elementer lang, og $ B $ er $ o $ elementer. Vi har en resultatliste $ C $ som har $ m+o $ elementer. Vi har tre tellere: $ i $, $ j $ og $ k $ som går over henholdsvis $ A $, $ B $ og $ C $. Vi starter med å sette $ i=j=k=0 $ og sammenligner $ A_i $ med $ B_j $. Den minste av dem setter vi inn i $ C_k $. Hentet vi elementet fra $ A $ øker vi $ i $ med 1, hentet vi elementet fra $ B $ øker vi $ j $ med 1. Uansett øker vi $ k $ med 1. Deretter sammenligner vi $ A_i $ med $ B_j $, setter minste inn i $ C_k $, og øker riktig teller. Slik fortsetter vi så lenge $ j \leq m+o $. Se seksjon 7.6 (side 302) i boka for et nais eksempel med figurer. 
+
+\paragraph{Kompleksitet} Vi setter opp en rekkurant følge for kjøretiden $ T $. Fra definisjonen av flettesortering fremgår det at
+\begin{align*}
+T(1) &= 1\\
+T(n) &= 2\,T\left( \frac{n}{2} \right) + n
+\end{align*}
+Vi ser at for $ n>1 $ må vi utføre $ \log_2 n $ rekursjoner (siden vi halverer $ n $ for hver gang) før vi kommer til et trivielt problem, altså base case $ T(1) = 1 $. For hver rekursjon har vi lineær tid (selve flettinga). Dermed har flettesortering $ O(n\log n) $ tid. 
+
+
+
+\subsubsection{Heapsort}\label{heapsort}
+I heapsort utnytter vi egenskapene til en heap.
+Her bruker vi en max-heap, som vi setter alle elementene inn i. Da vet vi at
+rota er det største elementet per detfinisjon av heap. Dersom vi så tar ut et og
+et element av heapen, og plasserer på den bakerste ikke-opptatte plassen i
+resultat-arrayen, vil vi få arrayen ut i sortert form.
+
+\paragraph{Kompleksitet}
+Fra teorem \ref{teo:heapop} har vi at innsetting og sletting i en heap tar, i verste fall, $ O(\log_2 n) $ tid. I beste fall har vi at innsetting tar $ O(1) $ tid, og at sletting tar $ O(\log_2 n) $ tid. Siden lista er $ n $ elementer lang må vi gjøre $ n $ innsettinger og $ n $ slettinger. Det gir at total kjøretid er
+\begin{align*}
+\text{I beste fall:\quad} & T(n) = O(n + n\log_2 n) = O(n\log_2 n)\\
+\text{I verste fall:\quad} & T(n) = O(n\log_2 n + n\log_2 n) = O(n\log_2 n)
+\end{align*}
+
+\subsubsection{Tresortering}\label{treesort}
+I likhet med \nameref{heapsort} utnytter vi her egenskapene til en datastruktur,
+nemlig binære søketrær. I et slikt tre vet vi at venstre barn til en node er
+mindre enn noden selv, og at høyre barn er større eller lik noden.
+Deretter traverserer vi treet i infix-rekkefølge. På den måten vil vi altså gå
+gjennom treet i stigende rekkefølge, og vi har dermed sortert arrayen.
+
+\paragraph{Kompleksitet}
+Fra teorem \ref{teo:bintre} har vi at innsetting i et binært søketre tar $ O(\log_2 n) $ beste tid, og $ O(n) $ verste tid. En traversering av treet tar opplagt $ O(n) $ tid, siden vi går gjennom hver node én gang. Tilsammen har vi da at kjøretiden for algoritmen er 
+\begin{align*}
+\text{I beste fall / gjennomsnittlig:\quad} & T(n) = O(n\log_2 n)\\
+\text{I verste fall:\quad} & T(n) = O(n\cdot n) = O(n^2)
+\end{align*}
+
+
+\subsubsection{Quicksort}
+\label{quick}
+Som navnet antyder, er dette en ganske rask algoritme.
+Ideen er at vi velger et (vilkårlig) element i arrayen (pivotelement), og ordner resten av
+elementene slik at de som er mindre pivotelementet står på venstre side, og de
+som er større på venstre. Deretter gjentar vi denne prosessen for disse to
+subarrayene på hver side av pivotelementet.
+
+\javaimport{kode/quickSort.java}
+
+Som man kan se i koden ovenfor er det litt problematisk å foreta selve
+flyttingen av elementene i forhold til pivoten når vi jobber med arrayer, siden
+vi ikke kan dele opp og sette sammen arrayer. En detaljert beskrivning (og
+illustrering) av tankegangen finnes i boka i seksjon 7.7.2 (side 312). 
+En noe forenklet utgave følger her:
+
+\begin{enumerate}
+\item Bytt plass på pivoten og det siste elementet, slik at vi unngår at den
+  kommer i veien for oss.
+\item La $i$ og $j$ starte på henholdsvis første og \textbf{nest siste} plass i
+  arrayen. 
+\item\label{item:bevege} La $i$ bevege seg oppover, og $j$ nedover, helt til $i$ står på et
+  element som er større enn pivotelementet, og $j$ står på et element som er
+  mindre.
+\item\label{item:bytt} Bytt plass på elementene som $i$ og $j$ peker på.
+\item Gjenta~\ref{item:bevege} og~\ref{item:bytt} helt til $i$ og $j$ har
+  passert hverandre. Nå peker $j$ på et element mindre enn pivot, og $i$ på et
+  som er større. Dersom vi nå bytter plass på verdien på $i$ og pivoten.
+\end{enumerate}
+~\\
+\begin{eks} ~\newline
+\[
+  \begin{array}{c c c c c c c c c l}
+    3&1&4&\underline{5}&9&2&6&8&7 &\quad \text{Der elementet med linje under er pivoten.}\\
+    3&1&2&4&\underline{5}&9&6&8&7 &\quad \text{Etter at vi har ordnet elementene
+    i forhold til pivoten}
+  \end{array}
+\]
+Nå står pivoten på riktig plass. Vi gjentar prosessen på subarrayen som består
+av elementene på høyre side, og på elementene på venstre side av pivoten.
+\end{eks}
+
+\paragraph{Om å velge pivot}
+Hvilket element vi velger som pivotelement kan ha veldig mye å si for kjøretiden
+til algoritmen. Dersom vi får en array som allerede er sortert, og vi velger det
+første elementet (altså det minste) som pivotelement, vil vi bruke kvadratisk
+tid på å gjøre egentlig ingenting!
+
+Det beste valget av pivot, ville vært medianen. Da vil størrelsen på
+subarrayene bli det samme (med en forskjell på 1 hvis vi har partall antall
+elementer). Dessverre vil det å regne ut medianen til en stor array ta alt for
+lang tid. Boka foreslår en mulig løsning ved å trekke tilfeldige tall, og
+deretter bruke medianen til disse som pivot. Det tilfeldige elementet viser seg
+imidlertid å hjelpe lite. Derfor blir det til slutt anbefalt å bruke medianen
+til det første, siste og midterste elementet i arrayen som pivot.
+
+
+\paragraph{Kompleksitet}
+Det er flere måter å analysere kompleksiteten til Quicksort. En metode er ved å bruke diskret sannsynlighetsteori (god innføring i dette på Wikipedia). Her skal vi bruke en annen metode. Vi setter opp det som kalles en \emph{rekurrent følge} for kjøretiden og analyserer den. For hver rekursjon må vi gjennom lista og dele den i to kategorier, vi har altså lineær tid $ O(n) $ for hvert steg. Analysen går derfor i hovedsak ut på å finne ut hvor mange rekursjoner som må til. 
+
+\subparagraph{Worst case: $ O(n^2) $}
+Hvis vi i hver rekursjon velger det største elementet som pivot vil vi i den $ i $-te rekursjonen gjøre $ n-i $ flyttinger. Setter vi opp et uttrykk (rekurrent følge) for kjøretiden får vi:
+\[ T(n) ~=~ O(n) + T(n-1) ~=~ O(n) + O(n-1) + T(n-2) ~=~ ... \]
+Vi ser at vi må gjøre $ n $ rekursjoner før vi når et problem der løsninga er triviell, og vi kan nøste sammen den totale løsninga. Følgelig er worst case for quicksort $ O(n^2) $.
+
+\subparagraph{Best case: $ O(n\log n) $}
+I et perfekt tilfelle vil vi velge medianen som pivot i hver eneste rekursjon. Vi vil dermed halvere problemet for hver gang. Setter vi opp et uttrykk for kjøretiden får vi:
+\[ T(n) ~=~ O(n) + 2\,T\left( \frac{n}{2} \right) ~=~ ... \]
+Vi ser at vi halverer argumentet til $ T $ hver gang. Vi må derfor gjøre $ \log n $ rekursjoner før vi når et trivielt problem. Følgelig er best case for quicksort $ O(n\log n) $
+
+\subparagraph{Avarage case: $ O(n\log n) $}
+Vi har fra forrige avsnitt at hvis vi velger medianen som pivot vil vi ha $ O(n\log n) $ tid.  Vi kjenner ikke medianen, men estimerer den med medianen av et tilfeldig utvalg elementer. Dette er en forventningsrett estimator for median. Pivoten vi velger vil derfor være en god tilnærming til den optimale pivoten. Det at estimatoren for medianen er forventningsrett gir oss at i det lange løp vil gjennomsnittet gå mot tilfellet der vi velger medianen som pivot, altså $ O(n\log n) $
+
+Nå har det seg slik at som diskuterte tidligere velger vi sjeldent tre \emph{tilfeldige} elementer i lista, men heller første, midterste og siste element. Likevel, hvis vi antar at innholdet i lista er tilfeldig (uniformt) fordelt vil \emph{innholdet} i de tre elementene være tilfeldig, selv om \emph{indexen} er deterministisk.
+
+
+
+\subsubsection{Radixsort}\label{radixsort}
+Radix sort sorterer en array på et siffer av gangen.
+Metoden forekommer i to varianter, en fra høyre til venstre, og en som gjør
+motsatt. Generelt for begge algoritmene har vi
+\begin{enumerate}
+\item Finn max verdi i arrayen. (Største siffer i alle tallene)
+\item\label{item:tell} Tell opp hvor mange elementer det er av hver verdi av det sifferet vi ser
+  på. (hvor mange 0-er, 1-ere osv)
+\item Ved å addere disse antallene, finner vi ut hvor i arrayen tallene skal stå
+  ved å addere verdiene i arrayen vi lagde i~\ref{item:tell}, men starte på 0.
+\end{enumerate}
+En spesiell ting ved Radix sort er at den aldri gjør sammenligninger mellom to
+tall.
+
+\paragraph{Right-Radix (RR)}
+Den ``vanlige'' formen for Radix-sort, og er iterativ.
+Den begynner med det minst gjeldende sifferet (det bakerste). Etter
+``fellesstegene'' blir den siste arrayen vi lagde brukt til å slå opp hvor vi
+skal plassere elementet. Vi går gjennom arrayen fra venstre til høyre, og setter
+inn elementer i den nye arrayen. At vi gjør det fra høyre til venstre er viktig,
+siden vi ønsker en~\hyperref[stabil]{stabil} sortering. Etter at vi har plassert
+et element på sin plass i den nye ``sorterte'' arrayen, bør vi øke verdien vi
+akkurat brukte i telle-arrayen med 1 så vi lett kan finne ut hvor neste tall med
+samme siffer på gjeldende plass. Dette gjentar vi helt til vi har vært gjennom
+maks antall gjeldende siffer.
+
+\begin{eks}
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c}
+      170&45&75&90&802&2&24&66
+    \end{array}
+  \end{displaymath}
+  Teller deretter opp antall tall som slutter på 0, 1 osv. resulterer i
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c c c}
+      2&0&2&0&1&2&1&0&0&0
+    \end{array}
+  \end{displaymath}
+  Altså har vi to tall som slutter på 0, to som slutter på 2 osv. For å finne
+  den nye plasseringen til elementene, summerer vi opp plassene i denne arrayen,
+  og får
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c c c}
+      0&2&2&4&4&5&7&8&8&8
+    \end{array}
+  \end{displaymath}
+  Da vet vi f.eks. at tall som slutter på 0 skal settes inn på indeks 0. Siden
+  vi har to slike, kan vi ikke sette inn de som slutter på 2 noe lenger ut i
+  arrayen enn indeks 2. Når vi setter inn, og beholder innbyrdes ordning, får
+  vi.
+  \begin{displaymath}
+    \begin{array}{c c c c c c c c}
+      170&90&802&2&24&45&75&66
+    \end{array}
+  \end{displaymath}
+  Deretter gjentar vi prosesen men denne arrayen, og sorterter på siffer nr 2
+  fra høyre. Dette gjentar vi til vi har vært gjennom så mange gjeldende siffer
+  som det største tallet i arrayen har. I dette tilfellet 3 (siden 802 har tre
+  gjeldende siffer.) Merk at f.eks. 2 er å betrakte som 002 videre i sorteringen.
+\end{eks}
+
+\paragraph{Kompleksitet}
+I radix sort gjør vi kun lineære operasjoner: Først går vi gjennom lista for å
+finne den største verdien, deretter går vi gjennom lista for å telle, så går vi
+gjennom for å plassere elementene på sine nye plasser. De siste to punktene
+gjøres like mange ganger som vi har gjeldende sifre. La oss kalle denne verdien
+for $k$. Da får vi $O(n + 2kn)$, som er lik $O(kn)$ siden $k\geq 1$. Alternativt
+kan vi betrakte $k$ som en konstant, og vi får at radix sort er $O(n)$
+
+
+\subsection{Parallell Sortering}
+
+\subsubsection{Amdahls lov}
+\label{sec:amdahl}
+
+Amdahls lov gir oss en slags øvre grense for hvor mye tid vi kan spare på å
+parallellisere en algoritme.
+\begin{teorem}\textbf{Amdahls lov: } 
+  Anta at du har en algoritme der en andel
+  $p\%$ må kjøres sekvensielt, men at resten kan gjøres i parallell.
+  Med $k$ lik antall prosessorer, får vi at maksimal speedup er
+  \[
+    S = \frac{\text{Sekvensiell tid}}{\text{Parallell tid}} \leq \frac{100}{p + \frac{100 - p}{k}}
+  \]
+\end{teorem}
+
+Denne loven har imidlertid møtt motstand i Gustafson, som hevder at andelen av
+programmet som er sekvensielt blir mindre etterhvert som problemet blir større.
+Altså er ikke Amdahls lov fast.
+
+\subsubsection{Parallell Quicksort}\label{parquick}
+Siden \nameref{quick} deler lista opp i to deler der alle elementene i den ene lista er mindre enn alle elementene i den andre lista er den velegnet til å parallellisere. Vi må gjøre de første rekursjonene sekvensielt og deler opp lista i $ n $ biter (merk at $ n $ på være på formen $ 2^k, k\in \mathbb{N} $). Deretter starter vi $ n $ tråder med hver sin del å sortere. For å $ n $ tråder må vi gjøre $ \log_2 n $ nivåer med rekursjon sekvensielt først. Når alle trådene er ferdig har vi $ n $ sortere biter, der vi vet at alle elementene i tråd 1 er mindre enn elementene i tråd 2, som er mindre enn elementene i tråd 3, osv. Da kan vi sette sammen bitene sekvensielt til slutt og få en sortert liste. 
+\begin{figure}[H]
+\caption{Illustrasjon av parallell quicksort med to tråder}
+\centering
+Utgangspunkt:\\
+\begin{tabular}{| c |c| c |}
+\hline
+\quad\quad\quad\quad...\quad\quad\quad\quad&$ p $&\quad\quad\quad\quad...\quad\quad\quad\quad\\
+\hline
+\end{tabular}\\
+~\\$ p $ som pivot, deler opp:\\
+\begin{tabular}{| c |}
+\hline
+\quad\quad\quad\quad$ < p $\quad\quad\quad\quad\quad\\
+\hline
+\end{tabular}\quad\quad
+\begin{tabular}{| c |}
+\hline
+\quad\quad\quad\quad$ \geq p $\quad\quad\quad\quad\quad\\
+\hline
+\end{tabular}\\
+~\\ Starter egne tråder som sorterer disse to bitene, setter sammen til slutt.
+\end{figure}
+

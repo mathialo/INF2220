@@ -1,0 +1,5 @@
+[0] Config.pm:340> INFO - This is Biber 2.4
+[0] Config.pm:343> INFO - Logfile is 'inf2220_komp.blg'
+[56] biber:287> INFO - === Fri Mar 31, 2017, 13:44:53
+[181] Utils.pm:163> ERROR - Cannot find control file 'inf2220_komp.bcf'! - did you pass the "backend=biber" option to BibLaTeX?
+[181] Biber.pm:113> INFO - ERRORS: 1
