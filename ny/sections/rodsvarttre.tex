@@ -44,7 +44,11 @@ Vi zoomer inn på en del av treet og jobber kun med de nodene som har noe å si 
 		\item Hvis P er rød må vi ta noen steg for å opprettholde krav \textit{ii} og \textit{iii}:
 		\begin{itemize}
 			\item Hvis U også er rød: Farg P og U svarte og farg G rød. Dette kan føre til trøbbel videre oppover i treet, så vi må fortsette oppover å rette opp feil.
-			\item Hvis U er svart, utfør en Zig-rotasjon mhp P, og utfør nødvendige fargeendringer
+			\item Hvis U er svart, utfør en rotasjon, og utfør nødvendige fargeendringer:
+			\begin{itemize}
+				\item X venstre barn av P: Zig mhp P.
+				\item X høyre barn av P: Zig-zag mhp X.
+			\end{itemize}
 		\end{itemize}
 		\item Hvis rota på noe tidspunkt blir farget rød kan man bare farge den svart igjen.
 	\end{itemize}
